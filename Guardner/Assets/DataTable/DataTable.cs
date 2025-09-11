@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public abstract class DataTable
 {
-    public static readonly string FormatPath = "DataTables/{0}";
+    public static readonly string FormatPath = "DataTables/{0}"; // {0}은 나중에 파일 이름 등으로 대체될 플레이스홀더
 
     public abstract void Load(string filename);
 
