@@ -5,36 +5,41 @@ using UnityEngine;
 
 public enum GuardnerTypes
 {
-
+    Melee = 1,
+    Ranged,
+    Support,
 }
 
 public enum GuardnerGrade
 {
-    One = 1,
-    Two,
-    Three,
+    General = 1,
+    Unique,
+    Legendery,
 }
 public class GuardnerData
 {
     public string Name { get; private set; }
-    public int Id { get; private set; }
+    public int ID { get; private set; }
+    public int IDDivide { get; private set; } // ID 구분
     public int Level { get; private set; }
-    public int MaxLevel { get; private set; }
-    public GuardnerTypes Type { get; private set; }
-    public GuardnerGrade Grade { get; private set; }
-    public int Att { get; private set; }
+    public int MaxUPLevel { get; private set; } // 강화 최대 레벨 
+    public GuardnerTypes Role { get; private set; } // 타입
+    public GuardnerGrade Rarity { get; private set; } // 등급
+    public int AttackPower { get; private set; }
     public int AttackRange { get; private set; }
     public float DPS { get; private set; }
-    public float APS { get; private set; }
-    public float HP { get; private set; }
+    public float APS { get; private set; }    
     public int Door { get; private set; }
-    public int Cost { get; private set; }
-    public int Price { get; private set; }
-    public string GuardnerDescript { get; private set; }
+    public int SummonGold { get; private set; } // 소환 골드 
+    public int SellingGold { get; private set; } // 판매 골드
+    public int GateHP { get; private set; } // 문 추가 내구도 
+    public string Reference { get; private set; } // 설명
+    public int LvStatID { get; private set; } // 레벨 추가 능력치 ID
+    public int SkillID { get; private set; }
 
     public override string ToString()
     {
-        return $"이름: {Name}\n 도감 설명: {GuardnerDescript}";
+        return $"이름: {Name}\n 도감 설명: {Reference}";
     }
 
 }
@@ -50,11 +55,12 @@ public class GuardnerTable : DataTable
         var path = string.Format(FormatPath, filename);
         var textAsset = Resources.Load<TextAsset>(path);
         var list = LoadCSV<GuardnerData>(textAsset.text);
+
         foreach (var guardner in list)
         {
-            if (!table.ContainsKey(guardner.Id))
+            if (!table.ContainsKey(guardner.ID))
             {
-                table.Add(guardner.Id, guardner);
+                table.Add(guardner.ID, guardner);
             }
             else
             {
