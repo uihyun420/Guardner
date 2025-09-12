@@ -35,8 +35,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     {
         IsDead = true;
         animator.SetTrigger(isDead);
-        Debug.Log("¸ó½ºÅÍ Á×À½");        
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1f);
     }
 
     public void Ondamage(int damage)

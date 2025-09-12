@@ -6,19 +6,16 @@ public class GuardnerBehavior : MonoBehaviour
     public readonly string attack = "ATTACK";
     public readonly string isDead = "isDead";
     public readonly string monster = "Monster"; // 몬스터 레이어 
+
     public GuardnerData guardnerData { get; private set; }
     public MonsterBehavior Monster;
     
     private CapsuleCollider2D collider;
 
-    private float hp;
     private int attackPower;
-    private int level;
     private float aps;
     private int attackRange;
-
     private Animator animator;
-
     private float attackTimer;
     private void Awake()
     {
@@ -27,24 +24,13 @@ public class GuardnerBehavior : MonoBehaviour
         aps = 1f; // 테스트용
         attackRange = 3; // 테스트용 
         attackPower = 35; // 테스트용
+        attackTimer = 0; 
     }
 
-    public void Init(GuardnerData data)
-    {
-        // guardnerData = data; // 데이터 복사
-
-        attackTimer = 0;
-        //attackPower = guardnerData.AttackPower;
-        //level = guardnerData.Level;
-        //hp = guardnerData.HP;
-        //aps = guardnerData.APS;        
-        //attackRange = guardnerData.AttackRange; 
-
-    }
 
     private void OnEnable()
     {
-        Init(guardnerData);
+        //Init(guardnerData);
     }
 
 
@@ -77,7 +63,7 @@ public class GuardnerBehavior : MonoBehaviour
     private void Attack()
     {
         animator.SetBool(attack, true);
-        animator.speed = aps;        
+        animator.speed = aps * 0.7f;        
     }
 
     private MonsterBehavior SearchMonster()
