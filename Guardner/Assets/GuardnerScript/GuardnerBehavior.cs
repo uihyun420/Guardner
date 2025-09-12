@@ -57,17 +57,20 @@ public class GuardnerBehavior : MonoBehaviour
         attackTimer += Time.deltaTime;
         float attackInterval = aps > 0 ? 1f / aps : 1f;
 
-        if (Monster != null)
+        if (Monster != null && !Monster.IsDead)
         {
             if (attackTimer >= attackInterval)
             {
                 Attack();
-                Monster.Ondamage(attackPower, Monster.transform.position, Vector2.right);
+                Monster.Ondamage(attackPower);
                 Debug.Log($"{attackInterval}초마다 공격");
                 Debug.Log($"{attackPower}의 데미지");
                 attackTimer = 0;
             }
-
+        }
+        else
+        {
+            animator.SetBool(attack, false);
         }
     }
 

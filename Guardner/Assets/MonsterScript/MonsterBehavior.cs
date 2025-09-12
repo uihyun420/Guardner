@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class MonsterBehavior : MonoBehaviour, IDamageable
 {
-    private readonly string isDead = "Die";
+    public readonly string isDead = "isDead";
 
     private CapsuleCollider2D collider;
     private Animator animator;
+    public bool IsDead = false;
     public MonsterData monsterData;
 
     public LayerMask layer;
 
-    private float hp;
+    private int hp = 350; // 테스트
 
-    private void Init()
+    private void Init(MonsterData data)
     {
+        data = monsterData;
         hp = monsterData.HP;
     }
 
@@ -24,13 +26,20 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void Die()
     {
+        IsDead = true;
         animator.SetTrigger(isDead);
+        Debug.Log("몬스터 죽음");        
         Destroy(gameObject, 2f);
     }
 
-    public void Ondamage(int damage, Vector2 hitPoint, Vector2 hitNormal)
+    public void Ondamage(int damage)
     {
         hp -= damage;
         if(hp <= 0)
