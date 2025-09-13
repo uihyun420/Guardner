@@ -4,12 +4,10 @@ using System.Linq;
 
 public class WayPoint : MonoBehaviour
 {
-    public MonoBehaviour monster;
+    //public MonoBehaviour monster;
     private float speed = 1f;
     public Transform[] wayPoint;
     public int wayPointCount = 0;
-
-
 
     private void Start()
     {

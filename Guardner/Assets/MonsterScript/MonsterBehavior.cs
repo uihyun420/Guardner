@@ -12,14 +12,26 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     public LayerMask layer;
 
     private int hp = 350; // Å×½ºÆ®
+    private float moveSpeed;
+    private int attackPower;
+    private string monsterName;
+    private Type monsterType;
+    private int skillId;
+    private int overLapping;
+    private string reference;
 
-    private void Init(MonsterData data)
+    public void Init(MonsterData data)
     {
-        data = monsterData;
+        monsterData = data;
         hp = monsterData.HP;
+        moveSpeed = monsterData.BaseMoveSpeed;
+        attackPower = monsterData.BaseAttackPower;
+        monsterName = monsterData.Name;
+        monsterType = monsterData.Type;
+        skillId = monsterData.SkillId;
+        overLapping = monsterData.OverLapping;
+        reference = monsterData.Reference;
     }
-
-
     private void Awake()
     {
         collider = GetComponent<CapsuleCollider2D>();

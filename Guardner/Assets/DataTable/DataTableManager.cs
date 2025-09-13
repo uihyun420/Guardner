@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class DataTableManager
 {
@@ -15,6 +16,10 @@ public class DataTableManager
         var guardnerTable = new GuardnerTable();
         guardnerTable.Load(DataTableIds.Guardner);
         tables.Add(DataTableIds.Guardner, guardnerTable);
+
+        var monsterTable = new MonsterTable();
+        monsterTable.Load(DataTableIds.Monster);
+        tables.Add(DataTableIds.Monster, monsterTable);
     }
 
 
@@ -23,6 +28,14 @@ public class DataTableManager
         get
         {
             return Get<GuardnerTable>(DataTableIds.Guardner);
+        }
+    }
+
+    public static MonsterTable MonsterTable
+    {
+        get
+        {
+            return Get<MonsterTable>(DataTableIds.Monster);
         }
     }
 
