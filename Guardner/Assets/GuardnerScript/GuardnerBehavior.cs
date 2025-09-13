@@ -10,7 +10,7 @@ public class GuardnerBehavior : MonoBehaviour
     public GuardnerData guardnerData { get; private set; }
     public MonsterBehavior Monster;
     
-    private CapsuleCollider2D collider;
+    private new CapsuleCollider2D collider;
 
     private int attackPower;
     private float aps;

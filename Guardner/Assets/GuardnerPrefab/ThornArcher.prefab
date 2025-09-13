@@ -3030,7 +3030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39443883d5ae9446b2210fb8a9dfed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Monster: {fileID: 0}
+  Monster: {fileID: 2826588337641964206, guid: 61fc304caa609c04d8c82014f1ef4206, type: 3}
 --- !u!70 &7112439995923636989
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

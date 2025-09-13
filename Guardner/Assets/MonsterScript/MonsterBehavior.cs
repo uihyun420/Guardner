@@ -4,7 +4,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 {
     public readonly string isDead = "isDead";
 
-    private CapsuleCollider2D collider;
+    private new CapsuleCollider2D collider;
     private Animator animator;
     public bool IsDead = false;
     public MonsterData monsterData;
@@ -31,6 +31,9 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         skillId = monsterData.SkillId;
         overLapping = monsterData.OverLapping;
         reference = monsterData.Reference;
+
+        Debug.Log($"몬스터 생성: {monsterName}, HP: {hp}, Speed: {moveSpeed}, Attack: {attackPower}");
+
     }
     private void Awake()
     {

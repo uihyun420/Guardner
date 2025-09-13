@@ -4,8 +4,8 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
-    public int monsterId = 401100; // 테스트
-    public Vector2 spawnPos = Vector2.zero;
+    private int monsterId = 411280; // 테스트
+    private Vector2 spawnPos = new Vector2(-1, 4);
 
 
     private void Start()

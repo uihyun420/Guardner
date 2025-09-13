@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7779966329367669047}
   - component: {fileID: 5073528834397453438}
   - component: {fileID: 2826588337641964206}
+  - component: {fileID: 3367429109797820240}
   m_Layer: 6
   m_Name: Monster
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8041847898529306896}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.47, y: 0.57, z: 0}
+  m_LocalPosition: {x: 1, y: 0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -165,3 +166,25 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &3367429109797820240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8041847898529306896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809aa937cf21a5346a6a765239ab093b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wayPoint:
+  - {fileID: 5746733755439084731, guid: b2d957e575761c546ac0b13e284c6ed5, type: 3}
+  - {fileID: 3782658088330614519, guid: 88531c80c59480c4c8a47f889ffe8e89, type: 3}
+  - {fileID: 7319180333140541644, guid: d7cb6b8abab42f34fb632b75b89ec030, type: 3}
+  - {fileID: 8863997459820288876, guid: 42e6268847cc8444b8bb0bcd48b41a98, type: 3}
+  - {fileID: 9105654780261442842, guid: f8c6c0922d8a7a54ca56dc9097a94b9d, type: 3}
+  - {fileID: 1822607552084412316, guid: f427f808f9c894b4a8a8d66d06bd545a, type: 3}
+  - {fileID: 2536712698545512261, guid: 611a42c364409cd44b8235682a8dba8a, type: 3}
+  - {fileID: 6074842224161839371, guid: c0a419b3416b67045b82b577012cfe89, type: 3}
+  wayPointCount: 0
