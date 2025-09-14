@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8041847898529306896}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.57, z: 0}
+  m_LocalPosition: {x: 1.023, y: 0.682, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a4d3ac6fd48984e906319b8fd0c05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 2915155854831120028, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
   IsDead: 0
   layer:
     serializedVersion: 2

@@ -40,7 +40,7 @@ public class MonsterTable : DataTable
         {
             if (!table.ContainsKey(monster.Id))
             {
-                Debug.Log($"로드된 몬스터: {monster.Id}, {monster.Name}");
+                //Debug.Log($"로드된 몬스터: {monster.Id}, {monster.Name}");
 
                 table.Add(monster.Id, monster);
             }

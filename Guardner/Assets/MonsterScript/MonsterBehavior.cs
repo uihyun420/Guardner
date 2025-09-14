@@ -3,6 +3,9 @@ using UnityEngine;
 public class MonsterBehavior : MonoBehaviour, IDamageable
 {
     public readonly string isDead = "isDead";
+    public readonly string attack = "ATTACK";
+    public readonly string Door = "Door"; // 문 레이어이름
+    public DoorBehavior door;
 
     private new CapsuleCollider2D collider;
     private Animator animator;
@@ -11,7 +14,11 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
     public LayerMask layer;
 
-    private int hp = 350; // 테스트
+    private float attackInterval = 1f;
+    private float attackTimer;
+    public bool isTouchingDoor = false;
+
+    private int hp;
     private float moveSpeed;
     private int attackPower;
     private string monsterName;
@@ -33,7 +40,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         reference = monsterData.Reference;
 
         Debug.Log($"몬스터 생성: {monsterName}, HP: {hp}, Speed: {moveSpeed}, Attack: {attackPower}");
-
     }
     private void Awake()
     {
@@ -43,14 +49,44 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        
+        attackTimer += Time.deltaTime;
+
+        if (isTouchingDoor && door != null && !door.isBreak)
+        {
+            if (attackTimer >= attackInterval)
+            {
+                //Attack();
+                door.Ondamage(attackPower);
+                Debug.Log($"문이 받은 데미지{attackPower}");
+                attackTimer = 0;
+            }
+        }
+        else
+        {
+            //animator.SetBool(attack, false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        DoorBehavior doorBehavior = collision.GetComponent<DoorBehavior>();
+        if (doorBehavior != null && !doorBehavior.isBreak)
+        {
+            door = doorBehavior;
+            isTouchingDoor = true;
+        }
+    }
+
+    private void Attack()
+    {
+        animator.SetBool(attack, true);
     }
 
     public void Die()
     {
         IsDead = true;
         animator.SetTrigger(isDead);
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
     }
 
     public void Ondamage(int damage)

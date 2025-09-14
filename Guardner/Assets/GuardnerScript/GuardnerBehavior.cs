@@ -49,8 +49,8 @@ public class GuardnerBehavior : MonoBehaviour
             {
                 Attack();
                 Monster.Ondamage(attackPower);
-                Debug.Log($"{attackInterval}초마다 공격");
-                Debug.Log($"{attackPower}의 데미지");
+                //Debug.Log($"{attackInterval}초마다 공격");
+                //Debug.Log($"{attackPower}의 데미지");
                 attackTimer = 0;
             }
         }
