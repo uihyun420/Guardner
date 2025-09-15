@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 5073528834397453438}
   - component: {fileID: 2826588337641964206}
   - component: {fileID: 3367429109797820240}
+  - component: {fileID: -2534828205787721149}
   m_Layer: 6
   m_Name: Monster
   m_TagString: Untagged
@@ -503,6 +504,33 @@ MonoBehaviour:
   - {fileID: 2536712698545512261, guid: 611a42c364409cd44b8235682a8dba8a, type: 3}
   - {fileID: 6074842224161839371, guid: c0a419b3416b67045b82b577012cfe89, type: 3}
   wayPointCount: 0
+--- !u!50 &-2534828205787721149
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8041847898529306896}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 2
 --- !u!1 &8890571863163856264
 GameObject:
   m_ObjectHideFlags: 0
