@@ -4,18 +4,22 @@ using System.Linq;
 
 public class WayPoint : MonoBehaviour
 {
-    //public MonoBehaviour monster;
     private float speed = 1f;
     public Transform[] wayPoint;
     public int wayPointCount = 0;
 
+    private MonsterBehavior monster;
+
     private void Start()
     {
         transform.position = wayPoint[wayPointCount].transform.position;
+        monster = GetComponent<MonsterBehavior>();
     }
 
     private void Update()
     {
+        if (monster.isStunned)
+            return;
         MovePath();
     }
 

@@ -39,7 +39,7 @@ public class GuardnerSkillTable : DataTable
         {
             if (!table.ContainsKey(skill.SkillID))
             {
-                Debug.Log($"로드된 스킬 : {skill.SkillID}, {skill.Name}");
+                //Debug.Log($"로드된 스킬 : {skill.SkillID}, {skill.Name}");
                 table.Add(skill.SkillID, skill);               
             }
             else

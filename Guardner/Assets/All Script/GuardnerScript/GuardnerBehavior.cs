@@ -10,8 +10,9 @@ public class GuardnerBehavior : MonoBehaviour
 
     public GuardnerData guardnerData { get; private set; }
     public MonsterBehavior Monster;
-    
-    private new CapsuleCollider2D collider;
+
+    private Rigidbody2D rb;
+    private CapsuleCollider2D collider;
 
     public int attackPower;
     public float aps;
@@ -29,10 +30,14 @@ public class GuardnerBehavior : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider2D>();
+        rb = GetComponent<Rigidbody2D>();   
+
         aps = 1f; // 테스트용
         attackRange = 2; // 테스트용 
         attackPower = 35; // 테스트용
-        attackTimer = 0; 
+        attackTimer = 0;
+        duration = 2; // 테스트
+        coolTime = 5;
     }
 
 

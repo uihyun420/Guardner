@@ -2960,6 +2960,7 @@ GameObject:
   - component: {fileID: 7941643649654077849}
   - component: {fileID: 3542377896305436549}
   - component: {fileID: 7112439995923636989}
+  - component: {fileID: 963456488865547494}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -3031,6 +3032,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Monster: {fileID: 2826588337641964206, guid: 61fc304caa609c04d8c82014f1ef4206, type: 3}
+  attackPower: 0
+  aps: 0
+  duration: 0
+  coolTime: 0
 --- !u!70 &7112439995923636989
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3068,6 +3073,33 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.39}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!50 &963456488865547494
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6055445860357201529}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6096805072215753667
 GameObject:
   m_ObjectHideFlags: 0

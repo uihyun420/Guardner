@@ -24,8 +24,8 @@ public class BattleUi : GenericWindow
         }
         else
         {
-            Debug.Log("쿨타임이 남아있어 스킬을 사용할 수 없습니다.");
-            // 필요하다면 버튼 비활성화 등 추가 UI 처리
+            Debug.Log("쿨타임");
+            // 버튼 비활성화 등 추가 UI 처리
         }
     }
 

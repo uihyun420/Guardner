@@ -7,6 +7,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     public readonly string Door = "Door"; // 문 레이어이름
     public DoorBehavior door;
 
+    private Rigidbody2D rb;
     private new CapsuleCollider2D collider;
     private Animator animator;
     public bool IsDead = false;
@@ -31,7 +32,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     public HpBar hpBar;
 
 
-    private bool isStunned = false;
+    public bool isStunned = false;
     private float stunTimer = 0f;
 
     public void Init(MonsterData data)
@@ -48,12 +49,13 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
         hpBar.SetMaxHealth(hp);
 
-        Debug.Log($"몬스터 생성: {monsterName}, HP: {hp}, Speed: {moveSpeed}, Attack: {attackPower}");
+        //Debug.Log($"몬스터 생성: {monsterName}, HP: {hp}, Speed: {moveSpeed}, Attack: {attackPower}");
     }
     private void Awake()
     {
         collider = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -66,7 +68,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
             {
                 //Attack();
                 door.Ondamage(attackPower);
-                Debug.Log($"문이 받은 데미지{attackPower}");
+                //Debug.Log($"문이 받은 데미지{attackPower}");
                 attackTimer = 0;
             }
         }
@@ -78,7 +80,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         if(isStunned)
         {
             stunTimer -= Time.deltaTime;
-            if(stunTimer <= 0f)
+            if(stunTimer < 0f)
             {
                 isStunned = false;
                 stunTimer = 0f;
@@ -122,6 +124,11 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
     public void Stun(float duration)
     {
+        if (duration < 0f)
+        {
+            Debug.LogWarning("[MonsterBehavior] Stun duration이 0 이하입니다.");
+            return;
+        }
         isStunned = true;
         stunTimer = duration;
     }

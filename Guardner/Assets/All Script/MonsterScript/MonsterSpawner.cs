@@ -22,7 +22,6 @@ public class MonsterSpawner : MonoBehaviour
             var behavior = monster.GetComponent<MonsterBehavior>();
             behavior.Init(monsterData);
         }
-
     }
 
     private IEnumerator CoSpawnMonster()
