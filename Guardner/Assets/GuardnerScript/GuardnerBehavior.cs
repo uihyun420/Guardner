@@ -22,7 +22,7 @@ public class GuardnerBehavior : MonoBehaviour
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider2D>();
         aps = 1f; // 테스트용
-        attackRange = 3; // 테스트용 
+        attackRange = 2; // 테스트용 
         attackPower = 35; // 테스트용
         attackTimer = 0; 
     }
@@ -30,7 +30,6 @@ public class GuardnerBehavior : MonoBehaviour
 
     private void OnEnable()
     {
-        //Init(guardnerData);
     }
 
 
@@ -63,7 +62,7 @@ public class GuardnerBehavior : MonoBehaviour
     private void Attack()
     {
         animator.SetBool(attack, true);
-        animator.speed = aps * 0.7f;        
+        animator.speed = aps;        
     }
 
     private MonsterBehavior SearchMonster()
@@ -88,20 +87,4 @@ public class GuardnerBehavior : MonoBehaviour
         }
         return null;
     }
-
-    //public void Ondamage(int damage, Vector2 hitPoint, Vector2 hitNormal)
-    //{
-    //    hp -= damage;
-    //    if (hp <= 0)
-    //    {
-    //        hp = 0;
-    //        Die();
-    //    }
-    //}
-    //public void Die()
-    //{
-    //    animator.SetTrigger(isDead);
-    //    animator.speed = 1f;
-    //    Destroy(gameObject, 2f);
-    //}
 }

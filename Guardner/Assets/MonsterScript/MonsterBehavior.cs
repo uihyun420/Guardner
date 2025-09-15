@@ -27,6 +27,10 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     private int overLapping;
     private string reference;
 
+
+    public HpBar hpBar;
+
+
     public void Init(MonsterData data)
     {
         monsterData = data;
@@ -38,6 +42,10 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         skillId = monsterData.SkillId;
         overLapping = monsterData.OverLapping;
         reference = monsterData.Reference;
+
+        hpBar.SetMaxHealth(hp);
+
+
 
         Debug.Log($"몬스터 생성: {monsterName}, HP: {hp}, Speed: {moveSpeed}, Attack: {attackPower}");
     }
@@ -86,12 +94,13 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     {
         IsDead = true;
         animator.SetTrigger(isDead);
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 0.25f);
     }
 
     public void Ondamage(int damage)
     {
         hp -= damage;
+        hpBar.SetHealth(hp);
         if(hp <= 0)
         {
             hp = 0;

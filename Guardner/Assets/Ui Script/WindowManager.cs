@@ -17,8 +17,8 @@ public class WindowManager : MonoBehaviour
             window.gameObject.SetActive(false);
         }
 
-        //CurrentWindow = defaultWindow;
-        //windows[(int)CurrentWindow].Open(); 
+        CurrentWindow = defaultWindow;
+        windows[(int)CurrentWindow].Open();
 
         // 도어 이벤트 구독
         DoorBehavior.OnDoorDestroyed += ShowGameOver;
@@ -39,6 +39,7 @@ public class WindowManager : MonoBehaviour
 
     private void ShowGameOver()
     {
+        Time.timeScale = 0;
         Open(WindowType.GameOver);
     }
 }
