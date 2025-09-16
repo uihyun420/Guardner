@@ -7,6 +7,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     public readonly string attack = "ATTACK";
     public readonly string Door = "Door"; // 문 레이어이름
     public DoorBehavior door;
+    private BattleUi battleUi;
 
     private Rigidbody2D rb;
     private new CapsuleCollider2D collider;
@@ -28,8 +29,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     private int skillId;
     private int overLapping;
     private string reference;
-
-    private float time = 0;
 
     public HpBar hpBar;
     public bool isStunned { get; set; } = false;
@@ -59,6 +58,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         collider = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        battleUi = FindObjectOfType<BattleUi>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
@@ -126,6 +126,8 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         {
             hp = 0;
             Die();
+            //GetGold(monsterData.Gold);
+            battleUi.AddGold(5);
         }
     }
 
@@ -148,5 +150,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.color = originalColor;
     }
+
 
 }

@@ -10,11 +10,13 @@ public class WayPoint : MonoBehaviour
     public int wayPointCount = 0;
 
     private MonsterBehavior monster;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         transform.position = wayPoint[wayPointCount].transform.position;
         monster = GetComponent<MonsterBehavior>();
+        spriteRenderer = GetComponent < SpriteRenderer>();
     }
 
     private void Update()
@@ -28,6 +30,7 @@ public class WayPoint : MonoBehaviour
             if (monster.isStunned)
             {
                 Debug.Log("È°¼ºÈ­µÊ");
+                speed = 0;
             }
         }
     }
@@ -43,6 +46,14 @@ public class WayPoint : MonoBehaviour
         if (transform.position == wayPoint[wayPointCount].transform.position)
         {
             wayPointCount++;
+        }
+        if(wayPointCount == 2 || wayPointCount == 5 || wayPointCount ==7 || wayPointCount == 8)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
         }
     }
 }

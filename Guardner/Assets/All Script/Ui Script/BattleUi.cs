@@ -16,15 +16,22 @@ public class BattleUi : GenericWindow
 
     private float battleTimer;
     public TextMeshProUGUI battleTimeText;
+    public TextMeshProUGUI goldText;
+
+    private int gold;
+
+    StringBuilder sb = new StringBuilder();
 
     private void Awake()
     {
         battleTimer = 300;
+        gold = 0;
     }
 
     private void Update()
     {
         SetBattleTimer();
+        SetGoldText();
     }
 
     public void OnSkillButtonClicked(int skillId)
@@ -52,12 +59,23 @@ public class BattleUi : GenericWindow
             battleTimer = 0f;
             Time.timeScale = 0f; 
         }
-        var sb = new StringBuilder();
+        sb.Clear();
         sb.Append("Time : ").Append(Mathf.FloorToInt(battleTimer));
         battleTimeText.text = sb.ToString();
     }
 
+    public void SetGoldText()
+    {
+        sb.Clear();
+        sb.Append(gold);
+        goldText.text = sb.ToString();
+    }
 
+    public void AddGold(int amount)
+    {
+        gold += amount;
+        Debug.Log($"°ñµå È¹µæ : {amount}");
+    }
     public override void Open()
     {
         base.Open();

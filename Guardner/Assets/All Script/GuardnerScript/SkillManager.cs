@@ -32,8 +32,8 @@ public class SkillManager : MonoBehaviour
 
     public void UseSkill(MonsterBehavior monstertarget, GuardnerBehavior guardnertarget)
     {
-        var monster = monstertarget;
-        var guardner = guardnertarget;
+        //var monster = monstertarget;
+        //var guardner = guardnertarget;
         var rb = monstertarget.GetComponent<Rigidbody2D>();
 
         // KnockBack (Monster)
@@ -47,33 +47,33 @@ public class SkillManager : MonoBehaviour
         // Stun (Monster)
         if (selectSkill.Stun > 0)
         {
-            monster.Stun(selectSkill.Stun);
+            monstertarget.Stun(selectSkill.Stun);
             Debug.Log($"Stun 적용: {selectSkill.Stun}초 (SkillID: {selectSkill.SkillID})");
         }
 
         // GateDamageReflection (Monster)
         if (selectSkill.GateDamageReflection > 0)
         {
-            float reflectedDamage = monster.attackPower * selectSkill.GateDamageReflection;
-            monster.ReflectDamage(reflectedDamage);
+            float reflectedDamage = monstertarget.attackPower * selectSkill.GateDamageReflection;
+            monstertarget.ReflectDamage(reflectedDamage);
             Debug.Log($"GateDamageReflection 적용: {reflectedDamage} (SkillID: {selectSkill.SkillID})");
         }
 
         // AttackPowerBoost (Guardner)
         if (selectSkill.AttackPowerBoost > 0)
         {
-            float attackPowerBoost = guardner.attackPower * selectSkill.AttackPowerBoost;
+            float attackPowerBoost = guardnertarget.attackPower * selectSkill.AttackPowerBoost;
             float duration = selectSkill.Duration;
-            guardner.AttackPowerBoost(attackPowerBoost, duration);
+            guardnertarget.AttackPowerBoost(attackPowerBoost, duration);
             Debug.Log($"AttackPowerBoost 적용: {attackPowerBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
 
         // AttackSpeedBoost (Guardner)
         if (selectSkill.AttackSpeedBoost > 0)
         {
-            float attackSpeedBoost = guardner.aps * selectSkill.AttackSpeedBoost;
+            float attackSpeedBoost = guardnertarget.aps * selectSkill.AttackSpeedBoost;
             float duration = selectSkill.Duration;
-            guardner.AttackSpeedBoost(attackSpeedBoost, duration);
+            guardnertarget.AttackSpeedBoost(attackSpeedBoost, duration);
             Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
 

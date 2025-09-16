@@ -476,12 +476,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 2915155854831120028, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
+  battleUi: {fileID: 0}
   IsDead: 0
   layer:
     serializedVersion: 2
     m_Bits: 64
   isTouchingDoor: 0
   attackPower: 0
+  gold: 0
   hpBar: {fileID: 3089756064081724669}
 --- !u!114 &3367429109797820240
 MonoBehaviour:
@@ -505,7 +507,6 @@ MonoBehaviour:
   - {fileID: 2536712698545512261, guid: 611a42c364409cd44b8235682a8dba8a, type: 3}
   - {fileID: 6074842224161839371, guid: c0a419b3416b67045b82b577012cfe89, type: 3}
   wayPointCount: 0
-  monster: {fileID: 2826588337641964206}
 --- !u!50 &-2534828205787721149
 Rigidbody2D:
   serializedVersion: 5
