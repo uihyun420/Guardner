@@ -505,6 +505,7 @@ MonoBehaviour:
   - {fileID: 2536712698545512261, guid: 611a42c364409cd44b8235682a8dba8a, type: 3}
   - {fileID: 6074842224161839371, guid: c0a419b3416b67045b82b577012cfe89, type: 3}
   wayPointCount: 0
+  monster: {fileID: 2826588337641964206}
 --- !u!50 &-2534828205787721149
 Rigidbody2D:
   serializedVersion: 5

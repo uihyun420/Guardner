@@ -32,8 +32,8 @@ public class SkillManager : MonoBehaviour
 
     public void UseSkill(MonsterBehavior monstertarget, GuardnerBehavior guardnertarget)
     {
-        var monster = monstertarget.GetComponent<MonsterBehavior>();
-        var guardner = guardnertarget.GetComponent<GuardnerBehavior>();
+        var monster = monstertarget;
+        var guardner = guardnertarget;
         var rb = monstertarget.GetComponent<Rigidbody2D>();
 
         // KnockBack (Monster)
@@ -41,14 +41,14 @@ public class SkillManager : MonoBehaviour
         {
             Vector2 direction = Vector2.right; // 오른쪽으로 밀기
             rb.AddForce(direction * selectSkill.KnockBack, ForceMode2D.Impulse);
-            Debug.Log($"[Skill] KnockBack 적용: {selectSkill.KnockBack} (SkillID: {selectSkill.SkillID})");
+            Debug.Log($"KnockBack 적용: {selectSkill.KnockBack} (SkillID: {selectSkill.SkillID})");
         }
 
         // Stun (Monster)
         if (selectSkill.Stun > 0)
         {
             monster.Stun(selectSkill.Stun);
-            Debug.Log($"[Skill] Stun 적용: {selectSkill.Stun}초 (SkillID: {selectSkill.SkillID})");
+            Debug.Log($"Stun 적용: {selectSkill.Stun}초 (SkillID: {selectSkill.SkillID})");
         }
 
         // GateDamageReflection (Monster)
@@ -56,7 +56,7 @@ public class SkillManager : MonoBehaviour
         {
             float reflectedDamage = monster.attackPower * selectSkill.GateDamageReflection;
             monster.ReflectDamage(reflectedDamage);
-            Debug.Log($"[Skill] GateDamageReflection 적용: {reflectedDamage} (SkillID: {selectSkill.SkillID})");
+            Debug.Log($"GateDamageReflection 적용: {reflectedDamage} (SkillID: {selectSkill.SkillID})");
         }
 
         // AttackPowerBoost (Guardner)
@@ -65,7 +65,7 @@ public class SkillManager : MonoBehaviour
             float attackPowerBoost = guardner.attackPower * selectSkill.AttackPowerBoost;
             float duration = selectSkill.Duration;
             guardner.AttackPowerBoost(attackPowerBoost, duration);
-            Debug.Log($"[Skill] AttackPowerBoost 적용: {attackPowerBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
+            Debug.Log($"AttackPowerBoost 적용: {attackPowerBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
 
         // AttackSpeedBoost (Guardner)
@@ -74,7 +74,7 @@ public class SkillManager : MonoBehaviour
             float attackSpeedBoost = guardner.aps * selectSkill.AttackSpeedBoost;
             float duration = selectSkill.Duration;
             guardner.AttackSpeedBoost(attackSpeedBoost, duration);
-            Debug.Log($"[Skill] AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
+            Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
 
         lastUsedTime[selectSkill.SkillID] = Time.time; // 마지막 사용 시간 갱신

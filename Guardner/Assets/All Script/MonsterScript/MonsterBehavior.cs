@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class MonsterBehavior : MonoBehaviour, IDamageable
 {
@@ -28,12 +29,14 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     private int overLapping;
     private string reference;
 
+    private float time = 0;
 
     public HpBar hpBar;
-
-
-    public bool isStunned = false;
+    public bool isStunned { get; set; } = false;
     private float stunTimer = 0f;
+
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 
     public void Init(MonsterData data)
     {
@@ -56,6 +59,9 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         collider = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
 
     private void Update()
@@ -80,7 +86,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         if(isStunned)
         {
             stunTimer -= Time.deltaTime;
-            if(stunTimer < 0f)
+            if (stunTimer < 0f)
             {
                 isStunned = false;
                 stunTimer = 0f;
@@ -114,6 +120,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     public void Ondamage(int damage)
     {
         hp -= damage;
+        StartCoroutine(CoHitEffect());
         hpBar.SetHealth(hp);
         if(hp <= 0)
         {
@@ -124,13 +131,9 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
     public void Stun(float duration)
     {
-        if (duration < 0f)
-        {
-            Debug.LogWarning("[MonsterBehavior] Stun duration이 0 이하입니다.");
-            return;
-        }
         isStunned = true;
         stunTimer = duration;
+        Debug.Log($"isStunned = {isStunned}, 타이머 = {stunTimer}");        
     }
 
     public void ReflectDamage(float amount)
@@ -138,5 +141,12 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         Ondamage(Mathf.RoundToInt(amount));
     }
 
+
+    private IEnumerator CoHitEffect()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = originalColor;
+    }
 
 }

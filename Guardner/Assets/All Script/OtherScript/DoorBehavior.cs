@@ -6,6 +6,7 @@ public class DoorBehavior : MonoBehaviour, IDamageable
     public static event Action OnDoorDestroyed; // 이벤트가 발생
 
     public LayerMask layer;
+    public HpBar hpBar;
 
     private int hp = 500;  // 테스트 
     private BoxCollider2D boxCollider2D;
@@ -15,6 +16,7 @@ public class DoorBehavior : MonoBehaviour, IDamageable
     private void Awake()
     {
         boxCollider2D = GetComponent<BoxCollider2D>();
+        hpBar.SetMaxHealth(hp);
         isBreak = false;
     }
 
@@ -33,6 +35,7 @@ public class DoorBehavior : MonoBehaviour, IDamageable
     public void Ondamage(int damage)
     {
         hp -= damage;
+        hpBar.SetHealth(hp);
         if(hp <= 0)
         {
             hp = 0;

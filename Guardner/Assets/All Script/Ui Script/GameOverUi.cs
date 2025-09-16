@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverUi : GenericWindow
@@ -10,5 +12,11 @@ public class GameOverUi : GenericWindow
     public override void Open()
     {
         base.Open();
+    }
+
+    public void OnClickButtonRetry()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
