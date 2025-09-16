@@ -360,7 +360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -165, y: -28}
+  m_AnchoredPosition: {x: -266, y: -669}
   m_SizeDelta: {x: 156.5268, y: 162.7374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &106355841
@@ -3386,7 +3386,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966ead756d3c77d4b9d989238c3a4ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guardnerPrefab: {fileID: 4204627278967031321, guid: 4df5966a2b46c4a4392c1814f55043c5, type: 3}
+  guardnerPrefabs:
+  - guardnerId: 11255
+    prefab: {fileID: 5145476537578873741, guid: 214830a3d5180b143b2abc86caf3962a, type: 3}
+  - guardnerId: 11235
+    prefab: {fileID: 4204627278967031321, guid: 4df5966a2b46c4a4392c1814f55043c5, type: 3}
+  - guardnerId: 11135
+    prefab: {fileID: 829225696231526450, guid: 9b7998ef4d960f143981bebfe71f578d, type: 3}
 --- !u!1 &1816482311
 GameObject:
   m_ObjectHideFlags: 0
@@ -4162,6 +4168,7 @@ MonoBehaviour:
   skill1: {fileID: 1267797366}
   skill2: {fileID: 1939113678}
   skill3: {fileID: 8557567}
+  spawnPos1: {fileID: 106355841}
   skillManager: {fileID: 1600214967}
   monsterTarget: {fileID: 2826588337641964206, guid: 61fc304caa609c04d8c82014f1ef4206, type: 3}
   guardnerTarget: {fileID: 6027714361228174309, guid: 4df5966a2b46c4a4392c1814f55043c5, type: 3}

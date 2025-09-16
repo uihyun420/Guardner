@@ -1,5 +1,6 @@
 using System.Text;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class BattleUi : GenericWindow
     public Button skill1;
     public Button skill2;
     public Button skill3;
+
+    public Button spawnPos1;
 
     public SkillManager skillManager;
     public MonsterBehavior monsterTarget;
@@ -38,8 +41,8 @@ public class BattleUi : GenericWindow
     {
         var skillData = skillManager.guardnerSkillTable.Get(skillId);
         skillManager.SelectSkill(skillId);
-        
-        if(skillManager.CanUseSkill(skillId))
+
+        if (skillManager.CanUseSkill(skillId))
         {
             skillManager.UseSkill(monsterTarget, guardnerTarget);
             Debug.Log($"사용된 스킬ID: {skillId}");
@@ -49,15 +52,15 @@ public class BattleUi : GenericWindow
             Debug.Log("쿨타임");
             // 버튼 비활성화 등 추가 UI 처리
         }
-    }   
+    }
 
     public void SetBattleTimer()
     {
         battleTimer -= Time.deltaTime;
-        if(battleTimer <= 0)
+        if (battleTimer <= 0)
         {
             battleTimer = 0f;
-            Time.timeScale = 0f; 
+            Time.timeScale = 0f;
         }
         sb.Clear();
         sb.Append("Time : ").Append(Mathf.FloorToInt(battleTimer));
@@ -86,8 +89,18 @@ public class BattleUi : GenericWindow
 
     public void OnGuardnerSpawnButtonClicked()
     {
-        int guardnerId = 11235; // 예시 ID
-        Vector2 spawnPos = new Vector2(0, 0); // 원하는 위치로 변경
-        guardnerSpawner.SpawnGuardner(guardnerId, spawnPos);
+        int[] guardnerId = { 11135, 11255, 11235 };
+
+        Vector2[] spawnPos = new Vector2[]
+        {
+             new Vector2(0.5f, 0f),
+             new Vector2(1f, 0f),
+             new Vector2(0.5f, 0.5f)
+        };
+
+        for (int i = 0; i < guardnerId.Length; i++)
+        {
+            guardnerSpawner.SpawnGuardner(guardnerId[i], spawnPos[i]);
+        }
     }
 }
