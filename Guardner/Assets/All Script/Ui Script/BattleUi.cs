@@ -80,4 +80,14 @@ public class BattleUi : GenericWindow
     {
         base.Open();
     }
+
+
+    public GuardnerSpawner guardnerSpawner;
+
+    public void OnGuardnerSpawnButtonClicked()
+    {
+        int guardnerId = 11235; // 예시 ID
+        Vector2 spawnPos = new Vector2(0, 0); // 원하는 위치로 변경
+        guardnerSpawner.SpawnGuardner(guardnerId, spawnPos);
+    }
 }

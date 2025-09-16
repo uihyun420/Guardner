@@ -8,7 +8,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     public readonly string Door = "Door"; // 문 레이어이름
     public DoorBehavior door;
     private BattleUi battleUi;
-
     private Rigidbody2D rb;
     private new CapsuleCollider2D collider;
     private Animator animator;
@@ -88,8 +87,8 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
             stunTimer -= Time.deltaTime;
             if (stunTimer < 0f)
             {
-                isStunned = false;
-                stunTimer = 0f;
+                //isStunned = false;
+                //stunTimer = 0f;
             }
             return;
         }
@@ -150,6 +149,4 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.color = originalColor;
     }
-
-
 }

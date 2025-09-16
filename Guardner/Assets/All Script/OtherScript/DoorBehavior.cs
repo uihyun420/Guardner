@@ -12,7 +12,6 @@ public class DoorBehavior : MonoBehaviour, IDamageable
     private BoxCollider2D boxCollider2D;
     public bool isBreak = false;
 
-
     private void Awake()
     {
         boxCollider2D = GetComponent<BoxCollider2D>();

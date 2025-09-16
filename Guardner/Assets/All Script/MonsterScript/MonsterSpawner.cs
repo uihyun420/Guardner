@@ -7,7 +7,6 @@ public class MonsterSpawner : MonoBehaviour
     private int monsterId = 401100; // Å×½ºÆ®
     private Vector2 spawnPos = new Vector2(-3, 4);
 
-
     private void Start()
     {
         StartCoroutine(CoSpawnMonster());

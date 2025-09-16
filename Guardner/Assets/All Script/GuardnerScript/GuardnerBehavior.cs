@@ -8,47 +8,71 @@ public class GuardnerBehavior : MonoBehaviour
     public readonly string isDead = "isDead";
     public readonly string monster = "Monster"; // 몬스터 레이어 
 
-    public GuardnerData guardnerData { get; private set; }
+    public GuardnerData guardnerData;
     public MonsterBehavior Monster;
 
     private Rigidbody2D rb;
     private CapsuleCollider2D collider;
 
+    public string name;
+    public string egName;
+    public int id;
+    public int idDivide;
+    public int level;
+    public GuardnerTypes role;
     public int attackPower;
     public float aps;
-    private int attackRange;
+    public float dps;
+    public int gateHp;
+    public int attackRange;
+    public int summonGold;
+    public int sellingGold;
+    public GuardnerGrade rarity;
+    public int maxLevel;
+    public int skillId;
+    public int lvStatId;
+    public string reference; 
+
     private Animator animator;
+
     private float attackTimer;
-
-
     public float duration;
     public int coolTime;
-
-
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();   
-
-        aps = 1f; // 테스트용
-        attackRange = 2; // 테스트용 
-        attackPower = 35; // 테스트용
         attackTimer = 0;
-        duration = 2; // 테스트
-        coolTime = 5;
     }
-
-
-    private void OnEnable()
+    public void Init(GuardnerData data)
     {
-    }
+        guardnerData = data;
 
+        name = guardnerData.Name;
+        egName = guardnerData.EGName;
+        id = guardnerData.Id;
+        idDivide = guardnerData.IdDivide;
+        level = guardnerData.Level;
+        role = guardnerData.Role;
+        attackPower = guardnerData.AttackPower;
+        aps = guardnerData.APS;
+        dps = guardnerData.DPS;
+        gateHp = guardnerData.GateHP;
+        attackRange = guardnerData.AttackRange;
+        summonGold = guardnerData.SummonGold;
+        sellingGold = guardnerData.SellingGold;
+        rarity = guardnerData.Rarity;
+        maxLevel = guardnerData.MaxUPLevel;
+        skillId = guardnerData.SkillID;
+        lvStatId = guardnerData.LvStatId;
+        reference = guardnerData.Reference;
+    }
 
     private void Update()
     {
-        collider.size = new Vector2(attackRange, attackRange); // 테스트 
+        collider.size = new Vector2(attackRange, attackRange);
 
         Monster = SearchMonster();
 

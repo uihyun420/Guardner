@@ -1,6 +1,7 @@
 using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public enum GuardnerTypes
@@ -60,6 +61,7 @@ public class GuardnerTable : DataTable
         {
             if (!table.ContainsKey(guardner.Id))
             {
+                //Debug.Log($"로드된 가드너: {guardner.Id}, {guardner.Name}");
                 table.Add(guardner.Id, guardner);
             }
             else
@@ -84,7 +86,5 @@ public class GuardnerTable : DataTable
         var guardnerList = table.Values.ToList();
         return guardnerList[Random.Range(0, guardnerList.Count)];
     }
-
-
 }
 
