@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BattleUi : GenericWindow
 {
     public GameObject battleUi;
+
     public Button skill1;
     public Button skill2;
     public Button skill3;
@@ -14,15 +15,14 @@ public class BattleUi : GenericWindow
     public Button spawnPos1;
 
     public SkillManager skillManager;
-    public MonsterBehavior monsterTarget;
-    public GuardnerBehavior guardnerTarget;
 
     private float battleTimer;
     public TextMeshProUGUI battleTimeText;
     public TextMeshProUGUI goldText;
 
     private int gold;
-
+    public MonsterSpawner monsterSpawner; // Inspector에서 연결
+    public GuardnerSpawner guardnerSpawner;
     StringBuilder sb = new StringBuilder();
 
     private void Awake()
@@ -40,30 +40,23 @@ public class BattleUi : GenericWindow
     public void OnSkillButtonClicked(int skillId)
     {
         var skillData = skillManager.guardnerSkillTable.Get(skillId);
-        var go = GameObject.FindGameObjectsWithTag("Monster");
-        for(int i = 0; i < go.Length; i++)
-        {
-            var target = go[i].GetComponent<MonsterBehavior>();
-            target.isStunned = true;
-            target.Stun(2f);
-        }
-        skillManager.SelectSkill(skillId);
-        //monsterTarget.isStunned = true;
-        //monsterTarget.Stun(30f);
-        Debug.Log($"타겟 : {monsterTarget.isStunned}");
-        skillManager.UseSkill(monsterTarget, guardnerTarget);
-        Debug.Log($"사용된 스킬ID: {skillId}");
 
-        //if (skillManager.CanUseSkill(skillId))
-        //{
-        //    skillManager.UseSkill(monsterTarget, guardnerTarget);
-        //    Debug.Log($"사용된 스킬ID: {skillId}");
-        //}
-        //else
-        //{
-        //    Debug.Log("쿨타임");
-        //    // 버튼 비활성화 등 추가 UI 처리
-        //}
+        if (skillManager.CanUseSkill(skillId))
+        {
+            foreach (var monster in monsterSpawner.spawnedMonsters)
+            {
+                if (monster != null)
+                    monster.Stun(skillData.Stun);
+            }
+            skillManager.SelectSkill(skillId);
+            skillManager.UseSkill();
+            Debug.Log($"사용된 스킬ID: {skillId}");
+        }
+        else
+        {
+            Debug.Log("쿨타임");
+            // 버튼 비활성화 등 추가 UI 처리
+        }
     }
 
     public void SetBattleTimer()
@@ -96,8 +89,6 @@ public class BattleUi : GenericWindow
         base.Open();
     }
 
-
-    public GuardnerSpawner guardnerSpawner;
 
     public void OnGuardnerSpawnButtonClicked()
     {

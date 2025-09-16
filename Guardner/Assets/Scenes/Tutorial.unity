@@ -457,6 +457,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106355839}
   m_CullTransparentMesh: 1
+--- !u!114 &125721413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+  m_PrefabInstance: {fileID: 850254638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be025ea1bfcd10e488ad93158773254b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &134183749
 GameObject:
   m_ObjectHideFlags: 0
@@ -4174,6 +4185,7 @@ MonoBehaviour:
   guardnerTarget: {fileID: 6027714361228174309, guid: 4df5966a2b46c4a4392c1814f55043c5, type: 3}
   battleTimeText: {fileID: 1074921573}
   goldText: {fileID: 1898738510}
+  monsterSpawner: {fileID: 125721413}
   guardnerSpawner: {fileID: 1794989048}
 --- !u!1 &2005690420
 GameObject:

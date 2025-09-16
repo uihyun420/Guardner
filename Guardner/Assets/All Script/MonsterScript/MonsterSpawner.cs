@@ -1,9 +1,12 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
+    public List<MonsterBehavior> spawnedMonsters = new List<MonsterBehavior>();
     private int monsterId = 401100; // Å×½ºÆ®
     private Vector2 spawnPos = new Vector2(-3, 4);
 
@@ -20,6 +23,7 @@ public class MonsterSpawner : MonoBehaviour
             GameObject monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
             var behavior = monster.GetComponent<MonsterBehavior>();
             behavior.Init(monsterData);
+            spawnedMonsters.Add(behavior);
         }
     }
 

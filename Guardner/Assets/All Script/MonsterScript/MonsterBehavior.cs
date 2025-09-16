@@ -134,7 +134,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     {
         isStunned = true;
         stunTimer = duration;
-        Debug.Log($"isStunned = {isStunned}, ≈∏¿Ã∏” = {stunTimer}");        
     }
 
     public void ReflectDamage(float amount)
