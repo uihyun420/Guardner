@@ -40,18 +40,30 @@ public class BattleUi : GenericWindow
     public void OnSkillButtonClicked(int skillId)
     {
         var skillData = skillManager.guardnerSkillTable.Get(skillId);
+        var go = GameObject.FindGameObjectsWithTag("Monster");
+        for(int i = 0; i < go.Length; i++)
+        {
+            var target = go[i].GetComponent<MonsterBehavior>();
+            target.isStunned = true;
+            target.Stun(2f);
+        }
         skillManager.SelectSkill(skillId);
+        //monsterTarget.isStunned = true;
+        //monsterTarget.Stun(30f);
+        Debug.Log($"타겟 : {monsterTarget.isStunned}");
+        skillManager.UseSkill(monsterTarget, guardnerTarget);
+        Debug.Log($"사용된 스킬ID: {skillId}");
 
-        if (skillManager.CanUseSkill(skillId))
-        {
-            skillManager.UseSkill(monsterTarget, guardnerTarget);
-            Debug.Log($"사용된 스킬ID: {skillId}");
-        }
-        else
-        {
-            Debug.Log("쿨타임");
-            // 버튼 비활성화 등 추가 UI 처리
-        }
+        //if (skillManager.CanUseSkill(skillId))
+        //{
+        //    skillManager.UseSkill(monsterTarget, guardnerTarget);
+        //    Debug.Log($"사용된 스킬ID: {skillId}");
+        //}
+        //else
+        //{
+        //    Debug.Log("쿨타임");
+        //    // 버튼 비활성화 등 추가 UI 처리
+        //}
     }
 
     public void SetBattleTimer()

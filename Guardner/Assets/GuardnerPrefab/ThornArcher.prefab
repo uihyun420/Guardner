@@ -2335,7 +2335,7 @@ MonoBehaviour:
   id: 11235
   idDivide: 0
   level: 0
-  role: 0
+  role: 2
   attackPower: 0
   aps: 0
   dps: 0

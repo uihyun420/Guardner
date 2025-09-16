@@ -9,13 +9,13 @@ public class WayPoint : MonoBehaviour
     public Transform[] wayPoint;
     public int wayPointCount = 0;
 
-    private MonsterBehavior monster;
+    public MonsterBehavior monster;
     private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         transform.position = wayPoint[wayPointCount].transform.position;
-        monster = GetComponent<MonsterBehavior>();
+        //monster = GetComponent<MonsterBehavior>();
         spriteRenderer = GetComponent < SpriteRenderer>();
     }
 
@@ -23,13 +23,13 @@ public class WayPoint : MonoBehaviour
     {
         if (!monster.isStunned)
         {
+            speed = 1f;
             MovePath();
         }
         else
         {
             if (monster.isStunned)
             {
-                Debug.Log("È°¼ºÈ­µÊ");
                 speed = 0;
             }
         }

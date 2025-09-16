@@ -87,8 +87,8 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
             stunTimer -= Time.deltaTime;
             if (stunTimer < 0f)
             {
-                //isStunned = false;
-                //stunTimer = 0f;
+                isStunned = false;
+                stunTimer = 0f;
             }
             return;
         }

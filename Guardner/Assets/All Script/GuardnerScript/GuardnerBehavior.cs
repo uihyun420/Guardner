@@ -14,24 +14,24 @@ public class GuardnerBehavior : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D collider;
 
-    public string name;
-    public string egName;
+    private string name;
+    private string egName;
     public int id;
-    public int idDivide;
-    public int level;
+    private int idDivide;
+    private int level;
     public GuardnerTypes role;
     public int attackPower;
     public float aps;
-    public float dps;
-    public int gateHp;
+    private float dps;
+    private int gateHp;
     public int attackRange;
-    public int summonGold;
-    public int sellingGold;
+    private int summonGold;
+    private int sellingGold;
     public GuardnerGrade rarity;
-    public int maxLevel;
-    public int skillId;
-    public int lvStatId;
-    public string reference; 
+    private int maxLevel;
+    private int skillId;
+    private int lvStatId;
+    private string reference; 
 
     private Animator animator;
 
