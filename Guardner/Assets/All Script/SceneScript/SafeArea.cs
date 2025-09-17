@@ -17,6 +17,17 @@ public class SafeArea : MonoBehaviour
         OnRectTransformDimensionsChange();
     }
 
+    //void Update()
+    //{
+    //    // 런타임에서 SafeArea 변경사항 감지 (디바이스 회전 등)
+    //    if (GetSafeArea() != lastSafeArea)
+    //    {
+    //        ApplySafeArea();
+    //    }
+    //}
+
+
+
     private void OnRectTransformDimensionsChange()
     {
 
@@ -44,10 +55,6 @@ public class SafeArea : MonoBehaviour
 
     private Rect GetSafeArea()
     {
-#if DEBUG && UNITY_EDITOR
-        return new Rect(132, 102, 2172, 1023);
-#else
-            return Screen.safeArea;
-#endif
+        return Screen.safeArea;
     }
 }

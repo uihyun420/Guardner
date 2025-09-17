@@ -12,13 +12,13 @@ public class BattleUi : GenericWindow
     public Button skill2;
     public Button skill3;
 
-    public Button spawnPos1;
+    //public Button spawnPos1;
 
     public SkillManager skillManager;
-
-    private float battleTimer;
+   
     public TextMeshProUGUI battleTimeText;
     public TextMeshProUGUI goldText;
+    private float battleTimer;
 
     private int gold;
     public MonsterSpawner monsterSpawner; // Inspector에서 연결
@@ -68,14 +68,14 @@ public class BattleUi : GenericWindow
             Time.timeScale = 0f;
         }
         sb.Clear();
-        sb.Append("Time : ").Append(Mathf.FloorToInt(battleTimer));
+        sb.Append("남은시간 : ").Append(Mathf.FloorToInt(battleTimer)).Append("초");
         battleTimeText.text = sb.ToString();
     }
 
     public void SetGoldText()
     {
         sb.Clear();
-        sb.Append(gold);
+        sb.Append(gold).Append("골드");
         goldText.text = sb.ToString();
     }
 
