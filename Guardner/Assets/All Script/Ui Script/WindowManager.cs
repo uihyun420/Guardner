@@ -24,6 +24,11 @@ public class WindowManager : MonoBehaviour
         DoorBehavior.OnDoorDestroyed += ShowGameOver;
     }
 
+    public void OpenOverlay(WindowType id)
+    {
+        // 현재 창은 닫지 않고 새 창만 열기
+        windows[(int)id].Open();
+    }
     public void Open(WindowType id)
     {
         windows[(int)CurrentWindow].Close();

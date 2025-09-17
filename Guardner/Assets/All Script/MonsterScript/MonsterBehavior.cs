@@ -36,6 +36,11 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
+    public void SetBattleUi(BattleUi ui)
+    {
+        battleUi = ui;
+    }
+
     public void Init(MonsterData data)
     {
         monsterData = data;
@@ -57,7 +62,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         collider = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        battleUi = FindObjectOfType<BattleUi>();
+       // battleUi = FindObjectOfType<BattleUi>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;

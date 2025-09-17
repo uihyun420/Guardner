@@ -17,7 +17,6 @@ public class GuardnerSpawner : MonoBehaviour
 
     public GuardnerSpawnUi guardnerSpawnUi;
 
-    public Rect spawnRect;
     public GameObject[] spawnPos;
 
     public void SpawnGuardner(int guardnerId, Vector2 spawnPos)
@@ -37,10 +36,5 @@ public class GuardnerSpawner : MonoBehaviour
         {
             Debug.LogWarning($"아이디 {guardnerId}에 해당하는 프리팹이 없습니다.");
         }
-    }
-
-    public void SelectSpawnPosition(Rect rect)
-    {
-
     }
 }

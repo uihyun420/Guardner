@@ -13,6 +13,10 @@ public class GameOverUi : GenericWindow
     {
         base.Open();
     }
+    public override void Close()
+    {
+        base.Close();
+    }
 
     public void OnClickButtonRetry()
     {
