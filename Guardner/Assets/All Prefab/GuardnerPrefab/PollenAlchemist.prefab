@@ -2937,15 +2937,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5145476537578873741}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
+  m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4871234898742352518}
   - {fileID: 3068060693584148022}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!210 &5341891918044452391
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -3057,24 +3057,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Monster: {fileID: 2826588337641964206, guid: 61fc304caa609c04d8c82014f1ef4206, type: 3}
-  name: 
-  egName: 
   id: 11255
-  idDivide: 0
-  level: 0
   role: 2
   attackPower: 0
   aps: 0
-  dps: 0
-  gateHp: 0
   attackRange: 0
-  summonGold: 0
-  sellingGold: 0
   rarity: 0
-  maxLevel: 0
-  skillId: 0
-  lvStatId: 0
-  reference: 
   duration: 0
   coolTime: 0
 --- !u!1 &5196254232942165022
