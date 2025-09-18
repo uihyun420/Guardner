@@ -5,6 +5,7 @@ public class StageManager : MonoBehaviour
 {
     public StageData stageData;
     private StageTable stageTable;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private MonsterSpawner monsterSpawner;
 
 
@@ -98,31 +99,44 @@ public class StageManager : MonoBehaviour
         isStageCompleted = false;
     }
 
-    public void SpawnWaveMonster()
+    private IEnumerator CoSpawnMonsterWithDelay(int monsterId, Vector2 spawnPos, int sortingOrder, float initialDelay, float interval)
     {
-        int[] monsterIds = new int[] { monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId};
-        int spawnCount = 0;
-        foreach(var monsterId in monsterIds)
+        yield return new WaitForSeconds(initialDelay);
+        while (!isStageCompleted)
         {
-            monsterSpawner.SpawnMonster(monsterId);
+            monsterSpawner.SpawnMonster(monsterId, spawnPos, sortingOrder);
             enemiesRemaining++;
-            spawnCount++;
-            Debug.Log($"소환된 몬스터 {monsterId}");
+            Debug.Log($"몬스터 {monsterId}");
+            yield return new WaitForSeconds(interval);
         }
-        Debug.Log($"웨이브 : {currentWave}, {spawnCount}마리 몬스터 소환 완료");
-       
-    }
-    
-    private IEnumerator CoSpawnWaveMonster()
-    {
-        for(int i = 0; i < totalWaveCount; i++)
-        {
-            currentWave = i + 1;
-            SpawnWaveMonster();
-            yield return new WaitForSeconds(waveMonsterRespawnInterval);
-        }
-        isStageCompleted = true;
-        Debug.Log("스테이지 클리어");
     }
 
+    private IEnumerator CoSpawnWaveMonster()
+    {
+        int[] monsterIds = new int[] { monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId};
+        Vector2 spawnPos = new Vector2(-3, 4);
+
+        for (int i = 0; i < monsterIds.Length; i++)
+        {
+            int monsterId = monsterIds[i];
+            if (monsterId == 0) continue;
+
+
+            float initialDelay = (i == 0) ? waveMonsterRespawnInterval : waveMonsterRespawnInterval + 1f;
+            float interval = waveMonsterRespawnInterval;
+
+            StartCoroutine(CoSpawnMonsterWithDelay(monsterId, spawnPos, i, initialDelay, interval));
+        }
+
+        yield return null;
+    }
+
+    public void OnBattleTimerEnd()
+    {
+        if (!isStageCompleted)
+        {
+            isStageCompleted = true;
+            gameManager.OnStageClear(); // 싱글톤 또는 참조 방식
+        }
+    }
 }

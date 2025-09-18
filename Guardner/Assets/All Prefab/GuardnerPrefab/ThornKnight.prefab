@@ -460,7 +460,7 @@ MonoBehaviour:
   attackPower: 0
   aps: 0
   attackRange: 0
-  rarity: 0
+  rarity: 1
   duration: 0
   coolTime: 0
 --- !u!1 &1071892943866407186

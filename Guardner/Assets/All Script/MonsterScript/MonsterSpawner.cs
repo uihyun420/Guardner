@@ -5,38 +5,46 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public GameObject monsterPrefab;
+    [System.Serializable]
+    public class MonsterPrefabInfo
+    {
+        public int monsterId;
+        public GameObject prefab;
+    }
+    public MonsterPrefabInfo[] monsterPrefabs; // Inspector에서 설정
     public List<MonsterBehavior> spawnedMonsters = new List<MonsterBehavior>();
 
 
-    private int monsterId = 401100; // 테스트
+    //public GameObject monsterPrefab;
+   //private int monsterId = 401100; // 테스트
 
     private Vector2 spawnPos = new Vector2(-3, 4);
     [SerializeField] private BattleUi battleUi;
-    //private void Start()
-    //{
-    //    StartCoroutine(CoSpawnMonster());
-    //}
 
-    public void SpawnMonster(int monsterId)
+
+    public void SpawnMonster(int monsterId, Vector2 spawnPos, int sortingOrder = 0)
     {
         var monsterData = DataTableManager.MonsterTable.Get(monsterId);
         if (monsterData != null)
         {
-            var monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
+            GameObject prefabToUse = GetMonsterPrefab(monsterId);
+            if (prefabToUse == null) return;
+
+            var monster = Instantiate(prefabToUse, spawnPos, Quaternion.identity);
             var behavior = monster.GetComponent<MonsterBehavior>();
             behavior.Init(monsterData);
             behavior.SetBattleUi(battleUi);
+            behavior.SetSortingOrder(sortingOrder); // 정렬 순서 설정
             spawnedMonsters.Add(behavior);
         }
     }
-
-    //private IEnumerator CoSpawnMonster()
-    //{
-    //    while (true)
-    //    {
-    //        SpawnMonster(monsterId);
-    //        yield return new WaitForSeconds(5f);
-    //    }
-    //}
+    private GameObject GetMonsterPrefab(int monsterId)
+    {
+        foreach (var info in monsterPrefabs)
+        {
+            if (info.monsterId == monsterId)
+                return info.prefab;
+        }
+        return null; // 해당 ID의 프리팹이 없으면 null 반환
+    }
 }

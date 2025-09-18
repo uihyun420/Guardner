@@ -25,9 +25,13 @@ public class BattleUi : GenericWindow
     public GuardnerSpawner guardnerSpawner;
     StringBuilder sb = new StringBuilder();
 
+
+    [SerializeField] private StageManager stageManager;
+
+
     private void Awake()
     {
-        battleTimer = 100;
+        battleTimer = 30;
         gold = 0;
     }
 
@@ -64,8 +68,8 @@ public class BattleUi : GenericWindow
         battleTimer -= Time.deltaTime;
         if (battleTimer <= 0)
         {
-            battleTimer = 0f;
-            Time.timeScale = 0f;
+            stageManager.OnBattleTimerEnd();
+            battleTimer = 0;
         }
         sb.Clear();
         sb.Append("남은시간 : ").Append(Mathf.FloorToInt(battleTimer)).Append("초");

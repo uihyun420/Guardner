@@ -76,7 +76,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         {
             if (attackTimer >= attackInterval)
             {
-                //Attack();
+                Attack();
                 door.Ondamage(attackPower);
                 //Debug.Log($"문이 받은 데미지{attackPower}");
                 attackTimer = 0;
@@ -84,7 +84,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         }
         else
         {
-            //animator.SetBool(attack, false);
+           animator.SetBool(attack, false);
         }
 
         if(isStunned)
@@ -153,4 +153,13 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.color = originalColor;
     }
+
+    public void SetSortingOrder(int order)
+    {
+        if(spriteRenderer != null)
+        {
+            spriteRenderer.sortingOrder = order;
+        }
+    }
+
 }

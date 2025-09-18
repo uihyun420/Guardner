@@ -3,8 +3,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private StageManager stageManager;
+    [SerializeField] private WindowManager windowManager;
     private void Start()
     {
+        Time.timeScale = 1f;
         StartGameStage(1630);
     }
 
@@ -19,5 +21,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log($"스테이지 {stageId}로드 실패");
         }
+    }
+
+    public void OnStageClear()
+    {
+        Time.timeScale = 0;
+        windowManager.Open(WindowType.StageClear);
+        Debug.Log("스테이지 클리어");
     }
 }
