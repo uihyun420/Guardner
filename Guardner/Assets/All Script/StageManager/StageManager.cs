@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour
@@ -5,6 +6,7 @@ public class StageManager : MonoBehaviour
     public StageData stageData;
     private StageTable stageTable;
     [SerializeField] private MonsterSpawner monsterSpawner;
+
 
 
     public int currentWave;
@@ -65,22 +67,22 @@ public class StageManager : MonoBehaviour
 
         ResetStageProgress();
         Debug.Log($"스테이지 {stage} 시작! 총 {totalWaveCount}개의 웨이브");
-        StartWave();
+        StartCoroutine(CoSpawnWaveMonster());
     }
 
 
     public void LoadStage(int stageId)
     {
-        if(stageTable == null)
+        if (stageTable == null)
         {
             stageTable = new StageTable();
             stageTable.Load(DataTableIds.Stage);
         }
         StageData data = stageTable.Get(stageId);
-        if(data !=null)
+        if (data != null)
         {
             Init(data);
-            Debug.Log($"스테이지 : {stage} 로드 완료");
+           // Debug.Log($"스테이지 : {stage} 로드 완료");
         }
         else
         {
@@ -96,39 +98,31 @@ public class StageManager : MonoBehaviour
         isStageCompleted = false;
     }
 
-    public void StartWave()
-    {
-        currentWave++;
-
-        if(currentWave > totalWaveCount) // 보스 소환 조건
-        {
-            isStageCompleted = true;
-            Debug.Log("스테이지 클리어!");
-            return;
-        }
-        Debug.Log($"웨이브 : {currentWave}, {totalWaveCount} 시작!");
-        SpawnWaveMonster();
-    }
-
     public void SpawnWaveMonster()
     {
-        if(string.IsNullOrEmpty(waveMonsterList))
+        int[] monsterIds = new int[] { monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId};
+        int spawnCount = 0;
+        foreach(var monsterId in monsterIds)
         {
-            Debug.Log("웨이브 몬스터 리스트가 비었습니다.");
-            return;
+            monsterSpawner.SpawnMonster(monsterId);
+            enemiesRemaining++;
+            spawnCount++;
+            Debug.Log($"소환된 몬스터 {monsterId}");
         }
-        //waveMonsterList를 파싱하여 몬스터 ID 배열로 변환
-        string[] monsterIds = waveMonsterList.Split(',');
-
-        foreach(string monsterIdStr in monsterIds)
-        {
-            if(int.TryParse(monsterIdStr.Trim(), out int monsterId))
-            {
-                monsterSpawner.SpawnMonster(monsterId);
-                enemiesRemaining++;
-            }
-        }
-        Debug.Log($"웨이브 {currentWave}: {enemiesRemaining}마리 몬스터 소환 완료");
+        Debug.Log($"웨이브 : {currentWave}, {spawnCount}마리 몬스터 소환 완료");
+       
     }
     
+    private IEnumerator CoSpawnWaveMonster()
+    {
+        for(int i = 0; i < totalWaveCount; i++)
+        {
+            currentWave = i + 1;
+            SpawnWaveMonster();
+            yield return new WaitForSeconds(waveMonsterRespawnInterval);
+        }
+        isStageCompleted = true;
+        Debug.Log("스테이지 클리어");
+    }
+
 }

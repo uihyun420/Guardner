@@ -7,13 +7,16 @@ public class MonsterSpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
     public List<MonsterBehavior> spawnedMonsters = new List<MonsterBehavior>();
+
+
     private int monsterId = 401100; // Å×½ºÆ®
+
     private Vector2 spawnPos = new Vector2(-3, 4);
     [SerializeField] private BattleUi battleUi;
-    private void Start()
-    {
-        StartCoroutine(CoSpawnMonster());
-    }
+    //private void Start()
+    //{
+    //    StartCoroutine(CoSpawnMonster());
+    //}
 
     public void SpawnMonster(int monsterId)
     {
@@ -28,12 +31,12 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
-    private IEnumerator CoSpawnMonster()
-    {
-        while (true)
-        {
-            SpawnMonster(monsterId);
-            yield return new WaitForSeconds(5f);
-        }
-    }
+    //private IEnumerator CoSpawnMonster()
+    //{
+    //    while (true)
+    //    {
+    //        SpawnMonster(monsterId);
+    //        yield return new WaitForSeconds(5f);
+    //    }
+    //}
 }
