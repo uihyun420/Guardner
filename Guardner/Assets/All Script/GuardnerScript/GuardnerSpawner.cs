@@ -16,7 +16,7 @@ public class GuardnerSpawner : MonoBehaviour
     public List<GuardnerBehavior> spawnedGuardners = new List<GuardnerBehavior>();
 
     public GuardnerSpawnUi guardnerSpawnUi;
-
+    public ScreenTouch screenTouch;
     public GameObject[] spawnPos;
 
     public void SpawnGuardner(int guardnerId, Vector2 spawnPos)
@@ -36,5 +36,12 @@ public class GuardnerSpawner : MonoBehaviour
         {
             Debug.LogWarning($"아이디 {guardnerId}에 해당하는 프리팹이 없습니다.");
         }
+    }
+
+    public Vector2 GetSelectedAreaPosition()
+    {
+        int selectedIndex = screenTouch.GetSelectedAreaIndex();
+        Debug.Log($"인덱스 : {selectedIndex}");
+        return spawnPos[selectedIndex].transform.position;
     }
 }

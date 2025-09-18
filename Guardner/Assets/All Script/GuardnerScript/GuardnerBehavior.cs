@@ -43,8 +43,14 @@ public class GuardnerBehavior : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider2D>();
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody2D>();
+        collider.isTrigger = true;
         attackTimer = 0;
+
+        if(rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
     }
     public void Init(GuardnerData data)
     {

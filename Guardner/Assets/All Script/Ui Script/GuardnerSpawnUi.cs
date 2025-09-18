@@ -13,10 +13,12 @@ public class GuardnerSpawnUi : GenericWindow
     [SerializeField] private GuardnerSpawner guardnerSpawner; // inspector에서 연결
 
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
+    private int selectedAreaIndex;
 
     public override void Open()
     {
         base.Open();
+        selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
         DisplayAvailableGuardner();
     }
 
@@ -31,6 +33,9 @@ public class GuardnerSpawnUi : GenericWindow
         {
             Destroy(child.gameObject);
         }
+
+
+
         foreach (var prefabInfo in guardnerSpawner.guardnerPrefabs)
         {
             var guardnerData = DataTableManager.GuardnerTable.Get(prefabInfo.guardnerId);
@@ -47,16 +52,18 @@ public class GuardnerSpawnUi : GenericWindow
         var itemUi = item.GetComponent<GuardnerItemUi>();
 
         if (itemUi != null)
+        {
             itemUi.SetData(data, OnSelectGuardner);
+        }
     }
 
     private void OnSelectGuardner(int guardnerId)
     {
         selectedGuardnerId = guardnerId;
 
-        if (guardnerSpawner.spawnPos.Length > 0)
+        if(selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
         {
-            Vector2 selectedSpawnPos = guardnerSpawner.spawnPos[0].transform.position;
+            Vector2 selectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
             guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos);
         }
         Close();
