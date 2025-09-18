@@ -24,6 +24,8 @@ public class DataTableManager
         var guardnerSkillTable = new GuardnerSkillTable();
         guardnerSkillTable.Load(DataTableIds.GuardnerSkill);
         tables.Add(DataTableIds.GuardnerSkill, guardnerSkillTable);
+
+        var stageTable = new StageTable();
     }
 
 

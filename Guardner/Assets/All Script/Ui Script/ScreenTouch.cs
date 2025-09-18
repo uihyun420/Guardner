@@ -8,8 +8,13 @@ public class ScreenTouch : MonoBehaviour
     public Camera mainCamera;
     public WindowManager windowManager;
 
+    private bool isUiBlocking = false;
+
     private void Update()
     {
+        if (isUiBlocking)
+            return;
+
         if(Input.touchCount ==1)
         {
             Touch touch = Input.GetTouch(0);
@@ -21,7 +26,7 @@ public class ScreenTouch : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0)) // 마우스 테스트용
         {
             Vector2 mousePosition = Input.mousePosition;
             HandleTouch(mousePosition);
@@ -53,5 +58,10 @@ public class ScreenTouch : MonoBehaviour
     public int GetSelectedAreaIndex()
     {
         return selectedAreaIndex;
+    }
+
+    public void SetUiBlocking(bool blocking)
+    {
+        isUiBlocking = blocking;
     }
 }

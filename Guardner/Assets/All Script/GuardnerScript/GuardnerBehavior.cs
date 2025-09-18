@@ -18,7 +18,6 @@ public class GuardnerBehavior : MonoBehaviour
     private string egName;
     public int id;
     private int idDivide;
-    private int level;
     public GuardnerTypes role;
     public int attackPower;
     public float aps;
@@ -30,8 +29,10 @@ public class GuardnerBehavior : MonoBehaviour
     public GuardnerGrade rarity;
     private int maxLevel;
     private int skillId;
-    private int lvStatId;
-    private string reference; 
+    private string reference;
+    private int guardnerDrawId;
+
+    //private int level;
 
     private Animator animator;
 
@@ -60,20 +61,18 @@ public class GuardnerBehavior : MonoBehaviour
         egName = guardnerData.EGName;
         id = guardnerData.Id;
         idDivide = guardnerData.IdDivide;
-        level = guardnerData.Level;
         role = guardnerData.Role;
         attackPower = guardnerData.AttackPower;
         aps = guardnerData.APS;
         dps = guardnerData.DPS;
-        gateHp = guardnerData.GateHP;
         attackRange = guardnerData.AttackRange;
         summonGold = guardnerData.SummonGold;
         sellingGold = guardnerData.SellingGold;
         rarity = guardnerData.Rarity;
         maxLevel = guardnerData.MaxUPLevel;
         skillId = guardnerData.SkillID;
-        lvStatId = guardnerData.LvStatId;
         reference = guardnerData.Reference;
+        guardnerDrawId = guardnerData.GuardenerDrawId;
     }
 
     private void Update()

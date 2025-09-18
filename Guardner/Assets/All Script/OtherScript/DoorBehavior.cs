@@ -8,7 +8,7 @@ public class DoorBehavior : MonoBehaviour, IDamageable
     public LayerMask layer;
     public HpBar hpBar;
 
-    private int hp = 500;  // 테스트 
+    private int hp = 100;  // 테스트 
     private BoxCollider2D boxCollider2D;
     public bool isBreak = false;
 

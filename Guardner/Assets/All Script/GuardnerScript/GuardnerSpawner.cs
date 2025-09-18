@@ -44,4 +44,16 @@ public class GuardnerSpawner : MonoBehaviour
         Debug.Log($"¿Œµ¶Ω∫ : {selectedIndex}");
         return spawnPos[selectedIndex].transform.position;
     }
+
+    public bool IsGuardnerAtPosition(Vector2 position, float checkRadius = 0.5f)
+    {
+        foreach(var guardner in spawnedGuardners)
+        {
+            if(guardner != null && Vector2.Distance(guardner.transform.position, position) < checkRadius)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -164,6 +164,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
   applicationIdentifier:
+    Android: com.Kyungil.NightGuardner
     Standalone: com.DefaultCompany.2D-Project
   buildNumber:
     Standalone: 0

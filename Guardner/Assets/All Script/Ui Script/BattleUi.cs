@@ -27,7 +27,7 @@ public class BattleUi : GenericWindow
 
     private void Awake()
     {
-        battleTimer = 300;
+        battleTimer = 100;
         gold = 0;
     }
 

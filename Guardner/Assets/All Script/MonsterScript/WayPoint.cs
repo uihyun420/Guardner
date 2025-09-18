@@ -47,7 +47,7 @@ public class WayPoint : MonoBehaviour
         {
             wayPointCount++;
         }
-        if(wayPointCount == 2 || wayPointCount == 5 || wayPointCount == 6 || wayPointCount ==7 || wayPointCount == 8)
+        if(wayPointCount == 1 || wayPointCount == 4 || wayPointCount == 5 || wayPointCount ==7 || wayPointCount == 8)
         {
             spriteRenderer.flipX = true;
         }
