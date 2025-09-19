@@ -25,7 +25,13 @@ public class DataTableManager
         guardnerSkillTable.Load(DataTableIds.GuardnerSkill);
         tables.Add(DataTableIds.GuardnerSkill, guardnerSkillTable);
 
+        var playerSkillTable = new PlayerSkillTable();
+        playerSkillTable.Load(DataTableIds.PlayerSkill);
+        tables.Add(DataTableIds.PlayerSkill, playerSkillTable);
+
         var stageTable = new StageTable();
+        stageTable.Load(DataTableIds.Stage);
+        tables.Add(DataTableIds.Stage, stageTable);
     }
 
 
@@ -51,7 +57,23 @@ public class DataTableManager
             return Get<GuardnerSkillTable>(DataTableIds.GuardnerSkill);
         }
     }
+
+    public static PlayerSkillTable PlayerSkillTable
+    {
+        get
+        {
+            return Get<PlayerSkillTable>(DataTableIds.PlayerSkill);
+        }
+    }
+    public static StageTable StageTable
+    {
+        get
+        {
+            return Get<StageTable>(DataTableIds.Stage);
+        }
+    }
   
+
     
 
     public static T Get<T>(string id) where T : DataTable

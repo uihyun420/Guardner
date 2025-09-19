@@ -74,16 +74,13 @@ public class StageManager : MonoBehaviour
 
     public void LoadStage(int stageId)
     {
-        if (stageTable == null)
-        {
-            stageTable = new StageTable();
-            stageTable.Load(DataTableIds.Stage);
-        }
+        stageTable = DataTableManager.StageTable;
+
         StageData data = stageTable.Get(stageId);
         if (data != null)
         {
             Init(data);
-           // Debug.Log($"스테이지 : {stage} 로드 완료");
+            Debug.Log($"스테이지 : {stage} 로드 완료");
         }
         else
         {
@@ -113,7 +110,7 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator CoSpawnWaveMonster()
     {
-        int[] monsterIds = new int[] { monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId};
+        int[] monsterIds = new int[] { monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId };
         Vector2 spawnPos = new Vector2(-3, 4);
 
         for (int i = 0; i < monsterIds.Length; i++)
