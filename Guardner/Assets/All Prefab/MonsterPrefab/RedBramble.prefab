@@ -326,8 +326,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.54}
-  m_Size: {x: 1.025, y: 0.95}
+  m_Offset: {x: 0, y: 0.1}
+  m_Size: {x: 1.025, y: 0.97}
   m_Direction: 0
 --- !u!114 &4897823999979355632
 MonoBehaviour:
@@ -512,7 +512,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.997}
+  m_AnchoredPosition: {x: 0, y: 0.435}
   m_SizeDelta: {x: 0.58, y: 0.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5255934663116702726
