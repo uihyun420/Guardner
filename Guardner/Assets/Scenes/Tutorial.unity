@@ -5363,6 +5363,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7257631202726267349, guid: 1f631ab79419b69448ebc7c5a2d1757f, type: 3}
   m_PrefabInstance: {fileID: 1070883687}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1074658377 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
+  m_PrefabInstance: {fileID: 864487274}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1082006635
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,6 +5501,7 @@ MonoBehaviour:
   guardnerItemPrefab: {fileID: 8892067380912734106, guid: d136c9a6cf7f4ff46be50fc566f1c917, type: 3}
   contentParent: {fileID: 1507286208}
   guardnerSpawner: {fileID: 1794989048}
+  battleUi: {fileID: 1466228247}
 --- !u!114 &1082006642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7408,6 +7420,8 @@ MonoBehaviour:
   skillManager: {fileID: 1600214967}
   battleTimeText: {fileID: 318278968}
   goldText: {fileID: 93014966}
+  guardnerSpawnCount: {fileID: 1074658377}
+  canSpawnGuardnerCount: 0
   monsterSpawner: {fileID: 125721413}
   guardnerSpawner: {fileID: 1794989048}
   stageManager: {fileID: 941582427}
@@ -8003,7 +8017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5713982, y: 0.61800003}
   m_AnchorMax: {x: 0.869, y: 0.7348543}
-  m_AnchoredPosition: {x: 1.3683167, y: 4.1384583}
+  m_AnchoredPosition: {x: 1.3683472, y: 4.1384277}
   m_SizeDelta: {x: -6.7894897, y: -4.4210052}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617186801

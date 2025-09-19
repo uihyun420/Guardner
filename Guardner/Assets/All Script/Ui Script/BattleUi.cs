@@ -1,6 +1,7 @@
 using System.Text;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,9 @@ public class BattleUi : GenericWindow
    
     public TextMeshProUGUI battleTimeText;
     public TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI guardnerSpawnCount;
+    private int maxGuardnerCount = 16;
+    public int canSpawnGuardnerCount = 0;
     private float battleTimer;
 
     private int gold;
@@ -32,13 +36,15 @@ public class BattleUi : GenericWindow
     private void Awake()
     {
         battleTimer = 60;
-        gold = 0;
+        gold = 150;
+        canSpawnGuardnerCount = maxGuardnerCount;
     }
 
     private void Update()
     {
         SetBattleTimer();
         SetGoldText();
+        SetGuardnerSpawnCount();
     }
 
     public void OnSkillButtonClicked(int skillId)
@@ -110,9 +116,20 @@ public class BattleUi : GenericWindow
             guardnerSpawner.SpawnGuardner(guardnerId[i], spawnPos[i]);
         }
     }
-
     public void TimeSetZero()
     {
         battleTimer = 0;       
+    }
+    
+    public void SetGuardnerSpawnCount()
+    {
+        sb.Clear();
+        sb.Append("배치 가능한 정원사 : ").Append(canSpawnGuardnerCount).Append("/").Append(maxGuardnerCount);
+        guardnerSpawnCount.text = sb.ToString();
+    }
+    public void UpdateGuardnerCount()
+    {
+        canSpawnGuardnerCount--;
+        SetGuardnerSpawnCount();
     }
 }

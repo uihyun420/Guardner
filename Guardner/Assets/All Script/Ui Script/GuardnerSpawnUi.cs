@@ -9,6 +9,7 @@ public class GuardnerSpawnUi : GenericWindow
     public Transform contentParent; // 스크롤랙트의 content
 
     [SerializeField] private GuardnerSpawner guardnerSpawner; // inspector에서 연결
+    [SerializeField] private BattleUi battleUi;
 
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
@@ -86,6 +87,7 @@ public class GuardnerSpawnUi : GenericWindow
                 return;
             }
             guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos);
+            battleUi.UpdateGuardnerCount();
         }
         Close();
     }
