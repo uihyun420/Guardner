@@ -18,13 +18,16 @@ public class GuardnerSpawnUi : GenericWindow
         base.Open();
         guardnerSpawner.screenTouch.SetUiBlocking(true);
 
+        if (scrollRect != null)
+            scrollRect.horizontal = false;
+
+
         selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
         if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
         {
             Vector2 expectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
         }
         DisplayAvailableGuardner();
-        
     }
 
     public override void Close()
@@ -40,8 +43,6 @@ public class GuardnerSpawnUi : GenericWindow
             Destroy(child.gameObject);
         }
 
-
-
         foreach (var prefabInfo in guardnerSpawner.guardnerPrefabs)
         {
             var guardnerData = DataTableManager.GuardnerTable.Get(prefabInfo.guardnerId);
@@ -49,6 +50,14 @@ public class GuardnerSpawnUi : GenericWindow
             {
                 CreateGuardnerItem(guardnerData, prefabInfo.guardnerId);
             }
+        }
+
+        // 콘텐츠 크기와 뷰포트 크기 비교해서 스크롤 활성/비활성
+        if (scrollRect != null)
+        {
+            var contentHeight = scrollRect.content.rect.height;
+            var viewportHeight = scrollRect.viewport.rect.height;
+            scrollRect.vertical = contentHeight > viewportHeight;
         }
     }
 

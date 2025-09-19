@@ -23,10 +23,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        //if(Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    GameExit();
+        //}
+    }
+
     public void OnStageClear()
     {
         Time.timeScale = 0;
         windowManager.Open(WindowType.StageClear);
         Debug.Log("스테이지 클리어");
     }
+
+    public void GameExit()
+    {
+        Application.Quit();
+        Debug.Log("게임종료");
+    }
+
 }

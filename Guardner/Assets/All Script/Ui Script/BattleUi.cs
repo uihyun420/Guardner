@@ -110,4 +110,9 @@ public class BattleUi : GenericWindow
             guardnerSpawner.SpawnGuardner(guardnerId[i], spawnPos[i]);
         }
     }
+
+    public void TimeSetZero()
+    {
+        battleTimer = 0;       
+    }
 }
