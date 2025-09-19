@@ -58,4 +58,9 @@ public class GuardnerSkillTable : DataTable
         }
         return table[id];
     }
+
+    public IEnumerable<GuardnerSkillData> GetAll()
+    {
+        return table.Values;
+    }
 }

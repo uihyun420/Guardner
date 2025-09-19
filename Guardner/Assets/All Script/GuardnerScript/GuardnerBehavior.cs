@@ -153,4 +153,11 @@ public class GuardnerBehavior : MonoBehaviour
     {
         StartCoroutine(CoAttackSpeedBoost(amount, duration));
     }
+
+    //public IEnumerator CoCleanDebuff()
+
+    //public void CleanDebuff(float duration)
+    //{
+    //    StartCoroutine()
+    //}
 }

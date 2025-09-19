@@ -6,13 +6,29 @@ public class SkillManager : MonoBehaviour
 {
     public GuardnerSkillTable guardnerSkillTable => DataTableManager.GuardnerSkillTable;    
     private GuardnerSkillData selectSkill;
+    
 
     private Dictionary<int, float> lastUsedTime = new Dictionary<int, float>(); // 스킬 ID별 마지막 사용 시간 저장 
 
     public void Init(GuardnerSkillData data)
     {
         selectSkill = data;
+
     }
+
+    private void Update()
+    {
+        foreach(var skillData in guardnerSkillTable.GetAll())
+        {
+            if(CanUseSkill(skillData.SkillID))
+            {
+                SelectSkill(skillData.SkillID);
+                UseSkill();
+                Debug.Log($"사용된 스킬 {skillData.Name}");
+            }
+        }
+    }
+
 
     public void SelectSkill(int skillId)
     {
@@ -35,17 +51,18 @@ public class SkillManager : MonoBehaviour
         var guardner = GetComponent<GuardnerBehavior>();
         var monster = GetComponent<MonsterBehavior>();
 
+
         // KnockBack (Monster)
-        if (selectSkill.KnockBack > 0 && monster != null)
-        {
-            var rb = monster.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                Vector2 direction = Vector2.right;
-                rb.AddForce(direction * selectSkill.KnockBack, ForceMode2D.Impulse);
-                Debug.Log($"KnockBack 적용: {selectSkill.KnockBack} (SkillID: {selectSkill.SkillID})");
-            }
-        }
+        //if (selectSkill.KnockBack > 0 && monster != null)
+        //{
+        //    var rb = monster.GetComponent<Rigidbody2D>();
+        //    if (rb != null)
+        //    {
+        //        Vector2 direction = Vector2.right;
+        //        rb.AddForce(direction * selectSkill.KnockBack, ForceMode2D.Impulse);
+        //        Debug.Log($"KnockBack 적용: {selectSkill.KnockBack} (SkillID: {selectSkill.SkillID})");
+        //    }
+        //}
 
         // Stun (Monster)
         if (selectSkill.Stun > 0 && monster != null)
@@ -80,7 +97,10 @@ public class SkillManager : MonoBehaviour
             Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
 
+        //if (selectSkill.DebuffClean > 0 && guardner != null)
+        //{
+        //    float 
+        //}
         lastUsedTime[selectSkill.SkillID] = Time.time;
     }
-
 }

@@ -39,7 +39,6 @@ public class GuardnerData
     {
         return $"이름: {Name}\n 도감 설명: {Reference}";
     }
-
 }
 
 public class GuardnerTable : DataTable
