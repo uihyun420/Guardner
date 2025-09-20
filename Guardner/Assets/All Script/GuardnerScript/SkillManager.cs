@@ -4,83 +4,164 @@ using System.Collections;
 
 public class SkillManager : MonoBehaviour
 {
-    public GuardnerSkillTable guardnerSkillTable => DataTableManager.GuardnerSkillTable;    
+    public GuardnerSkillTable guardnerSkillTable => DataTableManager.GuardnerSkillTable;
     private GuardnerSkillData selectSkill;
-    
 
     private Dictionary<int, float> lastUsedTime = new Dictionary<int, float>(); // 스킬 ID별 마지막 사용 시간 저장 
+
+    [SerializeField] private GuardnerSpawner guardnerSpawner;
+    [SerializeField] private MonsterSpawner monsterSpawner;
 
     public void Init(GuardnerSkillData data)
     {
         selectSkill = data;
-
     }
 
     private void Update()
     {
-        foreach(var skillData in guardnerSkillTable.GetAll())
+        if (guardnerSpawner == null || guardnerSpawner.spawnedGuardners.Count == 0)
+            return;
+        if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
+            return;
+
+        foreach (var guardner in guardnerSpawner.spawnedGuardners)
         {
-            if(CanUseSkill(skillData.SkillID))
+            if (guardner == null)
+                continue;
+
+            // 가드너의 SkillID와 일치하는 스킬만 적용
+            var skillData = guardnerSkillTable.Get(guardner.skillId);
+            if (skillData != null && CanUseSkill(skillData.SkillID, skillData.CoolTime))
             {
                 SelectSkill(skillData.SkillID);
                 UseSkill();
-                Debug.Log($"사용된 스킬 {skillData.Name}");
+                Debug.Log($"가드너 {guardner.name}가 스킬 {skillData.Name} 사용");
             }
         }
     }
-
 
     public void SelectSkill(int skillId)
     {
         selectSkill = guardnerSkillTable.Get(skillId);
     }
 
-    public bool CanUseSkill(int skillId)
+    // 개별 스킬의 쿨타임을 매개변수로 받도록 수정
+    public bool CanUseSkill(int skillId, float coolTime)
     {
         if (!lastUsedTime.ContainsKey(skillId))
         {
             return true;
-        } 
+        }
         float lastTime = lastUsedTime[skillId];
-        float coolTime = selectSkill.CoolTime;
         return Time.time - lastTime >= coolTime;
     }
 
     public void UseSkill()
     {
-        var guardner = GetComponent<GuardnerBehavior>();
-        var monster = GetComponent<MonsterBehavior>();
-
-
-        // KnockBack (Monster)
-        //if (selectSkill.KnockBack > 0 && monster != null)
-        //{
-        //    var rb = monster.GetComponent<Rigidbody2D>();
-        //    if (rb != null)
-        //    {
-        //        Vector2 direction = Vector2.right;
-        //        rb.AddForce(direction * selectSkill.KnockBack, ForceMode2D.Impulse);
-        //        Debug.Log($"KnockBack 적용: {selectSkill.KnockBack} (SkillID: {selectSkill.SkillID})");
-        //    }
-        //}
-
-        // Stun (Monster)
-        if (selectSkill.Stun > 0 && monster != null)
+        // 몬스터 대상 스킬
+        if (selectSkill.TargetType == SkillTargetType.Monster)
         {
-            monster.Stun(selectSkill.Stun);
+            ApplySkillToMonsters();
+        }
+        // 가디언 대상 스킬
+        else if (selectSkill.TargetType == SkillTargetType.Guardner)
+        {
+            ApplySkillToAllGuardners();
+        }
+
+        lastUsedTime[selectSkill.SkillID] = Time.time;
+    }
+
+    // 몬스터 대상 스킬 적용
+    private void ApplySkillToMonsters()
+    {
+        if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
+            return;
+
+        foreach (var monster in monsterSpawner.spawnedMonsters)
+        {
+            if (monster != null && !monster.IsDead)
+            {
+                ApplyMonsterSkills(monster);
+            }
+        }
+    }
+
+    // 가디언 대상 스킬 적용
+    private void ApplySkillToAllGuardners()
+    {
+        if (guardnerSpawner == null || guardnerSpawner.spawnedGuardners.Count == 0)
+            return;
+
+        foreach (var guardner in guardnerSpawner.spawnedGuardners)
+        {
+            if (guardner != null)
+            {
+                ApplyGuardnerSkills(guardner);
+            }
+        }
+    }
+
+    private MonsterBehavior FindTargetMonster(GuardnerBehavior guardner)
+    {
+        // 스포너의 spawnedMonsters 리스트 직접 사용
+        if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
+            return null;
+
+        // 현재 가디언이 타겟팅하고 있는 몬스터 우선 확인
+        if (guardner != null && guardner.Monster != null && !guardner.Monster.IsDead)
+        {
+            return guardner.Monster;
+        }
+
+        // 가디언 공격 범위 내의 몬스터 찾기
+        MonsterBehavior nearestMonster = null;
+        float nearestDistance = float.MaxValue;
+
+        // spawnedMonsters 리스트 직접 순회 - 성능 최적화!
+        foreach (var monster in monsterSpawner.spawnedMonsters)
+        {
+            if (monster != null && !monster.IsDead)
+            {
+                float distance = Vector2.Distance(transform.position, monster.transform.position);
+
+                if (guardner != null && distance <= guardner.attackRange && distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestMonster = monster;
+                }
+            }
+        }
+
+        return nearestMonster;
+    }
+
+    private void ApplyMonsterSkills(MonsterBehavior targetMonster)
+    {
+        if (targetMonster == null) return;
+
+        // Stun
+        if (selectSkill.Stun > 0)
+        {
+            targetMonster.Stun(selectSkill.Stun);
             Debug.Log($"Stun 적용: {selectSkill.Stun}초 (SkillID: {selectSkill.SkillID})");
         }
 
-        // GateDamageReflection (Monster)
-        if (selectSkill.GateDamageReflection > 0 && monster != null)
+        // GateDamageReflection
+        if (selectSkill.GateDamageReflection > 0)
         {
-            float reflectedDamage = monster.attackPower * selectSkill.GateDamageReflection;
-            monster.ReflectDamage(reflectedDamage);
+            float reflectedDamage = targetMonster.attackPower * selectSkill.GateDamageReflection;
+            targetMonster.ReflectDamage(reflectedDamage);
             Debug.Log($"GateDamageReflection 적용: {reflectedDamage} (SkillID: {selectSkill.SkillID})");
         }
+    }
 
-        // AttackPowerBoost (Guardner)
-        if (selectSkill.AttackPowerBoost > 0 && guardner != null)
+    private void ApplyGuardnerSkills(GuardnerBehavior guardner)
+    {
+        if (guardner == null) return;
+
+        // AttackPowerBoost
+        if (selectSkill.AttackPowerBoost > 0)
         {
             float attackPowerBoost = guardner.attackPower * selectSkill.AttackPowerBoost;
             float duration = selectSkill.Duration;
@@ -88,19 +169,13 @@ public class SkillManager : MonoBehaviour
             Debug.Log($"AttackPowerBoost 적용: {attackPowerBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
 
-        // AttackSpeedBoost (Guardner)
-        if (selectSkill.AttackSpeedBoost > 0 && guardner != null)
+        // AttackSpeedBoost
+        if (selectSkill.AttackSpeedBoost > 0)
         {
             float attackSpeedBoost = guardner.aps * selectSkill.AttackSpeedBoost;
             float duration = selectSkill.Duration;
             guardner.AttackSpeedBoost(attackSpeedBoost, duration);
             Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
-
-        //if (selectSkill.DebuffClean > 0 && guardner != null)
-        //{
-        //    float 
-        //}
-        lastUsedTime[selectSkill.SkillID] = Time.time;
     }
 }

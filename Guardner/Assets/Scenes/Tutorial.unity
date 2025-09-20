@@ -10022,6 +10022,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8866255386916920349, guid: c10e909b2375c7243879e22a2d139ad6, type: 3}
+      propertyPath: monsterSpawner
+      value: 
+      objectReference: {fileID: 125721413}
+    - target: {fileID: 8866255386916920349, guid: c10e909b2375c7243879e22a2d139ad6, type: 3}
+      propertyPath: guardnerSpawner
+      value: 
+      objectReference: {fileID: 1794989048}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

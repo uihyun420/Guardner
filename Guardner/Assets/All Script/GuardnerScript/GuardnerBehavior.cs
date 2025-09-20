@@ -28,7 +28,7 @@ public class GuardnerBehavior : MonoBehaviour
     private int sellingGold;
     public GuardnerGrade rarity;
     private int maxLevel;
-    private int skillId;
+    public int skillId;
     private string reference;
     private int guardnerDrawId;
 
@@ -132,26 +132,26 @@ public class GuardnerBehavior : MonoBehaviour
 
     public void AttackPowerBoost(float amount, float duration)
     {
+        StopCoroutine("CoAttackPowerBoost");
         StartCoroutine(CoAttackPowerBoost(amount, duration));
     }
     private IEnumerator CoAttackPowerBoost(float amount, float duration)
     {
-        int att = attackPower;
-        attackPower += Mathf.RoundToInt(att * amount);
+        attackPower += (int)amount;
         yield return new WaitForSeconds(duration);
-        attackPower = att;
+        attackPower -= (int)amount;
     }
 
-    public IEnumerator CoAttackSpeedBoost(float amount, float duration)
-    {
-        float originalAps = aps;
-        aps += aps * amount;
-        yield return new WaitForSeconds(duration);
-        aps = originalAps;
-    }
     public void AttackSpeedBoost(float amount, float duration)
     {
+        StopCoroutine("CoAttackSpeedBoost");
         StartCoroutine(CoAttackSpeedBoost(amount, duration));
+    }
+    public IEnumerator CoAttackSpeedBoost(float amount, float duration)
+    {
+        aps += amount;
+        yield return new WaitForSeconds(duration);
+        aps -= amount;
     }
 
     //public IEnumerator CoCleanDebuff()

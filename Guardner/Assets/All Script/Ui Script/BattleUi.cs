@@ -51,7 +51,7 @@ public class BattleUi : GenericWindow
     {
         var skillData = skillManager.guardnerSkillTable.Get(skillId);
 
-        if (skillManager.CanUseSkill(skillId))
+        if (skillManager.CanUseSkill(skillId, skillData.CoolTime))
         {
             foreach (var monster in monsterSpawner.spawnedMonsters)
             {
