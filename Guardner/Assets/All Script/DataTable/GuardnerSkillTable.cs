@@ -7,7 +7,6 @@ public enum SkillTargetType
     Guardner,
 }
 
-
 public class GuardnerSkillData
 {
     public string Name { get; set; }

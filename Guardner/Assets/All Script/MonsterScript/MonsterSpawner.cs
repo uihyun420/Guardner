@@ -14,10 +14,6 @@ public class MonsterSpawner : MonoBehaviour
     public MonsterPrefabInfo[] monsterPrefabs; // Inspector에서 설정
     public List<MonsterBehavior> spawnedMonsters = new List<MonsterBehavior>();
 
-
-    //public GameObject monsterPrefab;
-   //private int monsterId = 401100; // 테스트
-
     private Vector2 spawnPos = new Vector2(-3, 4);
     [SerializeField] private BattleUi battleUi;
 

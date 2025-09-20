@@ -27,6 +27,7 @@ public class PlayerSkillData
     public int CoolTime { get; set; }
     public string SkillDescription { get; set; }
     public int GardenerSkillDrawId { get; set; }
+    public SkillTargetType TargetType { get; set; }
 }
 
 public class PlayerSkillTable : DataTable
@@ -60,5 +61,10 @@ public class PlayerSkillTable : DataTable
             return null;
         }
         return table[id];
+    }
+
+    public IEnumerable<PlayerSkillData> GetAll()
+    {
+        return table.Values;
     }
 }

@@ -5,12 +5,12 @@ using System.Collections;
 public class SkillManager : MonoBehaviour
 {
     public GuardnerSkillTable guardnerSkillTable => DataTableManager.GuardnerSkillTable;
-    private GuardnerSkillData selectSkill;
+    protected GuardnerSkillData selectSkill;
 
-    private Dictionary<int, float> lastUsedTime = new Dictionary<int, float>(); // 스킬 ID별 마지막 사용 시간 저장 
+    protected Dictionary<int, float> lastUsedTime = new Dictionary<int, float>(); // 스킬 ID별 마지막 사용 시간 저장 
 
-    [SerializeField] private GuardnerSpawner guardnerSpawner;
-    [SerializeField] private MonsterSpawner monsterSpawner;
+    [SerializeField] protected GuardnerSpawner guardnerSpawner;
+    [SerializeField] protected MonsterSpawner monsterSpawner;
 
     public void Init(GuardnerSkillData data)
     {
@@ -40,13 +40,12 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    public void SelectSkill(int skillId)
+    public virtual void SelectSkill(int skillId)
     {
         selectSkill = guardnerSkillTable.Get(skillId);
     }
 
-    // 개별 스킬의 쿨타임을 매개변수로 받도록 수정
-    public bool CanUseSkill(int skillId, float coolTime)
+    public virtual bool CanUseSkill(int skillId, float coolTime)
     {
         if (!lastUsedTime.ContainsKey(skillId))
         {
@@ -56,7 +55,7 @@ public class SkillManager : MonoBehaviour
         return Time.time - lastTime >= coolTime;
     }
 
-    public void UseSkill()
+    public virtual void UseSkill()
     {
         // 몬스터 대상 스킬
         if (selectSkill.TargetType == SkillTargetType.Monster)
@@ -73,7 +72,7 @@ public class SkillManager : MonoBehaviour
     }
 
     // 몬스터 대상 스킬 적용
-    private void ApplySkillToMonsters()
+    protected virtual void ApplySkillToMonsters()
     {
         if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
             return;
@@ -88,7 +87,7 @@ public class SkillManager : MonoBehaviour
     }
 
     // 가디언 대상 스킬 적용
-    private void ApplySkillToAllGuardners()
+    protected virtual void ApplySkillToAllGuardners()
     {
         if (guardnerSpawner == null || guardnerSpawner.spawnedGuardners.Count == 0)
             return;
@@ -102,7 +101,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    private MonsterBehavior FindTargetMonster(GuardnerBehavior guardner)
+    protected virtual MonsterBehavior FindTargetMonster(GuardnerBehavior guardner)
     {
         // 스포너의 spawnedMonsters 리스트 직접 사용
         if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
@@ -136,7 +135,7 @@ public class SkillManager : MonoBehaviour
         return nearestMonster;
     }
 
-    private void ApplyMonsterSkills(MonsterBehavior targetMonster)
+    protected virtual void ApplyMonsterSkills(MonsterBehavior targetMonster)
     {
         if (targetMonster == null) return;
 
@@ -156,7 +155,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    private void ApplyGuardnerSkills(GuardnerBehavior guardner)
+    protected virtual void ApplyGuardnerSkills(GuardnerBehavior guardner)
     {
         if (guardner == null) return;
 
