@@ -16,12 +16,12 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
     public LayerMask layer;
 
-    private float attackInterval = 1f;
+    public float attackInterval = 1f;
     private float attackTimer;
     public bool isTouchingDoor = false;
 
     private int hp;
-    private float moveSpeed;
+    public float moveSpeed;
     public int attackPower;
     private string monsterName;
     private Type monsterType;
@@ -45,7 +45,8 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     {
         monsterData = data;
         hp = monsterData.HP;
-        moveSpeed = monsterData.BaseMoveSpeed;
+        // moveSpeed = monsterData.BaseMoveSpeed;
+        moveSpeed = monsterData.BaseMoveSpeed <= 0 ? 1.0f : monsterData.BaseMoveSpeed; // 테스트
         attackPower = monsterData.BaseAttackPower;
         monsterName = monsterData.Name;
         monsterType = monsterData.Type;
@@ -130,8 +131,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         {
             hp = 0;
             Die();
-            //GetGold(monsterData.Gold);
-            battleUi.AddGold(5);
+            battleUi.AddGold(monsterData.RewardGold);
         }
     }
 
@@ -162,4 +162,29 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         }
     }
 
+
+
+    // 몬스터 스피드 디버프 
+    public void SpeedDebuff(float moveSpeedPercent, float attackSpeedPercent, float duration)
+    {
+        StopCoroutine("CoSpeedDebuff");
+        StartCoroutine(CoSpeedDebuff(moveSpeedPercent, attackSpeedPercent, duration));
+    }
+
+    public IEnumerator CoSpeedDebuff(float moveSpeedPercent, float attackSpeedPercent, float duration)
+    {
+        float originalMoveSpeed = moveSpeed;
+        float originalAttackInterval = attackInterval;
+
+        // 이동속도 감소
+        moveSpeed *= (1f - moveSpeedPercent);
+        // 공격속도 감소(공격간격 증가)
+        attackInterval *= (1f + attackSpeedPercent);
+
+        yield return new WaitForSeconds(duration);
+
+        // 원상복구 (원래 값으로 직접 복구)
+        moveSpeed = originalMoveSpeed;
+        attackInterval = originalAttackInterval;
+    }
 }

@@ -4,8 +4,7 @@ using System.Threading;
 using UnityEngine;
 
 public class WayPoint : MonoBehaviour
-{
-    private float speed = 1f;
+{    
     public Transform[] wayPoint;
     public int wayPointCount = 0;
 
@@ -15,24 +14,15 @@ public class WayPoint : MonoBehaviour
     private void Start()
     {
         transform.position = wayPoint[wayPointCount].transform.position;
-        //monster = GetComponent<MonsterBehavior>();
         spriteRenderer = GetComponent < SpriteRenderer>();
     }
 
     private void Update()
     {
         if (!monster.isStunned)
-        {
-            speed = 1f;
+        {            
             MovePath();
-        }
-        else
-        {
-            if (monster.isStunned)
-            {
-                speed = 0;
-            }
-        }
+        }        
     }
 
     public void MovePath()
@@ -42,7 +32,7 @@ public class WayPoint : MonoBehaviour
         {
             return;
         }
-        transform.position = Vector2.MoveTowards(transform.position, wayPoint[wayPointCount].transform.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, wayPoint[wayPointCount].transform.position, monster.moveSpeed * Time.deltaTime);
         if (transform.position == wayPoint[wayPointCount].transform.position)
         {
             wayPointCount++;

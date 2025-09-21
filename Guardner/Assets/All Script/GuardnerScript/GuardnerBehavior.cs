@@ -14,6 +14,10 @@ public class GuardnerBehavior : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D collider;
 
+    public bool hasCriticalBuff = false; // 크리티컬 공격 여부 
+    public float buffCriticalChance = 0f; // 크리티컬 확률
+    public float buffCriticalDamage = 0f; // 크리티컬 데미지
+
     private string name;
     private string egName;
     public int id;
@@ -89,9 +93,6 @@ public class GuardnerBehavior : MonoBehaviour
             if (attackTimer >= attackInterval)
             {
                 Attack();
-                Monster.Ondamage(attackPower);
-                //Debug.Log($"{attackInterval}초마다 공격");
-                //Debug.Log($"{attackPower}의 데미지");
                 attackTimer = 0;
             }
         }
@@ -104,8 +105,21 @@ public class GuardnerBehavior : MonoBehaviour
     private void Attack()
     {
         animator.SetBool(attack, true);
-        animator.speed = aps;        
+        animator.speed = aps;
+
+        // 일반 공격
+        Monster.Ondamage(attackPower);
+
+        // 크리티컬 버프가 있으면 추가 데미지 체크
+        if (hasCriticalBuff && Random.value < buffCriticalChance)
+        {
+            int criticalDamage = Mathf.RoundToInt(attackPower * buffCriticalDamage);
+            Monster.Ondamage(criticalDamage);
+            Debug.Log($"크리티컬! 추가 데미지: {criticalDamage}");
+        }
     }
+
+
 
     private MonsterBehavior SearchMonster()
     {
@@ -144,14 +158,14 @@ public class GuardnerBehavior : MonoBehaviour
 
     public void AttackSpeedBoost(float amount, float duration)
     {
-        StopCoroutine("CoAttackSpeedBoost");
+        StopCoroutine("CoAttackSpeedBoost"); // 적용시간 지나면 다시 돌아오게 
         StartCoroutine(CoAttackSpeedBoost(amount, duration));
     }
-    public IEnumerator CoAttackSpeedBoost(float amount, float duration)
+    public IEnumerator CoAttackSpeedBoost(float amount, float duration) 
     {
         aps += amount;
         yield return new WaitForSeconds(duration);
-        aps -= amount;
+        aps -= amount; // 적용시간 지나면 다시 돌아오게 
     }
 
     //public IEnumerator CoCleanDebuff()

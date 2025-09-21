@@ -195,24 +195,7 @@ public class BattleUi : GenericWindow
         base.Open();
     }
 
-
-    public void OnGuardnerSpawnButtonClicked()
-    {
-        int[] guardnerId = { 11135, 11255, 11235 };
-
-        Vector2[] spawnPos = new Vector2[]
-        {
-             new Vector2(0.5f, 0f),
-             new Vector2(1f, 0f),
-             new Vector2(0.5f, 0.5f)
-        };
-
-        for (int i = 0; i < guardnerId.Length; i++)
-        {
-            guardnerSpawner.SpawnGuardner(guardnerId[i], spawnPos[i]);
-        }
-    }
-    public void TimeSetZero()
+    public void TimeSetZero() // 테스트용
     {
         battleTimer = 0;       
     }
