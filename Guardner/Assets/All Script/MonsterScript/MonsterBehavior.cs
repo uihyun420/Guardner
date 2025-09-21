@@ -63,8 +63,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         collider = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-       // battleUi = FindObjectOfType<BattleUi>();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
     }
