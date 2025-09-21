@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StageData
-{
-    public int ID { get; set; }
+{    public int ID { get; set; }
     public int Stage { get; set; } // 스테이지 단계
     public string BaseSpawnMonster { get; set; }
     public int BaseMonsterRespawnInterval { get; set; }
@@ -24,9 +23,6 @@ public class StageData
     public float MovementSpeed { get; set; }
     public int RewardID { get; set; }
 }
-
-
-
 public class StageTable : DataTable
 {
     private readonly Dictionary<int, StageData> table = new Dictionary<int, StageData>();
@@ -44,7 +40,7 @@ public class StageTable : DataTable
             if(!table.ContainsKey(stage.ID))
             {
                 table.Add(stage.ID, stage);
-                Debug.Log($"로드된 스테이지 : {stage.ID},로드된 스테이지 몬스터: {stage.MonsterAId}, {stage.MonsterBId}, {stage.MonsterCId}, {stage.MonsterDId}, {stage.MonsterEId}, {stage.MonsterFId}");
+                //Debug.Log($"로드된 스테이지 : {stage.ID},로드된 스테이지 몬스터: {stage.MonsterAId}, {stage.MonsterBId}, {stage.MonsterCId}, {stage.MonsterDId}, {stage.MonsterEId}, {stage.MonsterFId}");
             }
             else
             {
