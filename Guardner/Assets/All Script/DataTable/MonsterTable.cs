@@ -24,7 +24,7 @@ public class MonsterData
     public int HP { get;  set; } 
     public int BaseAttackPower { get;  set; }
     public string Reference { get;  set; }
-    
+    public int RewardGold { get; set; }
 }
 
 public class MonsterTable : DataTable
