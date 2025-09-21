@@ -263,4 +263,30 @@ public class PlayerSkillManager : SkillManager
         yield return new WaitForSeconds(duration);
         skillData.CoolTime = originalCoolTime;
     }
+
+
+
+
+
+    public float RemainCoolTime(int skillId, float coolTime) // 남은 쿨타임 계산
+    {
+        if(!lastUsedTime.ContainsKey(skillId))
+        {
+            return 0f;  
+        }
+        float lastTime = lastUsedTime[skillId];
+        float remain = coolTime - (Time.time - lastTime);
+        return Mathf.Max(0f, remain);
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

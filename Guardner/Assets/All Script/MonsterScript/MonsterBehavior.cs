@@ -77,7 +77,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
             {
                 Attack();
                 door.Ondamage(attackPower);
-                //Debug.Log($"문이 받은 데미지{attackPower}");
                 attackTimer = 0;
             }
         }

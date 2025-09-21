@@ -19,6 +19,9 @@ public class BattleUi : GenericWindow
    
     public TextMeshProUGUI battleTimeText;
     public TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI coolTimeText1;
+    [SerializeField] private TextMeshProUGUI coolTimeText2;
+    [SerializeField] private TextMeshProUGUI coolTimeText3;
     [SerializeField] private TextMeshProUGUI guardnerSpawnCount;
     private int maxGuardnerCount = 16;
     public int canSpawnGuardnerCount = 0;
@@ -64,6 +67,7 @@ public class BattleUi : GenericWindow
         {
             // 스킬이 할당된 경우 - 스킬 사용
             playerSkillManager.UsePlayerSkill(assignedSkillId);
+            SetSkillButtonInteractable(slotNumber, false); // 버튼 비활성화
         }
     }
 
@@ -136,6 +140,7 @@ public class BattleUi : GenericWindow
         SetBattleTimer();
         SetGoldText();
         SetGuardnerSpawnCount();
+        SetCoolTimeText();
     }
 
     public void OnPlayerSkillButtonClicked(int skillId)
@@ -210,5 +215,64 @@ public class BattleUi : GenericWindow
     {
         canSpawnGuardnerCount--;
         SetGuardnerSpawnCount();
+    }
+
+    public void SetCoolTimeText()
+    {
+        for (int i = 1; i <= 3; i++)
+        {
+            int skillId = GetAssignedSkillId(i);
+            Image buttonImage = null;
+            TextMeshProUGUI targetText = null;
+            switch (i)
+            {
+                case 1:
+                    targetText = coolTimeText1;
+                    if (skill1 != null) buttonImage = skill1.GetComponent<Image>();
+                    break;
+                case 2:
+                    targetText = coolTimeText2;
+                    if (skill2 != null) buttonImage = skill2.GetComponent<Image>();
+                    break;
+                case 3:
+                    targetText = coolTimeText3;
+                    if (skill3 != null) buttonImage = skill3.GetComponent<Image>();
+                    break;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            if (skillId != -1 && playerSkillManager.lastUsedTime.ContainsKey(skillId))
+            {
+                var skillData = DataTableManager.PlayerSkillTable.Get(skillId);
+                float remainSec = playerSkillManager.RemainCoolTime(skillId, skillData.CoolTime);
+                if (remainSec > 0)
+                {
+                    sb.Append(Mathf.CeilToInt(remainSec)).Append("초");
+                    // 쿨타임 진행률 계산
+                    float fillAmount = 1f - (remainSec / skillData.CoolTime);
+                    if (buttonImage != null)
+                        buttonImage.fillAmount = fillAmount; // 버튼 이미지 fillAmount로 진행률 표시
+                    SetSkillButtonInteractable(i, false); // 쿨타임 중엔 비활성화
+                }
+                else
+                {
+                    if (buttonImage != null)
+                        buttonImage.fillAmount = 1f; // 쿨타임 끝나면 완전히 채움
+                    SetSkillButtonInteractable(i, true); // 쿨타임 끝나면 버튼 활성화
+                }
+            }
+            if (targetText != null)
+                targetText.text = sb.ToString();
+        }
+    }
+
+    private void SetSkillButtonInteractable(int slotNumber, bool interactable)
+    {
+        switch (slotNumber)
+        {
+            case 1: if (skill1 != null) skill1.interactable = interactable; break;
+            case 2: if (skill2 != null) skill2.interactable = interactable; break;
+            case 3: if (skill3 != null) skill3.interactable = interactable; break;
+        }
     }
 }
