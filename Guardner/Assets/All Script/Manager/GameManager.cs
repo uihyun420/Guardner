@@ -13,14 +13,10 @@ public class GameManager : MonoBehaviour
     private void StartGameStage(int stageId)
     {
         stageManager.LoadStage(stageId);
-        if(stageManager.stageData !=null)
-        {
-            stageManager.StartStage();
-        }
-        else
-        {
-            Debug.Log($"스테이지 {stageId}로드 실패");
-        }
+        //if(stageManager.stageData !=null)
+        //{
+        //    stageManager.StartStage();
+        //}
     }
 
     private void Update()

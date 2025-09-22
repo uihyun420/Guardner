@@ -11,9 +11,8 @@ public class BattleUi : GenericWindow
     public Button skill2;
     public Button skill3;
 
-    public SkillManager skillManager;
-   
-    public TextMeshProUGUI battleTimeText;
+    public SkillManager skillManager;   
+    public TextMeshProUGUI battleTimeText;    
     public TextMeshProUGUI goldText;
 
     [SerializeField] private TextMeshProUGUI coolTimeText1;
@@ -24,6 +23,8 @@ public class BattleUi : GenericWindow
     private int maxGuardnerCount = 16;
     public int canSpawnGuardnerCount = 0;
     private float battleTimer;
+    private float readyTimer = 30f;
+    private bool isReadyTime = true;
 
     private int gold;
     public MonsterSpawner monsterSpawner; // Inspector에서 연결
@@ -129,12 +130,25 @@ public class BattleUi : GenericWindow
     {
         battleTimer = 60;
         gold = 150;
+        isReadyTime = true;
         canSpawnGuardnerCount = maxGuardnerCount;
     }
 
     private void Update()
     {
-        SetBattleTimer();
+        if(isReadyTime)
+        {
+            SetReadyText();
+            if(readyTimer <= 0)
+            {
+                isReadyTime = false;
+                stageManager.StartStage();
+            }
+        }
+        else
+        {
+            SetBattleTimer();
+        }
         SetGoldText();
         SetGuardnerSpawnCount();
         SetCoolTimeText();
@@ -178,6 +192,18 @@ public class BattleUi : GenericWindow
         sb.Clear();
         sb.Append("남은시간 : ").Append(Mathf.FloorToInt(battleTimer)).Append("초");
         battleTimeText.text = sb.ToString();
+    }
+
+    public void SetReadyText()
+    {
+        readyTimer -= Time.deltaTime;
+        if(readyTimer <= 0)
+        {
+            readyTimer = 0;
+        }
+        sb.Clear();
+        sb.Append("준비 시간 : ").Append(Mathf.FloorToInt(readyTimer)).Append("초");
+        battleTimeText.text = sb.ToString(); // 준비시간도 battleTimeText에 표시
     }
 
     public void SetGoldText()

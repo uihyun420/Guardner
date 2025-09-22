@@ -22,19 +22,16 @@ public class GuardnerItemUi : MonoBehaviour
         if(guardnerImage != null)
         {
             string imagePath = $"GuardnerIcons/guardner_{data.GuardenerDrawId}";
-            Debug.Log($"이미지 로드 경로: {imagePath}");
             var sprite = Resources.Load<Sprite>(imagePath);
 
             if(sprite != null)
             {
                 guardnerImage.sprite = sprite;
                 guardnerImage.gameObject.SetActive(true);
-                Debug.Log("이미지 로드 성공");
             }
             else
             {
                 guardnerImage.gameObject.SetActive(false);
-                Debug.LogWarning("이미지 로드 실패: 파일이 없거나 경로가 잘못됨");
             }
         }
 

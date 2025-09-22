@@ -8,8 +8,6 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private MonsterSpawner monsterSpawner;
 
-
-
     public int currentWave;
     public int enemiesRemaining;
     public bool isBossStage;
