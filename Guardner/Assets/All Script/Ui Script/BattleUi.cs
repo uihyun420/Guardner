@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -31,7 +32,7 @@ public class BattleUi : GenericWindow
     public GuardnerSpawner guardnerSpawner;
     StringBuilder sb = new StringBuilder();
 
-
+    [SerializeField] private GameObject readyTimeObject;
     [SerializeField] private StageManager stageManager;
     [SerializeField] private PlayerSkillManager playerSkillManager;
     [SerializeField] private PlayerSkillSetUi playerSkillSetUi; // Inspector에서 연결
@@ -50,6 +51,8 @@ public class BattleUi : GenericWindow
             skill2.onClick.AddListener(() => OnSkillSlotClicked(2));
         if (skill3 != null)
             skill3.onClick.AddListener(() => OnSkillSlotClicked(3));
+
+        StartCoroutine(CoSetReadyTimeUi());
     }
 
     // 스킬 슬롯 버튼 클릭 시 호출
@@ -297,5 +300,12 @@ public class BattleUi : GenericWindow
             case 2: if (skill2 != null) skill2.interactable = interactable; break;
             case 3: if (skill3 != null) skill3.interactable = interactable; break;
         }
+    }
+
+    private IEnumerator CoSetReadyTimeUi()
+    {
+        readyTimeObject.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        readyTimeObject.gameObject.SetActive(false);
     }
 }

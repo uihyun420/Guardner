@@ -10377,6 +10377,7 @@ MonoBehaviour:
   canSpawnGuardnerCount: 0
   monsterSpawner: {fileID: 125721413}
   guardnerSpawner: {fileID: 1794989048}
+  readyTimeObject: {fileID: 1961627831}
   stageManager: {fileID: 941582427}
   playerSkillManager: {fileID: 1699866780}
   playerSkillSetUi: {fileID: 1707292859}
@@ -12192,7 +12193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1961627832
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12208,10 +12209,10 @@ RectTransform:
   - {fileID: 283090914}
   m_Father: {fileID: 922292456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 391.7981, y: -144.11333}
+  m_SizeDelta: {x: 783.5962, y: 288.22665}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1961627833
 MonoBehaviour:

@@ -22,7 +22,6 @@ public class PlayerSkillItemUi : MonoBehaviour
             sb.Clear();
             sb.Append(skillData.Name).Append("\n").Append(skillData.SkillDescription);
             skillNameText.text = sb.ToString();
-            Debug.Log(skillData.SkillDescription);
         }
 
         if (skillIcon != null)
