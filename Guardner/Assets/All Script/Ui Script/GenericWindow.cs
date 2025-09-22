@@ -30,8 +30,8 @@ public class GenericWindow : MonoBehaviour
             {
                 screenTouch.SetUiBlocking(true);
             }
+            BlockBattleUI(true); // 오버레이 창이 열릴 때 스킬 버튼 차단
         }
-        BlockBattleUI(true);
     }
     public virtual void Close()
     {

@@ -54,9 +54,6 @@ public class PlayerSkillManager : SkillManager
                 FragranceBloomEffect(skillData);
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
-
-
-
                 // 다른 스킬 추가
         }
     }
@@ -262,11 +259,6 @@ public class PlayerSkillManager : SkillManager
         yield return new WaitForSeconds(duration);
         skillData.CoolTime = originalCoolTime;
     }
-
-
-
-
-
     public float RemainCoolTime(int skillId, float coolTime) // 남은 쿨타임 계산
     {
         if(!lastUsedTime.ContainsKey(skillId))
@@ -277,15 +269,4 @@ public class PlayerSkillManager : SkillManager
         float remain = coolTime - (Time.time - lastTime);
         return Mathf.Max(0f, remain);
     }
-
-
-
-
-
-
-
-
-
-
-
 }

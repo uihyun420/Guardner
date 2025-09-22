@@ -24,10 +24,6 @@ public class PlayerSkillSetUi : GenericWindow
     {
         base.Open();
 
-        // 배경 터치 막기
-        //if (battleUi != null && battleUi.guardnerSpawner != null && battleUi.guardnerSpawner.screenTouch != null)
-        //    battleUi.guardnerSpawner.screenTouch.SetUiBlocking(true);
-
         if (scrollRect != null)
             scrollRect.horizontal = false;
 
@@ -37,10 +33,6 @@ public class PlayerSkillSetUi : GenericWindow
     public override void Close()
     {
         base.Close();
-
-        // 배경 터치 다시 허용
-        //if (battleUi != null && battleUi.guardnerSpawner != null && battleUi.guardnerSpawner.screenTouch != null)
-        //    battleUi.guardnerSpawner.screenTouch.SetUiBlocking(false);
     }
 
     // BattleUi에서 호출될 메서드 - 스킬 슬롯 설정
