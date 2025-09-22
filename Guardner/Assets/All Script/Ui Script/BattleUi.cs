@@ -19,6 +19,11 @@ public class BattleUi : GenericWindow
     [SerializeField] private TextMeshProUGUI coolTimeText1;
     [SerializeField] private TextMeshProUGUI coolTimeText2;
     [SerializeField] private TextMeshProUGUI coolTimeText3;
+
+    [SerializeField] private TextMeshProUGUI text1;
+    [SerializeField] private TextMeshProUGUI text2;
+    [SerializeField] private TextMeshProUGUI text3;
+
     [SerializeField] private TextMeshProUGUI guardnerSpawnCount;
 
     private int maxGuardnerCount = 16;
@@ -81,14 +86,17 @@ public class BattleUi : GenericWindow
             case 1:
                 assignedSkill1 = skillId;
                 UpdateSkillButtonUI(skill1, skillId);
+                text1.text = string.Empty;
                 break;
             case 2:
                 assignedSkill2 = skillId;
                 UpdateSkillButtonUI(skill2, skillId);
+                text2.text = string.Empty;
                 break;
             case 3:
                 assignedSkill3 = skillId;
                 UpdateSkillButtonUI(skill3, skillId);
+                text3.text = string.Empty;
                 break;
         }
     }
@@ -266,7 +274,7 @@ public class BattleUi : GenericWindow
                     break;
             }
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();            
             if (skillId != -1 && playerSkillManager.lastUsedTime.ContainsKey(skillId))
             {
                 var skillData = DataTableManager.PlayerSkillTable.Get(skillId);
