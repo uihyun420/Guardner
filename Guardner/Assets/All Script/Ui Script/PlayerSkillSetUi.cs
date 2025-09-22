@@ -13,13 +13,20 @@ public class PlayerSkillSetUi : GenericWindow
     private int selectedSkillSlot; // 현재 선택된 스킬 슬롯 (1, 2, 3)
     private int selectedSkillId; // 선택된 스킬 ID
 
+
+    private void Awake()
+    {
+        isOverlayWindow = true;
+    }
+
+
     public override void Open()
     {
         base.Open();
 
         // 배경 터치 막기
-        if (battleUi != null && battleUi.guardnerSpawner != null && battleUi.guardnerSpawner.screenTouch != null)
-            battleUi.guardnerSpawner.screenTouch.SetUiBlocking(true);
+        //if (battleUi != null && battleUi.guardnerSpawner != null && battleUi.guardnerSpawner.screenTouch != null)
+        //    battleUi.guardnerSpawner.screenTouch.SetUiBlocking(true);
 
         if (scrollRect != null)
             scrollRect.horizontal = false;
@@ -32,8 +39,8 @@ public class PlayerSkillSetUi : GenericWindow
         base.Close();
 
         // 배경 터치 다시 허용
-        if (battleUi != null && battleUi.guardnerSpawner != null && battleUi.guardnerSpawner.screenTouch != null)
-            battleUi.guardnerSpawner.screenTouch.SetUiBlocking(false);
+        //if (battleUi != null && battleUi.guardnerSpawner != null && battleUi.guardnerSpawner.screenTouch != null)
+        //    battleUi.guardnerSpawner.screenTouch.SetUiBlocking(false);
     }
 
     // BattleUi에서 호출될 메서드 - 스킬 슬롯 설정

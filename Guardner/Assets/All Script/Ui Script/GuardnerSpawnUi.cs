@@ -14,6 +14,14 @@ public class GuardnerSpawnUi : GenericWindow
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
 
+
+    private void Awake()
+    {
+        isOverlayWindow = true;
+    }
+
+
+
     public override void Open()
     {
         selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
@@ -28,7 +36,7 @@ public class GuardnerSpawnUi : GenericWindow
         }
 
         base.Open();
-        guardnerSpawner.screenTouch.SetUiBlocking(true);
+        //guardnerSpawner.screenTouch.SetUiBlocking(true);
 
         if (scrollRect != null)
             scrollRect.horizontal = false;
@@ -39,7 +47,7 @@ public class GuardnerSpawnUi : GenericWindow
     public override void Close()
     {
         base.Close();
-        guardnerSpawner.screenTouch.SetUiBlocking(false);
+        //guardnerSpawner.screenTouch.SetUiBlocking(false);
     }
 
     private void DisplayAvailableGuardner()

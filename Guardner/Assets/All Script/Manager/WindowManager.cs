@@ -8,6 +8,8 @@ public class WindowManager : MonoBehaviour
     public WindowType defaultWindow;
     public WindowType CurrentWindow { get; private set; }
 
+    private GenericWindow currentWindow;
+
     private void Start()
     {
         foreach (var window in windows)
@@ -26,6 +28,10 @@ public class WindowManager : MonoBehaviour
 
     public void OpenOverlay(WindowType id)
     {
+        // 이미 같은 타입의 오버레이가 열려있으면 열지 않음
+        if (windows[(int)id].gameObject.activeSelf)
+            return;
+
         // 현재 창은 닫지 않고 새 창만 열기
         windows[(int)id].Open();
     }
@@ -35,6 +41,7 @@ public class WindowManager : MonoBehaviour
         CurrentWindow = id;
         windows[(int)CurrentWindow].Open();
     }
+
 
     private void OnDestroy()
     {
