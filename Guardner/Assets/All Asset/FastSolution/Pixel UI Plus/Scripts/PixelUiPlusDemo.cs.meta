@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6d8c46e30b1244d85933150068849228
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310543
+  packageName: Pixel UI Pro
+  packageVersion: 1.0
+  assetPath: Assets/FastSolution/Pixel UI Plus/Scripts/PixelUiPlusDemo.cs
+  uploadId: 734329

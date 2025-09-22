@@ -1,7 +1,5 @@
 using System.Text;
 using TMPro;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,16 +11,16 @@ public class BattleUi : GenericWindow
     public Button skill2;
     public Button skill3;
 
-    //public Button spawnPos1;
-
     public SkillManager skillManager;
    
     public TextMeshProUGUI battleTimeText;
     public TextMeshProUGUI goldText;
+
     [SerializeField] private TextMeshProUGUI coolTimeText1;
     [SerializeField] private TextMeshProUGUI coolTimeText2;
     [SerializeField] private TextMeshProUGUI coolTimeText3;
     [SerializeField] private TextMeshProUGUI guardnerSpawnCount;
+
     private int maxGuardnerCount = 16;
     public int canSpawnGuardnerCount = 0;
     private float battleTimer;
@@ -113,18 +111,17 @@ public class BattleUi : GenericWindow
         var skillData = DataTableManager.PlayerSkillTable.Get(skillId);
         if (skillData != null)
         {
-            // 버튼 텍스트나 이미지 업데이트
-            var buttonText = skillButton.GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText != null)
-            {
-                buttonText.text = skillData.Name;
-            }
-
             // 스킬 아이콘 설정
             var buttonImage = skillButton.GetComponent<Image>();
             if (buttonImage != null)
             {
-                // buttonImage.sprite = Resources.Load<Sprite>($"SkillIcons/{skillData.GardenerSkillDrawId}");
+                string imagePath = $"SkillIcons/Skill_{skillData.Id}";
+                var sprite = Resources.Load<Sprite>(imagePath);
+
+                if(sprite != null)
+                {
+                    buttonImage.sprite = sprite;
+                }
             }
         }
     }

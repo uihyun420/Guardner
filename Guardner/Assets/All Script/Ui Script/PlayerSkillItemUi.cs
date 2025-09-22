@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,25 +6,43 @@ using UnityEngine.UI;
 public class PlayerSkillItemUi : MonoBehaviour
 {
     public TextMeshProUGUI skillNameText;
-    //public Image skillIcon; // 스킬 아이콘 이미지
+    public Image skillIcon; // 스킬 아이콘 이미지
     public Button selectButton;
+    StringBuilder sb = new StringBuilder();
 
     private int skillId;
 
     public void SetData(PlayerSkillData skillData, System.Action<int> onSelect, bool isAlreadyAssigned)
     {
         skillId = skillData.Id;
+        
 
         if (skillNameText != null)
         {
-            skillNameText.text = skillData.Name;
+            sb.Clear();
+            sb.Append(skillData.Name).Append("\n").Append(skillData.SkillDescription);
+            skillNameText.text = sb.ToString();
+            Debug.Log(skillData.SkillDescription);
         }
 
-        //if (skillIcon != null)
-        //{
-        //    // 실제로는 Resources나 Addressable로 스킬 아이콘 로드
-        //    // skillIcon.sprite = Resources.Load<Sprite>($"SkillIcons/{skillData.GardenerSkillDrawId}");
-        //}
+        if (skillIcon != null)
+        {
+            // 디버그: 로드 시도하는 경로 확인
+            string imagePath = $"SkillIcons/skill_{skillData.Id}";
+
+            var sprite = Resources.Load<Sprite>(imagePath);
+
+            if (sprite != null)
+            {
+                skillIcon.sprite = sprite;
+                skillIcon.gameObject.SetActive(true);
+            }
+            else
+            {
+                skillIcon.gameObject.SetActive(false);
+            }
+        }
+
 
         if (selectButton != null)
         {

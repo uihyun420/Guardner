@@ -15,7 +15,6 @@ public class PlayerSkillManager : SkillManager
 
         if (!CanUseSkill(skillId, skillData.CoolTime))
         {
-            Debug.Log("스킬 쿨타임입니다.");
             return;
         }
         ApplyPlayerSkillEffect(skillData);

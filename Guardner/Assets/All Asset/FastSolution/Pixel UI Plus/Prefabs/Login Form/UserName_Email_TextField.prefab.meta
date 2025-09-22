@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 80be992b15ae74f9792132338fb7417d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310543
+  packageName: Pixel UI Pro
+  packageVersion: 1.0
+  assetPath: Assets/FastSolution/Pixel UI Plus/Prefabs/Login Form/UserName_Email_TextField.prefab
+  uploadId: 734329

@@ -7,7 +7,7 @@ public class SkillManager : MonoBehaviour
     public GuardnerSkillTable guardnerSkillTable => DataTableManager.GuardnerSkillTable;
     protected GuardnerSkillData selectSkill;
 
-    protected Dictionary<int, float> lastUsedTime = new Dictionary<int, float>(); // 스킬 ID별 마지막 사용 시간 저장 
+    public Dictionary<int, float> lastUsedTime = new Dictionary<int, float>(); // 스킬 ID별 마지막 사용 시간 저장 
 
     [SerializeField] protected GuardnerSpawner guardnerSpawner;
     [SerializeField] protected MonsterSpawner monsterSpawner;

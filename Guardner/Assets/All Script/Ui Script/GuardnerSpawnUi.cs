@@ -16,18 +16,23 @@ public class GuardnerSpawnUi : GenericWindow
 
     public override void Open()
     {
+        selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
+        if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
+        {
+            Vector2 expectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
+            if (guardnerSpawner.IsGuardnerAtPosition(expectedSpawnPos))
+            {
+                Debug.Log("이미 가드너가 소환된 위치입니다.");
+                return;
+            }
+        }
+
         base.Open();
         guardnerSpawner.screenTouch.SetUiBlocking(true);
 
         if (scrollRect != null)
             scrollRect.horizontal = false;
 
-
-        selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
-        if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
-        {
-            Vector2 expectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
-        }
         DisplayAvailableGuardner();
     }
 
@@ -39,7 +44,7 @@ public class GuardnerSpawnUi : GenericWindow
 
     private void DisplayAvailableGuardner()
     {
-        foreach(Transform child in contentParent)
+        foreach (Transform child in contentParent)
         {
             Destroy(child.gameObject);
         }
@@ -77,11 +82,11 @@ public class GuardnerSpawnUi : GenericWindow
     {
         selectedGuardnerId = guardnerId;
 
-        if(selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
+        if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
         {
             Vector2 selectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
 
-            if(guardnerSpawner.IsGuardnerAtPosition(selectedSpawnPos))
+            if (guardnerSpawner.IsGuardnerAtPosition(selectedSpawnPos))
             {
                 Debug.Log("가드너가 이미 존재합니다.");
                 return;
