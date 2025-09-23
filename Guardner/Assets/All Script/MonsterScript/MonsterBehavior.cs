@@ -9,7 +9,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     public DoorBehavior door;
     private BattleUi battleUi;
     private Rigidbody2D rb;
-    private new CapsuleCollider2D collider;
+    private CapsuleCollider2D collider;
     private Animator animator;
     public bool IsDead = false;
     public MonsterData monsterData;
