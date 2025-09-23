@@ -4076,7 +4076,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738940271}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4086,8 +4086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -302, y: -558}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -316, y: -570}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &738940273
 MonoBehaviour:
@@ -4500,7 +4500,7 @@ PrefabInstance:
       objectReference: {fileID: 1466228247}
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.size
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.data[0].prefab
@@ -4515,6 +4515,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100377676536103862, guid: 988b07e5ad5bf8d47a22613b57e71190, type: 3}
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 2569571810513534078, guid: 68024f919862594418b1f8bbd564c4d3, type: 3}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[4].prefab
+      value: 
+      objectReference: {fileID: 7793943221719759204, guid: 6194b7df989bd9f47b51dae40423113e, type: 3}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[5].prefab
+      value: 
+      objectReference: {fileID: 1435195966303946516, guid: 37c456fa654b1ed46986c8f76ae4a2bb, type: 3}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[6].prefab
+      value: 
+      objectReference: {fileID: 2508256400645105740, guid: ca4d86a99fa570c4e894583ea219d548, type: 3}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.data[0].monsterId
       value: 411260
       objectReference: {fileID: 0}
@@ -4525,6 +4541,22 @@ PrefabInstance:
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.data[2].monsterId
       value: 401100
+      objectReference: {fileID: 0}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[3].monsterId
+      value: 411220
+      objectReference: {fileID: 0}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[4].monsterId
+      value: 411270
+      objectReference: {fileID: 0}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[5].monsterId
+      value: 411300
+      objectReference: {fileID: 0}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[6].monsterId
+      value: 411320
       objectReference: {fileID: 0}
     - target: {fileID: 2504763116625422590, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5934,7 +5966,7 @@ GameObject:
   - component: {fileID: 1164836958}
   - component: {fileID: 1164836959}
   m_Layer: 0
-  m_Name: "\uBC24\uC758 \uC815\uC6D0\uC0AC \uC804\uD22C\uBC30\uACBD (\uBC24)_0"
+  m_Name: BG2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

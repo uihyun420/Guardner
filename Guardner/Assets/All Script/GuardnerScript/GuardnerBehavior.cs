@@ -119,8 +119,6 @@ public class GuardnerBehavior : MonoBehaviour
         }
     }
 
-
-
     private MonsterBehavior SearchMonster()
     {
         Vector2 center = (Vector2)collider.transform.position + collider.offset;
@@ -133,15 +131,24 @@ public class GuardnerBehavior : MonoBehaviour
         var layer = LayerMask.GetMask(monster);
 
         Collider2D[] hits = Physics2D.OverlapCapsuleAll(center, size, direction, angle, layer);
-        foreach(var mon in hits)
+
+        MonsterBehavior closestMonster = null;
+        float minDist = float.MaxValue;
+
+        foreach (var mon in hits)
         {
             var monster = mon.GetComponent<MonsterBehavior>();
-            if(monster !=null)
+            if (monster != null && !monster.IsDead)
             {
-                return monster;
+                float dist = Vector2.Distance(transform.position, monster.transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closestMonster = monster;
+                }
             }
         }
-        return null;
+        return closestMonster;
     }
 
     public void AttackPowerBoost(float amount, float duration)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6447637698182434078}
   - component: {fileID: 1164493173771988467}
   - component: {fileID: 4278116124634428995}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RottenBlossom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3787120969976831814}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.184, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,9 +124,9 @@ GameObject:
   - component: {fileID: 637181218053556322}
   - component: {fileID: 7789463486007908742}
   - component: {fileID: 8132578772779687397}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RottenBlossom
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -331,6 +331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HpBar
       objectReference: {fileID: 0}
+    - target: {fileID: 2670313401923788429, guid: 7377785fa565a1e44b12f1107b8bc4fd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3528397954628185286, guid: 7377785fa565a1e44b12f1107b8bc4fd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -410,6 +414,18 @@ PrefabInstance:
     - target: {fileID: 3528397954628185286, guid: 7377785fa565a1e44b12f1107b8bc4fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830891450031066343, guid: 7377785fa565a1e44b12f1107b8bc4fd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221881921331735670, guid: 7377785fa565a1e44b12f1107b8bc4fd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682561358601125231, guid: 7377785fa565a1e44b12f1107b8bc4fd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7885245782773422238, guid: 7377785fa565a1e44b12f1107b8bc4fd, type: 3}
       propertyPath: m_AnchorMax.x

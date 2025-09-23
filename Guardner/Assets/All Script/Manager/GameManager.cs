@@ -7,16 +7,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-        StartGameStage(1630);
+        StartGameStage(4660);
     }
 
     private void StartGameStage(int stageId)
     {
         stageManager.LoadStage(stageId);
-        //if(stageManager.stageData !=null)
-        //{
-        //    stageManager.StartStage();
-        //}
     }
 
     private void Update()
