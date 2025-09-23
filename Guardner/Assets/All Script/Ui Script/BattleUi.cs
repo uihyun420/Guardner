@@ -16,6 +16,13 @@ public class BattleUi : GenericWindow
     public TextMeshProUGUI battleTimeText;    
     public TextMeshProUGUI goldText;
 
+    [SerializeField] private Button readyTextButton;
+    public void ReadyTimeSetZero() // Å×½ºÆ® 
+    {
+        readyTimer = 0;
+    }
+
+
     [SerializeField] private TextMeshProUGUI coolTimeText1;
     [SerializeField] private TextMeshProUGUI coolTimeText2;
     [SerializeField] private TextMeshProUGUI coolTimeText3;
