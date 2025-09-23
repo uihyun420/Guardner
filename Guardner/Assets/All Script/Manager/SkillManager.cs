@@ -165,7 +165,7 @@ public class SkillManager : MonoBehaviour
             float attackPowerBoost = guardner.attackPower * selectSkill.AttackPowerBoost;
             float duration = selectSkill.Duration;
             guardner.AttackPowerBoost(attackPowerBoost, duration);
-            Debug.Log($"AttackPowerBoost 적용: {attackPowerBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
+            //Debug.Log($"AttackPowerBoost 적용: {attackPowerBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
 
         // AttackSpeedBoost
@@ -174,7 +174,7 @@ public class SkillManager : MonoBehaviour
             float attackSpeedBoost = guardner.aps * selectSkill.AttackSpeedBoost;
             float duration = selectSkill.Duration;
             guardner.AttackSpeedBoost(attackSpeedBoost, duration);
-            Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
+            //Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
     }
 }
