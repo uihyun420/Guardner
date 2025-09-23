@@ -220,14 +220,13 @@ public class BattleUi : GenericWindow
     public void SetGoldText()
     {
         sb.Clear();
-        sb.Append(gold).Append("골드");
+        sb.Append(gold).Append(" G");
         goldText.text = sb.ToString();
     }
 
     public void AddGold(int amount)
     {
         gold += amount;
-        Debug.Log($"골드 획득 : {amount}");
     }
     public override void Open()
     {
@@ -242,7 +241,7 @@ public class BattleUi : GenericWindow
     public void SetGuardnerSpawnCount()
     {
         sb.Clear();
-        sb.Append("배치 가능한 정원사 : ").Append(canSpawnGuardnerCount).Append("/").Append(maxGuardnerCount);
+        sb.Append("배치 가능한 정원사 ").Append(canSpawnGuardnerCount).Append("/").Append(maxGuardnerCount);
         guardnerSpawnCount.text = sb.ToString();
     }
     public void UpdateGuardnerCount()

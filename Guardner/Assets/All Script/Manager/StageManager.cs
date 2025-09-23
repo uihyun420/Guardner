@@ -109,7 +109,7 @@ public class StageManager : MonoBehaviour
     private IEnumerator CoSpawnWaveMonster()
     {
         int[] monsterIds = new int[] { monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId };
-        Vector2 spawnPos = new Vector2(-3, 4);
+        Vector2 spawnPos = new Vector2(-3, 4);        
 
         for (int i = 0; i < monsterIds.Length; i++)
         {
