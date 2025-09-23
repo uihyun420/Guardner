@@ -4,7 +4,7 @@ using UnityEngine;
 public class StageData
 {    public int ID { get; set; }
     public int Stage { get; set; } // 스테이지 단계
-    public string BaseSpawnMonster { get; set; }
+    public int BaseSpawnMonster { get; set; }
     public int BaseMonsterRespawnInterval { get; set; }
     public float WaveMonsterRespawnInterval { get; set; }
     public int MonsterAId { get; set; }

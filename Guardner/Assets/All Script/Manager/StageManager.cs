@@ -15,7 +15,7 @@ public class StageManager : MonoBehaviour
 
     private int id;
     private int stage; //스테이지 단계
-    private string baseSpawnMonster;
+    private int baseSpawnMonster;
     private float waveMonsterRespawnInterval;
     private int monsterAId;
     private int monsterBId;
@@ -94,7 +94,7 @@ public class StageManager : MonoBehaviour
         isStageCompleted = false;
     }
 
-    private IEnumerator CoSpawnMonsterWithDelay(int monsterId, Vector2 spawnPos, int sortingOrder, float initialDelay, float interval)
+    private IEnumerator CoSpawnMonsterWithDelay(int baseSpawnMonster, int monsterId, Vector2 spawnPos, int sortingOrder, float initialDelay, float interval)
     {
         yield return new WaitForSeconds(initialDelay);
         while (!isStageCompleted)
@@ -108,7 +108,7 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator CoSpawnWaveMonster()
     {
-        int[] monsterIds = new int[] { monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId };
+        int[] monsterIds = new int[] { baseSpawnMonster, monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId };
         Vector2 spawnPos = new Vector2(-3, 4);        
 
         for (int i = 0; i < monsterIds.Length; i++)
@@ -117,10 +117,10 @@ public class StageManager : MonoBehaviour
             if (monsterId == 0) continue;
 
 
-            float initialDelay = (i == 0) ? waveMonsterRespawnInterval : waveMonsterRespawnInterval + 1f;
+            float initialDelay = (i == 0) ? 0f : waveMonsterRespawnInterval + 1f; 
             float interval = waveMonsterRespawnInterval;
 
-            StartCoroutine(CoSpawnMonsterWithDelay(monsterId, spawnPos, i, initialDelay, interval));
+            StartCoroutine(CoSpawnMonsterWithDelay(baseSpawnMonster, monsterId, spawnPos, i, initialDelay, interval));
         }
 
         yield return null;
