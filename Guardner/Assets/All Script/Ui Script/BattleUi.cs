@@ -17,11 +17,16 @@ public class BattleUi : GenericWindow
     public TextMeshProUGUI goldText;
 
     [SerializeField] private Button readyTextButton;
+    [SerializeField] private Button BattleTimerButton;
     public void ReadyTimeSetZero() // Å×½ºÆ® 
     {
         readyTimer = 0;
     }
-
+    public void BattleTimerSetZero()
+    {
+        battleTimer = 0;
+    }
+    
 
     [SerializeField] private TextMeshProUGUI coolTimeText1;
     [SerializeField] private TextMeshProUGUI coolTimeText2;
@@ -63,6 +68,10 @@ public class BattleUi : GenericWindow
             skill2.onClick.AddListener(() => OnSkillSlotClicked(2));
         if (skill3 != null)
             skill3.onClick.AddListener(() => OnSkillSlotClicked(3));
+
+
+        BattleTimerButton.onClick.AddListener(BattleTimerSetZero);
+
 
         StartCoroutine(CoSetReadyTimeUi());
     }
@@ -150,6 +159,11 @@ public class BattleUi : GenericWindow
         gold = 150;
         isReadyTime = true;
         canSpawnGuardnerCount = maxGuardnerCount;
+    }
+
+    private void OnEnable()
+    {
+        battleTimer = 60;
     }
 
     private void Update()
@@ -319,7 +333,7 @@ public class BattleUi : GenericWindow
     private IEnumerator CoSetReadyTimeUi()
     {
         readyTimeObject.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         readyTimeObject.gameObject.SetActive(false);
     }
 }
