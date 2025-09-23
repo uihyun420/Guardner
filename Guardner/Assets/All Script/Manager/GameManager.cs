@@ -4,10 +4,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private StageManager stageManager;
     [SerializeField] private WindowManager windowManager;
+
+    [SerializeField] private int startingStageId = 1630; // 기본값을 스테이지 1로 설정
     private void Start()
     {
         Time.timeScale = 1f;
-        StartGameStage(105150);
+        StartGameStage(startingStageId);
     }
 
     private void StartGameStage(int stageId)

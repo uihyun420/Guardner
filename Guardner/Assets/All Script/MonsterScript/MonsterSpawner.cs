@@ -43,4 +43,13 @@ public class MonsterSpawner : MonoBehaviour
         }
         return null; // 해당 ID의 프리팹이 없으면 null 반환
     }
+
+    public void ClearMonster()
+    {
+        foreach(var monster in spawnedMonsters)
+        {
+            Destroy(monster.gameObject);
+        }
+        spawnedMonsters.Clear();
+    }
 }

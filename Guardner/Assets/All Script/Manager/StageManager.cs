@@ -63,7 +63,9 @@ public class StageManager : MonoBehaviour
             Debug.Log("스테이지 데이터가 로드되지 않았습니다.");
             return;
         }
-
+        monsterSpawner.ClearMonster();
+        StopAllCoroutines();
+        
         ResetStageProgress();
         Debug.Log($"스테이지 {stage} 시작! 총 {totalWaveCount}개의 웨이브");
         StartCoroutine(CoSpawnWaveMonster());

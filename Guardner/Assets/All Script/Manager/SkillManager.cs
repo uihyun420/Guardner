@@ -35,7 +35,7 @@ public class SkillManager : MonoBehaviour
             {
                 SelectSkill(skillData.SkillID);
                 UseSkill();
-                Debug.Log($"가드너 {guardner.name}가 스킬 {skillData.Name} 사용");
+               // Debug.Log($"가드너 {guardner.name}가 스킬 {skillData.Name} 사용");
             }
         }
     }
