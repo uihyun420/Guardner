@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-        StartGameStage(4660);
+        StartGameStage(105150);
     }
 
     private void StartGameStage(int stageId)
