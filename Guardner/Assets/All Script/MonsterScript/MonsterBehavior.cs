@@ -62,9 +62,24 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     {
         collider = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
+
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+
         rb = GetComponent<Rigidbody2D>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
-        originalColor = spriteRenderer.color;
+        if (spriteRenderer == null)
+        {
+            // 자식에서 SpriteRenderer를 찾아서 할당
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
     }
 
     private void Update()
@@ -146,9 +161,12 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
     private IEnumerator CoHitEffect()
     {
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        spriteRenderer.color = originalColor;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = originalColor;
+        }
     }
 
     public void SetSortingOrder(int order)

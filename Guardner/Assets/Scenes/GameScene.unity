@@ -4513,7 +4513,7 @@ PrefabInstance:
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.data[2].prefab
       value: 
-      objectReference: {fileID: 1715857535681315966, guid: 988b07e5ad5bf8d47a22613b57e71190, type: 3}
+      objectReference: {fileID: 2100377676536103862, guid: 988b07e5ad5bf8d47a22613b57e71190, type: 3}
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.data[0].monsterId
       value: 411260
