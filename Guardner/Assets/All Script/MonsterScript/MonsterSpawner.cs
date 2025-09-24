@@ -65,17 +65,4 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
-
-    public void CleanMonster()
-    {
-        for(int i = spawnedMonsters.Count -1; i>=0; i--)
-        {
-            if (spawnedMonsters[i] != null && spawnedMonsters[i].gameObject != null)
-            {
-                Destroy(spawnedMonsters[i].gameObject);
-            }
-        }
-        spawnedMonsters.Clear();
-    }
-
 }

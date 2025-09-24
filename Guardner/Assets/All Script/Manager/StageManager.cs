@@ -141,4 +141,13 @@ public class StageManager : MonoBehaviour
         isStageCompleted = true;
         gameManager.OnStageClear();
     }
+
+    public void StageStop()
+    {
+        if(monsterSpawner != null)
+        {
+            monsterSpawner.StopAllCoroutines();
+        }
+        isStageCompleted = true;
+    }
 }
