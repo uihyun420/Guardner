@@ -48,8 +48,34 @@ public class MonsterSpawner : MonoBehaviour
     {
         foreach(var monster in spawnedMonsters)
         {
-            Destroy(monster.gameObject);
+            if(monster != null && monster.gameObject != null)
+            {
+                Destroy(monster.gameObject);
+            }
         }
         spawnedMonsters.Clear();
     }
+
+
+    public void RemoveMonster(MonsterBehavior monster)
+    {
+        if(spawnedMonsters.Contains(monster))
+        {
+            spawnedMonsters.Remove(monster);
+        }
+    }
+
+
+    public void CleanMonster()
+    {
+        for(int i = spawnedMonsters.Count -1; i>=0; i--)
+        {
+            if (spawnedMonsters[i] != null && spawnedMonsters[i].gameObject != null)
+            {
+                Destroy(spawnedMonsters[i].gameObject);
+            }
+        }
+        spawnedMonsters.Clear();
+    }
+
 }

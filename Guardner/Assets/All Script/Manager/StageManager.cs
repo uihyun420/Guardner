@@ -7,6 +7,7 @@ public class StageManager : MonoBehaviour
     private StageTable stageTable;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private MonsterSpawner monsterSpawner;
+    [SerializeField] private BattleUi battleUi;
 
     public int currentWave;
     public int enemiesRemaining;
@@ -45,6 +46,7 @@ public class StageManager : MonoBehaviour
         monsterCId = stageData.MonsterCId;
         monsterDId = stageData.MonsterDId;
         monsterEId = stageData.MonsterEId;
+        monsterFId = stageData.MonsterFId;
         monsterGId = stageData.MonsterGId;
         monsterHId = stageData.MonsterHId;
         waveMonsterList = stageData.WaveMonsterList;
@@ -63,10 +65,11 @@ public class StageManager : MonoBehaviour
             Debug.Log("스테이지 데이터가 로드되지 않았습니다.");
             return;
         }
+
         monsterSpawner.ClearMonster();
         StopAllCoroutines();
-        
         ResetStageProgress();
+
         Debug.Log($"스테이지 {stage} 시작! 총 {totalWaveCount}개의 웨이브");
         StartCoroutine(CoSpawnWaveMonster());
     }
@@ -99,10 +102,14 @@ public class StageManager : MonoBehaviour
     private IEnumerator CoSpawnMonsterWithDelay(int baseSpawnMonster, int monsterId, Vector2 spawnPos, int sortingOrder, float initialDelay, float interval)
     {
         yield return new WaitForSeconds(initialDelay);
-        while (!isStageCompleted)
+
+        int spawnCount = 0;
+
+        while (!isStageCompleted && spawnCount < totalWaveCount)
         {
             monsterSpawner.SpawnMonster(monsterId, spawnPos, sortingOrder);
             enemiesRemaining++;
+            spawnCount++;
             Debug.Log($"몬스터 {monsterId}");
             yield return new WaitForSeconds(interval);
         }
@@ -111,29 +118,27 @@ public class StageManager : MonoBehaviour
     private IEnumerator CoSpawnWaveMonster()
     {
         int[] monsterIds = new int[] { baseSpawnMonster, monsterAId, monsterBId, monsterCId, monsterDId, monsterEId, monsterFId, monsterHId };
-        Vector2 spawnPos = new Vector2(-3, 4);        
+        Vector2 spawnPos = new Vector2(-3, 4);
 
         for (int i = 0; i < monsterIds.Length; i++)
         {
             int monsterId = monsterIds[i];
-            if (monsterId == 0) continue;
+            if (monsterId == 0)
+            {
+                continue;
+            }
 
-
-            float initialDelay = (i == 0) ? 0f : waveMonsterRespawnInterval + 1f; 
+            float initialDelay = (i == 0) ? 0f : waveMonsterRespawnInterval + 1f;
             float interval = waveMonsterRespawnInterval;
 
             StartCoroutine(CoSpawnMonsterWithDelay(baseSpawnMonster, monsterId, spawnPos, i, initialDelay, interval));
         }
-
         yield return null;
     }
 
     public void OnBattleTimerEnd()
     {
-        if (!isStageCompleted)
-        {
-            isStageCompleted = true;
-            gameManager.OnStageClear(); // 싱글톤 또는 참조 방식
-        }
+        isStageCompleted = true;
+        gameManager.OnStageClear();
     }
 }

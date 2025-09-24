@@ -131,6 +131,19 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     {
         IsDead = true;
         animator.SetTrigger(isDead);
+        StageManager stageManager = FindObjectOfType<StageManager>();
+        MonsterSpawner monsterSpawner = FindObjectOfType<MonsterSpawner>();
+        if (stageManager != null)
+        {
+            stageManager.enemiesRemaining--;
+            Debug.Log($"몬스터 사망 - 남은 적: {stageManager.enemiesRemaining}");
+        }
+
+        if(monsterSpawner != null)
+        {
+            monsterSpawner.RemoveMonster(this);
+        }
+
         Destroy(gameObject, 0.25f);
     }
 

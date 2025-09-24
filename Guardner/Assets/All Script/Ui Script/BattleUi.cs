@@ -20,13 +20,20 @@ public class BattleUi : GenericWindow
     [SerializeField] private Button BattleTimerButton;
     public void ReadyTimeSetZero() // 테스트 
     {
-        readyTimer = 0;
+        readyTimer = 0f;
     }
     public void BattleTimerSetZero()
     {
-        battleTimer = 0;
+        battleTimer = 0f;
     }
-    
+
+    public void ResetBattleTimer()
+    {
+        battleTimer = 60f;
+        readyTimer = 0f; // 준비 시간을 0으로 설정
+        isReadyTime = false; // 준비 시간 건너뛰고 바로 배틀 타이머 시작
+
+    }
 
     [SerializeField] private TextMeshProUGUI coolTimeText1;
     [SerializeField] private TextMeshProUGUI coolTimeText2;
@@ -40,7 +47,7 @@ public class BattleUi : GenericWindow
 
     private int maxGuardnerCount = 16;
     public int canSpawnGuardnerCount = 0;
-    private float battleTimer;
+    public float battleTimer;
     private float readyTimer = 30f;
     private bool isReadyTime = true;
 
@@ -159,11 +166,6 @@ public class BattleUi : GenericWindow
         gold = 150;
         isReadyTime = true;
         canSpawnGuardnerCount = maxGuardnerCount;
-    }
-
-    private void OnEnable()
-    {
-        battleTimer = 60;
     }
 
     private void Update()

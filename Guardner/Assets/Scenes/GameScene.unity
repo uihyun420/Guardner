@@ -799,6 +799,7 @@ MonoBehaviour:
   nextStage: {fileID: 300871811}
   stageManager: {fileID: 941582427}
   gameManager: {fileID: 1614417559}
+  battleUi: {fileID: 1466228247}
 --- !u!114 &121324151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4801,6 +4802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1614417559}
   monsterSpawner: {fileID: 125721413}
+  battleUi: {fileID: 1466228247}
   currentWave: 0
   enemiesRemaining: 0
   isBossStage: 0
@@ -10129,6 +10131,7 @@ MonoBehaviour:
   text3: {fileID: 2032758338}
   guardnerSpawnCount: {fileID: 200971014}
   canSpawnGuardnerCount: 0
+  battleTimer: 0
   monsterSpawner: {fileID: 125721413}
   guardnerSpawner: {fileID: 1794989048}
   readyTimeObject: {fileID: 1961627831}

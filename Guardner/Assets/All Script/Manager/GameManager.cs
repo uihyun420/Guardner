@@ -27,8 +27,12 @@ public class GameManager : MonoBehaviour
 
     public void OnStageClear()
     {
+        Debug.Log("OnStageClear 호출됨");
         Time.timeScale = 0;
+        Debug.Log($"WindowManager가 null인가? {windowManager == null}");
+        Debug.Log("WindowType.StageClear 호출 시작");
         windowManager.Open(WindowType.StageClear);
+        Debug.Log("WindowType.StageClear 호출 완료");
         Debug.Log("스테이지 클리어");
     }
 

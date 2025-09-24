@@ -9,6 +9,7 @@ public class StageClearUi : GenericWindow
     [SerializeField] private Button nextStage;
     [SerializeField] private StageManager stageManager;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private BattleUi battleUi;
 
     private void Start()
     {
@@ -37,24 +38,33 @@ public class StageClearUi : GenericWindow
 
     public void OnNextStageButton()
     {
+        Debug.Log("=== OnNextStageButton 시작 ===");
+
         if (stageManager == null || stageManager.stageData == null)
+        {
+            Debug.Log("StageManager 또는 StageData가 null입니다.");
             return;
+        }
 
         // 스테이지 정보 가져오기
         int currentStage = stageManager.stageData.Stage;
         int nextStage = currentStage + 1;
         int nextStageId = FindNextStageId(nextStage);
 
+        Debug.Log($"현재 스테이지: {currentStage}, 다음 스테이지: {nextStage}, 다음 스테이지 ID: {nextStageId}");
+
         if (nextStageId <= 0)
         {
-            Debug.LogWarning($"스테이지 {nextStage}를 찾을 수 없습니다.");
             if (gameManager != null)
                 gameManager.GameExit();
             return;
         }
 
-        // 타임스케일 복원
         Time.timeScale = 1;
+
+        battleUi.ResetBattleTimer();
+
+        Close();
 
         // 스테이지 로드
         stageManager.LoadStage(nextStageId);
@@ -64,8 +74,6 @@ public class StageClearUi : GenericWindow
         {
             manager.Open(WindowType.Battle);
         }
-
-        // 스테이지 시작
         stageManager.StartStage();
     }
 
