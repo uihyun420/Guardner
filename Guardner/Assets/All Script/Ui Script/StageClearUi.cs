@@ -85,6 +85,10 @@ public class StageClearUi : GenericWindow
 
         Time.timeScale = 1;
 
+        battleUi.ResetBattleTimer();
+
+        Close();
+
         stageManager.LoadStage(currentStageId);
 
         if (manager != null)

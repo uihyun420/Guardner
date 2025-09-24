@@ -5,4 +5,5 @@ public enum WindowType
     GuardnerSpawnUi,
     StageClear,
     PlayerSkillSetUi,
+    MainMenuUi,
 }

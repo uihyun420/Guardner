@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         StartGameStage(startingStageId);
     }
 
-    private void StartGameStage(int stageId)
+    public void StartGameStage(int stageId)
     {
         stageManager.LoadStage(stageId);
     }
