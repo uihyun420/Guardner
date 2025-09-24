@@ -66,10 +66,8 @@ public class StageClearUi : GenericWindow
 
         Close();
 
-        // 스테이지 로드
         stageManager.LoadStage(nextStageId);
 
-        // WindowManager를 통해 Battle UI로 전환
         if (manager != null)
         {
             manager.Open(WindowType.Battle);
@@ -85,19 +83,15 @@ public class StageClearUi : GenericWindow
 
         int currentStageId = stageManager.stageData.ID;
 
-        // 타임스케일 복원
         Time.timeScale = 1;
 
-        // 스테이지 로드
         stageManager.LoadStage(currentStageId);
 
-        // WindowManager를 통해 Battle UI로 전환
         if (manager != null)
         {
             manager.Open(WindowType.Battle);
         }
 
-        // 스테이지 시작
         stageManager.StartStage();
     }
 
