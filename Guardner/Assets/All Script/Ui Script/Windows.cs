@@ -6,4 +6,5 @@ public enum WindowType
     StageClear,
     PlayerSkillSetUi,
     MainMenuUi,
+    DictionaryUi,
 }
