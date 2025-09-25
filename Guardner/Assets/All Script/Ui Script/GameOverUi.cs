@@ -16,6 +16,7 @@ public class GameOverUi : GenericWindow
     [SerializeField] private BattleUi battleUi;
     [SerializeField] private MainMenuUi mainMenuUi;
     [SerializeField] private MonsterSpawner monsterSpawner;
+    [SerializeField] private GuardnerSpawner guardnerSpawner;
 
 
     private int retryStageId;
@@ -97,11 +98,10 @@ public class GameOverUi : GenericWindow
     public void OnMainMenuButton()
     {
         Time.timeScale = 1;
-
-        //Close();
-
+        Close();
         StageManager.StageStop();
         monsterSpawner.ClearMonster();
+        guardnerSpawner.ClearGuardner();
 
         if (manager != null)
         {

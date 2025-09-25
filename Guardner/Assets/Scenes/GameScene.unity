@@ -1434,7 +1434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 7016676749426589388}
   isOverlayWindow: 0
-  retry: {fileID: 8253120987294766861}
+  mainMenu: {fileID: 8253120987294766861}
   nextStage: {fileID: 8253120988303025238}
   stageManager: {fileID: 941582427}
   gameManager: {fileID: 1614417559}
@@ -14242,6 +14242,7 @@ MonoBehaviour:
   battleUi: {fileID: 1466228247}
   mainMenuUi: {fileID: 199810806}
   monsterSpawner: {fileID: 125721413}
+  guardnerSpawner: {fileID: 1794989048}
 --- !u!114 &1281217403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19664,7 +19665,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2153697851851054011, guid: e133cd6adac44fa4eb6749ead0f2c2a7, type: 3}
       propertyPath: m_Name
-      value: Retry
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7455733152517759384, guid: e133cd6adac44fa4eb6749ead0f2c2a7, type: 3}
+      propertyPath: m_text
+      value: "\uBA54\uC778 \uBA54\uB274\uB85C"
       objectReference: {fileID: 0}
     - target: {fileID: 8101424334578860295, guid: e133cd6adac44fa4eb6749ead0f2c2a7, type: 3}
       propertyPath: m_Pivot.x

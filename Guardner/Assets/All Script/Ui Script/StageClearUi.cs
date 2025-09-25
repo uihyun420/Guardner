@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StageClearUi : GenericWindow
 {
-    [SerializeField] private Button retry;
+    [SerializeField] private Button mainMenu;
     [SerializeField] private Button nextStage;
     [SerializeField] private StageManager stageManager;
     [SerializeField] private GameManager gameManager;
@@ -15,7 +15,7 @@ public class StageClearUi : GenericWindow
 
     private void Start()
     {
-        retry.onClick.AddListener(OnRetryButton);
+        mainMenu.onClick.AddListener(OnClickMainMenuButton);
         nextStage.onClick.AddListener(OnNextStageButton);
     }
 
@@ -73,32 +73,21 @@ public class StageClearUi : GenericWindow
         if (manager != null)
         {
             manager.Open(WindowType.Battle);
-        }       
-        
+        }               
     }
 
 
-    public void OnRetryButton()
+    public void OnClickMainMenuButton()
     {
-        if (stageManager == null || stageManager.stageData == null)
-            return;
-
-        int currentStageId = stageManager.stageData.ID;
-
-        Time.timeScale = 1;
-
-        battleUi.ResetBattleTimer();
+        stageManager.StageStop();
+        monsterSpawner.ClearMonster();
+        guardnerSpawner.ClearGuardner();
 
         Close();
-
-        stageManager.LoadStage(currentStageId);
-
         if (manager != null)
         {
-            manager.Open(WindowType.Battle);
+            manager.Open(WindowType.MainMenuUi);
         }
-
-       // stageManager.StartStage();
     }
 
 
