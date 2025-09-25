@@ -62,7 +62,7 @@ public class GuardnerItemUi : MonoBehaviour
         if (dictionaryDiscription != null)
         {
             var descBuilder = new StringBuilder();
-            descBuilder.Append(data.Reference).Append("\n").Append(data.AttackPower);
+            descBuilder.Append(data.Reference).Append("\n").Append("°ø°Ý·Â: ").Append(data.AttackPower);
             dictionaryDiscription.text = descBuilder.ToString();
             Debug.Log($"Reference: '{data.Reference}'");
         }
