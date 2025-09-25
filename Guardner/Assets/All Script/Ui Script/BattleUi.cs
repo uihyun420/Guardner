@@ -30,9 +30,8 @@ public class BattleUi : GenericWindow
     public void ResetBattleTimer()
     {
         battleTimer = 60f;
-        readyTimer = 0f; // 준비 시간을 0으로 설정
-        isReadyTime = false; // 준비 시간 건너뛰고 바로 배틀 타이머 시작
-
+        readyTimer = 30f; 
+        isReadyTime = true; 
     }
 
     [SerializeField] private TextMeshProUGUI coolTimeText1;
@@ -57,6 +56,7 @@ public class BattleUi : GenericWindow
     StringBuilder sb = new StringBuilder();
 
     [SerializeField] private GameObject readyTimeObject;
+    [SerializeField] private GameObject battleStartObject;
     [SerializeField] private StageManager stageManager;
     [SerializeField] private PlayerSkillManager playerSkillManager;
     [SerializeField] private PlayerSkillSetUi playerSkillSetUi; // Inspector에서 연결
@@ -176,6 +176,7 @@ public class BattleUi : GenericWindow
             if(readyTimer <= 0)
             {
                 isReadyTime = false;
+                StartCoroutine(CoSetBattleStart());
                 stageManager.StartStage();
             }
         }
@@ -337,5 +338,12 @@ public class BattleUi : GenericWindow
         readyTimeObject.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         readyTimeObject.gameObject.SetActive(false);
+    }
+
+    private IEnumerator CoSetBattleStart()
+    {
+        battleStartObject.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        battleStartObject.gameObject.SetActive(false);
     }
 }

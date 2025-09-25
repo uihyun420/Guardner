@@ -16,12 +16,12 @@ public class DictionaryUi : GenericWindow
     private void Start()
     {
         closeButton.onClick.AddListener(OnClickCloseButton);
-        InitializeOwnedGuardenr();
     }
 
     public override void Open()
     {
         base.Open();
+        InitializeOwnedGuardenr();
         DisPlayerOwnedGuardner();
     }
 

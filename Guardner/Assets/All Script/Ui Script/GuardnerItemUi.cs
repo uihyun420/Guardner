@@ -64,7 +64,6 @@ public class GuardnerItemUi : MonoBehaviour
             var descBuilder = new StringBuilder();
             descBuilder.Append(data.Reference).Append("\n").Append("°ø°Ý·Â: ").Append(data.AttackPower);
             dictionaryDiscription.text = descBuilder.ToString();
-            Debug.Log($"Reference: '{data.Reference}'");
         }
 
         if (guardnerImage != null)
