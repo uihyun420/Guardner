@@ -346,7 +346,9 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
+  attackInterval: 1
   isTouchingDoor: 0
+  moveSpeed: 0
   attackPower: 0
   hpBar: {fileID: 1941375121476326919}
 --- !u!114 &3570713848621763866
@@ -372,8 +374,20 @@ MonoBehaviour:
   - {fileID: 7350782182299082142, guid: 9fdb719baf098924790b0936a9ab7a5e, type: 3}
   - {fileID: 995267351116103419, guid: 3ea275cb2e5407b42bb517a6a7aabd15, type: 3}
   - {fileID: 6772114081325292728, guid: ac6bc26f29a08af408908b3b74c7bdd4, type: 3}
+  rightWayPoint:
+  - {fileID: 2962670373857731905, guid: ce9ea486247a5b54cbea5ddafd1aa653, type: 3}
+  - {fileID: 136156680857592203, guid: 6ccb295738f9f9947b9df8655bd79f69, type: 3}
+  - {fileID: 608390494582357374, guid: 363eaa89ba5d75543b747f7ff50d4f6d, type: 3}
+  - {fileID: 6835871443354594592, guid: 98720c3032b6a534896722bd31a24148, type: 3}
+  - {fileID: 3644186434295456884, guid: 96edd973797d84e4eb4d14cb5b68ee6b, type: 3}
+  - {fileID: 8051640709867641360, guid: fbeb1451d658d134d9bb4e97f30e06f5, type: 3}
+  - {fileID: 1528102294146201254, guid: 23e232d09e498454184a216f148e8153, type: 3}
+  - {fileID: 4869565194963739822, guid: f798c709f81c79741b3317ed8f60373b, type: 3}
+  - {fileID: 7948501566362163090, guid: 1ccfc54d4c2ccdf4aacf7a59874a92de, type: 3}
+  - {fileID: 3628879279151712624, guid: ba744da2b84554f49a714528de7dc003, type: 3}
   wayPointCount: 0
   monster: {fileID: 4897823999979355632}
+  isMirrored: 0
 --- !u!50 &3049824345800480466
 Rigidbody2D:
   serializedVersion: 5

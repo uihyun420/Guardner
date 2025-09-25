@@ -6,6 +6,9 @@ using UnityEngine;
 public class WayPoint : MonoBehaviour
 {    
     public Transform[] wayPoint;
+    public Transform[] rightWayPoint;
+
+    [SerializeField] private Transform[] runTimeWayPoints;
     public int wayPointCount = 0;
 
     public MonsterBehavior monster;
@@ -13,10 +16,28 @@ public class WayPoint : MonoBehaviour
     private bool isDefaultFlipX = false;
 
     public bool isMirrored = false; // 스프라이트 미러링
+    public bool useRightWayPoints = false; // 오른쪽 웨이포인트 사용 여부
+
+    public void SetWayPointDirection(bool useRight)
+    {
+        useRightWayPoints = useRight;
+        runTimeWayPoints = useRight ? rightWayPoint : wayPoint;
+        wayPointCount = 0;
+    }
 
     private void Start()
     {
-        transform.position = wayPoint[wayPointCount].transform.position;
+        // wayPoint가 설정되지 않은 경우 기본값으로 leftWayPoints 사용
+        if (runTimeWayPoints == null || runTimeWayPoints.Length == 0)
+        {
+            runTimeWayPoints = wayPoint;
+        }
+
+        if (runTimeWayPoints != null && runTimeWayPoints.Length > 0)
+        {
+            transform.position = runTimeWayPoints[wayPointCount].transform.position;
+        }
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
         {
@@ -39,12 +60,12 @@ public class WayPoint : MonoBehaviour
     public void MovePath()
     {
         if (monster.isStunned) return;
-        if(wayPointCount >= wayPoint.Length)
+        if(runTimeWayPoints == null || wayPointCount >= runTimeWayPoints.Length)
         {
             return;
         }
 
-        Vector2 targetPos = wayPoint[wayPointCount].transform.position;
+        Vector2 targetPos = runTimeWayPoints[wayPointCount].transform.position;  // 수정된 부분
         transform.position = Vector2.MoveTowards(transform.position, targetPos, monster.moveSpeed * Time.deltaTime);
 
         //방향에 따라 flipx 설정

@@ -20,7 +20,7 @@ public class MonsterSpawner : MonoBehaviour
 
     public void SpawnMonster(int monsterId, Vector2 spawnPos, int sortingOrder = 0)
     {
-        var monsterData = DataTableManager.MonsterTable.Get(monsterId);
+        var monsterData = DataTableManager.MonsterTable.Get(monsterId);        
         if (monsterData != null)
         {
             GameObject prefabToUse = GetMonsterPrefab(monsterId);
@@ -31,6 +31,13 @@ public class MonsterSpawner : MonoBehaviour
             behavior.Init(monsterData);
             behavior.SetBattleUi(battleUi);
             behavior.SetSortingOrder(sortingOrder); // 정렬 순서 설정
+
+            var wayPoint = monster.GetComponent<WayPoint>();
+            if(wayPoint != null)
+            {
+                bool useRight = Random.value < 0.5f;
+                wayPoint.SetWayPointDirection(useRight);
+            }
             spawnedMonsters.Add(behavior);
         }
     }
