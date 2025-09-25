@@ -277,6 +277,12 @@ public class BattleUi : GenericWindow
         text1.text = "+";
         text2.text = "+";
         text3.text = "+";
+
+        if(playerSkillManager != null)
+        {
+            playerSkillManager.lastUsedTime.Clear();
+        }
+
         StartCoroutine(CoSetReadyTimeUi());
     }
 
@@ -340,6 +346,14 @@ public class BattleUi : GenericWindow
                         buttonImage.fillAmount = 1f; // 쿨타임 끝나면 완전히 채움
                     SetSkillButtonInteractable(i, true); // 쿨타임 끝나면 버튼 활성화
                 }
+            }
+            else // 스킬이 할당되어 있지만 사용한 적이 없거나 쿨타임이 리셋된 경우
+            {
+                if(buttonImage !=null)
+                {
+                    buttonImage.fillAmount = 1f;
+                }
+                SetSkillButtonInteractable(i, true);
             }
             if (targetText != null)
                 targetText.text = sb.ToString();

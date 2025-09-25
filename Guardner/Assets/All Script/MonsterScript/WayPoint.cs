@@ -65,7 +65,7 @@ public class WayPoint : MonoBehaviour
             return;
         }
 
-        Vector2 targetPos = runTimeWayPoints[wayPointCount].transform.position;  // 수정된 부분
+        Vector2 targetPos = runTimeWayPoints[wayPointCount].transform.position;  
         transform.position = Vector2.MoveTowards(transform.position, targetPos, monster.moveSpeed * Time.deltaTime);
 
         //방향에 따라 flipx 설정
