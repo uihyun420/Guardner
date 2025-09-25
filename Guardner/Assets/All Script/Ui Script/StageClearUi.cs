@@ -79,11 +79,25 @@ public class StageClearUi : GenericWindow
 
     public void OnClickMainMenuButton()
     {
+        Time.timeScale = 1;
+
         stageManager.StageStop();
         monsterSpawner.ClearMonster();
         guardnerSpawner.ClearGuardner();
 
+        // BattleUI 초기화 (필요한 경우)
+        if (battleUi != null)
+        {
+            battleUi.ResetBattleTimer();
+            battleUi.gameObject.SetActive(false);  // BattleUI 비활성화
+
+            // BattleUI 자식 오브젝트들 비활성화 (필요한 경우)
+            if (battleUi.battleUi != null)
+                battleUi.battleUi.SetActive(false);
+        }
+
         Close();
+
         if (manager != null)
         {
             manager.Open(WindowType.MainMenuUi);
