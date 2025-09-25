@@ -143,6 +143,17 @@ public class BattleUi : GenericWindow
 
     private void UpdateSkillButtonUI(Button skillButton, int skillId)
     {
+        if(skillId == -1)
+        {
+            var buttonImage = skillButton.GetComponent<Image>();
+            if(buttonImage != null)
+            {
+                var defaultSprite = Resources.Load<Sprite>("SkillIcons/Skill_Default");
+                buttonImage.sprite = defaultSprite;
+            }
+            return;
+        }
+
         var skillData = DataTableManager.PlayerSkillTable.Get(skillId);
         if (skillData != null)
         {
@@ -256,6 +267,17 @@ public class BattleUi : GenericWindow
     public override void Open()
     {
         base.Open();
+        canSpawnGuardnerCount = maxGuardnerCount;
+        assignedSkill1 = -1;
+        assignedSkill2 = -1;
+        assignedSkill3 = -1;
+        UpdateSkillButtonUI(skill1, -1);
+        UpdateSkillButtonUI(skill2, -1);
+        UpdateSkillButtonUI(skill3, -1);
+        text1.text = "+";
+        text2.text = "+";
+        text3.text = "+";
+        StartCoroutine(CoSetReadyTimeUi());
     }
 
     public void TimeSetZero() // 테스트용
