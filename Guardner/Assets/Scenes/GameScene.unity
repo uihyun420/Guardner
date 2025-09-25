@@ -16699,6 +16699,7 @@ MonoBehaviour:
   contentParent: {fileID: 680864972}
   battleUi: {fileID: 1466228247}
   playerSkillManager: {fileID: 1699866780}
+  screenTouch: {fileID: 585887588}
 --- !u!1001 &1712785603
 PrefabInstance:
   m_ObjectHideFlags: 0
