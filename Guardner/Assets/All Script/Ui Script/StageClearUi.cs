@@ -10,13 +10,14 @@ public class StageClearUi : GenericWindow
     [SerializeField] private StageManager stageManager;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private BattleUi battleUi;
+    [SerializeField] private GuardnerSpawner guardnerSpawner;
+    [SerializeField] private MonsterSpawner monsterSpawner;
 
     private void Start()
     {
         retry.onClick.AddListener(OnRetryButton);
         nextStage.onClick.AddListener(OnNextStageButton);
     }
-
 
     public override void Open()
     {
@@ -62,17 +63,18 @@ public class StageClearUi : GenericWindow
 
         Time.timeScale = 1;
 
-        battleUi.ResetBattleTimer();
-
+        battleUi.ResetBattleTimer();        
         Close();
 
         stageManager.LoadStage(nextStageId);
+        monsterSpawner.ClearMonster();
+        guardnerSpawner.ClearGuardner();
 
         if (manager != null)
         {
             manager.Open(WindowType.Battle);
-        }
-        stageManager.StartStage();
+        }       
+        
     }
 
 
@@ -96,8 +98,9 @@ public class StageClearUi : GenericWindow
             manager.Open(WindowType.Battle);
         }
 
-        stageManager.StartStage();
+       // stageManager.StartStage();
     }
+
 
     // Stage 번호에 해당하는 스테이지 ID 찾기
     private int FindNextStageId(int stageNumber)

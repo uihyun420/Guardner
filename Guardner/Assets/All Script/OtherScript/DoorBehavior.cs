@@ -19,10 +19,6 @@ public class DoorBehavior : MonoBehaviour, IDamageable
         isBreak = false;
     }
 
-    private void OnEnable()
-    {
-    }
-
     public void Die()
     {
         isBreak = true;
@@ -39,7 +35,6 @@ public class DoorBehavior : MonoBehaviour, IDamageable
         {
             hp = 0;
             Die();
-            Debug.Log("ÆÐ¹è");
         }
     }
 }

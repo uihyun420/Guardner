@@ -1360,7 +1360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &121324147
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1439,6 +1439,8 @@ MonoBehaviour:
   stageManager: {fileID: 941582427}
   gameManager: {fileID: 1614417559}
   battleUi: {fileID: 1466228247}
+  guardnerSpawner: {fileID: 1794989048}
+  monsterSpawner: {fileID: 125721413}
 --- !u!114 &121324151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14238,6 +14240,7 @@ MonoBehaviour:
   StageManager: {fileID: 941582427}
   gameManager: {fileID: 1614417559}
   battleUi: {fileID: 1466228247}
+  mainMenuUi: {fileID: 199810806}
   monsterSpawner: {fileID: 125721413}
 --- !u!114 &1281217403
 MonoBehaviour:

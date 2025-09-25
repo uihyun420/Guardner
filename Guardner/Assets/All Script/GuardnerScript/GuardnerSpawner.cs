@@ -56,4 +56,16 @@ public class GuardnerSpawner : MonoBehaviour
         }
         return false;
     }
+
+    public void ClearGuardner()
+    {
+        foreach (var guardner in spawnedGuardners)
+        {
+            if (guardner != null && guardner.gameObject != null)
+            {
+                Destroy(guardner.gameObject);
+            }
+        }
+        spawnedGuardners.Clear();
+    }
 }

@@ -162,7 +162,8 @@ public class BattleUi : GenericWindow
     }
     private void Awake()
     {
-        battleTimer = 60;
+        battleTimer = 60f;
+        readyTimer = 30f;
         gold = 150;
         isReadyTime = true;
         canSpawnGuardnerCount = maxGuardnerCount;
