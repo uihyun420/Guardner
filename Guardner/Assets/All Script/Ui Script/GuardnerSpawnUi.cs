@@ -20,8 +20,6 @@ public class GuardnerSpawnUi : GenericWindow
         isOverlayWindow = true;
     }
 
-
-
     public override void Open()
     {
         selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
@@ -36,7 +34,6 @@ public class GuardnerSpawnUi : GenericWindow
         }
 
         base.Open();
-        //guardnerSpawner.screenTouch.SetUiBlocking(true);
 
         if (scrollRect != null)
             scrollRect.horizontal = false;
@@ -47,7 +44,6 @@ public class GuardnerSpawnUi : GenericWindow
     public override void Close()
     {
         base.Close();
-        //guardnerSpawner.screenTouch.SetUiBlocking(false);
     }
 
     private void DisplayAvailableGuardner()
@@ -83,6 +79,16 @@ public class GuardnerSpawnUi : GenericWindow
         if (itemUi != null)
         {
             itemUi.SetData(data, OnSelectGuardner);
+
+            if (battleUi.gold < data.SummonGold)
+            {
+                itemUi.SetTextColor(Color.red);
+            }
+            else
+            {
+                itemUi.SetTextColor(Color.black);
+            }
+
         }
     }
 

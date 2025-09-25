@@ -19,9 +19,21 @@ public class GuardnerSpawner : MonoBehaviour
     public ScreenTouch screenTouch;
     public GameObject[] spawnPos;
 
+    [SerializeField] private BattleUi battleUi;
+
     public void SpawnGuardner(int guardnerId, Vector2 spawnPos)
     {
         var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
+
+        int summonGold = guardnerData.SummonGold;
+        if(battleUi.gold < summonGold)
+        {
+
+            return;
+        }
+
+        battleUi.gold -= summonGold;
+        battleUi.SetGoldText();
 
         var prefabInfo = guardnerPrefabs.FirstOrDefault(p => p.guardnerId == guardnerId);
         if (prefabInfo.prefab != null)

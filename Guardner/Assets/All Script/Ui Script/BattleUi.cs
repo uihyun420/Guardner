@@ -50,7 +50,7 @@ public class BattleUi : GenericWindow
     private float readyTimer = 30f;
     private bool isReadyTime = true;
 
-    private int gold;
+    public int gold;
     public MonsterSpawner monsterSpawner; // Inspector에서 연결
     public GuardnerSpawner guardnerSpawner;
     StringBuilder sb = new StringBuilder();

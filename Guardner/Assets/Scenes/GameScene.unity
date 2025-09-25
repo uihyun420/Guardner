@@ -15576,6 +15576,7 @@ MonoBehaviour:
   guardnerSpawnCount: {fileID: 200971014}
   canSpawnGuardnerCount: 0
   battleTimer: 0
+  gold: 0
   monsterSpawner: {fileID: 125721413}
   guardnerSpawner: {fileID: 1794989048}
   readyTimeObject: {fileID: 1961627831}
@@ -17604,6 +17605,7 @@ MonoBehaviour:
   - {fileID: 1583448195}
   - {fileID: 1106713366}
   - {fileID: 959073591}
+  battleUi: {fileID: 1466228247}
 --- !u!1 &1809316040
 GameObject:
   m_ObjectHideFlags: 0

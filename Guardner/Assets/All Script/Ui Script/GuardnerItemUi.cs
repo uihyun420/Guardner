@@ -48,6 +48,15 @@ public class GuardnerItemUi : MonoBehaviour
         }
     }
 
+
+    public void SetTextColor(Color color)
+    {
+        if(infoText != null)
+        {
+            infoText.color = color;
+        }
+    }
+
     public void DictionarySetData(GuardnerData data, System.Action<int> onSelect)
     {
         guardnerId = data.Id;
