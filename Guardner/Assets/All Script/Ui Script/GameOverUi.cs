@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class GameOverUi : GenericWindow
 {
+    // 씬 로드 후 열릴 UI 타입을 저장하는 정적 변수
+    public static WindowType NextWindowAfterLoad = WindowType.MainMenuUi;
+    public static int RetryStageId = 0;
+
     [SerializeField] private Button retryButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private TextMeshProUGUI stageText;
@@ -24,7 +28,7 @@ public class GameOverUi : GenericWindow
     private void Start()
     {
         retryButton.onClick.AddListener(OnClickRetryButton);
-        mainMenuButton.onClick.AddListener(OnMainMenuButton);
+        mainMenuButton.onClick.AddListener(OnClickMainMenuButton);
     }
 
     private void Update()
@@ -42,77 +46,30 @@ public class GameOverUi : GenericWindow
 
     public void OnClickRetryButton()
     {
-        //string sceneName = SceneManager.GetActiveScene().name;
-        //SceneManager.LoadScene(sceneName);
-
-        //int currentStagId = StageManager.stageData.ID;
-
-        //Time.timeScale = 1;
-
-        //battleUi.ResetBattleTimer();
-
-        //Close();
-
-        //StageManager.LoadStage(currentStagId);
-
-        //if (manager != null)
-        //{
-        //    manager.Open(WindowType.Battle);
-        //}
-
-        //StageManager.StartStage();
-        Time.timeScale = 1;
+        // 재시작 시 현재 스테이지 ID 저장
         retryStageId = StageManager.stageData.ID;
+        // 씬 로드 후 Battle UI를 열도록 설정
+        NextWindowAfterLoad = WindowType.Battle;
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        Time.timeScale = 1;
         string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void OnClickMainMenuButton()
     {
-        WindowManager newWindowManager = FindObjectOfType<WindowManager>();
-        StageManager newStageManager = FindObjectOfType<StageManager>();
-        BattleUi newBattleUi = FindObjectOfType<BattleUi>();
-        MainMenuUi newMainMenuUi = FindObjectOfType<MainMenuUi>();
-        if(newMainMenuUi != null)
-        {
-            newMainMenuUi.gameObject.SetActive(false);
-        }
+        NextWindowAfterLoad = WindowType.MainMenuUi;
+        RetryStageId = 0;
 
-        if (newStageManager != null && newBattleUi != null)
-        {
-            newStageManager.LoadStage(retryStageId);
-            newBattleUi.ResetBattleTimer();           
-        }
-
-        if (newWindowManager != null)
-        {
-            newWindowManager.Open(WindowType.Battle);
-        }
-        // 이벤트 해제
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-
-    public void OnMainMenuButton()
-    {
         Time.timeScale = 1;
-        Close();
-        StageManager.StageStop();
-        monsterSpawner.ClearMonster();
-        guardnerSpawner.ClearGuardner();
-
-        if (manager != null)
-        {
-            manager.Open(WindowType.MainMenuUi);
-        }
+        string sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(sceneName);
     }
 
     private void SetGameOverStageText()
-    {                
+    {
         sb.Clear();
         sb.Append("스테이지 LEVEL ").Append(StageManager.stageData.Stage);
-        stageText.text = sb.ToString();        
+        stageText.text = sb.ToString();
     }
 }

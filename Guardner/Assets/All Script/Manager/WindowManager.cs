@@ -15,13 +15,29 @@ public class WindowManager : MonoBehaviour
         foreach (var window in windows)
         {
             window.Init(this);
-            //window.Close();
             window.gameObject.SetActive(false);
         }
 
-        CurrentWindow = defaultWindow;
+        //CurrentWindow = defaultWindow;
+        //windows[(int)CurrentWindow].Open();
+
+        // GameOverUi에서 지정한 창을 사용
+        CurrentWindow = GameOverUi.NextWindowAfterLoad;
+        // 기본값으로 재설정 (다음 씬 로드를 위해)
+        GameOverUi.NextWindowAfterLoad = defaultWindow;
+
         windows[(int)CurrentWindow].Open();
 
+        if(CurrentWindow == WindowType.Battle && GameOverUi.RetryStageId > 0)
+        {
+            StageManager stageManager = FindObjectOfType<StageManager>();
+            if(stageManager != null)
+            {
+                stageManager.LoadStage(GameOverUi.RetryStageId);
+
+                GameOverUi.RetryStageId = 0; // 사용후 초기화
+            }
+        }
         // 도어 이벤트 구독
         DoorBehavior.OnDoorDestroyed += ShowGameOver;
     }
