@@ -116,10 +116,10 @@ TextureImporter:
       name: guardner_263_0
       rect:
         serializedVersion: 2
-        x: 47
-        y: 61
-        width: 191
-        height: 174
+        x: 114
+        y: 48
+        width: 892
+        height: 971
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

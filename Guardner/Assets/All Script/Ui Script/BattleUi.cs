@@ -209,6 +209,7 @@ public class BattleUi : GenericWindow
     public void OnSkillButtonClicked(int skillId)
     {
         var skillData = skillManager.guardnerSkillTable.Get(skillId);
+        var sb = new StringBuilder();
 
         if (skillManager.CanUseSkill(skillId, skillData.CoolTime))
         {
@@ -218,7 +219,7 @@ public class BattleUi : GenericWindow
                     monster.Stun(skillData.Stun);
             }
             skillManager.SelectSkill(skillId);
-            skillManager.UseSkill();
+            skillManager.UseSkill();            
             Debug.Log($"사용된 스킬ID: {skillId}");
         }
         else

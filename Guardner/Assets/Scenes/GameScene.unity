@@ -3766,7 +3766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_fontStyle
@@ -3774,7 +3774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_fontSizeBase
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4094722810028855089, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_Pivot.x
@@ -3858,7 +3858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4933664571867927406, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_Name
-      value: Text
+      value: DeBuffText
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3870,6 +3870,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4094722810028855089, guid: b12964784e0e0784984d1ef5174541da, type: 3}
   m_PrefabInstance: {fileID: 525923607}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &525923609 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
+  m_PrefabInstance: {fileID: 525923607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &555196144
 GameObject:
   m_ObjectHideFlags: 0
@@ -16585,6 +16596,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guardnerSpawner: {fileID: 1794989048}
   monsterSpawner: {fileID: 125721413}
+  buffText: {fileID: 1947479415}
+  deBuffText: {fileID: 525923609}
 --- !u!4 &1699866781
 Transform:
   m_ObjectHideFlags: 0
@@ -17726,7 +17739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_fontStyle
@@ -17734,7 +17747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_fontSizeBase
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4094722810028855089, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_Pivot.x
@@ -17818,7 +17831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4933664571867927406, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_Name
-      value: Text
+      value: BuffText
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18076,6 +18089,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4094722810028855089, guid: b12964784e0e0784984d1ef5174541da, type: 3}
   m_PrefabInstance: {fileID: 1921080237}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1947479415 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
+  m_PrefabInstance: {fileID: 1814028287}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1957522426
 GameObject:
   m_ObjectHideFlags: 0

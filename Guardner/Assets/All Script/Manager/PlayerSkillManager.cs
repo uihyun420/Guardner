@@ -1,12 +1,101 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkillManager : SkillManager
 {
-    public PlayerSkillTable playerSkillTable => DataTableManager.PlayerSkillTable; 
+    public PlayerSkillTable playerSkillTable => DataTableManager.PlayerSkillTable;
+
+    [SerializeField] private TextMeshProUGUI buffText;
+    [SerializeField] private TextMeshProUGUI deBuffText;
+
+    private float textDisplayTime = 3f; // 텍스트 표시 시간
+    private StringBuilder sb = new StringBuilder();
+    private List<SkillEffect> activeSkillEffects = new List<SkillEffect>();
+
+    // 스킬 효과 정보를 저장하는 클래스
+    public class SkillEffect
+    {
+        public string effectText;
+        public float remainingTime;
+        public bool isBuff; // true면 버프, false면 디버프
+
+        public SkillEffect(string effect, float duration, bool buff)
+        {
+            effectText = effect;
+            remainingTime = duration;
+            isBuff = buff;
+        }
+    }
+
+    private void UpdateActiveEffects()
+    {
+        // 남은 시간 감소 및 만료된 효과 제거
+        for (int i = activeSkillEffects.Count - 1; i >= 0; i--)
+        {
+            activeSkillEffects[i].remainingTime -= Time.deltaTime;
+            if (activeSkillEffects[i].remainingTime <= 0)
+            {
+                activeSkillEffects.RemoveAt(i);
+            }
+        }
+    }
+    private void UpdateEffectTexts()
+    {
+        // 버프 텍스트 업데이트
+        if (buffText != null)
+        {
+            sb.Clear();
+            var buffs = activeSkillEffects.Where(e => e.isBuff).ToList();
+            if (buffs.Count > 0)
+            {
+                foreach (var buff in buffs)
+                {
+                    sb.AppendLine($"{buff.effectText} ({Mathf.CeilToInt(buff.remainingTime)}초)");
+                }
+            }
+            buffText.text = sb.ToString();
+        }
+
+        // 디버프 텍스트 업데이트
+        if (deBuffText != null)
+        {
+            sb.Clear();
+            var debuffs = activeSkillEffects.Where(e => !e.isBuff).ToList();
+            if (debuffs.Count > 0)
+            {
+                foreach (var debuff in debuffs)
+                {
+                    sb.AppendLine($"{debuff.effectText} ({Mathf.CeilToInt(debuff.remainingTime)}초)");
+                }
+            }
+            deBuffText.text = sb.ToString();
+        }
+    }
+
+    private void AddSkillEffect(string effectText, float duration, bool isBuff)
+    {
+        // 같은 스킬이 이미 활성화되어 있으면 시간 갱신
+        var existingEffect = activeSkillEffects.FirstOrDefault(e => e.effectText == effectText);
+        if (existingEffect != null)
+        {
+            existingEffect.remainingTime = duration;
+        }
+        else
+        {
+            activeSkillEffects.Add(new SkillEffect(effectText, duration, isBuff));
+        }
+    }
+
+    private void Update()
+    {
+        UpdateActiveEffects();
+        UpdateEffectTexts();
+    }
 
     public void UsePlayerSkill(int skillId)
     {
@@ -22,6 +111,7 @@ public class PlayerSkillManager : SkillManager
         lastUsedTime[skillId] = Time.time;
     }
 
+
     private void ApplyPlayerSkillEffect(PlayerSkillData skillData)
     {
         switch (skillData.Id)
@@ -30,33 +120,37 @@ public class PlayerSkillManager : SkillManager
                 PullingWeedsEffect(skillData);
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
-            case 52830:
+            case 52830: // 아침 물주기
                 MorningWateringEffect(skillData);
+                AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
-            case 521035:
+            case 521035: // 해충 퇴치제
                 PestRepellentEffect(skillData);
+                AddSkillEffect(skillData.SkillDescription, skillData.Duration, false); // 디버프 효과
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
-            case 52650:
+            case 52650: // 가지치기
                 PruningEffect(skillData);
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
-            case 521260:
+            case 521260: // 햇빛 조절
                 SunlightControlEffect(skillData);
+                AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
-            case 52170:
+            case 52170: // 토양 정리
                 SoilLevelingEffect(skillData);
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
-            case 521590:
+            case 521590: // 향기 블룸
                 FragranceBloomEffect(skillData);
+                AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
-                // 다른 스킬 추가
         }
     }
+
 
 
     private List<MonsterBehavior> GetAliveMonsters()
@@ -137,6 +231,7 @@ public class PlayerSkillManager : SkillManager
                 Debug.Log($"아군 가드너 {guardner.name} 공격속도 {boostPercent * 100}% 증가 ({duration}초)");
             }
         }
+
     }
     
     private void PestRepellentEffect(PlayerSkillData skillData) // 해충퇴치제
