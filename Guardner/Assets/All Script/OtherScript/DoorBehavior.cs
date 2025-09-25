@@ -37,4 +37,11 @@ public class DoorBehavior : MonoBehaviour, IDamageable
             Die();
         }
     }
+
+    public void Init()
+    {
+        hp = 100;
+        hpBar.SetHealth(hp);
+        hpBar.SetMaxHealth(hp);
+    }
 }

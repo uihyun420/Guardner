@@ -18,6 +18,7 @@ public class BattleUi : GenericWindow
 
     [SerializeField] private Button readyTextButton;
     [SerializeField] private Button BattleTimerButton;
+    [SerializeField] private GameObject door;
     public void ReadyTimeSetZero() // Å×½ºÆ® 
     {
         readyTimer = 0f;
@@ -268,6 +269,11 @@ public class BattleUi : GenericWindow
     public override void Open()
     {
         base.Open();
+        var doorBehavior = door.GetComponent<DoorBehavior>();
+        if(doorBehavior != null)
+        {
+            doorBehavior.Init();
+        }
         canSpawnGuardnerCount = maxGuardnerCount;
         assignedSkill1 = -1;
         assignedSkill2 = -1;

@@ -15567,6 +15567,7 @@ MonoBehaviour:
   goldText: {fileID: 1506976691}
   readyTextButton: {fileID: 1974105572}
   BattleTimerButton: {fileID: 1809316042}
+  door: {fileID: 1841693331}
   coolTimeText1: {fileID: 928179588}
   coolTimeText2: {fileID: 318581287}
   coolTimeText3: {fileID: 246263707}
@@ -17844,6 +17845,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4094722810028855089, guid: b12964784e0e0784984d1ef5174541da, type: 3}
   m_PrefabInstance: {fileID: 1814028287}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1841693331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1993916996046373054, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
+  m_PrefabInstance: {fileID: 3287183434857732469}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1863041229
 GameObject:
