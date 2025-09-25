@@ -39,11 +39,8 @@ public class StageClearUi : GenericWindow
 
     public void OnNextStageButton()
     {
-        Debug.Log("=== OnNextStageButton 시작 ===");
-
         if (stageManager == null || stageManager.stageData == null)
         {
-            Debug.Log("StageManager 또는 StageData가 null입니다.");
             return;
         }
 
