@@ -12,10 +12,11 @@ public class BattleUi : GenericWindow
     public Button skill2;
     public Button skill3;
 
+    public GameObject blockTouchScreenPanel;
     public SkillManager skillManager;   
     public TextMeshProUGUI battleTimeText;    
     public TextMeshProUGUI goldText;
-
+    
     [SerializeField] private Button readyTextButton;
     [SerializeField] private Button BattleTimerButton;
     [SerializeField] private GameObject door;

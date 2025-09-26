@@ -50,6 +50,7 @@ public class PlayerSkillSetUi : GenericWindow
             scrollRect.enabled = true;
             scrollRect.gameObject.SetActive(true);
         }
+        battleUi.blockTouchScreenPanel.SetActive(true);
 
         // 지연 후 ScrollRect 초기화
         StartCoroutine(InitializeScrollRect());
@@ -63,6 +64,7 @@ public class PlayerSkillSetUi : GenericWindow
             screenTouch.enabled = true;
         }
         base.Close();
+        battleUi.blockTouchScreenPanel.SetActive(false);
     }
 
     private IEnumerator InitializeScrollRect()
