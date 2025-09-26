@@ -13,9 +13,16 @@ public class PlayerSkillManager : SkillManager
     [SerializeField] private TextMeshProUGUI buffText;
     [SerializeField] private TextMeshProUGUI deBuffText;
 
-    private float textDisplayTime = 3f; // 텍스트 표시 시간
     private StringBuilder sb = new StringBuilder();
     private List<SkillEffect> activeSkillEffects = new List<SkillEffect>();
+    private bool isBattleStarted = false;
+
+
+
+    public void SetBattleState(bool isStarted)
+    {
+        isBattleStarted = isStarted;
+    }
 
     // 스킬 효과 정보를 저장하는 클래스
     public class SkillEffect
@@ -99,6 +106,8 @@ public class PlayerSkillManager : SkillManager
 
     public void UsePlayerSkill(int skillId)
     {
+        if (!isBattleStarted) return;
+
         var skillData = playerSkillTable.Get(skillId);
         if (skillData == null) return; 
 

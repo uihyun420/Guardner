@@ -19,6 +19,7 @@ public class BattleUi : GenericWindow
     [SerializeField] private Button readyTextButton;
     [SerializeField] private Button BattleTimerButton;
     [SerializeField] private GameObject door;
+    
     public void ReadyTimeSetZero() // Å×½ºÆ® 
     {
         readyTimer = 0f;
@@ -289,7 +290,7 @@ public class BattleUi : GenericWindow
         {
             playerSkillManager.lastUsedTime.Clear();
         }
-
+        playerSkillManager.SetBattleState(false);
         StartCoroutine(CoSetReadyTimeUi());
     }
 
@@ -387,6 +388,7 @@ public class BattleUi : GenericWindow
     private IEnumerator CoSetBattleStart()
     {
         battleStartObject.gameObject.SetActive(true);
+        playerSkillManager.SetBattleState(true);
         yield return new WaitForSeconds(1.5f);
         battleStartObject.gameObject.SetActive(false);
     }
