@@ -48,7 +48,7 @@ public class GenericWindow : MonoBehaviour
     }
 
 
-    private void BlockBattleUI(bool block)
+    public void BlockBattleUI(bool block)
     {
         BattleUi battleUi = FindObjectOfType<BattleUi>();
         if(battleUi != null)
