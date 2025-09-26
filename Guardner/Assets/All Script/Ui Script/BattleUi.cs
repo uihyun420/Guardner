@@ -284,7 +284,7 @@ public class BattleUi : GenericWindow
         text1.text = "+";
         text2.text = "+";
         text3.text = "+";
-
+        gold = 150;
         if(playerSkillManager != null)
         {
             playerSkillManager.lastUsedTime.Clear();
