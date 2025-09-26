@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GuardnerBehavior : MonoBehaviour
@@ -45,7 +44,6 @@ public class GuardnerBehavior : MonoBehaviour
     private LineRenderer lineRenderer;
     private bool isRangeVisible = false;
 
-    public System.Action<GuardnerBehavior> OnGuardnerClicked; // 클릭했을때 이벤트 전달
     private Camera mainCamera;
 
     private void Awake()
@@ -53,7 +51,12 @@ public class GuardnerBehavior : MonoBehaviour
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
-        collider.isTrigger = true;
+
+        CapsuleCollider2D touchCollider = gameObject.AddComponent<CapsuleCollider2D>();
+        touchCollider.isTrigger = false; // 터치 감지용
+        touchCollider.size = new Vector2(0.5f, 0.5f); // 터치 영역 크기
+
+        collider.isTrigger = true; // 공격 범위용
         attackTimer = 0;
 
         if(rb != null)
@@ -67,6 +70,10 @@ public class GuardnerBehavior : MonoBehaviour
             lineRenderer = gameObject.AddComponent<LineRenderer>();
         }
 
+        // 컴포넌트 강제 활성화
+        lineRenderer.gameObject.SetActive(true);
+        lineRenderer.enabled = true;
+
         mainCamera = Camera.main;
         if(mainCamera == null)
         {
@@ -77,16 +84,15 @@ public class GuardnerBehavior : MonoBehaviour
     }
     private void SetupLinRenderer()
     {
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        var mat = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.material = mat;
         lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red; 
-        lineRenderer.startWidth = 0.05f;
-        lineRenderer.endWidth = 0.05f;
-        //lineRenderer.useWorldSpace = false;
-        lineRenderer.useWorldSpace = true; // 월드 좌표 사용
-
-        lineRenderer.enabled = false;
-        lineRenderer.sortingOrder = 10; // UI 위에 표시
+        lineRenderer.endColor = Color.red;
+        lineRenderer.startWidth = 0.1f; // 더 두껍게
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.sortingOrder = 100; // 더 높은 값
+        lineRenderer.sortingLayerName = "Default";
     }
     public void Init(GuardnerData data)
     {
@@ -132,69 +138,17 @@ public class GuardnerBehavior : MonoBehaviour
             animator.SetBool(attack, false);
         }
 
-        HandleTouchInput();
+       // HandleTouchInput();
 
         if(isRangeVisible)
         {
             DrawAttackRange();
         }
     }
-
-    private void HandleTouchInput()
-    {
-        if(Input.touchCount == 1)
-        {
-            Touch touch = Input.GetTouch(0);
-            if(touch.phase == TouchPhase.Began)
-            {
-                CheckTouch(touch.position);
-            }
-        }
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            CheckTouch(Input.mousePosition);
-
-        }
-    }
-
-    private void CheckTouch(Vector2 screenPosition)
-    {
-        if (mainCamera == null) return;
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);
-        worldPosition.z = 0;
-
-        if(IsPointInGuardner(worldPosition))
-        {
-            OnGuardnerTouched();
-        }
-    }
-
-    private bool IsPointInGuardner(Vector3 worldPosition)
-    {
-        // CapsuleCollider2D의 범위 내에 포인트가 있는지 확인
-        Vector2 center = (Vector2)transform.position + collider.offset;
-        Vector2 size = collider.size;
-
-        // 간단한 사각형 범위 검사 (실제로는 더 정확한 캡슐 검사가 필요할 수 있음)
-        Bounds bounds = new Bounds(center, size);
-        return bounds.Contains(worldPosition);
-    }
-
-    private void OnGuardnerTouched()
-    {
-        Debug.Log($"가드너 터치됨: {guardnerData.Name}");
-
-        // 이벤트 발생
-        OnGuardnerClicked?.Invoke(this);
-
-        // 범위 표시 토글
-        ToggleRangeDisplay();
-    }
-
     public void ToggleRangeDisplay()
     {
         isRangeVisible = !isRangeVisible;
+        Debug.Log($"범위 토글: {isRangeVisible}, attackRange: {attackRange}");
         ShowAttackRange(isRangeVisible);
     }
 
@@ -202,6 +156,7 @@ public class GuardnerBehavior : MonoBehaviour
     {
         isRangeVisible = show;
         lineRenderer.enabled = show;
+        Debug.Log($"LineRenderer 활성화: {lineRenderer.enabled}"); // 디버그 로그 추가
         if (show)
         {
             DrawAttackRange();
@@ -221,7 +176,8 @@ public class GuardnerBehavior : MonoBehaviour
             float angle = 2f * Mathf.PI * i / segments;
             float x = Mathf.Cos(angle) * radius + center.x;
             float y = Mathf.Sin(angle) * radius + center.y;
-            lineRenderer.SetPosition(i, new Vector3(x, y, center.z));
+            //lineRenderer.SetPosition(i, new Vector3(x, y, center.z));
+            lineRenderer.SetPosition(i, new Vector3(x, y, 0f));
         }
     }
 
