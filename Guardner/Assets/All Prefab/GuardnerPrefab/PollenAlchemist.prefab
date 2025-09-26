@@ -3057,12 +3057,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Monster: {fileID: 2826588337641964206, guid: 61fc304caa609c04d8c82014f1ef4206, type: 3}
+  hasCriticalBuff: 0
+  buffCriticalChance: 0
+  buffCriticalDamage: 0
   id: 11255
   role: 2
   attackPower: 0
   aps: 0
   attackRange: 0
   rarity: 1
+  skillId: 0
   duration: 0
   coolTime: 0
 --- !u!1 &5196254232942165022

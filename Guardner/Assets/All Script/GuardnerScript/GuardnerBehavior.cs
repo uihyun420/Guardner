@@ -36,13 +36,17 @@ public class GuardnerBehavior : MonoBehaviour
     private string reference;
     private int guardnerDrawId;
 
-    //private int level;
-
     private Animator animator;
 
     private float attackTimer;
     public float duration;
     public int coolTime;
+
+    private LineRenderer lineRenderer;
+    private bool isRangeVisible = false;
+
+    public System.Action<GuardnerBehavior> OnGuardnerClicked; // 클릭했을때 이벤트 전달
+    private Camera mainCamera;
 
     private void Awake()
     {
@@ -56,6 +60,33 @@ public class GuardnerBehavior : MonoBehaviour
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
         }
+
+        lineRenderer = GetComponent<LineRenderer>();
+        if (lineRenderer == null)
+        {
+            lineRenderer = gameObject.AddComponent<LineRenderer>();
+        }
+
+        mainCamera = Camera.main;
+        if(mainCamera == null)
+        {
+            mainCamera = FindObjectOfType<Camera>();
+        }
+
+        SetupLinRenderer();
+    }
+    private void SetupLinRenderer()
+    {
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red; 
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
+        //lineRenderer.useWorldSpace = false;
+        lineRenderer.useWorldSpace = true; // 월드 좌표 사용
+
+        lineRenderer.enabled = false;
+        lineRenderer.sortingOrder = 10; // UI 위에 표시
     }
     public void Init(GuardnerData data)
     {
@@ -100,7 +131,100 @@ public class GuardnerBehavior : MonoBehaviour
         {
             animator.SetBool(attack, false);
         }
+
+        HandleTouchInput();
+
+        if(isRangeVisible)
+        {
+            DrawAttackRange();
+        }
     }
+
+    private void HandleTouchInput()
+    {
+        if(Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+            if(touch.phase == TouchPhase.Began)
+            {
+                CheckTouch(touch.position);
+            }
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            CheckTouch(Input.mousePosition);
+
+        }
+    }
+
+    private void CheckTouch(Vector2 screenPosition)
+    {
+        if (mainCamera == null) return;
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);
+        worldPosition.z = 0;
+
+        if(IsPointInGuardner(worldPosition))
+        {
+            OnGuardnerTouched();
+        }
+    }
+
+    private bool IsPointInGuardner(Vector3 worldPosition)
+    {
+        // CapsuleCollider2D의 범위 내에 포인트가 있는지 확인
+        Vector2 center = (Vector2)transform.position + collider.offset;
+        Vector2 size = collider.size;
+
+        // 간단한 사각형 범위 검사 (실제로는 더 정확한 캡슐 검사가 필요할 수 있음)
+        Bounds bounds = new Bounds(center, size);
+        return bounds.Contains(worldPosition);
+    }
+
+    private void OnGuardnerTouched()
+    {
+        Debug.Log($"가드너 터치됨: {guardnerData.Name}");
+
+        // 이벤트 발생
+        OnGuardnerClicked?.Invoke(this);
+
+        // 범위 표시 토글
+        ToggleRangeDisplay();
+    }
+
+    public void ToggleRangeDisplay()
+    {
+        isRangeVisible = !isRangeVisible;
+        ShowAttackRange(isRangeVisible);
+    }
+
+    public void ShowAttackRange(bool show)
+    {
+        isRangeVisible = show;
+        lineRenderer.enabled = show;
+        if (show)
+        {
+            DrawAttackRange();
+        }
+    }
+
+    private void DrawAttackRange()
+    {
+        int segments = 64;
+        float radius = attackRange * 0.5f;
+        lineRenderer.positionCount = segments + 1;
+
+        Vector3 center = transform.position; // 월드 좌표 기준
+
+        for (int i = 0; i <= segments; i++)
+        {
+            float angle = 2f * Mathf.PI * i / segments;
+            float x = Mathf.Cos(angle) * radius + center.x;
+            float y = Mathf.Sin(angle) * radius + center.y;
+            lineRenderer.SetPosition(i, new Vector3(x, y, center.z));
+        }
+    }
+
 
     private void Attack()
     {

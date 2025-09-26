@@ -35,14 +35,6 @@ public class GuardnerSpawnUi : GenericWindow
 
         base.Open();
 
-        if(battleUi != null)
-        {
-            battleUi.skill1.interactable = false;
-            battleUi.skill2.interactable = false;
-            battleUi.skill3.interactable = false;
-        }
-
-
         if (scrollRect != null)
             scrollRect.horizontal = false;
 
@@ -52,12 +44,6 @@ public class GuardnerSpawnUi : GenericWindow
     public override void Close()
     {
         base.Close();
-        if (battleUi != null)
-        {
-            battleUi.skill1.interactable = true;
-            battleUi.skill2.interactable = true;
-            battleUi.skill3.interactable = true;
-        }
     }
 
     private void DisplayAvailableGuardner()
