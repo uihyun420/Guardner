@@ -16,7 +16,13 @@ public class PlayerSkillSetUi : GenericWindow
 
     private int selectedSkillSlot; // 현재 선택된 스킬 슬롯 (1, 2, 3)
     private int selectedSkillId; // 선택된 스킬 ID
+    private bool isStartedBattle = false;
 
+
+    public void IsBattleState(bool startedBattle)
+    {
+        isStartedBattle = startedBattle;
+    }
 
     private void Awake()
     {
@@ -88,6 +94,11 @@ public class PlayerSkillSetUi : GenericWindow
     // BattleUi에서 호출될 메서드 - 스킬 슬롯 설정
     public void OpenForSkillSlot(int skillSlot)
     {
+        if(isStartedBattle)
+        {
+            return;
+        }
+
         selectedSkillSlot = skillSlot;
         Open();
     }
