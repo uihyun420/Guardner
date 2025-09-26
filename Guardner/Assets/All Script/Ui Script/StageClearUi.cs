@@ -1,5 +1,7 @@
 
 using System.Net.NetworkInformation;
+using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +14,13 @@ public class StageClearUi : GenericWindow
     [SerializeField] private BattleUi battleUi;
     [SerializeField] private GuardnerSpawner guardnerSpawner;
     [SerializeField] private MonsterSpawner monsterSpawner;
+    [SerializeField] private MainMenuUi mainMenuUi;
+    [SerializeField] private TextMeshProUGUI stageRewardText;
+    [SerializeField] private TextMeshProUGUI stageText;
+
+
+    private bool rewardGiven = false;
+    private int lastRewardedStage = -1; // 보상을 지급한 마지막 스테이지 
 
     private void Start()
     {
@@ -30,6 +39,14 @@ public class StageClearUi : GenericWindow
         if (stageManager == null)
             stageManager = FindObjectOfType<StageManager>();
 
+        int currentStage = stageManager.stageData.Stage;
+        if (!rewardGiven && lastRewardedStage != currentStage)
+        {
+            GiveStageReward();
+            rewardGiven = true;
+            lastRewardedStage = currentStage;
+        }
+        SetGameClearStageText();
         Time.timeScale = 0;
     }
     public override void Close()
@@ -57,11 +74,12 @@ public class StageClearUi : GenericWindow
                 gameManager.GameExit();
             return;
         }
+        rewardGiven = false;
 
         Time.timeScale = 1;
 
-        battleUi.ResetBattleTimer();  
-        
+        battleUi.ResetBattleTimer();
+
         Close();
 
         stageManager.LoadStage(nextStageId);
@@ -71,14 +89,14 @@ public class StageClearUi : GenericWindow
         if (manager != null)
         {
             manager.Open(WindowType.Battle);
-        }               
+        }
     }
 
 
     public void OnClickMainMenuButton()
     {
         Time.timeScale = 1;
-
+        rewardGiven = false;
         stageManager.StageStop();
         monsterSpawner.ClearMonster();
         guardnerSpawner.ClearGuardner();
@@ -126,4 +144,61 @@ public class StageClearUi : GenericWindow
             default: return -1; // 존재하지 않는 스테이지
         }
     }
+
+    public void GiveStageReward()
+    {
+        int currentStage = stageManager.stageData.Stage;
+        var stageRewardTable = DataTableManager.StageRewardTable;
+        var rewardData = stageRewardTable.GetStage(currentStage);
+
+        if(rewardData == null)
+        {
+            Debug.Log($"스테이지 {currentStage}에 대한 보상 데이터가 없습니다.");
+            return;
+        }
+
+        int totalReward = 0;
+
+        // 기본보상
+        if(rewardData.BaseRewardId == 11002)
+        {
+            totalReward += rewardData.BaseRewardIdQty;
+        }
+
+        //추가보상
+        if(rewardData.BaseReward2Id == 11002)
+        {
+            totalReward += rewardData.BaseReward2IdQty;
+        }
+
+        if (rewardData.Bonus1RewardId== 11002)
+        {
+            totalReward += rewardData.Bonus1RewardIdRewardQty;
+        } 
+
+        // 보너스 보상 2 (Bonus2RewardId가 11002면 골드 - 몬스터 처치 수에 따른 보상)
+        if (rewardData.Bonus2RewardId == 11003)
+        {
+            totalReward += rewardData.Bonus2RewardIdRewardQty;
+        }
+
+        if(mainMenuUi != null && totalReward > 0)
+        {
+            mainMenuUi.AddMainUiGold(totalReward);
+            Debug.Log($"스테이지 {currentStage} 클리어 보상: {totalReward} 골드 지급");
+        }
+
+        var sb = new StringBuilder();
+        sb.Append("보상 :").Append(totalReward).Append(" G");
+        stageRewardText.text = sb.ToString();
+    }
+    private void SetGameClearStageText()
+    {
+        var sb = new StringBuilder();
+        sb.Clear();
+        sb.Append("스테이지 LEVEL ").Append(stageManager.stageData.Stage);
+        stageText.text = sb.ToString();
+    }
+
+
 }

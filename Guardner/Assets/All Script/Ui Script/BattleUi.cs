@@ -102,18 +102,6 @@ public class BattleUi : GenericWindow
                 SetSkillButtonInteractable(slotNumber, false); // 버튼 비활성화
             }
         }
-
-        //if (assignedSkillId == -1)
-        //{
-        //    // 스킬이 할당되지 않은 경우 - PlayerSkillSetUi 열기
-        //    playerSkillSetUi.OpenForSkillSlot(slotNumber);
-        //}
-        //else
-        //{
-        //    // 스킬이 할당된 경우 - 스킬 사용
-        //    playerSkillManager.UsePlayerSkill(assignedSkillId);
-        //    SetSkillButtonInteractable(slotNumber, false); // 버튼 비활성화
-        //}
     }
 
     // 스킬을 슬롯에 할당

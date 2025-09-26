@@ -18,15 +18,14 @@ public class StageRewardData
     public string Bonus2RewardIdCondition { get; set; }
 }
 
-
-
-
 public class StageRewardTable : DataTable
 {
-    private readonly Dictionary<int, StageRewardData> table = new Dictionary<int, StageRewardData>();
+    private readonly Dictionary<int, StageRewardData> table = new Dictionary<int, StageRewardData>(); // Id 테이블
+    private readonly Dictionary<int, StageRewardData> stageTable = new Dictionary<int, StageRewardData>(); // 스테이지 단계 테이블 
     public override void Load(string filename)
     {
         table.Clear();
+        stageTable.Clear();
         var path = string.Format(FormatPath, filename);
         var textAsset = Resources.Load<TextAsset>(path);
         var list = LoadCSV<StageRewardData>(textAsset.text);
@@ -35,8 +34,17 @@ public class StageRewardTable : DataTable
         {
             if (!table.ContainsKey(stageReward.RewardID))
             {
-                Debug.Log($"로드된 보상 : {stageReward.RewardID}");
+                //Debug.Log($"로드된 보상 : {stageReward.RewardID}");
                 table.Add(stageReward.RewardID, stageReward);
+
+                if(!stageTable.ContainsKey(stageReward.Stage))
+                {
+                    stageTable.Add(stageReward.Stage, stageReward);
+                }
+                else
+                {
+                    Debug.Log($"스테이지 번호 중복 : {stageReward.Stage}");
+                }
             }
             else
             {
@@ -53,6 +61,15 @@ public class StageRewardTable : DataTable
             return null;
         }
         return table[id];
+    }
+
+    public StageRewardData GetStage(int stageNumber)
+    {
+        if(!stageTable.ContainsKey(stageNumber))
+        {
+            return null;
+        }
+        return stageTable[stageNumber];
     }
 
     public IEnumerable<StageRewardData> GetAll()

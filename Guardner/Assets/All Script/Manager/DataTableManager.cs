@@ -32,6 +32,10 @@ public class DataTableManager
         var stageTable = new StageTable();
         stageTable.Load(DataTableIds.Stage);
         tables.Add(DataTableIds.Stage, stageTable);
+
+        var stageRewardTable = new StageRewardTable();
+        stageRewardTable.Load(DataTableIds.StageReward);
+        tables.Add(DataTableIds.StageReward, stageRewardTable);
     }
 
 
@@ -72,7 +76,13 @@ public class DataTableManager
             return Get<StageTable>(DataTableIds.Stage);
         }
     }
-  
+    public static StageRewardTable StageRewardTable
+    {
+        get
+        {
+            return Get<StageRewardTable>(DataTableIds.StageReward);
+        }
+    }
 
     
 
