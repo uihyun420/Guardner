@@ -158,38 +158,70 @@ public class StageClearUi : GenericWindow
         }
 
         int totalReward = 0;
+        int gardenerTickets = 0;  // 가드너 뽑기권
+        int playerSkillTickets = 0;  // 플레이어 스킬 뽑기권
 
         // 기본보상
-        if(rewardData.BaseRewardId == 11002)
+        if (rewardData.BaseRewardId == 11002)
         {
             totalReward += rewardData.BaseRewardIdQty;
         }
 
-        //추가보상
-        if(rewardData.BaseReward2Id == 11002)
+        // 추가보상 (뽑기권 처리 추가)
+        if (rewardData.BaseReward2Id == 11002)
         {
             totalReward += rewardData.BaseReward2IdQty;
         }
+        else if (rewardData.BaseReward2Id == 131991)  // 가드너 뽑기권
+        {
+            gardenerTickets += rewardData.BaseReward2IdQty;
+        }
+        else if (rewardData.BaseReward2Id == 231991)  // 플레이어 스킬 뽑기권
+        {
+            playerSkillTickets += rewardData.BaseReward2IdQty;
+        }
 
-        if (rewardData.Bonus1RewardId== 11002)
+        if (rewardData.Bonus1RewardId == 11002)
         {
             totalReward += rewardData.Bonus1RewardIdRewardQty;
-        } 
+        }
 
-        // 보너스 보상 2 (Bonus2RewardId가 11002면 골드 - 몬스터 처치 수에 따른 보상)
+        // 보너스 보상 2 (Bonus2RewardId가 11003면 추가 골드)
         if (rewardData.Bonus2RewardId == 11003)
         {
             totalReward += rewardData.Bonus2RewardIdRewardQty;
         }
 
-        if(mainMenuUi != null && totalReward > 0)
+        // 골드 지급
+        if (mainMenuUi != null && totalReward > 0)
         {
             mainMenuUi.AddMainUiGold(totalReward);
             Debug.Log($"스테이지 {currentStage} 클리어 보상: {totalReward} 골드 지급");
         }
 
+        // 뽑기권 지급 (나중에 구현할 메서드들)
+        if (gardenerTickets > 0)
+        {
+            // TODO: 가드너 뽑기권 지급 로직 추가
+            Debug.Log($"스테이지 {currentStage} 클리어 보상: {gardenerTickets} 가드너 뽑기권 지급");
+        }
+
+        if (playerSkillTickets > 0)
+        {
+            // TODO: 플레이어 스킬 뽑기권 지급 로직 추가
+            Debug.Log($"스테이지 {currentStage} 클리어 보상: {playerSkillTickets} 플레이어 스킬 뽑기권 지급");
+        }
+
+        // UI 텍스트 업데이트
         var sb = new StringBuilder();
-        sb.Append("보상 :").Append(totalReward).Append(" G");
+        sb.Append("보상 : ").Append(totalReward).Append(" G");
+
+        if (gardenerTickets > 0)
+            sb.Append("\n정원사 뽑기권 : ").Append(gardenerTickets).Append("개");
+
+        if (playerSkillTickets > 0)
+            sb.Append("가드너 스킬 뽑기권 : ").Append(playerSkillTickets).Append("개");
+
         stageRewardText.text = sb.ToString();
     }
     private void SetGameClearStageText()
