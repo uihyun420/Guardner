@@ -158,6 +158,7 @@ public class StageClearUi : GenericWindow
         }
 
         int totalReward = 0;
+        int bonusReward = 0;
         int gardenerTickets = 0;  // 가드너 뽑기권
         int playerSkillTickets = 0;  // 플레이어 스킬 뽑기권
 
@@ -189,13 +190,29 @@ public class StageClearUi : GenericWindow
         // 보너스 보상 2 (Bonus2RewardId가 11003면 추가 골드)
         if (rewardData.Bonus2RewardId == 11003)
         {
-            totalReward += rewardData.Bonus2RewardIdRewardQty;
+            int killUnit = 30;
+            int stage = stageManager.stageData.Stage;
+            if (stage >= 6 && stage <= 10)
+            {
+                killUnit = 100;
+            }
+            else if(stage >= 11)
+            {
+                killUnit = 130;
+            }
+
+            int bonusCount = stageManager.monsterKillCount / killUnit;
+            if(bonusCount > 0)
+            {
+                bonusReward += rewardData.Bonus2RewardIdRewardQty * bonusCount;
+                stageManager.monsterKillCount = 0;
+            }            
         }
 
         // 골드 지급
         if (mainMenuUi != null && totalReward > 0)
         {
-            mainMenuUi.AddMainUiGold(totalReward);
+            mainMenuUi.AddMainUiGold(totalReward + bonusReward);
             Debug.Log($"스테이지 {currentStage} 클리어 보상: {totalReward} 골드 지급");
         }
 
@@ -214,8 +231,11 @@ public class StageClearUi : GenericWindow
 
         // UI 텍스트 업데이트
         var sb = new StringBuilder();
-        sb.Append("보상 : ").Append(totalReward).Append(" G");
-
+        sb.Append("스테이지 기본보상 : ").Append(totalReward).Append(" G");
+        if(bonusReward > 0)
+        {
+            sb.Append("\n보너스 보상 : ").Append(bonusReward).Append(" G");
+        }
         if (gardenerTickets > 0)
             sb.Append("\n정원사 뽑기권 : ").Append(gardenerTickets).Append("개");
 
@@ -231,6 +251,4 @@ public class StageClearUi : GenericWindow
         sb.Append("스테이지 LEVEL ").Append(stageManager.stageData.Stage);
         stageText.text = sb.ToString();
     }
-
-
 }

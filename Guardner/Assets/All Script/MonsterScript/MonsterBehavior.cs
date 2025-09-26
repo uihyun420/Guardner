@@ -136,7 +136,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         if (stageManager != null)
         {
             stageManager.enemiesRemaining--;
-            Debug.Log($"몬스터 사망 - 남은 적: {stageManager.enemiesRemaining}");
+            stageManager.monsterKillCount++;
         }
 
         if(monsterSpawner != null)
@@ -189,8 +189,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
             spriteRenderer.sortingOrder = order;
         }
     }
-
-
 
     // 몬스터 스피드 디버프 
     public void SpeedDebuff(float moveSpeedPercent, float attackSpeedPercent, float duration)

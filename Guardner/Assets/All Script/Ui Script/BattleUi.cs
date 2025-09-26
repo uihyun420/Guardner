@@ -31,8 +31,8 @@ public class BattleUi : GenericWindow
 
     public void ResetBattleTimer()
     {
-        battleTimer = 60f;
-        readyTimer = 30f; 
+        battleTimer = 180f;
+        readyTimer = 60f; 
         isReadyTime = true; 
     }
 
@@ -176,8 +176,8 @@ public class BattleUi : GenericWindow
     }
     private void Awake()
     {
-        battleTimer = 60f;
-        readyTimer = 30f;
+        battleTimer = 180f;
+        readyTimer = 60f;
         gold = 150;
         isReadyTime = true;
         canSpawnGuardnerCount = maxGuardnerCount;

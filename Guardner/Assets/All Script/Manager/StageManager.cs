@@ -13,6 +13,7 @@ public class StageManager : MonoBehaviour
     public int enemiesRemaining;
     public bool isBossStage;
     public bool isStageCompleted;
+    public int monsterKillCount = 0;
 
     private int id;
     private int stage; //스테이지 단계
