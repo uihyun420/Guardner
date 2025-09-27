@@ -9,6 +9,9 @@ public class GuardnerEnhanceUi : GenericWindow
     public GameObject guardnerEnhanceItemPrefab; // 각 가드너 항목 프리팹
 
     [SerializeField] private Button BackButton;
+    [SerializeField] private Button guardnerButton;
+
+    [SerializeField] private GuardnerEnhanceResultUi guardnerEnhanceResultUi;   
 
     // 현재 강화 레벨 정보 (예시: 실제로는 세이브 데이터 등에서 불러와야 함)
     private Dictionary<int, int> guardnerLevelDict = new Dictionary<int, int>();
@@ -75,7 +78,8 @@ public class GuardnerEnhanceUi : GenericWindow
         if (itemUi != null)
         {
             var sprite = GetGuardnerSprite(guardnerId);
-            itemUi.SetData(data, GetGuardnerSprite(guardnerId), () => OnEnhanceButton(guardnerId));
+            // ← 한 번만 호출하고, 실제 guardnerId 전달
+            itemUi.SetData(data, sprite, () => OnEnhanceButton(guardnerId));
         }
     }
     private Sprite GetGuardnerSprite(int guardnerId)
@@ -89,21 +93,25 @@ public class GuardnerEnhanceUi : GenericWindow
     private void OnEnhanceButton(int guardnerId)
     {
         int level = GetCurrentLevel(guardnerId);
-        var nextData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, level + 1);
-        if (nextData != null)
-        {
-            guardnerLevelDict[guardnerId] = level + 1;
-            ResetList();
-        }
-        else
-        {
-            Debug.Log("최대 레벨입니다.");
-        }
+        //var nextData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, level + 1);
+        //if (nextData != null)
+        //{
+        //    guardnerLevelDict[guardnerId] = level + 1;
+        //    ResetList();
+        //}
+        //else
+        //{
+        //    Debug.Log("최대 레벨입니다.");
+        //}
+
+        guardnerEnhanceResultUi.SetEnhanceData(guardnerId, level);
+        guardnerEnhanceResultUi.Open();
     }
 
     private void OnClickBackButton()
     {
         Close();
     }
+
 
 }
