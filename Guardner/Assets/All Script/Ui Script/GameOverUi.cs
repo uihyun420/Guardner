@@ -14,7 +14,8 @@ public class GameOverUi : GenericWindow
     [SerializeField] private Button retryButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private TextMeshProUGUI stageText;
-
+    [SerializeField] private GameObject spawnRect;
+    
     [SerializeField] private StageManager StageManager;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private BattleUi battleUi;
@@ -38,10 +39,13 @@ public class GameOverUi : GenericWindow
     public override void Open()
     {
         base.Open();
+        spawnRect.SetActive(false);
+
     }
     public override void Close()
     {
         base.Close();
+        spawnRect.SetActive(true);
     }
 
     public void OnClickRetryButton()
@@ -69,7 +73,7 @@ public class GameOverUi : GenericWindow
     private void SetGameOverStageText()
     {
         sb.Clear();
-        sb.Append("스테이지 LEVEL ").Append(StageManager.stageData.Stage);
+        sb.Append("STAGE LEVEL ").Append(StageManager.stageData.Stage);
         stageText.text = sb.ToString();
     }
 }
