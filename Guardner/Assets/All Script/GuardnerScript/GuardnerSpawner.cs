@@ -28,7 +28,6 @@ public class GuardnerSpawner : MonoBehaviour
         int summonGold = guardnerData.SummonGold;
         if(battleUi.gold < summonGold)
         {
-
             return;
         }
 

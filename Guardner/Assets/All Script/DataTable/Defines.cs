@@ -6,4 +6,6 @@ public static class DataTableIds
     public static readonly string Stage = "StageTable";
     public static readonly string PlayerSkill = "PlayerSkillTable";
     public static readonly string StageReward = "StageRewardTable";
+    public static readonly string GuardnerEnhance = "GuardnerEnhanceTable";
+
 }
