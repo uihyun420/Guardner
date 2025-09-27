@@ -22,7 +22,7 @@ public class GuardnerEnhanceData
 
 public class GuardnerEnhanceTable : DataTable
 {
-    private readonly Dictionary<int, GuardnerEnhanceData> table = new Dictionary<int, GuardnerEnhanceData>();
+    private readonly Dictionary<(int, int), GuardnerEnhanceData> table = new Dictionary<(int, int), GuardnerEnhanceData>();
     public override void Load(string filename)
     {
         table.Clear();
@@ -32,25 +32,28 @@ public class GuardnerEnhanceTable : DataTable
 
         foreach (var guardner in list)
         {
-            if (!table.ContainsKey(guardner.Id))
-            {                
-                table.Add(guardner.Id, guardner);
+            var key = (guardner.Id, guardner.Level);
+            if (!table.ContainsKey(key))
+            {
+                table.Add(key, guardner);
             }
             else
             {
-                Debug.Log("아이디 중복오류");
+                Debug.Log("아이디+레벨 중복오류");
             }
+
         }
     }
 
-    public GuardnerEnhanceData Get(int id)
+    public GuardnerEnhanceData Get(int id, int level)
     {
-        if (!table.ContainsKey(id))
+        var key = (id, level);
+        if (!table.ContainsKey(key))
         {
-            Debug.LogError($"SkillTable에 skillId {id}가 없습니다.");
+            Debug.LogError($"강화테이블에 id {id}, level {level}이 없습니다.");
             return null;
         }
-        return table[id];
+        return table[key];
     }
 
     public IEnumerable<GuardnerEnhanceData> GetAll()

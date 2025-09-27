@@ -36,8 +36,19 @@ public class DataTableManager
         var stageRewardTable = new StageRewardTable();
         stageRewardTable.Load(DataTableIds.StageReward);
         tables.Add(DataTableIds.StageReward, stageRewardTable);
-    }
 
+        var guardnerEnhanceTable = new GuardnerEnhanceTable();
+        guardnerEnhanceTable.Load(DataTableIds.GuardnerEnhance);
+        tables.Add(DataTableIds.GuardnerEnhance, guardnerEnhanceTable);
+
+    }
+    public static GuardnerEnhanceTable GuardnerEnhanceTable
+    {
+        get
+        {
+            return Get<GuardnerEnhanceTable>(DataTableIds.GuardnerEnhance);
+        }
+    }
 
     public static GuardnerTable GuardnerTable
     {
