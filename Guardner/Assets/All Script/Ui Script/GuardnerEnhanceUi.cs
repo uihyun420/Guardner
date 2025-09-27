@@ -8,6 +8,7 @@ public class GuardnerEnhanceUi : GenericWindow
     public Transform contentParent;
     public GameObject guardnerEnhanceItemPrefab; // 각 가드너 항목 프리팹
 
+    [SerializeField] private Button BackButton;
 
     // 현재 강화 레벨 정보 (예시: 실제로는 세이브 데이터 등에서 불러와야 함)
     private Dictionary<int, int> guardnerLevelDict = new Dictionary<int, int>();
@@ -17,6 +18,10 @@ public class GuardnerEnhanceUi : GenericWindow
         ResetList();
     }
 
+    private void Awake()
+    {
+        BackButton.onClick.AddListener(OnClickBackButton);
+    }
     public override void Open()
     {
         base.Open();
@@ -69,14 +74,16 @@ public class GuardnerEnhanceUi : GenericWindow
         var itemUi = go.GetComponent<GuardnerEnhanceItemUi>();
         if (itemUi != null)
         {
+            var sprite = GetGuardnerSprite(guardnerId);
             itemUi.SetData(data, GetGuardnerSprite(guardnerId), () => OnEnhanceButton(guardnerId));
         }
     }
     private Sprite GetGuardnerSprite(int guardnerId)
     {
-        // 실제 구현에서는 guardnerId에 맞는 Sprite를 리소스에서 불러와야 함
-        // 예시: Resources.Load<Sprite>($"Guardner/{guardnerId}");
-        return null;
+        var sprite = Resources.Load<Sprite>($"GuardnerIcons/{guardnerId}");
+        if (sprite == null)
+            Debug.LogWarning($"이미지 없음: GuardnerIcons/{guardnerId}");
+        return sprite;
     }
 
     private void OnEnhanceButton(int guardnerId)
@@ -94,5 +101,9 @@ public class GuardnerEnhanceUi : GenericWindow
         }
     }
 
+    private void OnClickBackButton()
+    {
+        Close();
+    }
 
 }
