@@ -11,7 +11,8 @@ public class MainMenuUi : GenericWindow
     [SerializeField] private GameManager gameManager;
     [SerializeField] private BattleUi battleUi;
     [SerializeField] private DictionaryUi dictionaryUi;
-
+    [SerializeField] private Button EnhanceButton;
+    [SerializeField] private GuardnerEnhanceUi guardnerEnhanceUi;
     [SerializeField] private TextMeshProUGUI goldText;
 
     public int mainUiGold = 0;
@@ -22,6 +23,7 @@ public class MainMenuUi : GenericWindow
     {
         battleStartButton.onClick.AddListener(OnBattleStartButton);
         DictionaryButton.onClick.AddListener(OnClickDictionaryButton);
+        EnhanceButton.onClick.AddListener(OnClickEnhanceButton);
     }
     private void Update()
     {
@@ -72,4 +74,10 @@ public class MainMenuUi : GenericWindow
     {
         mainUiGold = 0;
     }
+
+    public void OnClickEnhanceButton()
+    {
+        guardnerEnhanceUi.Open();
+    }
+
 }

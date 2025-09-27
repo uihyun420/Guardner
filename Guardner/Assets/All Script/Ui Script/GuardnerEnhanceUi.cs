@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GuardnerEnhanceUi : MonoBehaviour
+public class GuardnerEnhanceUi : GenericWindow
 {
     public ScrollRect scrollRect;
     public Transform contentParent;
@@ -15,6 +15,15 @@ public class GuardnerEnhanceUi : MonoBehaviour
     private void OnEnable()
     {
         ResetList();
+    }
+
+    public override void Open()
+    {
+        base.Open();
+    }
+    public override void Close()
+    {
+        base.Close();
     }
 
     public void ResetList()
