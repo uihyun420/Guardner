@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 96c8c3dd890f62844bc757d82185dba7
+guid: 73e888243ed88a7428df6ac0e5525625
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -116,10 +116,10 @@ TextureImporter:
       name: guardner_1181_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 1019
-        height: 1019
+        x: 126
+        y: 39
+        width: 768
+        height: 980
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

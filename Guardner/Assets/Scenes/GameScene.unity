@@ -19625,10 +19625,20 @@ MonoBehaviour:
   guardnerPrefabs:
   - guardnerId: 11255
     prefab: {fileID: 5145476537578873741, guid: 214830a3d5180b143b2abc86caf3962a, type: 3}
-  - guardnerId: 11235
+  - guardnerId: 11245
     prefab: {fileID: 4204627278967031321, guid: 4df5966a2b46c4a4392c1814f55043c5, type: 3}
   - guardnerId: 11135
     prefab: {fileID: 829225696231526450, guid: 9b7998ef4d960f143981bebfe71f578d, type: 3}
+  - guardnerId: 11120
+    prefab: {fileID: 8616823271620557351, guid: fa3069480700c3e4682e78b7525793c7, type: 3}
+  - guardnerId: 11125
+    prefab: {fileID: 3141656821139911677, guid: fb912fc50f42b4f48bcc2e8ee8bc169e, type: 3}
+  - guardnerId: 11235
+    prefab: {fileID: 642227571115821349, guid: 65932e942e61e684bafe31de4cfcc5fc, type: 3}
+  - guardnerId: 11250
+    prefab: {fileID: 8397444121506317559, guid: 51ce4d1eae2566448983a946daa0cfc9, type: 3}
+  - guardnerId: 11310
+    prefab: {fileID: 9023479103262044033, guid: 0c52e55466dbb3744b20fd9d5b033c3b, type: 3}
   spawnedGuardners: []
   guardnerSpawnUi: {fileID: 1082006641}
   screenTouch: {fileID: 585887588}
@@ -22226,15 +22236,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5398312857641133352, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.01
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 5398312857641133352, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.87
+      value: -2.76
       objectReference: {fileID: 0}
     - target: {fileID: 5398312857641133352, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: -0.07
       objectReference: {fileID: 0}
     - target: {fileID: 5398312857641133352, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22273,12 +22283,16 @@ PrefabInstance:
       value: 0.0972
       objectReference: {fileID: 0}
     - target: {fileID: 5798766596355723511, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5798766596355723511, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.1795
       objectReference: {fileID: 0}
     - target: {fileID: 5798766596355723511, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2.548
+      value: -2.623
       objectReference: {fileID: 0}
     - target: {fileID: 6553135870351143259, guid: 3fdca7f4b2b82b04bbdce0ceaa0030ca, type: 3}
       propertyPath: gradient.key0.b
