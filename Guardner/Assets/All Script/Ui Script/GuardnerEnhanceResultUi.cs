@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,9 @@ public class GuardnerEnhanceResultUi : GenericWindow
     [SerializeField] private TextMeshProUGUI enhancedStatus;
     [SerializeField] private TextMeshProUGUI attackText;
     [SerializeField] private Button exitButton;
+    [SerializeField] private Image guardnerImage; // Inspector에서 연결
+
+    //[SerializeField] private TextMeshProUGUI 
     //[SerializeField] private TextMeshProUGUI enhanceButtonText;
 
     [SerializeField] private MainMenuUi mainMenuUi; // Inspector에서 연결
@@ -36,11 +40,17 @@ public class GuardnerEnhanceResultUi : GenericWindow
 
     public void SetEnhanceData(int guardnerId, int currentLevel)
     {
+        var sb = new StringBuilder();
+
         this.currentGuardnerId = guardnerId;
         this.currentLevel = currentLevel;
 
         var currentData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, currentLevel);
         var nextData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, currentLevel + 1);
+
+        var sprite = Resources.Load<Sprite>($"GuardnerIcons/{guardnerId}");
+        if (guardnerImage != null)
+            guardnerImage.sprite = sprite;
 
         if (currentData == null)
         {
@@ -51,14 +61,22 @@ public class GuardnerEnhanceResultUi : GenericWindow
             enhanceButton.interactable = false;
             return;
         }
+        sb.Clear();
+        sb.Append(currentData.Name);
+        nameText.text = sb.ToString();
 
-        nameText.text = currentData.Name;
-        currentStatus.text = $"Lv.{currentData.Level}\n공격력: {currentData.AttackPower}\n공격속도: {currentData.APS}\nDPS: {currentData.DPS}";
-        attackText.text = $"현재: {currentData.AttackPower}";
+        sb.Clear();
+        sb.Append("현재 능력치\n").Append("Lv : ").Append(currentData.Level).Append("\n").Append("공격속도 : ").Append(currentData.APS).Append("\n").Append("DPS : ").Append(currentData.DPS);
+        currentStatus.text = sb.ToString();
 
         if (nextData != null)
         {
-            enhancedStatus.text = $"Lv.{nextData.Level}\n공격력: {nextData.AttackPower}\n공격속도: {nextData.APS}\nDPS: {nextData.DPS}";
+            sb.Clear();
+            sb.Append("강화 후 능력치\n")
+              .Append("Lv : ").Append(nextData.Level).Append("\n")
+              .Append("공격속도 : ").Append(nextData.APS).Append("\n")
+              .Append("DPS : ").Append(nextData.DPS);
+            enhancedStatus.text = sb.ToString();
             enhanceButton.interactable = true;
         }
         else
@@ -66,6 +84,11 @@ public class GuardnerEnhanceResultUi : GenericWindow
             enhancedStatus.text = "최대 레벨";
             enhanceButton.interactable = false;
         }
+
+        sb.Clear();
+        sb.Append("공격력 : ").Append(currentData.AttackPower).Append("+").Append(nextData.AttackPower - currentData.AttackPower);
+        attackText.text = sb.ToString();    
+
     }
     private void OnClickEnhanceButton()
     {

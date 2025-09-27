@@ -1,6 +1,7 @@
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class MainMenuUi : GenericWindow
@@ -14,6 +15,9 @@ public class MainMenuUi : GenericWindow
     [SerializeField] private Button EnhanceButton;
     [SerializeField] private GuardnerEnhanceUi guardnerEnhanceUi;
     [SerializeField] private TextMeshProUGUI goldText;
+
+    [SerializeField] private GameObject tilemap;
+    [SerializeField] private GameObject spawnRect;
 
     public int mainUiGold = 0;
 
@@ -33,11 +37,15 @@ public class MainMenuUi : GenericWindow
     public override void Open()
     {
         base.Open();
+        tilemap.SetActive(false);
+        spawnRect.SetActive(false);
     }
 
     public override void Close()
     {
         base.Close();
+        tilemap.SetActive(true);
+        spawnRect.SetActive(true);
     }
 
     private void OnBattleStartButton()
