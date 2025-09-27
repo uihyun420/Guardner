@@ -254,7 +254,7 @@ public class BattleUi : GenericWindow
             readyTimer = 0;
         }
         sb.Clear();
-        sb.Append("준비 시간 : ").Append(Mathf.FloorToInt(readyTimer)).Append("초");
+        sb.Append(Mathf.FloorToInt(readyTimer)).Append("초");
         battleTimeText.text = sb.ToString(); // 준비시간도 battleTimeText에 표시
     }
 
@@ -305,7 +305,7 @@ public class BattleUi : GenericWindow
     public void SetGuardnerSpawnCount()
     {
         sb.Clear();
-        sb.Append("배치 가능한 정원사 ").Append(canSpawnGuardnerCount).Append("/").Append(maxGuardnerCount);
+        sb.Append("정원사 ").Append(canSpawnGuardnerCount).Append("/").Append(maxGuardnerCount);
         guardnerSpawnCount.text = sb.ToString();
     }
     public void UpdateGuardnerCount()

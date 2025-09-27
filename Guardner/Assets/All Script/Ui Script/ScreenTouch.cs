@@ -60,7 +60,6 @@ public class ScreenTouch : MonoBehaviour
         }
 
         Collider2D[] hits = Physics2D.OverlapPointAll(worldPosition);
-        Debug.Log($"터치 위치: {worldPosition}, 감지된 콜라이더 수: {hits.Length}");
 
         foreach (var hit in hits)
         {
