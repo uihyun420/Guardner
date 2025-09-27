@@ -17,6 +17,7 @@ public class StageClearUi : GenericWindow
     [SerializeField] private MainMenuUi mainMenuUi;
     [SerializeField] private TextMeshProUGUI stageRewardText;
     [SerializeField] private TextMeshProUGUI stageText;
+    [SerializeField] private GameObject spawnRect;
 
 
     private bool rewardGiven = false;
@@ -32,6 +33,7 @@ public class StageClearUi : GenericWindow
     {
         base.Open();
 
+        spawnRect.SetActive(false);
         // UI가 열릴 때 참조 가져오기
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>();
@@ -52,6 +54,8 @@ public class StageClearUi : GenericWindow
     public override void Close()
     {
         base.Close();
+        spawnRect.SetActive(true);
+
     }
 
     public void OnNextStageButton()
@@ -231,7 +235,7 @@ public class StageClearUi : GenericWindow
 
         // UI 텍스트 업데이트
         var sb = new StringBuilder();
-        sb.Append("스테이지 기본보상 : ").Append(totalReward).Append(" G");
+        sb.Append(totalReward).Append(" G");
         if(bonusReward > 0)
         {
             sb.Append("\n보너스 보상 : ").Append(bonusReward).Append(" G");
@@ -248,7 +252,7 @@ public class StageClearUi : GenericWindow
     {
         var sb = new StringBuilder();
         sb.Clear();
-        sb.Append("스테이지 LEVEL ").Append(stageManager.stageData.Stage);
+        sb.Append("STAGE LEVEL ").Append(stageManager.stageData.Stage);
         stageText.text = sb.ToString();
     }
 }
