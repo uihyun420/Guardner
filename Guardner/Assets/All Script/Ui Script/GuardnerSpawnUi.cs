@@ -90,10 +90,6 @@ public class GuardnerSpawnUi : GenericWindow
         }
     }
 
-
-
-
-
     public override void Close()
     {
         // ScreenTouch 다시 활성화

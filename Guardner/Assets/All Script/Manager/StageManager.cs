@@ -73,6 +73,17 @@ public class StageManager : MonoBehaviour
 
         Debug.Log($"스테이지 {stage} 시작! 총 {totalWaveCount}개의 웨이브");
         StartCoroutine(CoSpawnWaveMonster());
+
+        int bossMonsterId = 0;
+        if (stage == 5) bossMonsterId = 4222300;
+        else if (stage == 10) bossMonsterId = 4222500;
+        else if (stage == 15) bossMonsterId = 4222400;
+
+        if (bossMonsterId != 0)
+        {
+            Vector2 bossSpawnPos = new Vector2(-3, 4); // 원하는 위치로 조정
+            StartCoroutine(CoSpawnBossMonster(bossMonsterId, bossSpawnPos, 10));
+        }
     }
 
 
@@ -150,5 +161,17 @@ public class StageManager : MonoBehaviour
             monsterSpawner.StopAllCoroutines();
         }
         isStageCompleted = true;
+    }
+
+    private IEnumerator CoSpawnBossMonster(int bossMonsterId, Vector2 spawnPos, int sortingOrder)
+    {
+        yield return new WaitForSeconds(60f); // 1분 대기
+
+        if (!isStageCompleted)
+        {
+            monsterSpawner.SpawnMonster(bossMonsterId, spawnPos, sortingOrder);
+            enemiesRemaining++;
+            Debug.Log($"보스 몬스터 {bossMonsterId} 스폰됨");
+        }
     }
 }
