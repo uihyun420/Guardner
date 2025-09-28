@@ -117,4 +117,47 @@ public class SaveLoadManager
         Data.Gold += amount;
         Save(); // 자동 저장
     }
+
+
+
+
+
+    // 가드너의 실제 능력치 조회 (저장된 강화 정보 반영)
+    public static GuardnerSaveData GetGuardnerStats(string guardnerId)
+    {
+        var savedData = Data.GetGuardnerEnhance(guardnerId);
+        if (savedData != null)
+        {
+            return savedData;
+        }
+
+        // 저장된 데이터가 없다면 기본 레벨 1 데이터 반환
+        var baseData = DataTableManager.GuardnerEnhanceTable.Get(int.Parse(guardnerId), 1);
+        if (baseData != null)
+        {
+            return new GuardnerSaveData
+            {
+                Level = 1,
+                AttackPower = baseData.AttackPower,
+                Health = baseData.GateHP,
+                AttackSpeed = baseData.APS,
+                MovementSpeed = 1.0f
+            };
+        }
+
+        return null;
+    }
+
+    // 가드너의 현재 레벨 조회
+    public static int GetGuardnerLevel(string guardnerId)
+    {
+        var savedData = Data.GetGuardnerEnhance(guardnerId);
+        return savedData?.Level ?? 1; // 저장된 데이터가 없으면 레벨 1
+    }
+
+    // 가드너가 언락되었는지 확인
+    public static bool IsGuardnerUnlocked(string guardnerId)
+    {
+        return Data.IsGuardnerUnlocked(guardnerId);
+    }
 }

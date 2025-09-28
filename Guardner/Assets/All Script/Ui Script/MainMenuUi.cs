@@ -19,7 +19,11 @@ public class MainMenuUi : GenericWindow
     [SerializeField] private GameObject tilemap;
     [SerializeField] private GameObject spawnRect;
 
-    public int mainUiGold = 0;
+    public int mainUiGold
+    {
+        get => SaveLoadManager.Data.Gold;
+        set => SaveLoadManager.Data.Gold = value;
+    }
 
     private WindowManager windowManager;
 
@@ -28,6 +32,8 @@ public class MainMenuUi : GenericWindow
         battleStartButton.onClick.AddListener(OnBattleStartButton);
         DictionaryButton.onClick.AddListener(OnClickDictionaryButton);
         EnhanceButton.onClick.AddListener(OnClickEnhanceButton);
+
+        SetMainUiGoldText();
     }
     private void Update()
     {
@@ -39,6 +45,8 @@ public class MainMenuUi : GenericWindow
         base.Open();
         tilemap.SetActive(false);
         spawnRect.SetActive(false);
+
+        SetMainUiGoldText();
     }
 
     public override void Close()

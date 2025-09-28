@@ -39,6 +39,28 @@ public class GuardnerSpawner : MonoBehaviour
         {
             GameObject guardner = Instantiate(prefabInfo.prefab, spawnPos, Quaternion.identity);
             var behavior = guardner.GetComponent<GuardnerBehavior>();
+
+            // 강화된 가드너 정보 적용
+            var enhancedStats = SaveLoadManager.GetGuardnerStats(guardnerId.ToString());
+            if (enhancedStats != null)
+            {
+                // 기본 데이터 초기화
+                behavior.Init(guardnerData);
+
+                // 강화된 능력치로 덮어쓰기
+                behavior.attackPower = enhancedStats.AttackPower;
+                behavior.aps = enhancedStats.AttackSpeed;
+                // behavior.health = enhancedStats.Health; // GuardnerBehavior에 Health 프로퍼티가 있다면
+
+                Debug.Log($"강화된 가드너 소환! Lv.{enhancedStats.Level} - 공격력: {enhancedStats.AttackPower}, 공격속도: {enhancedStats.AttackSpeed}");
+            }
+            else
+            {
+                // 기본 데이터로 초기화
+                behavior.Init(guardnerData);
+            }
+
+
             behavior.Init(guardnerData);
             spawnedGuardners.Add(behavior);
             Debug.Log($"소환된 가드너 이름: {behavior.name}, 아이디 {behavior.id}, 공격력 {behavior.attackPower}, 공격범위 {behavior.attackRange}, 공격속도 {behavior.aps}");

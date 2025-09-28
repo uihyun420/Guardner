@@ -13,9 +13,6 @@ public class GuardnerEnhanceResultUi : GenericWindow
     [SerializeField] private Button exitButton;
     [SerializeField] private Image guardnerImage; // Inspector에서 연결
 
-    //[SerializeField] private TextMeshProUGUI 
-    //[SerializeField] private TextMeshProUGUI enhanceButtonText;
-
     [SerializeField] private MainMenuUi mainMenuUi; // Inspector에서 연결
 
     private int currentGuardnerId;
@@ -43,10 +40,20 @@ public class GuardnerEnhanceResultUi : GenericWindow
         var sb = new StringBuilder();
 
         this.currentGuardnerId = guardnerId;
-        this.currentLevel = currentLevel;
 
-        var currentData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, currentLevel);
-        var nextData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, currentLevel + 1);
+        // 저장된 가드너 레벨 확인 (저장된 데이터가 있다면 사용)
+        var savedData = SaveLoadManager.Data.GetGuardnerEnhance(guardnerId.ToString());
+        if (savedData != null)
+        {
+            this.currentLevel = savedData.Level;
+        }
+        else
+        {
+            this.currentLevel = currentLevel;
+        }
+
+        var currentData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, this.currentLevel);
+        var nextData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, this.currentLevel + 1);
 
         var sprite = Resources.Load<Sprite>($"GuardnerIcons/{guardnerId}");
         if (guardnerImage != null)
@@ -61,6 +68,7 @@ public class GuardnerEnhanceResultUi : GenericWindow
             enhanceButton.interactable = false;
             return;
         }
+
         sb.Clear();
         sb.Append(currentData.Name);
         nameText.text = sb.ToString();
@@ -78,18 +86,19 @@ public class GuardnerEnhanceResultUi : GenericWindow
               .Append("DPS : ").Append(nextData.DPS);
             enhancedStatus.text = sb.ToString();
             enhanceButton.interactable = true;
+
+            sb.Clear();
+            sb.Append("공격력 : ").Append(currentData.AttackPower).Append("+").Append(nextData.AttackPower - currentData.AttackPower);
+            attackText.text = sb.ToString();
         }
         else
         {
             enhancedStatus.text = "최대 레벨";
             enhanceButton.interactable = false;
+            attackText.text = $"공격력 : {currentData.AttackPower} (최대)";
         }
-
-        sb.Clear();
-        sb.Append("공격력 : ").Append(currentData.AttackPower).Append("+").Append(nextData.AttackPower - currentData.AttackPower);
-        attackText.text = sb.ToString();    
-
     }
+
     private void OnClickEnhanceButton()
     {
         var nextData = DataTableManager.GuardnerEnhanceTable.Get(currentGuardnerId, currentLevel + 1);
@@ -103,10 +112,9 @@ public class GuardnerEnhanceResultUi : GenericWindow
         }
 
         // 2. 골드 확인
-        if (mainMenuUi.mainUiGold < nextData.NeedGold)
+        if (SaveLoadManager.Data.Gold < nextData.NeedGold)
         {
-            Debug.Log($"골드 부족! 필요: {nextData.NeedGold}, 보유: {mainMenuUi.mainUiGold}");
-            // 필요시 경고 UI 표시
+            Debug.Log($"골드 부족! 필요: {nextData.NeedGold}, 보유: {SaveLoadManager.Data.Gold}");
             return;
         }
 
@@ -118,25 +126,42 @@ public class GuardnerEnhanceResultUi : GenericWindow
         // }
 
         // 4. 재화 차감
-        mainMenuUi.mainUiGold -= nextData.NeedGold;
+        SaveLoadManager.Data.Gold -= nextData.NeedGold;
         // UseItem(nextData.NeedItemId, nextData.NeedItemQty); // 아이템 시스템 구현 시 사용
 
-        // 5. 강화 레벨 증가 (실제 데이터 저장 필요)
-        // PlayerData.SetGuardnerLevel(currentGuardnerId, currentLevel + 1);
+        // 5. 강화된 가드너 데이터 생성 및 저장
+        var enhancedGuardner = new GuardnerSaveData
+        {
+            Level = nextData.Level,
+            AttackPower = nextData.AttackPower,
+            Health = nextData.GateHP, // GateHP를 Health로 사용
+            AttackSpeed = nextData.APS,
+            MovementSpeed = 1.0f, // 기본값 (테이블에 MovementSpeed가 없다면)
+        };
+
+        // 가드너 강화 정보 저장
+        SaveLoadManager.SaveGuardnerEnhance(currentGuardnerId.ToString(), enhancedGuardner);
+
+        // 가드너 언락 (처음 강화시)
+        SaveLoadManager.UnlockGuardner(currentGuardnerId.ToString());
 
         // 6. UI 갱신
-        SetEnhanceData(currentGuardnerId, currentLevel + 1);
+        currentLevel = nextData.Level;
+        SetEnhanceData(currentGuardnerId, currentLevel);
 
-        Debug.Log($"{nextData.Name} 강화 성공! Lv.{currentLevel} → Lv.{currentLevel + 1}");
+        // 메인 UI의 골드 갱신
+        if (mainMenuUi != null)
+        {
+            mainMenuUi.mainUiGold = SaveLoadManager.Data.Gold;
+        }
+
+        Debug.Log($"{nextData.Name} 강화 성공! Lv.{currentLevel - 1} → Lv.{currentLevel}");
 
         // 7. 필요시 강화 성공 이펙트, 사운드 등 추가
-
     }
 
     private void OnClickExitButton()
     {
         Close();
     }
-
-
 }
