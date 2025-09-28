@@ -18,7 +18,7 @@ public class StageClearUi : GenericWindow
     [SerializeField] private TextMeshProUGUI stageRewardText;
     [SerializeField] private TextMeshProUGUI stageText;
     [SerializeField] private GameObject spawnRect;
-
+    [SerializeField] private InventoryUi inventoryUi;
 
     private bool rewardGiven = false;
     private int lastRewardedStage = -1; // 보상을 지급한 마지막 스테이지 
@@ -223,14 +223,16 @@ public class StageClearUi : GenericWindow
         // 뽑기권 지급 (나중에 구현할 메서드들)
         if (gardenerTickets > 0)
         {
-            // TODO: 가드너 뽑기권 지급 로직 추가
-            Debug.Log($"스테이지 {currentStage} 클리어 보상: {gardenerTickets} 가드너 뽑기권 지급");
+            Debug.Log($"[StageClearUi] 가드너 뽑기권 지급 시도: {gardenerTickets}개");
+            Debug.Log($"[StageClearUi] inventoryUi 상태: {(inventoryUi != null ? "연결됨" : "NULL")}");
+            inventoryUi?.AddItem("LotteryTicket", gardenerTickets); // 가드너 뽑기권 인벤토리에 저장
         }
 
         if (playerSkillTickets > 0)
         {
-            // TODO: 플레이어 스킬 뽑기권 지급 로직 추가
-            Debug.Log($"스테이지 {currentStage} 클리어 보상: {playerSkillTickets} 플레이어 스킬 뽑기권 지급");
+            Debug.Log($"[StageClearUi] 플레이어 스킬 뽑기권 지급 시도: {playerSkillTickets}개");
+            Debug.Log($"[StageClearUi] inventoryUi 상태: {(inventoryUi != null ? "연결됨" : "NULL")}");
+            inventoryUi?.AddItem("EnhanceTicket", playerSkillTickets); // 플레이어 스킬 뽑기권 인벤토리에 저장
         }
 
         // UI 텍스트 업데이트
