@@ -14,7 +14,6 @@ public class GuardnerSpawnUi : GenericWindow
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
 
-
     private void Awake()
     {
         isOverlayWindow = true;
@@ -38,6 +37,7 @@ public class GuardnerSpawnUi : GenericWindow
         if (scrollRect != null)
             scrollRect.horizontal = false;
 
+        // 강화 정보가 갱신될 수 있으므로 매번 새로 표시
         DisplayAvailableGuardner();
     }
 

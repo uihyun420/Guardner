@@ -141,7 +141,6 @@ public class SaveLoadManager
                 AttackPower = baseData.AttackPower,
                 Health = baseData.GateHP,
                 AttackSpeed = baseData.APS,
-                MovementSpeed = 1.0f
             };
         }
 

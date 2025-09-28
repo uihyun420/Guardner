@@ -22,15 +22,27 @@ public class GuardnerItemUi : MonoBehaviour
 
         if (infoText != null)
         {
-            infoText.text = $"{data.Name}\n공격력: {data.AttackPower}\n골드: {data.SummonGold}";
+            // 강화된 가드너 정보 확인
+            var enhancedData = SaveLoadManager.GetGuardnerStats(data.Id.ToString());
+
+            if (enhancedData != null)
+            {
+                // 강화된 데이터가 있으면 강화된 수치 표시
+                infoText.text = $"{data.Name} Lv.{enhancedData.Level}\n공격력: {enhancedData.AttackPower} (+{enhancedData.AttackPower - data.AttackPower})\n골드: {data.SummonGold}";
+            }
+            else
+            {
+                // 기본 데이터 표시
+                infoText.text = $"{data.Name}\n공격력: {data.AttackPower}\n골드: {data.SummonGold}";
+            }
         }
 
-        if(guardnerImage != null)
+        if (guardnerImage != null)
         {
             string imagePath = $"GuardnerIcons/guardner_{data.GuardenerDrawId}";
             var sprite = Resources.Load<Sprite>(imagePath);
 
-            if(sprite != null)
+            if (sprite != null)
             {
                 guardnerImage.sprite = sprite;
                 guardnerImage.gameObject.SetActive(true);
