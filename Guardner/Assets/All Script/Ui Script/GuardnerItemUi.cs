@@ -11,6 +11,10 @@ public class GuardnerItemUi : MonoBehaviour
     public Image guardnerImage; // 스킬 아이콘 이미지
     public Button selectButton;
 
+
+    [SerializeField] private TextMeshProUGUI guardnerSpwawnDiscriptText;
+    [SerializeField] private TextMeshProUGUI nameText;
+
     [SerializeField] private TextMeshProUGUI dictionaryName;
     [SerializeField] private TextMeshProUGUI dictionaryDiscription;
 
@@ -20,39 +24,53 @@ public class GuardnerItemUi : MonoBehaviour
     {
         guardnerId = data.Id;
 
-        if (infoText != null)
-        {
-            // 강화된 가드너 정보 확인
-            var enhancedData = SaveLoadManager.GetGuardnerStats(data.Id.ToString());
+        // 1. 이름 표시
+        if (nameText != null)
+            nameText.text = data.Name;
 
-            if (enhancedData != null)
-            {
-                // 강화된 데이터가 있으면 강화된 수치 표시
-                infoText.text = $"{data.Name} Lv.{enhancedData.Level}\n공격력: {enhancedData.AttackPower} (+{enhancedData.AttackPower - data.AttackPower})\n골드: {data.SummonGold}";
-            }
-            else
-            {
-                // 기본 데이터 표시
-                infoText.text = $"{data.Name}\n공격력: {data.AttackPower}\n골드: {data.SummonGold}";
-            }
+        // 2. 강화 정보 가져오기
+        var enhancedData = SaveLoadManager.GetGuardnerStats(data.Id.ToString());
+        int attackPower = enhancedData?.AttackPower ?? data.AttackPower;
+
+        // 3. 스킬명 가져오기 (SkillID가 0이 아니면)
+        string skillName = "-";
+        if (data.SkillID != 0)
+        {
+            // 예시: DataTableManager.SkillTable.Get(data.SkillID).Name
+            // 실제 프로젝트의 스킬 테이블 구조에 맞게 수정
+            var skillData = DataTableManager.GuardnerSkillTable.Get(data.SkillID);
+            if (skillData != null)
+                skillName = skillData.Name;
         }
 
+        // 4. 설명 텍스트 구성
+        if (guardnerSpwawnDiscriptText != null)
+        {
+            guardnerSpwawnDiscriptText.text =
+                $"공격력: {attackPower}\n" +
+                $"스킬: {skillName}\n" +
+                $"소환 골드: {data.SummonGold}";
+        }
+
+        // 5. 기존 infoText도 강화 정보 반영(원한다면)
+        if (infoText != null)
+        {
+            if (enhancedData != null)
+                infoText.text = $"{data.Name} Lv.{enhancedData.Level}\n공격력: {attackPower} (+{attackPower - data.AttackPower})\n골드: {data.SummonGold}";
+            else
+                infoText.text = $"{data.Name}\n공격력: {data.AttackPower}\n골드: {data.SummonGold}";
+        }
+
+        // 6. 이미지
         if (guardnerImage != null)
         {
             string imagePath = $"GuardnerIcons/guardner_{data.GuardenerDrawId}";
             var sprite = Resources.Load<Sprite>(imagePath);
-
-            if (sprite != null)
-            {
-                guardnerImage.sprite = sprite;
-                guardnerImage.gameObject.SetActive(true);
-            }
-            else
-            {
-                guardnerImage.gameObject.SetActive(false);
-            }
+            guardnerImage.sprite = sprite;
+            guardnerImage.gameObject.SetActive(sprite != null);
         }
 
+        // 7. 버튼
         if (selectButton != null)
         {
             selectButton.onClick.RemoveAllListeners();

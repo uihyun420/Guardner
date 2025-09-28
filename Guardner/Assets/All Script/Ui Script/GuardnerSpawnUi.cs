@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GuardnerSpawnUi : GenericWindow
 {
@@ -8,8 +10,12 @@ public class GuardnerSpawnUi : GenericWindow
     public GameObject guardnerItemPrefab; // 가드너 아이템 ui 프리팹 
     public Transform contentParent; // 스크롤랙트의 content
 
+    [SerializeField] private GameObject blockScreenPanel;
     [SerializeField] private GuardnerSpawner guardnerSpawner; // inspector에서 연결
     [SerializeField] private BattleUi battleUi;
+    [SerializeField] private Button ExitButton;
+    [SerializeField] private ScreenTouch screenTouch; // ScreenTouch 참조 추가
+
 
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
@@ -17,6 +23,7 @@ public class GuardnerSpawnUi : GenericWindow
     private void Awake()
     {
         isOverlayWindow = true;
+        ExitButton.onClick.AddListener(OnClickExitButton);
     }
 
     public override void Open()
@@ -34,16 +41,69 @@ public class GuardnerSpawnUi : GenericWindow
 
         base.Open();
 
-        if (scrollRect != null)
-            scrollRect.horizontal = false;
+        // ScreenTouch를 완전히 비활성화
+        if (screenTouch != null)
+        {
+            screenTouch.enabled = false; // 컴포넌트 자체를 비활성화
+        }
 
         // 강화 정보가 갱신될 수 있으므로 매번 새로 표시
         DisplayAvailableGuardner();
+
+        // ScrollRect 설정을 DisplayAvailableGuardner 후에 실행 (PlayerSkillSetUi와 동일하게)
+        if (scrollRect != null)
+        {
+            scrollRect.horizontal = false;
+            scrollRect.vertical = true;
+            scrollRect.enabled = true;
+            scrollRect.gameObject.SetActive(true);
+        }
+
+        // 지연 후 ScrollRect 초기화 (PlayerSkillSetUi와 동일한 코루틴 사용)
+        StartCoroutine(InitializeScrollRect());
     }
+
+
+    private IEnumerator InitializeScrollRect()
+    {
+        // 2프레임 대기 (UI가 완전히 생성될 때까지)
+        yield return null;
+        yield return null;
+
+        if (scrollRect != null)
+        {
+            // Canvas 강제 업데이트
+            Canvas.ForceUpdateCanvases();
+
+            // ScrollRect 재설정
+            scrollRect.enabled = false;
+            yield return null;
+            scrollRect.enabled = true;
+
+            // 스크롤 위치를 맨 위로 초기화
+            scrollRect.verticalNormalizedPosition = 1f;
+
+            // EventSystem 클리어 후 다시 설정
+            EventSystem.current.SetSelectedGameObject(null);
+            yield return null;
+            EventSystem.current.SetSelectedGameObject(scrollRect.gameObject);
+        }
+    }
+
+
+
+
 
     public override void Close()
     {
+        // ScreenTouch 다시 활성화
+        if (screenTouch != null)
+        {
+            screenTouch.enabled = true;
+        }
+
         base.Close();
+
     }
 
     private void DisplayAvailableGuardner()
@@ -108,6 +168,11 @@ public class GuardnerSpawnUi : GenericWindow
             guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos);
             battleUi.UpdateGuardnerCount();
         }
+        Close();
+    }
+
+    private void OnClickExitButton()
+    {
         Close();
     }
 }
