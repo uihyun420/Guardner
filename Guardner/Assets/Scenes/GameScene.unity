@@ -8056,6 +8056,7 @@ MonoBehaviour:
   - {fileID: 551174785}
   - {fileID: 1327775666}
   - {fileID: 1964932189}
+  - {fileID: 1597684921}
   defaultWindow: 5
 --- !u!1001 &989204629
 PrefabInstance:
@@ -18293,6 +18294,14 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 294309889630999822, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 294309889630999822, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 294309889641486920, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -18555,7 +18564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 294309890808846281, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
       propertyPath: m_Name
-      value: Reward_Roadmap
+      value: StageChoiceUi
       objectReference: {fileID: 0}
     - target: {fileID: 294309890808846294, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
       propertyPath: m_Pivot.x
@@ -18880,6 +18889,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 294309890808846281, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1597684920}
+    - targetCorrespondingSourceObject: {fileID: 294309890808846281, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1597684921}
     - targetCorrespondingSourceObject: {fileID: 294309889969053554, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1970417857}
@@ -18906,6 +18918,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0045da38fd6ba0941864dffb1e94b603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1597684921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597684919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1354ecf42322e744b9d1c26458d8560d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 1597684919}
+  isOverlayWindow: 0
+  exitButton: {fileID: 1970417857}
 --- !u!114 &1600214967 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8866255386916920349, guid: c10e909b2375c7243879e22a2d139ad6, type: 3}
