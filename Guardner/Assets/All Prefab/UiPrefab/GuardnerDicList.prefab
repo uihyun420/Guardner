@@ -426,8 +426,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -160, y: 63}
-  m_SizeDelta: {x: 223.16, y: 70.509705}
+  m_AnchoredPosition: {x: -125, y: 51.627}
+  m_SizeDelta: {x: 242, y: 93.255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1807410904090298391
 CanvasRenderer:
@@ -484,10 +484,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 48
   m_fontStyle: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -3.5867538, w: 1.7933807}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -584,6 +584,8 @@ MonoBehaviour:
   infoText: {fileID: 0}
   guardnerImage: {fileID: 64812556762119322}
   selectButton: {fileID: 0}
+  guardnerSpwawnDiscriptText: {fileID: 0}
+  nameText: {fileID: 0}
   dictionaryName: {fileID: 7337087199662644909}
   dictionaryDiscription: {fileID: 0}
 --- !u!1 &6007890973479257021

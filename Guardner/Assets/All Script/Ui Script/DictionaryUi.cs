@@ -50,7 +50,6 @@ public class DictionaryUi : GenericWindow
         ownedGuardnerIds.Add(11310);   
         ownedGuardnerIds.Add(11315);
         ownedGuardnerIds.Add(11320);
-
     }
 
     private void DisPlayerOwnedGuardner()
