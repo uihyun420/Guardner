@@ -18813,6 +18813,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4494565629931845594, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494565629931845594, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6188162323525273831, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
