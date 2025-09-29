@@ -17,6 +17,8 @@ public class GuardnerEnhanceUi : GenericWindow
     [SerializeField] private Button skillGatchButton;
     [SerializeField] private GatchaUi gatchaUi;
 
+    [SerializeField] private InventoryUi inventoryUi;
+
     // 현재 강화 레벨 정보 (예시: 실제로는 세이브 데이터 등에서 불러와야 함)
     private Dictionary<int, int> guardnerLevelDict = new Dictionary<int, int>();
 
@@ -98,16 +100,6 @@ public class GuardnerEnhanceUi : GenericWindow
     private void OnEnhanceButton(int guardnerId)
     {
         int level = GetCurrentLevel(guardnerId);
-        //var nextData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, level + 1);
-        //if (nextData != null)
-        //{
-        //    guardnerLevelDict[guardnerId] = level + 1;
-        //    ResetList();
-        //}
-        //else
-        //{
-        //    Debug.Log("최대 레벨입니다.");
-        //}
 
         guardnerEnhanceResultUi.SetEnhanceData(guardnerId, level);
         guardnerEnhanceResultUi.Open();
@@ -120,6 +112,35 @@ public class GuardnerEnhanceUi : GenericWindow
 
     private void OnClickGuardnerGatchButton()
     {
+        // 뽑기권 개수 확인
+        Debug.Log("[Gatcha] UseItem 호출 전 LotteryTicket 개수: " + inventoryUi.GetItemCount("LotteryTicket"));
+
+        bool result = inventoryUi.UseItem("LotteryTicket", 1);
+
+        Debug.Log("[Gatcha] UseItem 결과: " + result);
+        Debug.Log("[Gatcha] UseItem 호출 후 LotteryTicket 개수: " + inventoryUi.GetItemCount("LotteryTicket"));
+
+
+
+        if (inventoryUi != null && inventoryUi.UseItem("LotteryTicket", 1))
+        {
+            var allIds = new List<int>(GetAllGuardnerIds());
+            int randomIdx = Random.Range(0, allIds.Count);
+            int guardnerId = allIds[randomIdx];
+            int level = 1;
+
+            var enhanceData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, level);
+            if(gatchaUi != null && enhanceData != null)
+            {
+                gatchaUi.SetGuardnerInfo(enhanceData, GetGuardnerSprite(guardnerId));
+                gatchaUi.Open();
+            }
+        }
+        else
+        {
+            Debug.Log("뽑기권이 부족합니다.");
+        }
+
         gatchaUi.Open();
     }
 

@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 public class InventoryUi : GenericWindow
 {
@@ -51,9 +52,16 @@ public class InventoryUi : GenericWindow
                     itemCounts[item.Key] = item.Value;
                 }
             }
-        }
+            if (SaveLoadManager.Data != null)
+            {
+                if (saveData != null && saveData.inventoryItems != null)
+                {
+                    Debug.Log("[InventoryUi] 세이브 데이터: " +
+                        string.Join(", ", saveData.inventoryItems.Select(kv => $"{kv.Key}:{kv.Value}")));
+                }
+            }
 
-        Debug.Log($"[InventoryUi] 인벤토리 데이터 로드됨: {itemCounts.Count}개 아이템");
+        }
     }
 
     // 아이템 추가/갱신 메서드
@@ -74,6 +82,8 @@ public class InventoryUi : GenericWindow
     // 아이템 사용 메서드
     public bool UseItem(string itemType, int count)
     {
+        Debug.Log($"[InventoryUi] UseItem 호출: {itemType}, 요청 수량: {count}, 현재 수량: {GetItemCount(itemType)}");
+
         if (itemCounts.ContainsKey(itemType) && itemCounts[itemType] >= count)
         {
             itemCounts[itemType] -= count;

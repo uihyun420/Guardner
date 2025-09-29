@@ -9,7 +9,8 @@ public class GatchaUi : GenericWindow
     [SerializeField] private TextMeshProUGUI guardnerDicriptText;
     [SerializeField] private TextMeshProUGUI attackText;
     [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private Button exitButton;   
+    [SerializeField] private Image image;
+    [SerializeField] private Button exitButton;
 
 
     private void Awake()
@@ -33,6 +34,15 @@ public class GatchaUi : GenericWindow
         Close();
     }
 
+    public void SetGuardnerInfo(GuardnerEnhanceData data, Sprite sprite)
+    {
+        nameText.text = data.Name;
+        guardnerDicriptText.text = $"공격력 : {data.AttackPower}\n" +
+            $"공격속도 : {data.APS}\n" +
+            $"레벨 : {data.Level}";
 
+        attackText.text = $"{data.AttackPower}";
+        levelText.text = $"{data.Level}";
+    }
 
 }
