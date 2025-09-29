@@ -11,7 +11,11 @@ public class GuardnerEnhanceUi : GenericWindow
     [SerializeField] private Button BackButton;
     [SerializeField] private Button guardnerButton;
 
-    [SerializeField] private GuardnerEnhanceResultUi guardnerEnhanceResultUi;   
+    [SerializeField] private GuardnerEnhanceResultUi guardnerEnhanceResultUi;
+
+    [SerializeField] private Button guardnerGatchButton;
+    [SerializeField] private Button skillGatchButton;
+    [SerializeField] private GatchaUi gatchaUi;
 
     // 현재 강화 레벨 정보 (예시: 실제로는 세이브 데이터 등에서 불러와야 함)
     private Dictionary<int, int> guardnerLevelDict = new Dictionary<int, int>();
@@ -24,6 +28,7 @@ public class GuardnerEnhanceUi : GenericWindow
     private void Awake()
     {
         BackButton.onClick.AddListener(OnClickBackButton);
+        guardnerGatchButton.onClick.AddListener(OnClickGuardnerGatchButton);
     }
     public override void Open()
     {
@@ -113,5 +118,9 @@ public class GuardnerEnhanceUi : GenericWindow
         Close();
     }
 
+    private void OnClickGuardnerGatchButton()
+    {
+        gatchaUi.Open();
+    }
 
 }

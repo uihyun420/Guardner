@@ -7,7 +7,8 @@ public abstract class SaveData
 {
     public int Version { get; protected set; }
     public int CurrentStage { get; set; }
-    public bool IsStageCleared { get; set; }
+    public bool IsStageCleared { get; set; }   
+
     public abstract SaveData VersionUp();
 }
 
@@ -19,7 +20,7 @@ public class SaveDataV1 : SaveData
     public int StageProgress { get; set; } = 0;
     public Dictionary<string, GuardnerSaveData> GuardnerEnhances { get; set; } = new Dictionary<string, GuardnerSaveData>();
     public List<string> UnlockedGuardners { get; set; } = new List<string>();
-
+    public Dictionary<string, int> inventoryItems { get; set; } = new Dictionary<string, int>();
     public SaveDataV1()
     {
         Version = 1;
@@ -61,6 +62,37 @@ public class SaveDataV1 : SaveData
     {
         return UnlockedGuardners.Contains(guardnerId);
     }
+
+    public void AddInventoryItem(string itemType, int count)
+    {
+        if(inventoryItems.ContainsKey(itemType))
+        {
+            inventoryItems[itemType] += count;
+        }
+        else
+        {
+            inventoryItems[itemType] = count;
+        }
+    }
+
+    public bool UseInventoryItem(string itemType, int count)
+    {
+        if (inventoryItems.ContainsKey(itemType) && inventoryItems[itemType] >= count)
+        {
+            inventoryItems[itemType] -= count;
+            if (inventoryItems[itemType] <= 0)
+                inventoryItems.Remove(itemType);
+            return true;
+        }
+        return false;
+    }
+
+    public int GetInventoryItemCount(string itemType)
+    {
+        return inventoryItems.ContainsKey(itemType) ? inventoryItems[itemType] : 0;
+    }
+
+
 }
 
 [Serializable]
