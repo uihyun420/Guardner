@@ -189,13 +189,14 @@ public class GuardnerBehavior : MonoBehaviour
 
         // 일반 공격
         Monster.Ondamage(attackPower);
+        Debug.Log($"[가드너 공격] 이름: {name}, ID: {id}, 공격력: {attackPower}, 공격속도: {aps}");
 
         // 크리티컬 버프가 있으면 추가 데미지 체크
         if (hasCriticalBuff && Random.value < buffCriticalChance)
         {
             int criticalDamage = Mathf.RoundToInt(attackPower * buffCriticalDamage);
             Monster.Ondamage(criticalDamage);
-            Debug.Log($"크리티컬! 추가 데미지: {criticalDamage}");
+            Debug.Log($"크리티컬! 추가 데미지: {criticalDamage}");            
         }
     }
 

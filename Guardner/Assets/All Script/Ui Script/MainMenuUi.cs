@@ -62,7 +62,8 @@ public class MainMenuUi : GenericWindow
     private void OnBattleStartButton()
     {
         Close();
-        gameManager.StartGameStage(1630);
+        int startingStageId = SaveLoadManager.GetStartingStageId();
+        gameManager.StartGameStage(startingStageId);
 
         if (windowManager != null)
         {

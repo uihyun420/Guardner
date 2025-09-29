@@ -45,6 +45,7 @@ public class StageClearUi : GenericWindow
         if (!rewardGiven && lastRewardedStage != currentStage)
         {
             GiveStageReward();
+            SaveStageCompletion(currentStage);
             rewardGiven = true;
             lastRewardedStage = currentStage;
         }
@@ -217,21 +218,18 @@ public class StageClearUi : GenericWindow
         if (mainMenuUi != null && totalReward > 0)
         {
             mainMenuUi.AddMainUiGold(totalReward + bonusReward);
+            SaveLoadManager.AddGold(totalReward + bonusReward);
             Debug.Log($"스테이지 {currentStage} 클리어 보상: {totalReward} 골드 지급");
         }
 
-        // 뽑기권 지급 (나중에 구현할 메서드들)
+
         if (gardenerTickets > 0)
-        {
-            Debug.Log($"[StageClearUi] 가드너 뽑기권 지급 시도: {gardenerTickets}개");
-            Debug.Log($"[StageClearUi] inventoryUi 상태: {(inventoryUi != null ? "연결됨" : "NULL")}");
+        {           
             inventoryUi?.AddItem("LotteryTicket", gardenerTickets); // 가드너 뽑기권 인벤토리에 저장
         }
 
         if (playerSkillTickets > 0)
         {
-            Debug.Log($"[StageClearUi] 플레이어 스킬 뽑기권 지급 시도: {playerSkillTickets}개");
-            Debug.Log($"[StageClearUi] inventoryUi 상태: {(inventoryUi != null ? "연결됨" : "NULL")}");
             inventoryUi?.AddItem("EnhanceTicket", playerSkillTickets); // 플레이어 스킬 뽑기권 인벤토리에 저장
         }
 
@@ -257,4 +255,17 @@ public class StageClearUi : GenericWindow
         sb.Append("STAGE LEVEL ").Append(stageManager.stageData.Stage);
         stageText.text = sb.ToString();
     }
+
+    private void SaveStageCompletion(int clearStage)
+    {
+        SaveLoadManager.Data.CurrentStage = clearStage;
+        SaveLoadManager.Data.IsStageCleared = true;
+
+        SaveLoadManager.UpdateStageProgress(clearStage + 1);
+        Debug.Log($"스테이지 {clearStage} 완료 정보가 저장되었습니다. 다음 스테이지 {clearStage + 1}이 언락되었습니다.");
+
+    }
+
+
 }
+

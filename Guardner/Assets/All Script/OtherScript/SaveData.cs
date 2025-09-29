@@ -6,6 +6,8 @@ using UnityEngine;
 public abstract class SaveData
 {
     public int Version { get; protected set; }
+    public int CurrentStage { get; set; }
+    public bool IsStageCleared { get; set; }
     public abstract SaveData VersionUp();
 }
 
