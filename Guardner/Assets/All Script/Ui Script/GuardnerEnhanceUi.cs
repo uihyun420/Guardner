@@ -129,6 +129,8 @@ public class GuardnerEnhanceUi : GenericWindow
             int guardnerId = allIds[randomIdx];
             int level = 1;
 
+            //GetGuardner(guardnerId);
+
             var enhanceData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, level);
             if(gatchaUi != null && enhanceData != null)
             {
@@ -143,5 +145,24 @@ public class GuardnerEnhanceUi : GenericWindow
 
         gatchaUi.Open();
     }
+
+    //private void GetGuardner(int guardnerId)
+    //{
+    //    var saveData = SaveLoadManager.Data as SaveDataV1;
+    //    if(saveData != null)
+    //    {
+    //        if(!saveData.ownedGuardnerIds.Contains(guardnerId))
+    //        {
+    //            saveData.ownedGuardnerIds.Add(guardnerId);
+    //            SaveLoadManager.Save();
+    //            Debug.Log($"[GuardnerEnhanceUi] 가드너 {guardnerId} 획득!");
+    //        }
+    //        else
+    //        {
+    //            Debug.Log($"[GuardnerEnhanceUi] 이미 보유한 가드너: {guardnerId}");
+    //        }
+    //    }
+    //}
+
 
 }

@@ -38,14 +38,18 @@ public class DictionaryUi : GenericWindow
     private void InitializeOwnedGuardenr()
     {
         // 나중에는 세이브 데이터에서 로드
-        ownedGuardnerIds.Add(11245);
-        ownedGuardnerIds.Add(11135);
-        ownedGuardnerIds.Add(11255);
         ownedGuardnerIds.Add(11120);
         ownedGuardnerIds.Add(11125);
+        ownedGuardnerIds.Add(11135);
         ownedGuardnerIds.Add(11235);
-        ownedGuardnerIds.Add(11310);
-
+        ownedGuardnerIds.Add(11245);
+        ownedGuardnerIds.Add(11250);
+        ownedGuardnerIds.Add(11255);
+        ownedGuardnerIds.Add(11260);
+        ownedGuardnerIds.Add(11270);
+        ownedGuardnerIds.Add(11310);   
+        ownedGuardnerIds.Add(11315);
+        ownedGuardnerIds.Add(11320);
 
     }
 

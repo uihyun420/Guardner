@@ -16,9 +16,6 @@ public class InventoryUi : GenericWindow
     {
         exitButton.onClick.AddListener(OnClickExitButton);
         LoadInventoryData();
-        //Debug.Log("[InventoryUi] Awake - ½½·Ô ¿¬°á »óÅÂ:");
-        //Debug.Log($"enhanceTicketUi: {(enhanceTicketUi != null ? "¿¬°áµÊ" : "NULL")}");
-        //Debug.Log($"lotteryTicketUi: {(lotteryTicketUi != null ? "¿¬°áµÊ" : "NULL")}");
     }
 
     public override void Open()

@@ -12,6 +12,8 @@ public struct GuardnerPrefabInfo
 
 public class GuardnerSpawner : MonoBehaviour
 {
+    public HashSet<int> ownedGuardnerIds = new HashSet<int>(); // 내가 실제로 가질 정원사 목록
+
     public GuardnerPrefabInfo[] guardnerPrefabs;
     public List<GuardnerBehavior> spawnedGuardners = new List<GuardnerBehavior>();
 
@@ -20,6 +22,29 @@ public class GuardnerSpawner : MonoBehaviour
     public GameObject[] spawnPos;
 
     [SerializeField] private BattleUi battleUi;
+
+
+    //// 가드너 획득 메서드
+    //public bool AcquireGuardner(int guardnerId)
+    //{
+    //    if (ownedGuardnerIds.Add(guardnerId))
+    //    {
+    //        // SaveLoadManager 등 세이브 반영 필요시 추가
+    //        Debug.Log($"[GuardnerSpawner] 가드너 {guardnerId} 획득!");
+    //        return true;
+    //    }
+    //    Debug.Log($"[GuardnerSpawner] 이미 보유한 가드너: {guardnerId}");
+    //    return false;
+    //}
+
+    //// 보유 여부 확인
+    //public bool HasGuardner(int guardnerId)
+    //{
+    //    return ownedGuardnerIds.Contains(guardnerId);
+    //}
+
+
+
 
     public void SpawnGuardner(int guardnerId, Vector2 spawnPos)
     {
