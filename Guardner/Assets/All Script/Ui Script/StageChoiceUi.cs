@@ -91,9 +91,6 @@ public class StageChoiceUi : GenericWindow
             var itemUi = slot.GetComponent<StageChoiceItemUi>();
             // 여기서 OnStageSelected 콜백을 전달해야 함
             itemUi.SetStage(i, state, OnStageSelected);
-
-            Debug.Log($"스테이지 {i}: 상태 = {state}, 클리어된 스테이지 = {clearedStageIndex}, 현재 스테이지 = {currentStageIndex}");
-
         }
     }
 

@@ -15,10 +15,19 @@ public class StageClearUi : GenericWindow
     [SerializeField] private GuardnerSpawner guardnerSpawner;
     [SerializeField] private MonsterSpawner monsterSpawner;
     [SerializeField] private MainMenuUi mainMenuUi;
-    [SerializeField] private TextMeshProUGUI stageRewardText;
+
     [SerializeField] private TextMeshProUGUI stageText;
     [SerializeField] private GameObject spawnRect;
     [SerializeField] private InventoryUi inventoryUi;
+
+    [SerializeField] private TextMeshProUGUI stageRewardText;
+    [SerializeField] private TextMeshProUGUI bonusGoldRewardText;
+    [SerializeField] private TextMeshProUGUI guardnerItemRewardText;
+    [SerializeField] private TextMeshProUGUI skillItemRewardText;
+
+    [SerializeField] private GameObject bonusGold;
+    [SerializeField] private GameObject guardnerItemReward;
+    [SerializeField] private GameObject skillItemReward;
 
     private bool rewardGiven = false;
     private int lastRewardedStage = -1; // 보상을 지급한 마지막 스테이지 
@@ -233,20 +242,67 @@ public class StageClearUi : GenericWindow
             inventoryUi?.AddItem("EnhanceTicket", playerSkillTickets); // 플레이어 스킬 뽑기권 인벤토리에 저장
         }
 
-        // UI 텍스트 업데이트
-        var sb = new StringBuilder();
-        sb.Append(totalReward).Append(" G");
-        if(bonusReward > 0)
+
+
+
+        // UI 표시/숨김 처리
+        if (totalReward > 0)
         {
-            sb.Append("\n보너스 보상 : ").Append(bonusReward).Append(" G");
+            stageRewardText.text = totalReward.ToString();
+            stageRewardText.gameObject.SetActive(true);
         }
+        else
+        {
+            stageRewardText.gameObject.SetActive(false);
+        }
+
+        if (bonusReward > 0)
+        {
+            bonusGoldRewardText.text = bonusReward.ToString();
+            bonusGold.gameObject.SetActive(true);
+        }
+        else
+        {
+            bonusGold.SetActive(false);
+        }
+
         if (gardenerTickets > 0)
-            sb.Append("\n정원사 뽑기권 : ").Append(gardenerTickets).Append("개");
+        {
+            guardnerItemRewardText.text = gardenerTickets.ToString();
+            guardnerItemReward.gameObject.SetActive(true);
+        }
+        else
+        {
+            guardnerItemReward.gameObject.SetActive(false);
+        }
 
         if (playerSkillTickets > 0)
-            sb.Append("가드너 스킬 뽑기권 : ").Append(playerSkillTickets).Append("개");
+        {
+            skillItemRewardText.text = playerSkillTickets.ToString();
+            skillItemReward.gameObject.SetActive(true);
+        }
+        else
+        {
+            skillItemReward.gameObject.SetActive(false);
+        }
 
-        stageRewardText.text = sb.ToString();
+
+
+
+        //// UI 텍스트 업데이트
+        //var sb = new StringBuilder();
+        //sb.Append(totalReward).Append(" G");
+        //if(bonusReward > 0)
+        //{
+        //    sb.Append("\n보너스 보상 : ").Append(bonusReward).Append(" G");
+        //}
+        //if (gardenerTickets > 0)
+        //    sb.Append("\n정원사 뽑기권 : ").Append(gardenerTickets).Append("개");
+
+        //if (playerSkillTickets > 0)
+        //    sb.Append("가드너 스킬 뽑기권 : ").Append(playerSkillTickets).Append("개");
+
+        //stageRewardText.text = sb.ToString();
     }
     private void SetGameClearStageText()
     {
