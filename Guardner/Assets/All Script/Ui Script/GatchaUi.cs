@@ -39,10 +39,13 @@ public class GatchaUi : GenericWindow
         nameText.text = data.Name;
         guardnerDicriptText.text = $"공격력 : {data.AttackPower}\n" +
             $"공격속도 : {data.APS}\n" +
-            $"레벨 : {data.Level}";
+            $"공격 범위 : {data.AttackRange}\n" +
+            $"{data.Reference}";
 
         attackText.text = $"{data.AttackPower}";
         levelText.text = $"{data.Level}";
+        image.sprite = sprite;
+
     }
 
 }

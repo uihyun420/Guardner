@@ -17,6 +17,7 @@ public class GuardnerEnhanceData
     public int GateHP { get; set; }
     public int AttackRange { get; set; }
     public int LvStatId { get; set; }
+    public string Reference { get; set; }
 }
 
 

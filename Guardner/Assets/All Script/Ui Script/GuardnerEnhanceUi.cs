@@ -87,6 +87,8 @@ public class GuardnerEnhanceUi : GenericWindow
         var sprite = Resources.Load<Sprite>($"GuardnerIcons/{guardnerId}");
         if (sprite == null)
             Debug.LogWarning($"이미지 없음: GuardnerIcons/{guardnerId}");
+
+        Debug.Log($"[GetGuardnerSprite] guardnerId: {guardnerId}");
         return sprite;
     }
 
