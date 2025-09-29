@@ -122,7 +122,6 @@ public class StageManager : MonoBehaviour
             monsterSpawner.SpawnMonster(monsterId, spawnPos, sortingOrder);
             enemiesRemaining++;
             spawnCount++;
-            Debug.Log($"∏ÛΩ∫≈Õ {monsterId}");
             yield return new WaitForSeconds(interval);
         }
     }

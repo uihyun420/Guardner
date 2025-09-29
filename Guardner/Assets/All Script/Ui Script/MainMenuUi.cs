@@ -18,6 +18,8 @@ public class MainMenuUi : GenericWindow
     [SerializeField] private GuardnerEnhanceUi guardnerEnhanceUi;
     [SerializeField] private TextMeshProUGUI goldText;
 
+    [SerializeField] private StageChoiceUi stageChoiceUi;    
+
     [SerializeField] private GameObject tilemap;
     [SerializeField] private GameObject spawnRect;
 
@@ -61,18 +63,20 @@ public class MainMenuUi : GenericWindow
 
     private void OnBattleStartButton()
     {
-        Close();
-        int startingStageId = SaveLoadManager.GetStartingStageId();
-        gameManager.StartGameStage(startingStageId);
+        //Close();
+        //int startingStageId = SaveLoadManager.GetStartingStageId();
+        //gameManager.StartGameStage(startingStageId);
 
-        if (windowManager != null)
-        {
-            windowManager.Open(WindowType.Battle);
-        }
-        else if (battleUi != null)
-        {
-            battleUi.Open();
-        }
+        //if (windowManager != null)
+        //{
+        //    windowManager.Open(WindowType.Battle);
+        //}
+        //else if (battleUi != null)
+        //{
+        //    battleUi.Open();
+        //}
+
+        stageChoiceUi.Open();
     }
 
     private void OnClickDictionaryButton()
@@ -104,4 +108,6 @@ public class MainMenuUi : GenericWindow
     {
         inventoryUi.Open();
     }
+
+    
 }

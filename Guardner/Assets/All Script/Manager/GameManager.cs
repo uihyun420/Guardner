@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-        int startingStageId = SaveLoadManager.GetStartingStageId();
-        StartGameStage(startingStageId);
+        //int startingStageId = SaveLoadManager.GetStartingStageId();
+        //StartGameStage(startingStageId);
     }
 
     public void StartGameStage(int stageId)
@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
     public void GameExit()
     {
         Application.Quit();
-        Debug.Log("게임종료");
     }
 
     private void SaveStageProgress()
