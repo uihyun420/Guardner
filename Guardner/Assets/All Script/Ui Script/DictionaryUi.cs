@@ -8,6 +8,7 @@ public class DictionaryUi : GenericWindow
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private GameObject dictionarySlot;
     [SerializeField] private Transform contentParent;
+    [SerializeField] private GuardnerSpawner guardnerSpawner; // 참조 추가
 
     [SerializeField] private Button closeButton;
 
@@ -21,8 +22,8 @@ public class DictionaryUi : GenericWindow
     public override void Open()
     {
         base.Open();
-        InitializeOwnedGuardenr();
-        DisPlayerOwnedGuardner();
+        //InitializeOwnedGuardenr();
+        DisplayOwnedGuardners();
     }
 
     public override void Close()
@@ -52,19 +53,22 @@ public class DictionaryUi : GenericWindow
         ownedGuardnerIds.Add(11320);
     }
 
-    private void DisPlayerOwnedGuardner()
+    private void DisplayOwnedGuardners()
     {
-        foreach(Transform guardner in contentParent)
+        foreach (Transform guardner in contentParent)
         {
             Destroy(guardner.gameObject);
         }
 
-        foreach(var guardnerId in ownedGuardnerIds)
+        if (guardnerSpawner != null)
         {
-            var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
-            if(guardnerData != null)
+            foreach (var guardnerId in guardnerSpawner.ownedGuardnerIds)
             {
-                CreationDictionarySlot(guardnerData);
+                var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
+                if (guardnerData != null)
+                {
+                    CreationDictionarySlot(guardnerData);
+                }
             }
         }
 
@@ -88,13 +92,15 @@ public class DictionaryUi : GenericWindow
         }
     }
 
-    //public void UnlockGuardner(int guardnerId)
-    //{
-    //    if(ownedGuardnerIds.Add(guardnerId))
-    //    {
-    //        Debug.Log("가드너 도감 추가");
-    //    }
-    //}
+    // 새 가드너 추가 (GuardnerSpawner에서 호출됨)
+    public void AddGuardnerToCollection(int guardnerId)
+    {
+        // 이미 UI가 열려있다면 즉시 새로고침
+        if (gameObject.activeInHierarchy)
+        {
+            DisplayOwnedGuardners();
+        }
+    }
 
     //가드너 가지고 있는지 확인
     public bool HasGuardner(int guardnerId)

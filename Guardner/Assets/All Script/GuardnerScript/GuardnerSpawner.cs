@@ -12,7 +12,7 @@ public struct GuardnerPrefabInfo
 
 public class GuardnerSpawner : MonoBehaviour
 {
-    public HashSet<int> ownedGuardnerIds = new HashSet<int>(); // 내가 실제로 가질 정원사 목록
+    public HashSet<int> ownedGuardnerIds = new HashSet<int>();
 
     public GuardnerPrefabInfo[] guardnerPrefabs;
     public List<GuardnerBehavior> spawnedGuardners = new List<GuardnerBehavior>();
@@ -23,26 +23,50 @@ public class GuardnerSpawner : MonoBehaviour
 
     [SerializeField] private BattleUi battleUi;
 
+    private void Start()
+    {
+        InitializeOwnedGuardners();
+    }
+    private void InitializeOwnedGuardners()
+    {
+        // 기본 가드너들 (처음 시작할 때)
+        ownedGuardnerIds.Add(11120);
+        ownedGuardnerIds.Add(11125);
+        ownedGuardnerIds.Add(11135);
+        // 나중에 세이브 데이터에서 로드하도록 확장 가능
+    }
 
-    //// 가드너 획득 메서드
-    //public bool AcquireGuardner(int guardnerId)
-    //{
-    //    if (ownedGuardnerIds.Add(guardnerId))
-    //    {
-    //        // SaveLoadManager 등 세이브 반영 필요시 추가
-    //        Debug.Log($"[GuardnerSpawner] 가드너 {guardnerId} 획득!");
-    //        return true;
-    //    }
-    //    Debug.Log($"[GuardnerSpawner] 이미 보유한 가드너: {guardnerId}");
-    //    return false;
-    //}
+    // 가드너 획득 메서드
+    public bool AcquireGuardner(int guardnerId)
+    {
+        if (ownedGuardnerIds.Add(guardnerId))
+        {
+            // SaveLoadManager 등 세이브 반영 필요시 추가
+            Debug.Log($"[GuardnerSpawner] 가드너 {guardnerId} 획득!");
 
-    //// 보유 여부 확인
-    //public bool HasGuardner(int guardnerId)
-    //{
-    //    return ownedGuardnerIds.Contains(guardnerId);
-    //}
+            // DictionaryUi와 다른 UI들에 알림
+            UpdateAllUIs(guardnerId);
+            return true;
+        }
+        Debug.Log($"[GuardnerSpawner] 이미 보유한 가드너: {guardnerId}");
+        return false;
+    }
 
+    // 보유 여부 확인
+    public bool HasGuardner(int guardnerId)
+    {
+        return ownedGuardnerIds.Contains(guardnerId);
+    }
+    // 모든 UI 업데이트
+    private void UpdateAllUIs(int newGuardnerId)
+    {
+        // DictionaryUi 업데이트
+        var dictionaryUi = FindObjectOfType<DictionaryUi>();
+        if (dictionaryUi != null)
+        {
+            dictionaryUi.AddGuardnerToCollection(newGuardnerId);
+        }
+    }
 
 
 

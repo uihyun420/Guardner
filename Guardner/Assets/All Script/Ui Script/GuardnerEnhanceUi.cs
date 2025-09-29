@@ -18,6 +18,7 @@ public class GuardnerEnhanceUi : GenericWindow
     [SerializeField] private GatchaUi gatchaUi;
 
     [SerializeField] private InventoryUi inventoryUi;
+    [SerializeField] private GuardnerSpawner guardnerSpawner;
 
     // 현재 강화 레벨 정보 (예시: 실제로는 세이브 데이터 등에서 불러와야 함)
     private Dictionary<int, int> guardnerLevelDict = new Dictionary<int, int>();
@@ -61,15 +62,7 @@ public class GuardnerEnhanceUi : GenericWindow
         }
     }
 
-    private IEnumerable<int> GetAllGuardnerIds()
-    {
-        // 실제 구현에서는 보유한 가드너 목록 등에서 가져와야 함
-        // 예시: 강화테이블에 있는 모든 Id
-        var ids = new HashSet<int>();
-        foreach (var data in DataTableManager.GuardnerEnhanceTable.GetAll())
-            ids.Add(data.Id);
-        return ids;
-    }
+
     private int GetCurrentLevel(int guardnerId)
     {
         // 실제로는 플레이어 데이터에서 현재 강화 레벨을 가져와야 함
@@ -115,13 +108,6 @@ public class GuardnerEnhanceUi : GenericWindow
         // 뽑기권 개수 확인
         Debug.Log("[Gatcha] UseItem 호출 전 LotteryTicket 개수: " + inventoryUi.GetItemCount("LotteryTicket"));
 
-        bool result = inventoryUi.UseItem("LotteryTicket", 1);
-
-        Debug.Log("[Gatcha] UseItem 결과: " + result);
-        Debug.Log("[Gatcha] UseItem 호출 후 LotteryTicket 개수: " + inventoryUi.GetItemCount("LotteryTicket"));
-
-
-
         if (inventoryUi != null && inventoryUi.UseItem("LotteryTicket", 1))
         {
             var allIds = new List<int>(GetAllGuardnerIds());
@@ -129,10 +115,14 @@ public class GuardnerEnhanceUi : GenericWindow
             int guardnerId = allIds[randomIdx];
             int level = 1;
 
-            //GetGuardner(guardnerId);
+            // GuardnerSpawner를 통해 가드너 획득
+            if (guardnerSpawner != null)
+            {
+                guardnerSpawner.AcquireGuardner(guardnerId);
+            }
 
             var enhanceData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, level);
-            if(gatchaUi != null && enhanceData != null)
+            if (gatchaUi != null && enhanceData != null)
             {
                 gatchaUi.SetGuardnerInfo(enhanceData, GetGuardnerSprite(guardnerId));
                 gatchaUi.Open();
@@ -142,27 +132,18 @@ public class GuardnerEnhanceUi : GenericWindow
         {
             Debug.Log("뽑기권이 부족합니다.");
         }
-
-        gatchaUi.Open();
     }
 
-    //private void GetGuardner(int guardnerId)
-    //{
-    //    var saveData = SaveLoadManager.Data as SaveDataV1;
-    //    if(saveData != null)
-    //    {
-    //        if(!saveData.ownedGuardnerIds.Contains(guardnerId))
-    //        {
-    //            saveData.ownedGuardnerIds.Add(guardnerId);
-    //            SaveLoadManager.Save();
-    //            Debug.Log($"[GuardnerEnhanceUi] 가드너 {guardnerId} 획득!");
-    //        }
-    //        else
-    //        {
-    //            Debug.Log($"[GuardnerEnhanceUi] 이미 보유한 가드너: {guardnerId}");
-    //        }
-    //    }
-    //}
+    private IEnumerable<int> GetAllGuardnerIds()
+    {
+        // 보유한 가드너 목록에서 가져오도록 변경
+        if (guardnerSpawner != null)
+            return guardnerSpawner.ownedGuardnerIds;
 
-
+        // 백업: 강화테이블의 모든 ID
+        var ids = new HashSet<int>();
+        foreach (var data in DataTableManager.GuardnerEnhanceTable.GetAll())
+            ids.Add(data.Id);
+        return ids;
+    }
 }

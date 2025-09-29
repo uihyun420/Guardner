@@ -109,12 +109,16 @@ public class GuardnerSpawnUi : GenericWindow
             Destroy(child.gameObject);
         }
 
-        foreach (var prefabInfo in guardnerSpawner.guardnerPrefabs)
+        // 보유한 가드너만 표시하도록 변경
+        if (guardnerSpawner != null)
         {
-            var guardnerData = DataTableManager.GuardnerTable.Get(prefabInfo.guardnerId);
-            if (guardnerData != null)
+            foreach (var guardnerId in guardnerSpawner.ownedGuardnerIds)
             {
-                CreateGuardnerItem(guardnerData, prefabInfo.guardnerId);
+                var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
+                if (guardnerData != null)
+                {
+                    CreateGuardnerItem(guardnerData, guardnerId);
+                }
             }
         }
 
