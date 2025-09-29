@@ -178,21 +178,21 @@ public class SaveLoadManager
 
         switch (stageProgress)
         {
-            case 1: return 1630;
-            case 2: return 2640;
-            case 3: return 3650;
-            case 4: return 4660;
-            case 5: return 56100;
-            case 6: return 65110;
-            case 7: return 75120;
-            case 8: return 85130;
-            case 9: return 95140;
-            case 10: return 105150;
-            case 11: return 114160;
-            case 12: return 124170;
-            case 13: return 134180;
-            case 14: return 144190;
-            case 15: return 153200;
+            case 0: return 1630;
+            case 1: return 2640;
+            case 2: return 3650;
+            case 3: return 4660;
+            case 4: return 56100;
+            case 5: return 65110;
+            case 6: return 75120;
+            case 7: return 85130;
+            case 8: return 95140;
+            case 9: return 105150;
+            case 10: return 114160;
+            case 11: return 124170;
+            case 12: return 134180;
+            case 13: return 144190;
+            case 14: return 153200;
             default: return 1630; // 기본값은 스테이지 1
         }
     }

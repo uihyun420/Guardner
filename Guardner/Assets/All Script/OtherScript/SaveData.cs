@@ -16,7 +16,7 @@ public class SaveDataV1 : SaveData
 {
     public string PlayerName { get; set; } = string.Empty;
     public int Gold { get; set; } = 0;
-    public int StageProgress { get; set; } = 1;
+    public int StageProgress { get; set; } = 0;
     public Dictionary<string, GuardnerSaveData> GuardnerEnhances { get; set; } = new Dictionary<string, GuardnerSaveData>();
     public List<string> UnlockedGuardners { get; set; } = new List<string>();
 

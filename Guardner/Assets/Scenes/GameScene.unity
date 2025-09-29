@@ -18385,6 +18385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurrentStageSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 294309889884062219, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 294309889915899096, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -18745,6 +18749,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 294309891548773428, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00054116506
+      objectReference: {fileID: 0}
     - target: {fileID: 294309891548773431, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -18857,6 +18865,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -282
       objectReference: {fileID: 0}
+    - target: {fileID: 7870707159384554002, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
+      propertyPath: m_Content
+      value: 
+      objectReference: {fileID: 1637725911}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5394560396339503339, guid: 8f2f4ff0eef054dd3873e61007eee27e, type: 3}
