@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using SaveDataVC = SaveDataV1; // 현재 버전으로 
 
@@ -118,10 +119,6 @@ public class SaveLoadManager
         Save(); // 자동 저장
     }
 
-
-
-
-
     // 가드너의 실제 능력치 조회 (저장된 강화 정보 반영)
     public static GuardnerSaveData GetGuardnerStats(string guardnerId)
     {
@@ -197,11 +194,10 @@ public class SaveLoadManager
         }
     }
 
-
-
-
-
-
-
+    public static void SaveOwnedGuardners(IEnumerable<int> ownedIds)
+    {
+        Data.OwnedGuardnerIds = ownedIds.ToList();
+        Save();
+    }
 
 }

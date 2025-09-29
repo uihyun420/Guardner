@@ -7,8 +7,8 @@ public abstract class SaveData
 {
     public int Version { get; protected set; }
     public int CurrentStage { get; set; }
-    public bool IsStageCleared { get; set; }   
-
+    public bool IsStageCleared { get; set; }
+    public List<int> OwnedGuardnerIds { get; set; } = new List<int>();
     public abstract SaveData VersionUp();
 }
 

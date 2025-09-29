@@ -29,11 +29,19 @@ public class GuardnerSpawner : MonoBehaviour
     }
     private void InitializeOwnedGuardners()
     {
-        // 기본 가드너들 (처음 시작할 때)
-        ownedGuardnerIds.Add(11120);
-        ownedGuardnerIds.Add(11125);
-        ownedGuardnerIds.Add(11135);
-        // 나중에 세이브 데이터에서 로드하도록 확장 가능
+        var loaded = SaveLoadManager.Data.OwnedGuardnerIds;
+        if (loaded != null && loaded.Count > 0)
+        {
+            ownedGuardnerIds = new HashSet<int>(loaded);
+        }
+        else
+        {
+            ownedGuardnerIds.Add(11120);
+            ownedGuardnerIds.Add(11125);
+            ownedGuardnerIds.Add(11135);
+            // 헬퍼 메서드로 저장
+            SaveLoadManager.SaveOwnedGuardners(ownedGuardnerIds);
+        }
     }
 
     // 가드너 획득 메서드
@@ -41,10 +49,9 @@ public class GuardnerSpawner : MonoBehaviour
     {
         if (ownedGuardnerIds.Add(guardnerId))
         {
-            // SaveLoadManager 등 세이브 반영 필요시 추가
-            Debug.Log($"[GuardnerSpawner] 가드너 {guardnerId} 획득!");
+            SaveLoadManager.SaveOwnedGuardners(ownedGuardnerIds);
 
-            // DictionaryUi와 다른 UI들에 알림
+            Debug.Log($"[GuardnerSpawner] 가드너 {guardnerId} 획득!");
             UpdateAllUIs(guardnerId);
             return true;
         }

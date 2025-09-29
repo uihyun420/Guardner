@@ -50,8 +50,8 @@ public class GuardnerEnhanceUi : GenericWindow
             Destroy(child.gameObject);
         }
 
-        // 모든 강화 데이터 가져오기 (Id+Level 구조라면, Id별로 현재 레벨만 표시)
-        foreach (var guardnerId in GetAllGuardnerIds())
+        // 보유 가드너만 표시
+        foreach (var guardnerId in GetAllGuardnerIdsOwned())
         {
             int level = GetCurrentLevel(guardnerId);
             var enhanceData = DataTableManager.GuardnerEnhanceTable.Get(guardnerId, level);
@@ -107,17 +107,15 @@ public class GuardnerEnhanceUi : GenericWindow
 
     private void OnClickGuardnerGatchButton()
     {
-        // 뽑기권 개수 확인
         Debug.Log("[Gatcha] UseItem 호출 전 LotteryTicket 개수: " + inventoryUi.GetItemCount("LotteryTicket"));
 
         if (inventoryUi != null && inventoryUi.UseItem("LotteryTicket", 1))
         {
-            var allIds = new List<int>(GetAllGuardnerIds());
+            var allIds = new List<int>(GetAllGuardnerIdsAll());
             int randomIdx = Random.Range(0, allIds.Count);
             int guardnerId = allIds[randomIdx];
             int level = 1;
 
-            // GuardnerSpawner를 통해 가드너 획득
             if (guardnerSpawner != null)
             {
                 guardnerSpawner.AcquireGuardner(guardnerId);
@@ -136,16 +134,22 @@ public class GuardnerEnhanceUi : GenericWindow
         }
     }
 
-    private IEnumerable<int> GetAllGuardnerIds()
+    // 전체 가드너 ID 반환 (뽑기 전용)
+    private IEnumerable<int> GetAllGuardnerIdsAll()
     {
-        // 보유한 가드너 목록에서 가져오도록 변경
-        if (guardnerSpawner != null)
-            return guardnerSpawner.ownedGuardnerIds;
-
-        // 백업: 강화테이블의 모든 ID
         var ids = new HashSet<int>();
         foreach (var data in DataTableManager.GuardnerEnhanceTable.GetAll())
             ids.Add(data.Id);
         return ids;
+    }
+
+    // 보유 가드너만 반환 (UI 리스트 등)
+    private IEnumerable<int> GetAllGuardnerIdsOwned()
+    {
+        if (guardnerSpawner != null)
+            return guardnerSpawner.ownedGuardnerIds;
+
+        // 예외 상황: 보유 가드너가 없을 때 전체 반환
+        return GetAllGuardnerIdsAll();
     }
 }
