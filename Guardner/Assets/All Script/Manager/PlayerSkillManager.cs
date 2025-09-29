@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using TMPro;
@@ -154,6 +155,21 @@ public class PlayerSkillManager : SkillManager
                 break;
             case 521590: // 향기 블룸
                 FragranceBloomEffect(skillData);
+                AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
+                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
+                break;
+            case 5215100: // 해충 박멸
+                PestExtermination(skillData);
+                AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
+                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
+                break ;
+            case 521120: // 태양광 집중
+                SolarFocus(skillData);
+                AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
+                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
+                break;
+            case 5220150: // 태양광 집중
+                GardenFestival(skillData);
                 AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
                 Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
@@ -358,6 +374,79 @@ public class PlayerSkillManager : SkillManager
             }
         }
     }
+
+
+    private void PestExtermination(PlayerSkillData skillData)
+    {
+        var aliveMonsters = GetAliveMonsters();
+        if (aliveMonsters.Count == 0) return;
+
+        float reducePercent = 0.25f; // 25% 감소
+        float duration = skillData.Duration;
+
+        foreach (var monster in aliveMonsters)
+        {
+            if (monster != null && !monster.IsDead)
+            {
+                monster.StopCoroutine("CoSpeedDebuff");
+                monster.StartCoroutine(monster.CoSpeedDebuff(reducePercent, reducePercent, duration));
+            }
+        }
+        AddSkillEffect(skillData.SkillDescription, duration, false); // 디버프 효과 텍스트
+    }
+
+    private void SolarFocus(PlayerSkillData skillData)
+    {
+        var aliveMonsters = GetAliveMonsters();
+        if (aliveMonsters.Count == 0) return;
+
+        foreach (var monster in aliveMonsters)
+        {
+            if (monster != null && !monster.IsDead)
+            {
+                // 몬스터의 현재 HP를 모두 깎음 (즉시 처치)
+                int currentHp = monster.monsterData.HP; // 몬스터의 최대 HP
+                monster.Ondamage(currentHp);
+            }
+        }
+        // 효과 텍스트(디버프) 표시
+        AddSkillEffect(skillData.SkillDescription, 0.5f, false);
+    }
+
+    private void GardenFestival(PlayerSkillData skillData)
+    {
+        // 1. 모든 몬스터 HP 80% 피해
+        var aliveMonsters = GetAliveMonsters();
+        if (aliveMonsters.Count > 0)
+        {
+            foreach (var monster in aliveMonsters)
+            {
+                if (monster != null && !monster.IsDead)
+                {
+                    int damage = Mathf.RoundToInt(monster.monsterData.HP * 0.8f);
+                    monster.Ondamage(damage);
+                }
+            }
+            AddSkillEffect("몬스터 HP -80%", 0.5f, false); // 디버프 효과 텍스트
+        }
+
+        // 2. 정원사 전체 공격력 +30%
+        var aliveGuardners = GetAliveGuardner();
+        float duration = skillData.Duration;
+        float attackPowerPercent = 0.3f; // 30%
+        if (aliveGuardners.Count > 0)
+        {
+            foreach (var guardner in aliveGuardners)
+            {
+                int attackPowerAmount = Mathf.RoundToInt(guardner.attackPower * attackPowerPercent);
+                guardner.AttackPowerBoost(attackPowerAmount, duration);
+            }
+            AddSkillEffect("정원사 전체 공격력 +30%", duration, true); // 버프 효과 텍스트
+        }
+    }
+
+
+
     private IEnumerator RestoreGuardnerSkillCoolTime(GuardnerSkillData skillData, float originalCoolTime, float duration)
     {
         yield return new WaitForSeconds(duration);
