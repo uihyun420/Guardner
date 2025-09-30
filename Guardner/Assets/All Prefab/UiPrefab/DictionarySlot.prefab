@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1719b5e71b79f479a8c382f98dc66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoText: {fileID: 0}
+  infoText: {fileID: 4533675529065578746}
   guardnerImage: {fileID: 7223227887547489103}
   selectButton: {fileID: 3972169025132455300}
   guardnerSpwawnDiscriptText: {fileID: 4533675529065578746}
@@ -654,7 +654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4094722810028855089, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.7
+      value: 4.700012
       objectReference: {fileID: 0}
     - target: {fileID: 4094722810028855089, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

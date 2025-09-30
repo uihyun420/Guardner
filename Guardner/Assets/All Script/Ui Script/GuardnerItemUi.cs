@@ -20,6 +20,12 @@ public class GuardnerItemUi : MonoBehaviour
 
     private int guardnerId;
 
+
+    public void SetNameTextColor(Color color)
+    {
+        nameText.color = color;
+    }
+
     public void SetData(GuardnerData data, System.Action<int> onSelect)
     {
         guardnerId = data.Id;

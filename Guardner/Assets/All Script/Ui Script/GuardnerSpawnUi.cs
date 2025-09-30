@@ -143,12 +143,13 @@ public class GuardnerSpawnUi : GenericWindow
             if (battleUi.gold < data.SummonGold)
             {
                 itemUi.SetTextColor(Color.red);
+                itemUi.SetNameTextColor(Color.red);
             }
             else
             {
-                itemUi.SetTextColor(Color.black);
+                itemUi.SetTextColor(Color.white);
+                itemUi.SetNameTextColor(Color.white);
             }
-
         }
     }
 
