@@ -80,16 +80,17 @@ public class GuardnerEnhanceResultUi : GenericWindow
         if (nextData != null)
         {
             sb.Clear();
-            sb.Append("강화 후 능력치\n")
+            sb.Append("강화 \n")
               .Append("Lv : ").Append(nextData.Level).Append("\n")
               .Append("공격속도 : ").Append(nextData.APS).Append("\n")
               .Append("DPS : ").Append(nextData.DPS);
+            
             enhancedStatus.text = sb.ToString();
             enhanceButton.interactable = true;
 
             sb.Clear();
             sb.Append("공격력 : ").Append(currentData.AttackPower).Append("+").Append(nextData.AttackPower - currentData.AttackPower);
-            attackText.text = sb.ToString();
+            attackText.text = sb.ToString();            
         }
         else
         {
