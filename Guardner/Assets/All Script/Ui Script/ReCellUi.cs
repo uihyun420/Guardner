@@ -12,6 +12,8 @@ public class ReCellUi : GenericWindow
     [SerializeField] private GuardnerSpawner guardnerSpawner;
     [SerializeField] private BattleUi battleUi;
     [SerializeField] private GameObject spawnRect;
+    [SerializeField] private GuardnerSpawnUi guardnerSpawnUi;
+    [SerializeField] private ScreenTouch screenTouch;
     
 
     private GuardnerBehavior targetGuardner; // 추가: 현재 선택된 가드너 참조
@@ -57,6 +59,12 @@ public class ReCellUi : GenericWindow
         if(collider != null)
         {
             collider.enabled = false;
+            guardnerSpawnUi.enabled = false;
+        }
+
+        if (screenTouch != null)
+        {
+            screenTouch.enabled = false;
         }
     }
     private void SpawnRectEnable()
@@ -65,6 +73,11 @@ public class ReCellUi : GenericWindow
         if (collider != null)
         {
             collider.enabled = true;
+            guardnerSpawnUi.enabled = true;
+        }
+        if (screenTouch != null)
+        {
+            screenTouch.enabled = true;
         }
     }
 

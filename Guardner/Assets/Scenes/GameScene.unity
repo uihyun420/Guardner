@@ -25536,6 +25536,8 @@ MonoBehaviour:
   guardnerSpawner: {fileID: 1794989048}
   battleUi: {fileID: 1466228247}
   spawnRect: {fileID: 99098600}
+  guardnerSpawnUi: {fileID: 579048190}
+  screenTouch: {fileID: 585887588}
 --- !u!1 &2136394117
 GameObject:
   m_ObjectHideFlags: 0
