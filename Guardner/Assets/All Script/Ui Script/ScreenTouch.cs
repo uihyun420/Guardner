@@ -10,6 +10,8 @@ public class ScreenTouch : MonoBehaviour
     public WindowManager windowManager;
 
     private bool isUiBlocking = false;
+    private GuardnerBehavior lastOpenedGuardner = null; 
+
 
     private void Update()
     {
@@ -69,9 +71,18 @@ public class ScreenTouch : MonoBehaviour
             {
                 guardner.ToggleRangeDisplay();
 
-                if(reCellUi != null)
+                if (reCellUi != null)
                 {
-                    reCellUi.Open(guardner);    
+                    if (lastOpenedGuardner == guardner)
+                    {
+                        reCellUi.Close();
+                        lastOpenedGuardner = null;
+                    }
+                    else
+                    {
+                        reCellUi.Open(guardner);
+                        lastOpenedGuardner = guardner;
+                    } 
                 }
 
                 break; 

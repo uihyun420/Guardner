@@ -2434,7 +2434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8224938385015314322, guid: 0b9319d3eb8784cc9a84d8e6db5cfc88, type: 3}
       propertyPath: m_fontSize
-      value: 32
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8224938385015314322, guid: 0b9319d3eb8784cc9a84d8e6db5cfc88, type: 3}
       propertyPath: m_fontAsset
@@ -2458,7 +2458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8224938385015314322, guid: 0b9319d3eb8784cc9a84d8e6db5cfc88, type: 3}
       propertyPath: m_fontSizeBase
-      value: 32
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8224938385015314322, guid: 0b9319d3eb8784cc9a84d8e6db5cfc88, type: 3}
       propertyPath: m_sharedMaterial
@@ -25350,7 +25350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6698253899233754443, guid: afd3cf90096204da5bdcc3fcaf7404dd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

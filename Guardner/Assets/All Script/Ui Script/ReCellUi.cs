@@ -12,7 +12,6 @@ public class ReCellUi : GenericWindow
     [SerializeField] private GuardnerSpawner guardnerSpawner;
     [SerializeField] private BattleUi battleUi;
 
-    private Vector2 openPos;
     private GuardnerBehavior targetGuardner; // 추가: 현재 선택된 가드너 참조
 
 
@@ -26,7 +25,7 @@ public class ReCellUi : GenericWindow
         targetGuardner = guardner;
         // 가드너 월드 위치를 스크린 좌표로 변환
         Vector3 worldPos = guardner.transform.position;
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos + Vector3.up * 1.5f); // 위로 약간 띄움
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos + Vector3.up * 1.2f); // 위로 약간 띄움
         transform.position = screenPos;
 
         var sb = new StringBuilder();
@@ -36,7 +35,7 @@ public class ReCellUi : GenericWindow
 
         int sellGold = Mathf.RoundToInt(targetGuardner.guardnerData.SellingGold * 0.7f);
         sb.Clear();
-        sb.Append("판매 : ").Append("\n").Append(sellGold).Append("G");
+        sb.Append("판매 골드 ").Append("\n").Append(sellGold).Append("G");
         reCellText.text = sb.ToString();
 
         base.Open();
