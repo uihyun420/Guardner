@@ -11,6 +11,8 @@ public class ReCellUi : GenericWindow
     [SerializeField] private Button reCellButton;
     [SerializeField] private GuardnerSpawner guardnerSpawner;
     [SerializeField] private BattleUi battleUi;
+    [SerializeField] private GameObject spawnRect;
+    
 
     private GuardnerBehavior targetGuardner; // 추가: 현재 선택된 가드너 참조
 
@@ -38,6 +40,7 @@ public class ReCellUi : GenericWindow
         sb.Append("판매 골드 ").Append("\n").Append(sellGold).Append("G");
         reCellText.text = sb.ToString();
 
+        SpawnRectUnEnable();
         base.Open();
     }
 
@@ -45,6 +48,24 @@ public class ReCellUi : GenericWindow
     {
         base.Close();
         targetGuardner = null;
+        SpawnRectEnable();
+    }
+
+    private void SpawnRectUnEnable()
+    {
+        var collider = spawnRect.GetComponent<Collider2D>();
+        if(collider != null)
+        {
+            collider.enabled = false;
+        }
+    }
+    private void SpawnRectEnable()
+    {
+        var collider = spawnRect.GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            collider.enabled = true;
+        }
     }
 
     private void OnClickReCellButton()

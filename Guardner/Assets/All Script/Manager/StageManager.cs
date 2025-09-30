@@ -164,7 +164,7 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator CoSpawnBossMonster(int bossMonsterId, Vector2 spawnPos, int sortingOrder)
     {
-        yield return new WaitForSeconds(60f); // 1분 대기
+        yield return new WaitForSeconds(1f); // 1분 대기
 
         if (!isStageCompleted)
         {

@@ -9,8 +9,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-        //int startingStageId = SaveLoadManager.GetStartingStageId();
-        //StartGameStage(startingStageId);
+
+        if (GameOverUi.RetryStageId > 0)
+        {
+            Debug.Log($"재시작 스테이지 ID: {GameOverUi.RetryStageId}");
+            stageManager.LoadStage(GameOverUi.RetryStageId);
+            GameOverUi.RetryStageId = 0; // 사용 후 초기화
+        }
+        else if (startingStageId > 0)
+        {
+            stageManager.LoadStage(startingStageId);
+        }
     }
 
     public void StartGameStage(int stageId)
@@ -48,10 +57,6 @@ public class GameManager : MonoBehaviour
 
         SaveLoadManager.UpdateStageProgress(currentStage);
         Debug.Log($"스테이지 {currentStage} 클리어 정보가 저장되었습니다.");
-        //스테이지 데이터가 로드되지 않았습니다.
-        //UnityEngine.Debug:Log(object)
-        //StageManager: StartStage()(at Assets / All Script / Manager / StageManager.cs:66)
-        //BattleUi: Update()(at Assets / All Script / Ui Script / BattleUi.cs:196)
     }
 
 }

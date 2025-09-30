@@ -88,8 +88,8 @@ public class GuardnerBehavior : MonoBehaviour
         lineRenderer.material = mat;
         lineRenderer.startColor = Color.red;
         lineRenderer.endColor = Color.red;
-        lineRenderer.startWidth = 0.1f; // 더 두껍게
-        lineRenderer.endWidth = 0.1f;
+        lineRenderer.startWidth = 0.05f; // 더 두껍게
+        lineRenderer.endWidth = 0.05f;
         lineRenderer.useWorldSpace = true;
         lineRenderer.sortingOrder = 100; // 더 높은 값
         lineRenderer.sortingLayerName = "Default";
@@ -160,8 +160,18 @@ public class GuardnerBehavior : MonoBehaviour
         if (show)
         {
             DrawAttackRange();
+            StartCoroutine(DisableLineRenderer(0.2f));
         }
     }
+
+
+    private IEnumerator DisableLineRenderer(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isRangeVisible = false;
+        lineRenderer.enabled = false;
+    }
+
 
     private void DrawAttackRange()
     {

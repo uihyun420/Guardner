@@ -8201,6 +8201,10 @@ PrefabInstance:
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.data[13].prefab
       value: 
+      objectReference: {fileID: 7160390425427247677, guid: 1490b0000a0af0441bf97555ce36d9f0, type: 3}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[14].prefab
+      value: 
       objectReference: {fileID: 1866400101754725822, guid: 1ffbb8ac31197e44fab0b4de93ab2346, type: 3}
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.data[0].monsterId
@@ -8256,6 +8260,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
       propertyPath: monsterPrefabs.Array.data[13].monsterId
+      value: 4222400
+      objectReference: {fileID: 0}
+    - target: {fileID: 492404593951240191, guid: ec14f6dd7255148428a262c153914500, type: 3}
+      propertyPath: monsterPrefabs.Array.data[14].monsterId
       value: 4222500
       objectReference: {fileID: 0}
     - target: {fileID: 2504763116625422590, guid: ec14f6dd7255148428a262c153914500, type: 3}
@@ -25527,6 +25535,7 @@ MonoBehaviour:
   reCellButton: {fileID: 1422195782}
   guardnerSpawner: {fileID: 1794989048}
   battleUi: {fileID: 1466228247}
+  spawnRect: {fileID: 99098600}
 --- !u!1 &2136394117
 GameObject:
   m_ObjectHideFlags: 0

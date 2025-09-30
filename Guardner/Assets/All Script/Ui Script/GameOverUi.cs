@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class GameOverUi : GenericWindow
 {
-    // 씬 로드 후 열릴 UI 타입을 저장하는 정적 변수
     public static WindowType NextWindowAfterLoad = WindowType.MainMenuUi;
     public static int RetryStageId = 0;
 
@@ -50,8 +49,8 @@ public class GameOverUi : GenericWindow
 
     public void OnClickRetryButton()
     {
-        // 재시작 시 현재 스테이지 ID 저장
-        retryStageId = StageManager.stageData.ID;
+        // 재시작 시 현재 스테이지 ID를 정적 변수에 저장
+        RetryStageId = StageManager.stageData.ID;
         // 씬 로드 후 Battle UI를 열도록 설정
         NextWindowAfterLoad = WindowType.Battle;
 
@@ -63,12 +62,21 @@ public class GameOverUi : GenericWindow
     public void OnClickMainMenuButton()
     {
         NextWindowAfterLoad = WindowType.MainMenuUi;
-        RetryStageId = 0;
+        RetryStageId = 0; // 메인 메뉴로 갈 때는 재시작 ID 초기화
 
         Time.timeScale = 1;
         string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
+    //public void OnClickMainMenuButton()
+    //{
+    //    NextWindowAfterLoad = WindowType.MainMenuUi;
+    //    RetryStageId = StageManager.stageData.ID;
+
+    //    Time.timeScale = 1;
+    //    string sceneName = SceneManager.GetActiveScene().name;
+    //    SceneManager.LoadScene(sceneName);
+    //}
 
     private void SetGameOverStageText()
     {
