@@ -153,50 +153,40 @@ public class PlayerSkillManager : SkillManager
         {
             case 51140: // 잡초 뽑기
                 PullingWeedsEffect(skillData);
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
             case 52830: // 아침 물주기
                 MorningWateringEffect(skillData);
                 AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
             case 521035: // 해충 퇴치제
                 PestRepellentEffect(skillData);
                 AddSkillEffect(skillData.SkillDescription, skillData.Duration, false); // 디버프 효과
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
             case 52650: // 가지치기
                 PruningEffect(skillData);
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
             case 521260: // 햇빛 조절
                 SunlightControlEffect(skillData);
                 AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
             case 52170: // 토양 정리
                 SoilLevelingEffect(skillData);
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
             case 521590: // 향기 블룸
                 FragranceBloomEffect(skillData);
                 AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
             case 5215100: // 해충 박멸
                 PestExtermination(skillData);
                 AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break ;
             case 521120: // 태양광 집중
                 SolarFocus(skillData);
                 AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
             case 5220150: // 태양광 집중
                 GardenFestival(skillData);
                 AddSkillEffect(skillData.SkillDescription, skillData.Duration, true); // 버프 효과
-                Debug.Log($"사용스킬 : {skillData.Name}, 스킬 아이디 {skillData.Id}, 스킬 효과 : {skillData.SkillDescription}");
                 break;
         }
     }

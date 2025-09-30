@@ -21500,8 +21500,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guardnerSpawner: {fileID: 1794989048}
   monsterSpawner: {fileID: 125721413}
-  stunEffectPrefab: {fileID: 0}
-  damageEffectPrefab: {fileID: 2325481569229151742, guid: a6ce10d4e5e04404db5147e520895aec, type: 3}
+  guardnerStunEffectPrefab: {fileID: 0}
+  guardnerBuffEffectPrefab: {fileID: 0}
+  guardnerDeBuffEffectPrefab: {fileID: 0}
+  guardnerDamageEffectPrefab: {fileID: 0}
   buffText: {fileID: 1947479415}
   deBuffText: {fileID: 525923609}
   pullingWeedsEffectPrefab: {fileID: 2325481569229151742, guid: a6ce10d4e5e04404db5147e520895aec, type: 3}
@@ -25677,6 +25679,22 @@ PrefabInstance:
       propertyPath: stunEffectPrefab
       value: 
       objectReference: {fileID: 5663818590087976858, guid: 04cffb8fdcffe3e4d9ec8465fac62636, type: 3}
+    - target: {fileID: 8866255386916920349, guid: c10e909b2375c7243879e22a2d139ad6, type: 3}
+      propertyPath: guardnerBuffEffectPrefab
+      value: 
+      objectReference: {fileID: 5427362705571820923, guid: 4e57bd7bb2b7f6d4abbbc061b0c4e377, type: 3}
+    - target: {fileID: 8866255386916920349, guid: c10e909b2375c7243879e22a2d139ad6, type: 3}
+      propertyPath: guardnerStunEffectPrefab
+      value: 
+      objectReference: {fileID: 7933558626557062053, guid: 3c95165bd7465924fb828d49b969e684, type: 3}
+    - target: {fileID: 8866255386916920349, guid: c10e909b2375c7243879e22a2d139ad6, type: 3}
+      propertyPath: guardnerDamageEffectPrefab
+      value: 
+      objectReference: {fileID: 2325481569229151742, guid: a6ce10d4e5e04404db5147e520895aec, type: 3}
+    - target: {fileID: 8866255386916920349, guid: c10e909b2375c7243879e22a2d139ad6, type: 3}
+      propertyPath: guardnerDeBuffEffectPrefab
+      value: 
+      objectReference: {fileID: 765487365820233295, guid: 771d5fed3492fb540af599870ed0cadc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

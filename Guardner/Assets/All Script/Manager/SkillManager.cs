@@ -6,12 +6,10 @@ using System.Collections;
 public enum SkillEffectType
 {
     Stun,
-    Damage,
-    Buff
+    DeBuff,
+    Buff,
+    Damage
 }
-
-
-
 
 public class SkillManager : MonoBehaviour
 {
@@ -24,10 +22,10 @@ public class SkillManager : MonoBehaviour
     [SerializeField] protected MonsterSpawner monsterSpawner;
 
 
-    [SerializeField] private GameObject stunEffectPrefab;
-    //[SerializeField] private GameObject reflectionEffectPrefab;
-    [SerializeField] private GameObject damageEffectPrefab;
-
+    [SerializeField] private GameObject guardnerStunEffectPrefab;
+    [SerializeField] private GameObject guardnerBuffEffectPrefab;
+    [SerializeField] private GameObject guardnerDeBuffEffectPrefab;
+    [SerializeField] private GameObject guardnerDamageEffectPrefab;
 
 
 
@@ -54,7 +52,7 @@ public class SkillManager : MonoBehaviour
             {
                 SelectSkill(skillData.SkillID);
                 UseSkill();
-               // Debug.Log($"가드너 {guardner.name}가 스킬 {skillData.Name} 사용");
+                Debug.Log($"가드너 {guardner.name}가 스킬 {skillData.Name} 사용");
             }
         }
     }
@@ -84,23 +82,60 @@ public class SkillManager : MonoBehaviour
         // 가디언 대상 스킬
         else if (selectSkill.TargetType == SkillTargetType.Guardner)
         {
-            ApplySkillToAllGuardners();
+            ApplySkillToAllGuardners();            
         }
 
         lastUsedTime[selectSkill.SkillID] = Time.time;
     }
 
     // 몬스터 대상 스킬 적용
+    //protected virtual void ApplySkillToMonsters()
+    //{
+    //    if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
+    //        return;
+
+    //    foreach (var monster in monsterSpawner.spawnedMonsters)
+    //    {
+    //        if (monster != null && !monster.IsDead)
+    //        {
+    //            ApplyMonsterSkills(monster);
+    //        }
+    //    }
+    //}
+
     protected virtual void ApplySkillToMonsters()
     {
         if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
             return;
 
+        if (guardnerSpawner == null || guardnerSpawner.spawnedGuardners.Count == 0)
+            return;
+
+        // 스킬을 사용하는 가드너 찾기
+        GuardnerBehavior skillUser = null;
+        foreach (var guardner in guardnerSpawner.spawnedGuardners)
+        {
+            if (guardner != null && guardner.skillId == selectSkill.SkillID)
+            {
+                skillUser = guardner;
+                break;
+            }
+        }
+
+        if (skillUser == null) return;
+
+        // 해당 가드너의 범위 내 몬스터에게만 스킬 적용
         foreach (var monster in monsterSpawner.spawnedMonsters)
         {
             if (monster != null && !monster.IsDead)
             {
-                ApplyMonsterSkills(monster);
+                float distance = Vector2.Distance(skillUser.transform.position, monster.transform.position);
+
+                // 가드너의 공격 범위 내에 있는 몬스터에게만 적용
+                if (distance <= skillUser.attackRange)
+                {
+                    ApplyMonsterSkills(monster);
+                }
             }
         }
     }
@@ -116,6 +151,7 @@ public class SkillManager : MonoBehaviour
             if (guardner != null)
             {
                 ApplyGuardnerSkills(guardner);
+                PlaySkillEffect(guardner.transform.position, SkillEffectType.Buff);
             }
         }
     }
@@ -171,9 +207,11 @@ public class SkillManager : MonoBehaviour
         {
             float reflectedDamage = targetMonster.attackPower * selectSkill.GateDamageReflection;
             targetMonster.ReflectDamage(reflectedDamage);
+            PlaySkillEffect(targetMonster.transform.position, SkillEffectType.Damage);
             Debug.Log($"GateDamageReflection 적용: {reflectedDamage} (SkillID: {selectSkill.SkillID})");
         }
     }
+
 
     protected virtual void ApplyGuardnerSkills(GuardnerBehavior guardner)
     {
@@ -196,7 +234,7 @@ public class SkillManager : MonoBehaviour
             float duration = selectSkill.Duration;
             guardner.AttackSpeedBoost(attackSpeedBoost, duration);
             PlaySkillEffect(guardner.transform.position, SkillEffectType.Buff);
-            //Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
+            Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
     }
 
@@ -207,14 +245,17 @@ public class SkillManager : MonoBehaviour
         switch (effectType)
         {
             case SkillEffectType.Stun:
-                effectPrefab = stunEffectPrefab;
+                effectPrefab = guardnerStunEffectPrefab;
                 break;
             case SkillEffectType.Damage:
-                effectPrefab = damageEffectPrefab;
+                effectPrefab = guardnerDamageEffectPrefab;
                 break;
             case SkillEffectType.Buff:
-                // 버프 이펙트는 가디언에게 적용되므로 여기서는 처리하지 않음
-                return;
+                effectPrefab = guardnerBuffEffectPrefab;
+                break;
+            case SkillEffectType.DeBuff:
+                effectPrefab = guardnerDeBuffEffectPrefab;
+                break;
         }
 
         if (effectPrefab != null)
@@ -231,7 +272,7 @@ public class SkillManager : MonoBehaviour
             else
             {
                 // 파티클이 없다면 2초 후 삭제
-                Destroy(effect, 2f);
+                Destroy(effect, 0.5f);
             }
         }
     }
