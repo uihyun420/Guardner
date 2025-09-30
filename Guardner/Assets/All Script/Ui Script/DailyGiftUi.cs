@@ -315,7 +315,7 @@ public class DailyGiftUi : GenericWindow
         if (buttonText != null)
         {
             string rewardText = GetRewardText(cycle, dayInCycle);
-            buttonText.text = $"Day {dayNumber}\n{rewardText}";
+            buttonText.text = rewardText; // 수량만 표시
         }
     }
 
@@ -326,11 +326,10 @@ public class DailyGiftUi : GenericWindow
             case 1:
             case 2:
             case 3:
-                return "1000G";
+                return "1000";
             case 4:
-                return $"가드너권 x{cycle}";
             case 5:
-                return $"스킬권 x{cycle}";
+                return cycle.ToString();
             default:
                 return "";
         }
