@@ -71,7 +71,7 @@ public class StageChoiceUi : GenericWindow
             GameObject prefabToUse;
             StageState state;
 
-            if (i < clearedStageIndex) // i가 클리어한 스테이지 이하면
+            if (i <= clearedStageIndex) // i가 클리어한 스테이지 이하면
             {
                 prefabToUse = clearedStagePrefab;
                 state = StageState.Cleared;
@@ -144,21 +144,4 @@ public class StageChoiceUi : GenericWindow
             default: return -1; // 존재하지 않는 스테이지
         }
     }
-
-
-    //private void OnClickCurrentStageButton()
-    //{
-    //    Close();
-    //    int startingStageId = SaveLoadManager.GetStartingStageId();
-    //    gameManager.StartGameStage(startingStageId);
-
-    //    if (windowManager != null)
-    //    {
-    //        windowManager.Open(WindowType.Battle);
-    //    }
-    //    else if (battleUi != null)
-    //    {
-    //        battleUi.Open();
-    //    }
-    //}
 }

@@ -165,7 +165,7 @@ public class StageClearUi : GenericWindow
         var stageRewardTable = DataTableManager.StageRewardTable;
         var rewardData = stageRewardTable.GetStage(currentStage);
 
-        if(rewardData == null)
+        if (rewardData == null)
         {
             Debug.Log($"스테이지 {currentStage}에 대한 보상 데이터가 없습니다.");
             return;
@@ -210,30 +210,30 @@ public class StageClearUi : GenericWindow
             {
                 killUnit = 100;
             }
-            else if(stage >= 11)
+            else if (stage >= 11)
             {
                 killUnit = 130;
             }
 
             int bonusCount = stageManager.monsterKillCount / killUnit;
-            if(bonusCount > 0)
+            if (bonusCount > 0)
             {
                 bonusReward += rewardData.Bonus2RewardIdRewardQty * bonusCount;
                 stageManager.monsterKillCount = 0;
-            }            
+            }
         }
 
         // 골드 지급
         if (mainMenuUi != null && totalReward > 0)
         {
-           // mainMenuUi.AddMainUiGold(totalReward + bonusReward);
+            // mainMenuUi.AddMainUiGold(totalReward + bonusReward);
             SaveLoadManager.AddGold(totalReward + bonusReward);
             Debug.Log($"스테이지 {currentStage} 클리어 보상: {totalReward} 골드 지급");
         }
 
 
         if (gardenerTickets > 0)
-        {           
+        {
             inventoryUi?.AddItem("LotteryTicket", gardenerTickets); // 가드너 뽑기권 인벤토리에 저장
         }
 
@@ -241,9 +241,6 @@ public class StageClearUi : GenericWindow
         {
             inventoryUi?.AddItem("EnhanceTicket", playerSkillTickets); // 플레이어 스킬 뽑기권 인벤토리에 저장
         }
-
-
-
 
         // UI 표시/숨김 처리
         if (totalReward > 0)
@@ -285,24 +282,6 @@ public class StageClearUi : GenericWindow
         {
             skillItemReward.gameObject.SetActive(false);
         }
-
-
-
-
-        //// UI 텍스트 업데이트
-        //var sb = new StringBuilder();
-        //sb.Append(totalReward).Append(" G");
-        //if(bonusReward > 0)
-        //{
-        //    sb.Append("\n보너스 보상 : ").Append(bonusReward).Append(" G");
-        //}
-        //if (gardenerTickets > 0)
-        //    sb.Append("\n정원사 뽑기권 : ").Append(gardenerTickets).Append("개");
-
-        //if (playerSkillTickets > 0)
-        //    sb.Append("가드너 스킬 뽑기권 : ").Append(playerSkillTickets).Append("개");
-
-        //stageRewardText.text = sb.ToString();
     }
     private void SetGameClearStageText()
     {
@@ -316,10 +295,8 @@ public class StageClearUi : GenericWindow
     {
         SaveLoadManager.Data.CurrentStage = clearStage;
         SaveLoadManager.Data.IsStageCleared = true;
-
-        SaveLoadManager.UpdateStageProgress(clearStage + 1);
-        Debug.Log($"스테이지 {clearStage} 완료 정보가 저장되었습니다. 다음 스테이지 {clearStage + 1}이 언락되었습니다.");
-
+        SaveLoadManager.UpdateStageProgress(clearStage);
+        Debug.Log($"스테이지 {clearStage} 완료 정보가 저장되었습니다. 다음 스테이지 {clearStage}이 언락되었습니다.");
     }
 
 
