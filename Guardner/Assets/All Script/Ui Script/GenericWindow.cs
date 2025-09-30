@@ -9,6 +9,7 @@ public class GenericWindow : MonoBehaviour
 
     [SerializeField] protected bool isOverlayWindow = false; // 오버레이 창인지 구분
 
+
     public void Init(WindowManager mgr)
     {
         manager = mgr;

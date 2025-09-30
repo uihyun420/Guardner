@@ -424,6 +424,7 @@ public class PlayerSkillManager : SkillManager
                 int damage = Mathf.RoundToInt(monster.monsterData.HP * reductionPercent);
                 monster.Stun(skillData.Stun);
                 monster.Ondamage(damage);
+                PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.SoilLeveling);
             }
         }
     }
@@ -458,6 +459,8 @@ public class PlayerSkillManager : SkillManager
 
                 // 일정 시간 후 원래 쿨타임으로 복구
                 StartCoroutine(RestoreGuardnerSkillCoolTime(guardnerSkillData, originalCoolTime, duration));
+                PlayPlayerSkillEffect(guardner.transform.position, PlayerSkillEffectType.FragranceBloom);
+
             }
         }
     }
@@ -477,9 +480,12 @@ public class PlayerSkillManager : SkillManager
             {
                 monster.StopCoroutine("CoSpeedDebuff");
                 monster.StartCoroutine(monster.CoSpeedDebuff(reducePercent, reducePercent, duration));
+                PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.PestExtermination);
             }
         }
         AddSkillEffect(skillData.SkillDescription, duration, false); // 디버프 효과 텍스트
+
+
     }
 
     private void SolarFocus(PlayerSkillData skillData)
@@ -494,6 +500,8 @@ public class PlayerSkillManager : SkillManager
                 // 몬스터의 현재 HP를 모두 깎음 (즉시 처치)
                 int currentHp = monster.monsterData.HP; // 몬스터의 최대 HP
                 monster.Ondamage(currentHp);
+                PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.SolarFocus);
+
             }
         }
         // 효과 텍스트(디버프) 표시
@@ -512,6 +520,8 @@ public class PlayerSkillManager : SkillManager
                 {
                     int damage = Mathf.RoundToInt(monster.monsterData.HP * 0.8f);
                     monster.Ondamage(damage);
+                    PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.PullingWeeds);
+
                 }
             }
             AddSkillEffect("몬스터 HP -80%", 0.5f, false); // 디버프 효과 텍스트
@@ -527,6 +537,8 @@ public class PlayerSkillManager : SkillManager
             {
                 int attackPowerAmount = Mathf.RoundToInt(guardner.attackPower * attackPowerPercent);
                 guardner.AttackPowerBoost(attackPowerAmount, duration);
+                PlayPlayerSkillEffect(guardner.transform.position, PlayerSkillEffectType.GardenFestival);
+
             }
             AddSkillEffect("정원사 전체 공격력 +30%", duration, true); // 버프 효과 텍스트
         }

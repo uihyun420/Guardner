@@ -48,7 +48,10 @@ public class GameManager : MonoBehaviour
 
         SaveLoadManager.UpdateStageProgress(currentStage);
         Debug.Log($"스테이지 {currentStage} 클리어 정보가 저장되었습니다.");
-
+        //스테이지 데이터가 로드되지 않았습니다.
+        //UnityEngine.Debug:Log(object)
+        //StageManager: StartStage()(at Assets / All Script / Manager / StageManager.cs:66)
+        //BattleUi: Update()(at Assets / All Script / Ui Script / BattleUi.cs:196)
     }
 
 }
