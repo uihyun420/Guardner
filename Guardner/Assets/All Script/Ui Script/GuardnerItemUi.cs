@@ -33,22 +33,20 @@ public class GuardnerItemUi : MonoBehaviour
         int attackPower = enhancedData?.AttackPower ?? data.AttackPower;
 
         // 3. 스킬명 가져오기 (SkillID가 0이 아니면)
-        string skillName = "-";
-        if (data.SkillID != 0)
-        {
-            // 예시: DataTableManager.SkillTable.Get(data.SkillID).Name
-            // 실제 프로젝트의 스킬 테이블 구조에 맞게 수정
-            var skillData = DataTableManager.GuardnerSkillTable.Get(data.SkillID);
-            if (skillData != null)
-                skillName = skillData.Name;
-        }
+        //string skillName = "-";
+        //if (data.SkillID != 0)
+        //{
+        //    var skillData = DataTableManager.GuardnerSkillTable.Get(data.SkillID).Name;
+        //    if (skillData != null)
+        //        skillName = skillData;
+        //}
 
         // 4. 설명 텍스트 구성
         if (guardnerSpwawnDiscriptText != null)
         {
             guardnerSpwawnDiscriptText.text =
                 $"공격력: {attackPower}\n" +
-                $"스킬: {skillName}\n" +
+                $"공격속도: {data.APS}\n" +
                 $"소환 골드: {data.SummonGold}";
         }
 

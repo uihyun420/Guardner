@@ -20,8 +20,8 @@ public class PlayerSkillItemUi : MonoBehaviour
         if (skillNameText != null)
         {
             sb.Clear();
-            sb.Append("스킬 이름 : ").Append(skillData.Name).Append("\n").Append("스킬 정보 : ")
-                .Append(skillData.SkillDescription).Append("\n").Append("쿨타임 : ").Append(skillData.CoolTime).Append("초");
+            sb.Append(skillData.Name).Append("\n").Append(skillData.SkillDescription).Append("\n")
+                .Append("쿨타임 : ").Append(skillData.CoolTime).Append("초");
             
             skillNameText.text = sb.ToString();
         }

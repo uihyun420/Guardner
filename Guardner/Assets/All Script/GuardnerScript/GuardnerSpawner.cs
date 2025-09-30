@@ -12,7 +12,7 @@ public struct GuardnerPrefabInfo
 
 public class GuardnerSpawner : MonoBehaviour
 {
-    public HashSet<int> ownedGuardnerIds = new HashSet<int>();
+    public HashSet<int> ownedGuardnerIds = new HashSet<int>(); // 내가 가지고 있는 정원사
 
     public GuardnerPrefabInfo[] guardnerPrefabs;
     public List<GuardnerBehavior> spawnedGuardners = new List<GuardnerBehavior>();
@@ -37,8 +37,7 @@ public class GuardnerSpawner : MonoBehaviour
         else
         {
             ownedGuardnerIds.Add(11120);
-            ownedGuardnerIds.Add(11125);
-            ownedGuardnerIds.Add(11135);
+            ownedGuardnerIds.Add(11235);
             // 헬퍼 메서드로 저장
             SaveLoadManager.SaveOwnedGuardners(ownedGuardnerIds);
         }

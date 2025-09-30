@@ -226,7 +226,7 @@ public class StageClearUi : GenericWindow
         // 골드 지급
         if (mainMenuUi != null && totalReward > 0)
         {
-            mainMenuUi.AddMainUiGold(totalReward + bonusReward);
+           // mainMenuUi.AddMainUiGold(totalReward + bonusReward);
             SaveLoadManager.AddGold(totalReward + bonusReward);
             Debug.Log($"스테이지 {currentStage} 클리어 보상: {totalReward} 골드 지급");
         }
