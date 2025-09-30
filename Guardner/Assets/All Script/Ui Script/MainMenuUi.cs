@@ -23,7 +23,8 @@ public class MainMenuUi : GenericWindow
 
     [SerializeField] private GameObject tilemap;
     [SerializeField] private GameObject spawnRect;
-
+    [SerializeField] private Button dailyGiftButton;
+    [SerializeField] private DailyGiftUi dailyGiftUi;
     public int mainUiGold
     {
         get => SaveLoadManager.Data.Gold;
@@ -39,7 +40,7 @@ public class MainMenuUi : GenericWindow
         EnhanceButton.onClick.AddListener(OnClickEnhanceButton);
         inventoryButton.onClick.AddListener(OnClickInventoryButton);
         settingButton.onClick.AddListener(OnClickSettingButton);
-
+        dailyGiftButton.onClick.AddListener(dailyGiftUi.Open);
         SetMainUiGoldText();
     }
     private void Update()
