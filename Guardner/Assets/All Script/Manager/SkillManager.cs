@@ -2,6 +2,17 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
+
+public enum SkillEffectType
+{
+    Stun,
+    Damage,
+    Buff
+}
+
+
+
+
 public class SkillManager : MonoBehaviour
 {
     public GuardnerSkillTable guardnerSkillTable => DataTableManager.GuardnerSkillTable;
@@ -11,6 +22,14 @@ public class SkillManager : MonoBehaviour
 
     [SerializeField] protected GuardnerSpawner guardnerSpawner;
     [SerializeField] protected MonsterSpawner monsterSpawner;
+
+
+    [SerializeField] private GameObject stunEffectPrefab;
+    //[SerializeField] private GameObject reflectionEffectPrefab;
+    [SerializeField] private GameObject damageEffectPrefab;
+
+
+
 
     public void Init(GuardnerSkillData data)
     {
@@ -117,7 +136,7 @@ public class SkillManager : MonoBehaviour
         MonsterBehavior nearestMonster = null;
         float nearestDistance = float.MaxValue;
 
-        // spawnedMonsters 리스트 직접 순회 - 성능 최적화!
+        // spawnedMonsters 리스트 직접 순회 - 성능 최적화
         foreach (var monster in monsterSpawner.spawnedMonsters)
         {
             if (monster != null && !monster.IsDead)
@@ -143,6 +162,7 @@ public class SkillManager : MonoBehaviour
         if (selectSkill.Stun > 0)
         {
             targetMonster.Stun(selectSkill.Stun);
+            PlaySkillEffect(targetMonster.transform.position, SkillEffectType.Stun);
             Debug.Log($"Stun 적용: {selectSkill.Stun}초 (SkillID: {selectSkill.SkillID})");
         }
 
@@ -165,7 +185,8 @@ public class SkillManager : MonoBehaviour
             float attackPowerBoost = guardner.attackPower * selectSkill.AttackPowerBoost;
             float duration = selectSkill.Duration;
             guardner.AttackPowerBoost(attackPowerBoost, duration);
-            //Debug.Log($"AttackPowerBoost 적용: {attackPowerBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
+            PlaySkillEffect(guardner.transform.position, SkillEffectType.Buff);
+
         }
 
         // AttackSpeedBoost
@@ -174,7 +195,52 @@ public class SkillManager : MonoBehaviour
             float attackSpeedBoost = guardner.aps * selectSkill.AttackSpeedBoost;
             float duration = selectSkill.Duration;
             guardner.AttackSpeedBoost(attackSpeedBoost, duration);
+            PlaySkillEffect(guardner.transform.position, SkillEffectType.Buff);
             //Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
     }
+
+    public void PlaySkillEffect(Vector3 position, SkillEffectType effectType)
+    {
+        GameObject effectPrefab = null;
+
+        switch (effectType)
+        {
+            case SkillEffectType.Stun:
+                effectPrefab = stunEffectPrefab;
+                break;
+            case SkillEffectType.Damage:
+                effectPrefab = damageEffectPrefab;
+                break;
+            case SkillEffectType.Buff:
+                // 버프 이펙트는 가디언에게 적용되므로 여기서는 처리하지 않음
+                return;
+        }
+
+        if (effectPrefab != null)
+        {
+            GameObject effect = Instantiate(effectPrefab, position, Quaternion.identity);
+
+            // 파티클 시스템이 있다면 자동으로 삭제되도록 설정
+            ParticleSystem particles = effect.GetComponent<ParticleSystem>();
+            if (particles != null)
+            {
+                var main = particles.main;
+                Destroy(effect, main.duration + main.startLifetime.constantMax);
+            }
+            else
+            {
+                // 파티클이 없다면 2초 후 삭제
+                Destroy(effect, 2f);
+            }
+        }
+    }
+
+    // 몬스터가 데미지를 받을 때 호출할 메서드
+    public void PlayDamageEffect(Vector3 position)
+    {
+        PlaySkillEffect(position, SkillEffectType.Damage);
+    }
 }
+
+

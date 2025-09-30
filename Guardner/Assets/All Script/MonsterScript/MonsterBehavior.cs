@@ -36,6 +36,9 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
+
+    [SerializeField] private SkillManager skillManager;
+
     public void SetBattleUi(BattleUi ui)
     {
         battleUi = ui;
@@ -152,6 +155,12 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         hp -= damage;
         StartCoroutine(CoHitEffect());
         hpBar.SetHealth(hp);
+
+        if(skillManager != null)
+        {
+            skillManager.PlayDamageEffect(transform.position);
+        }
+
         if(hp <= 0)
         {
             hp = 0;

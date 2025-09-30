@@ -16736,6 +16736,10 @@ PrefabInstance:
       value: 55.30005
       objectReference: {fileID: 0}
     - target: {fileID: 3599166714817575054, guid: 566f8d2794340428c8ec23721fb1b7af, type: 3}
+      propertyPath: m_text
+      value: 5/5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3599166714817575054, guid: 566f8d2794340428c8ec23721fb1b7af, type: 3}
       propertyPath: m_fontSize
       value: 36
       objectReference: {fileID: 0}
@@ -21375,8 +21379,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guardnerSpawner: {fileID: 1794989048}
   monsterSpawner: {fileID: 125721413}
+  stunEffectPrefab: {fileID: 0}
+  damageEffectPrefab: {fileID: 2325481569229151742, guid: a6ce10d4e5e04404db5147e520895aec, type: 3}
   buffText: {fileID: 1947479415}
   deBuffText: {fileID: 525923609}
+  pullingWeedsEffectPrefab: {fileID: 2325481569229151742, guid: a6ce10d4e5e04404db5147e520895aec, type: 3}
+  morningWateringEffectPrefab: {fileID: 4436220594023338641, guid: 1faa45203103dbf478cf9a83af6a3eba, type: 3}
+  pestRepellentEffectPrefab: {fileID: 4436220594023338641, guid: 1faa45203103dbf478cf9a83af6a3eba, type: 3}
+  pruningEffectPrefab: {fileID: 5663818590087976858, guid: 04cffb8fdcffe3e4d9ec8465fac62636, type: 3}
+  sunlightControlEffectPrefab: {fileID: 0}
+  soilLevelingEffectPrefab: {fileID: 0}
+  fragranceBloomEffectPrefab: {fileID: 0}
+  pestExterminationEffectPrefab: {fileID: 0}
+  solarFocusEffectPrefab: {fileID: 0}
+  gardenFestivalEffectPrefab: {fileID: 0}
 --- !u!4 &1699866781
 Transform:
   m_ObjectHideFlags: 0
@@ -25530,6 +25546,10 @@ PrefabInstance:
       propertyPath: guardnerSpawner
       value: 
       objectReference: {fileID: 1794989048}
+    - target: {fileID: 8866255386916920349, guid: c10e909b2375c7243879e22a2d139ad6, type: 3}
+      propertyPath: stunEffectPrefab
+      value: 
+      objectReference: {fileID: 5663818590087976858, guid: 04cffb8fdcffe3e4d9ec8465fac62636, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

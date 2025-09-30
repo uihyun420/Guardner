@@ -3,9 +3,25 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+
+
+public enum PlayerSkillEffectType
+{
+    PullingWeeds,      // 잡초뽑기
+    MorningWatering,   // 아침물주기
+    PestRepellent,     // 해충퇴치제
+    Pruning,           // 가지치기
+    SunlightControl,   // 햇빛조절
+    SoilLeveling,      // 토양정리
+    FragranceBloom,    // 향기블룸
+    PestExtermination, // 해충박멸
+    SolarFocus,        // 태양광집중
+    GardenFestival     // 정원축제
+}
 
 public class PlayerSkillManager : SkillManager
 {
@@ -18,7 +34,16 @@ public class PlayerSkillManager : SkillManager
     private List<SkillEffect> activeSkillEffects = new List<SkillEffect>();
     private bool isBattleStarted = false;
 
-
+    [SerializeField] private GameObject pullingWeedsEffectPrefab;      // 잡초뽑기 이펙트
+    [SerializeField] private GameObject morningWateringEffectPrefab;   // 아침물주기 이펙트
+    [SerializeField] private GameObject pestRepellentEffectPrefab;     // 해충퇴치제 이펙트
+    [SerializeField] private GameObject pruningEffectPrefab;           // 가지치기 이펙트
+    [SerializeField] private GameObject sunlightControlEffectPrefab;   // 햇빛조절 이펙트
+    [SerializeField] private GameObject soilLevelingEffectPrefab;      // 토양정리 이펙트
+    [SerializeField] private GameObject fragranceBloomEffectPrefab;    // 향기블룸 이펙트
+    [SerializeField] private GameObject pestExterminationEffectPrefab; // 해충박멸 이펙트
+    [SerializeField] private GameObject solarFocusEffectPrefab;        // 태양광집중 이펙트
+    [SerializeField] private GameObject gardenFestivalEffectPrefab;    // 정원축제 이펙트
 
     public void SetBattleState(bool isStarted)
     {
@@ -176,6 +201,62 @@ public class PlayerSkillManager : SkillManager
         }
     }
 
+    public void PlayPlayerSkillEffect(Vector3 position, PlayerSkillEffectType effectType)
+    {
+        GameObject effectPrefab = null;
+
+        switch (effectType)
+        {
+            case PlayerSkillEffectType.PullingWeeds:
+                effectPrefab = pullingWeedsEffectPrefab;
+                break;
+            case PlayerSkillEffectType.MorningWatering:
+                effectPrefab = morningWateringEffectPrefab;
+                break;
+            case PlayerSkillEffectType.PestRepellent:
+                effectPrefab = pestRepellentEffectPrefab;
+                break;
+            case PlayerSkillEffectType.Pruning:
+                effectPrefab = pruningEffectPrefab;
+                break;
+            case PlayerSkillEffectType.SunlightControl:
+                effectPrefab = sunlightControlEffectPrefab;
+                break;
+            case PlayerSkillEffectType.SoilLeveling:
+                effectPrefab = soilLevelingEffectPrefab;
+                break;
+            case PlayerSkillEffectType.FragranceBloom:
+                effectPrefab = fragranceBloomEffectPrefab;
+                break;
+            case PlayerSkillEffectType.PestExtermination:
+                effectPrefab = pestExterminationEffectPrefab;
+                break;
+            case PlayerSkillEffectType.SolarFocus:
+                effectPrefab = solarFocusEffectPrefab;
+                break;
+            case PlayerSkillEffectType.GardenFestival:
+                effectPrefab = gardenFestivalEffectPrefab;
+                break;
+        }
+
+        if (effectPrefab != null)
+        {
+            GameObject effect = Instantiate(effectPrefab, position, Quaternion.identity);
+
+            // 파티클 시스템이 있다면 자동으로 삭제되도록 설정
+            ParticleSystem particles = effect.GetComponent<ParticleSystem>();
+            if (particles != null)
+            {
+                var main = particles.main;
+                Destroy(effect, main.duration + main.startLifetime.constantMax);
+            }
+            else
+            {
+                //파티클이 없다면 삭제
+                Destroy(effect, 0.5f);
+            }
+        }
+    }
 
 
     private List<MonsterBehavior> GetAliveMonsters()
@@ -233,6 +314,7 @@ public class PlayerSkillManager : SkillManager
                 int damage = Mathf.RoundToInt(monster.monsterData.HP * reductionPercent);
 
                 monster.Ondamage(damage);
+                PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.PullingWeeds);
                 Debug.Log($"잡초 뽑기: {monster.monsterData.Name}에게 {damage} 데미지 (HP {reductionPercent * 100}% 감소)");
             }
         }
@@ -254,6 +336,8 @@ public class PlayerSkillManager : SkillManager
                 float boostAmount = guardner.aps * boostPercent;
                 guardner.AttackSpeedBoost(boostAmount, duration);
                 Debug.Log($"아군 가드너 {guardner.name} 공격속도 {boostPercent * 100}% 증가 ({duration}초)");
+                PlayPlayerSkillEffect(guardner.transform.position, PlayerSkillEffectType.MorningWatering);
+
             }
         }
 
@@ -273,6 +357,7 @@ public class PlayerSkillManager : SkillManager
             {
                 monster.StopCoroutine("CoSpeedDebuff");
                 monster.StartCoroutine(monster.CoSpeedDebuff(reducePercent, reducePercent, duration));
+                PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.PestRepellent);
             }
         }
     }
@@ -289,6 +374,7 @@ public class PlayerSkillManager : SkillManager
                 float monsterHpReducePercent = Mathf.Abs(skillData.HPReduction);
                 int damage = Mathf.RoundToInt(monster.monsterData.HP * monsterHpReducePercent);
                 monster.Ondamage(damage);
+                PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.Pruning);
             }
         }
     }
@@ -313,8 +399,9 @@ public class PlayerSkillManager : SkillManager
                 guardner.hasCriticalBuff = true;
                 guardner.buffCriticalChance = criticalValue;  // 확률
                 guardner.buffCriticalDamage = criticalValue;  // 데미지도 같은 값
-
                 StartCoroutine(RemoveCriticalBuff(guardner, duration));
+                PlayPlayerSkillEffect(guardner.transform.position, PlayerSkillEffectType.SunlightControl);
+
             }
         }
     }
