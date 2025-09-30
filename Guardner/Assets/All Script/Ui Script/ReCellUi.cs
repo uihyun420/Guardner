@@ -14,6 +14,7 @@ public class ReCellUi : GenericWindow
     [SerializeField] private GameObject spawnRect;
     [SerializeField] private GuardnerSpawnUi guardnerSpawnUi;
     [SerializeField] private ScreenTouch screenTouch;
+    [SerializeField] private Button closeButton;
     
 
     private GuardnerBehavior targetGuardner; // 추가: 현재 선택된 가드너 참조
@@ -22,6 +23,7 @@ public class ReCellUi : GenericWindow
     private void Awake()
     {
         reCellButton.onClick.AddListener(OnClickReCellButton);
+        closeButton.onClick.AddListener(Close);
     }
 
     public void Open(GuardnerBehavior guardner)
