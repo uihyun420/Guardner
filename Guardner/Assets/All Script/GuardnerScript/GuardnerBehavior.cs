@@ -255,11 +255,4 @@ public class GuardnerBehavior : MonoBehaviour
         yield return new WaitForSeconds(duration);
         aps -= amount; // 적용시간 지나면 다시 돌아오게 
     }
-
-    //public IEnumerator CoCleanDebuff()
-
-    //public void CleanDebuff(float duration)
-    //{
-    //    StartCoroutine()
-    //}
 }

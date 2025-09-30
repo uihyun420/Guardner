@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ScreenTouch : MonoBehaviour
 {
+    [SerializeField] private ReCellUi reCellUi;
     public BoxCollider2D[] touchAreas;
     private int selectedAreaIndex = -1; // 선택된 영역의 인덱스
 
@@ -67,7 +68,13 @@ public class ScreenTouch : MonoBehaviour
             if (guardner != null)
             {
                 guardner.ToggleRangeDisplay();
-                break; // 한 번만 처리
+
+                if(reCellUi != null)
+                {
+                    reCellUi.Open(guardner);    
+                }
+
+                break; 
             }
         }
 

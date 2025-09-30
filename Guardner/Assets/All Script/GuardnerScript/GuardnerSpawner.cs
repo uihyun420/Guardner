@@ -126,7 +126,6 @@ public class GuardnerSpawner : MonoBehaviour
     public Vector2 GetSelectedAreaPosition()
     {
         int selectedIndex = screenTouch.GetSelectedAreaIndex();
-        Debug.Log($"¿Œµ¶Ω∫ : {selectedIndex}");
         return spawnPos[selectedIndex].transform.position;
     }
 
