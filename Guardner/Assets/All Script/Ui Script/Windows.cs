@@ -7,4 +7,5 @@ public enum WindowType
     PlayerSkillSetUi,
     MainMenuUi,
     DictionaryUi,
+    Setting,   
 }

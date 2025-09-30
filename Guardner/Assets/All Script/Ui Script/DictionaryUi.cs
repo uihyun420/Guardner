@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +14,19 @@ public class DictionaryUi : GenericWindow
 
     [SerializeField] private Button closeButton;
 
+    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private MainMenuUi mainMenu;
+
+    [SerializeField] private TextMeshProUGUI guardnerCountText;    
+    private int maxGuardnerCount = 12;
+
     private HashSet<int> ownedGuardnerIds = new HashSet<int>(); // 가지고있는 가드너 목록
+
+    private void Update()
+    {
+        SetGoldText();
+        SetGuardnerText();
+    }
 
     private void Start()
     {
@@ -22,7 +36,6 @@ public class DictionaryUi : GenericWindow
     public override void Open()
     {
         base.Open();
-        //InitializeOwnedGuardenr();
         DisplayOwnedGuardners();
     }
 
@@ -34,6 +47,14 @@ public class DictionaryUi : GenericWindow
     public void OnClickCloseButton()
     {
         Close();
+    }
+
+    private void SetGuardnerText()
+    {
+        var sb = new StringBuilder();
+        sb.Clear();
+        sb.Append("정원사 ").Append("(").Append(guardnerSpawner.ownedGuardnerIds.Count).Append(" / ").Append(maxGuardnerCount).Append(")");
+        guardnerCountText.text = sb.ToString();
     }
 
     private void InitializeOwnedGuardenr()
@@ -106,6 +127,11 @@ public class DictionaryUi : GenericWindow
     public bool HasGuardner(int guardnerId)
     {
         return ownedGuardnerIds.Contains(guardnerId);
+    }
+
+    private void SetGoldText()
+    {
+        goldText.text = $"{mainMenu.mainUiGold}";
     }
 
 }

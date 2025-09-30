@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,9 @@ public class GuardnerEnhanceUi : GenericWindow
     [SerializeField] private InventoryUi inventoryUi;
     [SerializeField] private GuardnerSpawner guardnerSpawner;
 
+    [SerializeField] private MainMenuUi mainMenu;
+    [SerializeField] private TextMeshProUGUI goldText;
+
     // 현재 강화 레벨 정보 (예시: 실제로는 세이브 데이터 등에서 불러와야 함)
     private Dictionary<int, int> guardnerLevelDict = new Dictionary<int, int>();
 
@@ -32,6 +36,10 @@ public class GuardnerEnhanceUi : GenericWindow
     {
         BackButton.onClick.AddListener(OnClickBackButton);
         guardnerGatchButton.onClick.AddListener(OnClickGuardnerGatchButton);
+    }
+    private void Update()
+    {
+        SetGoldText();
     }
     public override void Open()
     {
@@ -152,4 +160,10 @@ public class GuardnerEnhanceUi : GenericWindow
         // 예외 상황: 보유 가드너가 없을 때 전체 반환
         return GetAllGuardnerIdsAll();
     }
+
+    private void SetGoldText()
+    {
+        goldText.text = $"{mainMenu.mainUiGold}";
+    }
+
 }

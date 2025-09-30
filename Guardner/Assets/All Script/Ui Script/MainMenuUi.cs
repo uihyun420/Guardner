@@ -17,7 +17,8 @@ public class MainMenuUi : GenericWindow
     [SerializeField] private Button EnhanceButton;
     [SerializeField] private GuardnerEnhanceUi guardnerEnhanceUi;
     [SerializeField] private TextMeshProUGUI goldText;
-
+    [SerializeField] private Button settingButton;
+    [SerializeField] private SettingUi settingUi;
     [SerializeField] private StageChoiceUi stageChoiceUi;    
 
     [SerializeField] private GameObject tilemap;
@@ -37,6 +38,7 @@ public class MainMenuUi : GenericWindow
         DictionaryButton.onClick.AddListener(OnClickDictionaryButton);
         EnhanceButton.onClick.AddListener(OnClickEnhanceButton);
         inventoryButton.onClick.AddListener(OnClickInventoryButton);
+        settingButton.onClick.AddListener(OnClickSettingButton);
 
         SetMainUiGoldText();
     }
@@ -63,20 +65,16 @@ public class MainMenuUi : GenericWindow
 
     private void OnBattleStartButton()
     {
-        //Close();
-        //int startingStageId = SaveLoadManager.GetStartingStageId();
-        //gameManager.StartGameStage(startingStageId);
-
-        //if (windowManager != null)
-        //{
-        //    windowManager.Open(WindowType.Battle);
-        //}
-        //else if (battleUi != null)
-        //{
-        //    battleUi.Open();
-        //}
-
         stageChoiceUi.Open();
+    }
+
+    private void OnClickSettingButton()
+    {
+        if(windowManager != null)
+        {
+            windowManager.Open(WindowType.Setting);
+        }
+        settingUi.Open();
     }
 
     private void OnClickDictionaryButton()
