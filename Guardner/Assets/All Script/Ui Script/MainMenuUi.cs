@@ -53,7 +53,6 @@ public class MainMenuUi : GenericWindow
         base.Open();
         tilemap.SetActive(false);
         spawnRect.SetActive(false);
-
         SetMainUiGoldText();
     }
 

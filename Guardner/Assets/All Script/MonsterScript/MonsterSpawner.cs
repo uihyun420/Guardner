@@ -72,4 +72,10 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
+
+    public void StopAllSpawning()
+    {
+        StopAllCoroutines();
+        CancelInvoke();
+    }
 }

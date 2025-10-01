@@ -20,7 +20,8 @@ public class BattleUi : GenericWindow
     [SerializeField] private Button readyTextButton;
     [SerializeField] private Button BattleTimerButton;
     [SerializeField] private GameObject door;
-    
+    [SerializeField] private SettingUi settingUi;
+    [SerializeField] private Button settingUiButton;
     public void ReadyTimeSetZero() // Å×½ºÆ® 
     {
         readyTimer = 0f;
@@ -81,7 +82,7 @@ public class BattleUi : GenericWindow
 
 
         BattleTimerButton.onClick.AddListener(BattleTimerSetZero);
-
+        settingUiButton.onClick.AddListener(settingUi.Open);
 
         StartCoroutine(CoSetReadyTimeUi());
     }
