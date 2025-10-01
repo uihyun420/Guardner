@@ -22,7 +22,7 @@ public class BattleUi : GenericWindow
     [SerializeField] private GameObject door;
     [SerializeField] private SettingUi settingUi;
     [SerializeField] private Button settingUiButton;
-    public void ReadyTimeSetZero() // 테스트 
+    public void ReadyTimeSetZero() 
     {
         readyTimer = 0f;
     }
@@ -55,7 +55,7 @@ public class BattleUi : GenericWindow
     private bool isReadyTime = true;
 
     public int gold;
-    public MonsterSpawner monsterSpawner; // Inspector에서 연결
+    public MonsterSpawner monsterSpawner; 
     public GuardnerSpawner guardnerSpawner;
     StringBuilder sb = new StringBuilder();
 
@@ -63,7 +63,7 @@ public class BattleUi : GenericWindow
     [SerializeField] private GameObject battleStartObject;
     [SerializeField] private StageManager stageManager;
     [SerializeField] private PlayerSkillManager playerSkillManager;
-    [SerializeField] private PlayerSkillSetUi playerSkillSetUi; // Inspector에서 연결
+    [SerializeField] private PlayerSkillSetUi playerSkillSetUi; 
 
     // 각 스킬 슬롯에 할당된 스킬 ID 저장
     private int assignedSkill1 = -1;
@@ -192,6 +192,7 @@ public class BattleUi : GenericWindow
             SetReadyText();
             if(readyTimer <= 0)
             {
+                readyTextButton.gameObject.SetActive(false);
                 isReadyTime = false;
                 StartCoroutine(CoSetBattleStart());
                 stageManager.StartStage();
@@ -253,6 +254,7 @@ public class BattleUi : GenericWindow
         if(readyTimer <= 0)
         {
             readyTimer = 0;
+
         }
         sb.Clear();
         sb.Append(Mathf.FloorToInt(readyTimer)).Append("초");
@@ -272,6 +274,7 @@ public class BattleUi : GenericWindow
     }
     public override void Open()
     {
+        readyTextButton.gameObject.SetActive(true);
         base.Open();
         var doorBehavior = door.GetComponent<DoorBehavior>();
         if(doorBehavior != null)
@@ -312,6 +315,10 @@ public class BattleUi : GenericWindow
     public void UpdateGuardnerCount()
     {
         canSpawnGuardnerCount--;
+        if (canSpawnGuardnerCount < 0)
+        {
+            canSpawnGuardnerCount = 0;
+        }
         SetGuardnerSpawnCount();
     }
 
@@ -402,5 +409,94 @@ public class BattleUi : GenericWindow
         playerSkillSetUi.IsBattleState(true);
         yield return new WaitForSeconds(1.5f);
         battleStartObject.gameObject.SetActive(false);
+    }
+
+
+    // 초기화
+    public void CompleteReset()
+    {
+        // 모든 코루틴 정지
+        StopAllCoroutines();
+
+        // 타이머 및 상태 초기화
+        battleTimer = 180f;
+        readyTimer = 60f;
+        isReadyTime = true;
+
+        // 골드 초기화
+        gold = 150;
+
+        // 정원사 수 초기화
+        canSpawnGuardnerCount = maxGuardnerCount;
+
+        // 스킬 슬롯 초기화
+        assignedSkill1 = -1;
+        assignedSkill2 = -1;
+        assignedSkill3 = -1;
+
+        // UI 초기화
+        UpdateSkillButtonUI(skill1, -1);
+        UpdateSkillButtonUI(skill2, -1);
+        UpdateSkillButtonUI(skill3, -1);
+        text1.text = "+";
+        text2.text = "+";
+        text3.text = "+";
+
+        // 스킬 버튼 상태 초기화
+        SetSkillButtonInteractable(1, true);
+        SetSkillButtonInteractable(2, true);
+        SetSkillButtonInteractable(3, true);
+
+        // 스킬 버튼 fillAmount 초기화
+        var skill1Image = skill1.GetComponent<Image>();
+        var skill2Image = skill2.GetComponent<Image>();
+        var skill3Image = skill3.GetComponent<Image>();
+        if (skill1Image != null) skill1Image.fillAmount = 1f;
+        if (skill2Image != null) skill2Image.fillAmount = 1f;
+        if (skill3Image != null) skill3Image.fillAmount = 1f;
+
+        // 쿨타임 텍스트 초기화
+        if (coolTimeText1 != null) coolTimeText1.text = "";
+        if (coolTimeText2 != null) coolTimeText2.text = "";
+        if (coolTimeText3 != null) coolTimeText3.text = "";
+
+        // PlayerSkillManager 초기화
+        if (playerSkillManager != null)
+        {
+            playerSkillManager.lastUsedTime.Clear();
+            playerSkillManager.SetBattleState(false);
+        }
+
+        // PlayerSkillSetUi 초기화
+        if (playerSkillSetUi != null)
+        {
+            playerSkillSetUi.IsBattleState(false);
+        }
+
+        // 몬스터와 정원사 클리어
+        if (monsterSpawner != null)
+        {
+            monsterSpawner.ClearMonster();
+        }
+        if (guardnerSpawner != null)
+        {
+            guardnerSpawner.ClearGuardner();
+        }
+
+        // 문 초기화
+        var doorBehavior = door.GetComponent<DoorBehavior>();
+        if (doorBehavior != null)
+        {
+            doorBehavior.Init();
+        }
+
+        // Ready 버튼 활성화
+        readyTextButton.gameObject.SetActive(true);
+
+        // 게임 오브젝트 상태 초기화
+        if (readyTimeObject != null) readyTimeObject.SetActive(false);
+        if (battleStartObject != null) battleStartObject.SetActive(false);
+
+        Debug.Log("BattleUi 완전 초기화 완료");
     }
 }

@@ -76,14 +76,14 @@ public class GuardnerSpawner : MonoBehaviour
 
 
 
-    public void SpawnGuardner(int guardnerId, Vector2 spawnPos)
+    public bool SpawnGuardner(int guardnerId, Vector2 spawnPos)
     {
         var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
 
         int summonGold = guardnerData.SummonGold;
         if(battleUi.gold < summonGold)
         {
-            return;
+            return false;
         }
 
         battleUi.gold -= summonGold;
@@ -105,8 +105,6 @@ public class GuardnerSpawner : MonoBehaviour
                 // 강화된 능력치로 덮어쓰기
                 behavior.attackPower = enhancedStats.AttackPower;
                 behavior.aps = enhancedStats.AttackSpeed;
-
-                Debug.Log($"강화된 가드너 소환! Lv.{enhancedStats.Level} - 공격력: {enhancedStats.AttackPower}, 공격속도: {enhancedStats.AttackSpeed}");
             }
             else
             {
@@ -115,11 +113,12 @@ public class GuardnerSpawner : MonoBehaviour
             }
             
             spawnedGuardners.Add(behavior);
-            Debug.Log($"소환된 가드너 이름: {behavior.name}, 아이디 {behavior.id}, 공격력 {behavior.attackPower}, 공격범위 {behavior.attackRange}, 공격속도 {behavior.aps}");
+            return true; // 소환 성공
         }
         else
         {
             Debug.LogWarning($"아이디 {guardnerId}에 해당하는 프리팹이 없습니다.");
+            return false;
         }
     }
 

@@ -39,31 +39,34 @@ public class SettingUi : GenericWindow
 
     private void OnClickMainMenuButton()
     {
-        if(windowManager != null)
+        Time.timeScale = 1;
+
+        if (stageManager != null)
+        {
+            stageManager.StageStop();
+        }
+
+        if (monsterSpawner != null)
+        {
+            monsterSpawner.StopAllCoroutines();
+            monsterSpawner.gameObject.SetActive(false);
+        }
+
+        if (battleUi != null)
+        {
+            battleUi.CompleteReset();
+        }
+
+        if (windowManager != null)
         {
             windowManager.Open(WindowType.MainMenuUi);
         }
 
-        guardnerSpawner.gameObject.SetActive(false);
-        monsterSpawner.gameObject.SetActive(false);
-
-        monsterSpawner.StopAllCoroutines();
-        stageManager.StageStop();
-
-
-        if (battleUi != null)
+        if (mainMenuUi != null)
         {
-            if (battleUi.guardnerSpawner != null)
-            {
-                battleUi.guardnerSpawner.ClearGuardner();
-            }
-            if (battleUi.monsterSpawner != null)
-            {
-                battleUi.monsterSpawner.ClearMonster();
-            }
+            mainMenuUi.Open();
         }
 
-        mainMenuUi.Open();
         Close();
     }
 

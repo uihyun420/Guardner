@@ -15,7 +15,7 @@ public class GuardnerSpawnUi : GenericWindow
     [SerializeField] private BattleUi battleUi;
     [SerializeField] private Button ExitButton;
     [SerializeField] private ScreenTouch screenTouch; // ScreenTouch 참조 추가
-
+    [SerializeField] private ReCellUi reCellUi;
 
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
@@ -28,6 +28,9 @@ public class GuardnerSpawnUi : GenericWindow
 
     public override void Open()
     {
+        reCellUi.gameObject.SetActive(false);
+        reCellUi.enabled = false;
+
         selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
         if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
         {
@@ -166,8 +169,10 @@ public class GuardnerSpawnUi : GenericWindow
                 Debug.Log("가드너가 이미 존재합니다.");
                 return;
             }
-            guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos);
-            battleUi.UpdateGuardnerCount();
+           if(guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos))
+            {
+                battleUi.UpdateGuardnerCount();
+            }
         }
         Close();
     }

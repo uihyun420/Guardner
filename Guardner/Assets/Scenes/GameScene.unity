@@ -6364,7 +6364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_margin.z
-      value: -0.23891449
+      value: 90.76246
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_fontStyle
@@ -8347,6 +8347,7 @@ MonoBehaviour:
   battleUi: {fileID: 1466228247}
   ExitButton: {fileID: 1128696912}
   screenTouch: {fileID: 585887588}
+  reCellUi: {fileID: 2134871458}
 --- !u!1 &583486649
 GameObject:
   m_ObjectHideFlags: 0
@@ -8640,6 +8641,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3534694765422991707, guid: f6e8e0eb672ce4c61bd9ba7c56af32b5, type: 3}
   m_PrefabInstance: {fileID: 286496494}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &664680236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664680237}
+  - component: {fileID: 664680238}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &664680237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664680236}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 404.76373, y: 1382.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &664680238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664680236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f160fb4a813a6147a35d2fb6dbfc293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &672967117 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8066916409468396536, guid: 566f8d2794340428c8ec23721fb1b7af, type: 3}
@@ -27172,7 +27217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_margin.x
-      value: 0.9445343
+      value: 3.2194977
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_margin.y
@@ -27180,7 +27225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_margin.z
-      value: 0.8125534
+      value: 48.58825
       objectReference: {fileID: 0}
     - target: {fileID: 1045039387887379247, guid: b12964784e0e0784984d1ef5174541da, type: 3}
       propertyPath: m_fontStyle
@@ -31702,3 +31747,4 @@ SceneRoots:
   - {fileID: 1614417558}
   - {fileID: 3287183434857732469}
   - {fileID: 1699866781}
+  - {fileID: 664680237}
