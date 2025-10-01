@@ -6,24 +6,32 @@ using UnityEngine.UI;
 
 public class MainMenuUi : GenericWindow
 {
+    [Header("Button")]
     [SerializeField] private Button battleStartButton;
     [SerializeField] private Button DictionaryButton;
-    [SerializeField] private StageManager stageManager;
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private BattleUi battleUi;
-    [SerializeField] private DictionaryUi dictionaryUi;
-    [SerializeField] private InventoryUi inventoryUi;
     [SerializeField] private Button inventoryButton;
     [SerializeField] private Button EnhanceButton;
-    [SerializeField] private GuardnerEnhanceUi guardnerEnhanceUi;
-    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private Button dailyGiftButton;
     [SerializeField] private Button settingButton;
-    [SerializeField] private SettingUi settingUi;
+
+    [Header("UI")]
+    [SerializeField] private DictionaryUi dictionaryUi;
+    [SerializeField] private InventoryUi inventoryUi;
+    [SerializeField] private BattleUi battleUi;
+    [SerializeField] private DailyGiftUi dailyGiftUi;
     [SerializeField] private StageChoiceUi stageChoiceUi;
+    [SerializeField] private GuardnerEnhanceUi guardnerEnhanceUi;
+    [SerializeField] private SettingUi settingUi;
+
+    [Header("Manager")]
+    [SerializeField] private StageManager stageManager;
+    [SerializeField] private GameManager gameManager;
+
+    [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private GameObject tilemap;
     [SerializeField] private GameObject spawnRect;
-    [SerializeField] private Button dailyGiftButton;
-    [SerializeField] private DailyGiftUi dailyGiftUi;
+ 
+
     public int mainUiGold
     {
         get => SaveLoadManager.Data.Gold;
@@ -54,12 +62,6 @@ public class MainMenuUi : GenericWindow
         spawnRect.SetActive(false);
         SetMainUiGoldText();
 
-        //if (inventoryUi != null)
-        //{
-        //    inventoryUi.gameObject.SetActive(true);
-        //    inventoryUi.LoadInventoryData(); 
-        //    inventoryUi.gameObject.SetActive(false);
-        //}
         if (inventoryUi != null)
         {
             inventoryUi.LoadInventoryData();
