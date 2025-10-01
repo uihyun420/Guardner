@@ -152,12 +152,28 @@ public class SoundManager : MonoBehaviour
 
     public void PlayMainBGM(string clipName)
     {
+        Debug.Log($"PlayMainBGM 호출됨: {clipName}, 호출 위치: {System.Environment.StackTrace}");
+
+        if (mainBGM != null && mainBGM.clip != null && mainBGM.clip.name == clipName && mainBGM.isPlaying)
+            return;
+
+        if (battleBGM != null && battleBGM.isPlaying)
+            battleBGM.Stop();
+
         currentBGMSource = mainBGM;
         PlayBGM(clipName, mainBGM);
     }
 
     public void PlayBattleBGM(string clipName)
     {
+        Debug.Log($"PlayBattleBGM 호출됨: {clipName}, 호출 위치: {System.Environment.StackTrace}");
+
+        if (battleBGM != null && battleBGM.clip != null && battleBGM.clip.name == clipName && battleBGM.isPlaying)
+            return;
+
+        if (mainBGM != null && mainBGM.isPlaying)
+            mainBGM.Stop();
+
         currentBGMSource = battleBGM;
         PlayBGM(clipName, battleBGM);
     }

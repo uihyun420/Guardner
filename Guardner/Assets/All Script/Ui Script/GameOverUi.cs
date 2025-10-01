@@ -39,6 +39,7 @@ public class GameOverUi : GenericWindow
     {
         base.Open();
         spawnRect.SetActive(false);
+        SoundManager.soundManager.PlaySFX("GameOverSfx");
 
     }
     public override void Close()
@@ -49,6 +50,7 @@ public class GameOverUi : GenericWindow
 
     public void OnClickRetryButton()
     {
+        SoundManager.soundManager.PlaySFX("UiClick2Sfx");
         // 재시작 시 현재 스테이지 ID를 정적 변수에 저장
         RetryStageId = StageManager.stageData.ID;
         // 씬 로드 후 Battle UI를 열도록 설정
@@ -61,6 +63,7 @@ public class GameOverUi : GenericWindow
 
     public void OnClickMainMenuButton()
     {
+        SoundManager.soundManager.PlaySFX("UiClick2Sfx");
         NextWindowAfterLoad = WindowType.MainMenuUi;
         RetryStageId = 0; // 메인 메뉴로 갈 때는 재시작 ID 초기화
 
@@ -68,15 +71,7 @@ public class GameOverUi : GenericWindow
         string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
-    //public void OnClickMainMenuButton()
-    //{
-    //    NextWindowAfterLoad = WindowType.MainMenuUi;
-    //    RetryStageId = StageManager.stageData.ID;
 
-    //    Time.timeScale = 1;
-    //    string sceneName = SceneManager.GetActiveScene().name;
-    //    SceneManager.LoadScene(sceneName);
-    //}
 
     private void SetGameOverStageText()
     {

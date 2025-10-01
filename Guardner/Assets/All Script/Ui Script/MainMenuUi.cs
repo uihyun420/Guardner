@@ -47,8 +47,15 @@ public class MainMenuUi : GenericWindow
         EnhanceButton.onClick.AddListener(OnClickEnhanceButton);
         inventoryButton.onClick.AddListener(OnClickInventoryButton);
         settingButton.onClick.AddListener(OnClickSettingButton);
-        dailyGiftButton.onClick.AddListener(dailyGiftUi.Open);
+        dailyGiftButton.onClick.AddListener(() => 
+        {
+            SoundManager.soundManager.PlaySFX("UiClickSfx");
+            dailyGiftUi.Open();
+        }); 
         SetMainUiGoldText();
+        battleUi.gameObject.SetActive(false);
+
+        SoundManager.soundManager.PlayMainBGM("GameStartBGM");
     }
     private void Update()
     {
@@ -58,6 +65,9 @@ public class MainMenuUi : GenericWindow
     public override void Open()
     {
         base.Open();
+        SoundManager.soundManager.StopBGM();
+        SoundManager.soundManager.PlayMainBGM("GameStartBGM");
+
         tilemap.SetActive(false);
         spawnRect.SetActive(false);
         SetMainUiGoldText();
@@ -73,11 +83,13 @@ public class MainMenuUi : GenericWindow
         base.Close();
         tilemap.SetActive(true);
         spawnRect.SetActive(true);
+        battleUi.gameObject.SetActive(true);
     }
 
     private void OnBattleStartButton()
     {
         stageChoiceUi.Open();
+        SoundManager.soundManager.PlaySFX("UiClickSfx");
     }
 
     private void OnClickSettingButton()
@@ -86,11 +98,13 @@ public class MainMenuUi : GenericWindow
         {
             windowManager.Open(WindowType.Setting);
         }
+        SoundManager.soundManager.PlaySFX("UiClickSfx");
         settingUi.Open();
     }
 
     private void OnClickDictionaryButton()
     {
+        SoundManager.soundManager.PlaySFX("UiClickSfx");
         dictionaryUi.Open();
     }
 
@@ -112,11 +126,12 @@ public class MainMenuUi : GenericWindow
     public void OnClickEnhanceButton()
     {
         guardnerEnhanceUi.Open();
-
+        SoundManager.soundManager.PlaySFX("UiClickSfx");
     }
 
     public void OnClickInventoryButton()
     {
+        SoundManager.soundManager.PlaySFX("UiClickSfx");
         inventoryUi.Open();
     }
 

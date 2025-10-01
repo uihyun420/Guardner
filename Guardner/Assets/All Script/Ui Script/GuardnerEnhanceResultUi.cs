@@ -161,8 +161,9 @@ public class GuardnerEnhanceResultUi : GenericWindow
         }
 
         Debug.Log($"{nextData.Name} 강화 성공! Lv.{currentLevel - 1} → Lv.{currentLevel}");
+        SoundManager.soundManager.PlaySFX("LevelUpSfx");
 
-        // 7. 필요시 강화 성공 이펙트, 사운드 등 추가
+
     }
 
     private void OnClickExitButton()

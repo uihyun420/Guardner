@@ -13,16 +13,16 @@ public class BattleUi : GenericWindow
     public Button skill3;
 
     public GameObject blockTouchScreenPanel;
-    public SkillManager skillManager;   
-    public TextMeshProUGUI battleTimeText;    
+    public SkillManager skillManager;
+    public TextMeshProUGUI battleTimeText;
     public TextMeshProUGUI goldText;
-    
+
     [SerializeField] private Button readyTextButton;
     [SerializeField] private Button BattleTimerButton;
     [SerializeField] private GameObject door;
     [SerializeField] private SettingUi settingUi;
     [SerializeField] private Button settingUiButton;
-    public void ReadyTimeSetZero() 
+    public void ReadyTimeSetZero()
     {
         readyTimer = 0f;
     }
@@ -34,8 +34,8 @@ public class BattleUi : GenericWindow
     public void ResetBattleTimer()
     {
         battleTimer = 180f;
-        readyTimer = 60f; 
-        isReadyTime = true; 
+        readyTimer = 60f;
+        isReadyTime = true;
     }
 
     [SerializeField] private TextMeshProUGUI coolTimeText1;
@@ -55,7 +55,7 @@ public class BattleUi : GenericWindow
     private bool isReadyTime = true;
 
     public int gold;
-    public MonsterSpawner monsterSpawner; 
+    public MonsterSpawner monsterSpawner;
     public GuardnerSpawner guardnerSpawner;
     StringBuilder sb = new StringBuilder();
 
@@ -63,7 +63,7 @@ public class BattleUi : GenericWindow
     [SerializeField] private GameObject battleStartObject;
     [SerializeField] private StageManager stageManager;
     [SerializeField] private PlayerSkillManager playerSkillManager;
-    [SerializeField] private PlayerSkillSetUi playerSkillSetUi; 
+    [SerializeField] private PlayerSkillSetUi playerSkillSetUi;
 
     // 각 스킬 슬롯에 할당된 스킬 ID 저장
     private int assignedSkill1 = -1;
@@ -74,15 +74,34 @@ public class BattleUi : GenericWindow
     {
         // 스킬 버튼 이벤트 연결
         if (skill1 != null)
-            skill1.onClick.AddListener(() => OnSkillSlotClicked(1));
+            skill1.onClick.AddListener(() => 
+            {
+                SoundManager.soundManager.PlaySFX("UiClickSfx");
+                OnSkillSlotClicked(1);
+            });
         if (skill2 != null)
-            skill2.onClick.AddListener(() => OnSkillSlotClicked(2));
+            skill2.onClick.AddListener(() => 
+            {
+                SoundManager.soundManager.PlaySFX("UiClickSfx");
+                OnSkillSlotClicked(2);
+            });
         if (skill3 != null)
-            skill3.onClick.AddListener(() => OnSkillSlotClicked(3));
+            skill3.onClick.AddListener(() => 
+            {
+                SoundManager.soundManager.PlaySFX("UiClickSfx");
+                OnSkillSlotClicked(3);
+            });
 
-
-        BattleTimerButton.onClick.AddListener(BattleTimerSetZero);
-        settingUiButton.onClick.AddListener(settingUi.Open);
+        BattleTimerButton.onClick.AddListener(() => 
+        {
+            SoundManager.soundManager.PlaySFX("UiClickSfx");
+            BattleTimerSetZero();
+        });
+        settingUiButton.onClick.AddListener(() => 
+        {
+            SoundManager.soundManager.PlaySFX("UiClickSfx");
+            settingUi.Open();
+        });
 
         StartCoroutine(CoSetReadyTimeUi());
     }
@@ -92,13 +111,13 @@ public class BattleUi : GenericWindow
     {
         int assignedSkillId = GetAssignedSkillId(slotNumber);
 
-        if(isReadyTime)
+        if (isReadyTime)
         {
             playerSkillSetUi.OpenForSkillSlot(slotNumber);
         }
         else
         {
-            if(assignedSkillId != -1)
+            if (assignedSkillId != -1)
             {
                 playerSkillManager.UsePlayerSkill(assignedSkillId);
                 SetSkillButtonInteractable(slotNumber, false); // 버튼 비활성화
@@ -127,6 +146,8 @@ public class BattleUi : GenericWindow
                 text3.text = string.Empty;
                 break;
         }
+        SoundManager.soundManager.PlaySFX("UiClick2Sfx");
+
     }
 
     // 스킬이 이미 할당되었는지 체크
@@ -148,10 +169,10 @@ public class BattleUi : GenericWindow
 
     private void UpdateSkillButtonUI(Button skillButton, int skillId)
     {
-        if(skillId == -1)
+        if (skillId == -1)
         {
             var buttonImage = skillButton.GetComponent<Image>();
-            if(buttonImage != null)
+            if (buttonImage != null)
             {
                 var defaultSprite = Resources.Load<Sprite>("SkillIcons/Skill_Default");
                 buttonImage.sprite = defaultSprite;
@@ -169,7 +190,7 @@ public class BattleUi : GenericWindow
                 string imagePath = $"SkillIcons/Skill_{skillData.Id}";
                 var sprite = Resources.Load<Sprite>(imagePath);
 
-                if(sprite != null)
+                if (sprite != null)
                 {
                     buttonImage.sprite = sprite;
                 }
@@ -187,10 +208,10 @@ public class BattleUi : GenericWindow
 
     private void Update()
     {
-        if(isReadyTime)
+        if (isReadyTime)
         {
             SetReadyText();
-            if(readyTimer <= 0)
+            if (readyTimer <= 0)
             {
                 readyTextButton.gameObject.SetActive(false);
                 isReadyTime = false;
@@ -210,12 +231,15 @@ public class BattleUi : GenericWindow
     public void OnPlayerSkillButtonClicked(int skillId)
     {
         playerSkillManager.UsePlayerSkill(skillId);
+        SoundManager.soundManager.PlaySFX("UiClick2Sfx");
+
     }
 
     public void OnSkillButtonClicked(int skillId)
     {
         var skillData = skillManager.guardnerSkillTable.Get(skillId);
         var sb = new StringBuilder();
+        SoundManager.soundManager.PlaySFX("UiClick2Sfx");
 
         if (skillManager.CanUseSkill(skillId, skillData.CoolTime))
         {
@@ -225,7 +249,7 @@ public class BattleUi : GenericWindow
                     monster.Stun(skillData.Stun);
             }
             skillManager.SelectSkill(skillId);
-            skillManager.UseSkill();            
+            skillManager.UseSkill();
             Debug.Log($"사용된 스킬ID: {skillId}");
         }
         else
@@ -251,7 +275,7 @@ public class BattleUi : GenericWindow
     public void SetReadyText()
     {
         readyTimer -= Time.deltaTime;
-        if(readyTimer <= 0)
+        if (readyTimer <= 0)
         {
             readyTimer = 0;
 
@@ -276,8 +300,9 @@ public class BattleUi : GenericWindow
     {
         readyTextButton.gameObject.SetActive(true);
         base.Open();
+
         var doorBehavior = door.GetComponent<DoorBehavior>();
-        if(doorBehavior != null)
+        if (doorBehavior != null)
         {
             doorBehavior.Init();
         }
@@ -292,7 +317,7 @@ public class BattleUi : GenericWindow
         text2.text = "+";
         text3.text = "+";
         gold = 150;
-        if(playerSkillManager != null)
+        if (playerSkillManager != null)
         {
             playerSkillManager.lastUsedTime.Clear();
         }
@@ -300,12 +325,15 @@ public class BattleUi : GenericWindow
         playerSkillSetUi.IsBattleState(false);
         StartCoroutine(CoSetReadyTimeUi());
     }
-
+    public override void Close()
+    {
+        base.Close();
+    }
     public void TimeSetZero() // 테스트용
     {
-        battleTimer = 0;       
+        battleTimer = 0;
     }
-    
+
     public void SetGuardnerSpawnCount()
     {
         sb.Clear();
@@ -351,7 +379,7 @@ public class BattleUi : GenericWindow
                     break;
             }
 
-            StringBuilder sb = new StringBuilder();            
+            StringBuilder sb = new StringBuilder();
             if (skillId != -1 && playerSkillManager.lastUsedTime.ContainsKey(skillId))
             {
                 var skillData = DataTableManager.PlayerSkillTable.Get(skillId);
@@ -374,7 +402,7 @@ public class BattleUi : GenericWindow
             }
             else // 스킬이 할당되어 있지만 사용한 적이 없거나 쿨타임이 리셋된 경우
             {
-                if(buttonImage !=null)
+                if (buttonImage != null)
                 {
                     buttonImage.fillAmount = 1f;
                 }
@@ -398,6 +426,11 @@ public class BattleUi : GenericWindow
     private IEnumerator CoSetReadyTimeUi()
     {
         readyTimeObject.gameObject.SetActive(true);
+        if (SoundManager.soundManager != null)
+        {
+            SoundManager.soundManager.StopBGM();
+            SoundManager.soundManager.PlayBattleBGM("BattleBGM");
+        }
         yield return new WaitForSeconds(1.5f);
         readyTimeObject.gameObject.SetActive(false);
     }
@@ -405,6 +438,7 @@ public class BattleUi : GenericWindow
     private IEnumerator CoSetBattleStart()
     {
         battleStartObject.gameObject.SetActive(true);
+
         playerSkillManager.SetBattleState(true);
         playerSkillSetUi.IsBattleState(true);
         yield return new WaitForSeconds(1.5f);

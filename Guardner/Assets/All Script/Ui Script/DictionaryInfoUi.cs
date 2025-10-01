@@ -42,6 +42,7 @@ public class DictionaryInfoUi : GenericWindow
     private void Awake()
     {
         closeButton.onClick.AddListener(Close);
+
     }
     public override void Open()
     {
@@ -51,5 +52,6 @@ public class DictionaryInfoUi : GenericWindow
     public override void Close()
     {
         base.Close();
+        SoundManager.soundManager.PlaySFX("UiClickSfx");
     }
 }

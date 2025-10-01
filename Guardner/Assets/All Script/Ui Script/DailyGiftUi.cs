@@ -29,9 +29,12 @@ public class DailyGiftUi : GenericWindow
     private void Start()
     {
         InitializeButtons();
-        exitButton?.onClick.AddListener(Close);
-        //PlayerPrefs.DeleteKey("LastClaimDate"); // 테스트
-        //PlayerPrefs.DeleteKey("CurrentStreak");
+        exitButton?.onClick.AddListener(() => 
+        {
+            SoundManager.soundManager.PlaySFX("UiClickSfx");
+            Close();
+        }); 
+
         PlayerPrefs.Save();
     }
 
@@ -86,6 +89,10 @@ public class DailyGiftUi : GenericWindow
 
     private void OnDailyGiftButtonClicked(int day)
     {
+        Debug.Log("버튼 클릭됨, SFX 재생 시도");
+
+        SoundManager.soundManager.PlaySFX("UiClickSfx");
+
         if (!CanClaimToday())
         {
             Debug.Log("오늘은 이미 보상을 받았습니다.");

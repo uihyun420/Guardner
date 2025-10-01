@@ -53,6 +53,7 @@ public class DictionaryUi : GenericWindow
     public void OnClickCloseButton()
     {
         Close();
+        SoundManager.soundManager.PlaySFX("UiClickSfx");
     }
 
     private void SetGuardnerText()
@@ -120,6 +121,7 @@ public class DictionaryUi : GenericWindow
             {
                 dictionaryInfoUi.SetGuardnerInfo(data);
                 dictionaryInfoUi.Open();
+                SoundManager.soundManager.PlaySFX("UiClick2Sfx");
             });
         }
     }

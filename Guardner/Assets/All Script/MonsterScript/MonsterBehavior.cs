@@ -95,6 +95,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
             {
                 Attack();
                 door.Ondamage(attackPower);
+                SoundManager.soundManager.PlaySFX("DoorHitSfx");
                 attackTimer = 0;
             }
         }

@@ -17,6 +17,7 @@ public class GameStartScene : MonoBehaviour
     public void onClickGameStart()
     {
         SceneManager.LoadScene("GameScene");
+        SoundManager.soundManager.PlaySFX("UiClick2Sfx");
     }
     public void onClickGameExit()
     {

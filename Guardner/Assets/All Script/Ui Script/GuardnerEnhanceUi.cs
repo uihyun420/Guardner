@@ -141,6 +141,7 @@ public class GuardnerEnhanceUi : GenericWindow
             
             UpdateGachaItemCountText();
             ResetList();
+            SoundManager.soundManager.PlaySFX("GachaResultSfx");
         }
         else
         {
