@@ -18,8 +18,8 @@ public class GuardnerItemUi : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dictionaryName;
     [SerializeField] private TextMeshProUGUI dictionaryDiscription;
 
-    private int guardnerId;
 
+    private int guardnerId;
 
     public void SetNameTextColor(Color color)
     {

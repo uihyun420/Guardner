@@ -7,20 +7,18 @@ using UnityEngine.UI;
 public class DailyGiftUi : GenericWindow
 {
     [SerializeField] private TextMeshProUGUI dateText;
-    [SerializeField] private TextMeshProUGUI timeText; // Inspector 연결
+    [SerializeField] private TextMeshProUGUI timeText; 
     private TimeSpan remainTime;
     private bool isTimerActive = false;
 
-    [SerializeField] private Button[] dailyGiftButtons = new Button[20]; // 20일치 버튼
+    [SerializeField] private Button[] dailyGiftButtons = new Button[20]; 
 
     [SerializeField] private GameObject checkMarkGoldPrefab;
     [SerializeField] private GameObject checkMarkLotteryPrefab;
     [SerializeField] private GameObject checkMarkSkillPrefab;
     private GameObject[] checkMarkInstances = new GameObject[20];
 
-
     private int goldAmount = 1000; // 1~3일 골드 수량
-
 
     [SerializeField] private InventoryUi inventoryUi;
     [SerializeField] private Button exitButton;
@@ -32,8 +30,8 @@ public class DailyGiftUi : GenericWindow
     {
         InitializeButtons();
         exitButton?.onClick.AddListener(Close);
-        PlayerPrefs.DeleteKey("LastClaimDate"); // 테스트
-        PlayerPrefs.DeleteKey("CurrentStreak");
+        //PlayerPrefs.DeleteKey("LastClaimDate"); // 테스트
+        //PlayerPrefs.DeleteKey("CurrentStreak");
         PlayerPrefs.Save();
     }
 
@@ -169,7 +167,7 @@ public class DailyGiftUi : GenericWindow
         }
     }
 
-    private bool CanClaimToday()
+    private bool CanClaimToday() // PlayerPrefs에 저장된 마지막 보상 수령 날짜와 오늘 날짜를 비교 
     {
         string lastClaimDate = PlayerPrefs.GetString(lastDateKey, "");
         string today = DateTime.Now.ToString("yyyy-MM-dd");

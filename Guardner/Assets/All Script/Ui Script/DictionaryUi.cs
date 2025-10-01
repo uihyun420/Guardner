@@ -22,6 +22,12 @@ public class DictionaryUi : GenericWindow
 
     private HashSet<int> ownedGuardnerIds = new HashSet<int>(); // 가지고있는 가드너 목록
 
+
+    [SerializeField] private DictionaryInfoUi dictionaryInfoUi;
+    [SerializeField] private Button dictionaryInfoUiButton;
+    [SerializeField] private WindowManager windowManager;
+
+
     private void Update()
     {
         SetGoldText();
@@ -107,9 +113,14 @@ public class DictionaryUi : GenericWindow
         var slot = Instantiate(dictionarySlot, contentParent);
         var itemUi = slot.GetComponent<GuardnerItemUi>();
 
-        if(itemUi != null)
+        if (itemUi != null)
         {
-            itemUi.DictionarySetData(data, null);
+            // 클릭 시 dictionaryInfoUi를 열도록 이벤트 연결
+            itemUi.DictionarySetData(data, (id) =>
+            {
+                dictionaryInfoUi.Open();
+                // 필요하다면 선택된 가드너 정보 전달 코드 추가
+            });
         }
     }
 

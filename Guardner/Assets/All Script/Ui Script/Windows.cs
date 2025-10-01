@@ -8,4 +8,5 @@ public enum WindowType
     MainMenuUi,
     DictionaryUi,
     Setting,   
+    DictionaryInfoUi,
 }
