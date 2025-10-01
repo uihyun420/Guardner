@@ -13,6 +13,7 @@ public class GatchaUi : GenericWindow
     [SerializeField] private Button exitButton;
 
 
+
     private void Awake()
     {
         exitButton.onClick.AddListener(OnClickExitButton);
@@ -45,7 +46,6 @@ public class GatchaUi : GenericWindow
         attackText.text = $"{data.AttackPower}";
         levelText.text = $"{data.Level}";
         image.sprite = sprite;
-
     }
 
 }

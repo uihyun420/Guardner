@@ -24,6 +24,11 @@ public class GuardnerEnhanceUi : GenericWindow
     [SerializeField] private MainMenuUi mainMenu;
     [SerializeField] private TextMeshProUGUI goldText;
 
+    [SerializeField] private TextMeshProUGUI hasGachaItemCountText;
+    private int needCount = 1;
+    private int lastGachaItemCount = -1;
+
+
     // 현재 강화 레벨 정보 (예시: 실제로는 세이브 데이터 등에서 불러와야 함)
     private Dictionary<int, int> guardnerLevelDict = new Dictionary<int, int>();
 
@@ -31,7 +36,6 @@ public class GuardnerEnhanceUi : GenericWindow
     {
         ResetList();
     }
-
     private void Awake()
     {
         BackButton.onClick.AddListener(OnClickBackButton);
@@ -39,11 +43,11 @@ public class GuardnerEnhanceUi : GenericWindow
     }
     private void Update()
     {
-        SetGoldText();
-        //ResetList();
+        SetGoldText();        
     }
     public override void Open()
     {
+        UpdateGachaItemCountText();
         base.Open();
     }
     public override void Close()
@@ -90,6 +94,7 @@ public class GuardnerEnhanceUi : GenericWindow
             // ← 한 번만 호출하고, 실제 guardnerId 전달
             itemUi.SetData(data, sprite, () => OnEnhanceButton(guardnerId));
         }
+
     }
     private Sprite GetGuardnerSprite(int guardnerId)
     {
@@ -133,11 +138,15 @@ public class GuardnerEnhanceUi : GenericWindow
                 gatchaUi.SetGuardnerInfo(enhanceData, GetGuardnerSprite(guardnerId));
                 gatchaUi.Open();
             }
+            
+            UpdateGachaItemCountText();
+            ResetList();
         }
         else
         {
             Debug.Log("뽑기권이 부족합니다.");
         }
+
     }
 
     // 전체 가드너 ID 반환 (뽑기 전용)
@@ -164,4 +173,15 @@ public class GuardnerEnhanceUi : GenericWindow
         goldText.text = $"{mainMenu.mainUiGold}";
     }
 
+    private void UpdateGachaItemCountText()
+    {
+        if (inventoryUi == null) return;
+
+        int currentCount = inventoryUi.GetItemCount("LotteryTicket");
+        if (lastGachaItemCount != currentCount)
+        {
+            hasGachaItemCountText.text = $"가드너 뽑기({currentCount} / {needCount})";
+            lastGachaItemCount = currentCount;
+        }
+    }
 }
