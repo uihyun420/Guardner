@@ -191,11 +191,23 @@ public class GuardnerBehavior : MonoBehaviour
         }
     }
 
-
     private void Attack()
     {
         animator.SetBool(attack, true);
         animator.speed = aps;
+
+        switch (role)
+        {
+            case GuardnerTypes.Ranged: // 궁수
+                SoundManager.soundManager.PlaySFX("Archor");
+                break;
+            case GuardnerTypes.Melee: // 기사
+                SoundManager.soundManager.PlaySFX("Knight");
+                break;
+            case GuardnerTypes.Support: // 마도사, 치유사 구분 필요시 아래처럼 분기
+                SoundManager.soundManager.PlaySFX("Healer");
+                break;
+        }
 
         // 일반 공격
         Monster.Ondamage(attackPower);

@@ -1785,7 +1785,7 @@ MonoBehaviour:
   buffCriticalChance: 0
   buffCriticalDamage: 0
   id: 11125
-  role: 0
+  role: 1
   attackPower: 0
   aps: 0
   attackRange: 0

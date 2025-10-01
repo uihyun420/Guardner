@@ -4803,7 +4803,7 @@ MonoBehaviour:
   buffCriticalChance: 0
   buffCriticalDamage: 0
   id: 11310
-  role: 0
+  role: 3
   attackPower: 0
   aps: 0
   attackRange: 0
