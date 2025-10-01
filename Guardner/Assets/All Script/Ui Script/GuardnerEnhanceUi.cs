@@ -40,7 +40,7 @@ public class GuardnerEnhanceUi : GenericWindow
     private void Update()
     {
         SetGoldText();
-        ResetList();
+        //ResetList();
     }
     public override void Open()
     {

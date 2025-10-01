@@ -33,24 +33,13 @@ public class GuardnerItemUi : MonoBehaviour
     {
         guardnerId = data.Id;
         Data = data;
-        // 1. 이름 표시
+
         if (nameText != null)
             nameText.text = data.Name;
 
-        // 2. 강화 정보 가져오기
         var enhancedData = SaveLoadManager.GetGuardnerStats(data.Id.ToString());
         int attackPower = enhancedData?.AttackPower ?? data.AttackPower;
 
-        // 3. 스킬명 가져오기 (SkillID가 0이 아니면)
-        //string skillName = "-";
-        //if (data.SkillID != 0)
-        //{
-        //    var skillData = DataTableManager.GuardnerSkillTable.Get(data.SkillID).Name;
-        //    if (skillData != null)
-        //        skillName = skillData;
-        //}
-
-        // 4. 설명 텍스트 구성
         if (guardnerSpwawnDiscriptText != null)
         {
             guardnerSpwawnDiscriptText.text =
@@ -59,7 +48,6 @@ public class GuardnerItemUi : MonoBehaviour
                 $"소환 골드: {data.SummonGold}";
         }
 
-        // 5. 기존 infoText도 강화 정보 반영(원한다면)
         if (infoText != null)
         {
             if (enhancedData != null)

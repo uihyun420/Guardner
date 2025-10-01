@@ -51,8 +51,12 @@ public class GuardnerSpawnUi : GenericWindow
 
     public override void Open()
     {
-        reCellUi.gameObject.SetActive(false);
-        reCellUi.enabled = false;
+        if (reCellUi != null)
+        {
+            reCellUi.Close(); // Close() 메서드 호출로 완전히 닫기
+            reCellUi.gameObject.SetActive(false);
+            reCellUi.enabled = false;
+        }
 
         selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
         if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
@@ -67,16 +71,13 @@ public class GuardnerSpawnUi : GenericWindow
 
         base.Open();
 
-        // ScreenTouch를 완전히 비활성화
         if (screenTouch != null)
         {
-            screenTouch.enabled = false; // 컴포넌트 자체를 비활성화
+            screenTouch.enabled = false; 
         }
 
-        // 강화 정보가 갱신될 수 있으므로 매번 새로 표시
         DisplayAvailableGuardner();
 
-        // ScrollRect 설정을 DisplayAvailableGuardner 후에 실행 (PlayerSkillSetUi와 동일하게)
         if (scrollRect != null)
         {
             scrollRect.horizontal = false;
@@ -85,7 +86,6 @@ public class GuardnerSpawnUi : GenericWindow
             scrollRect.gameObject.SetActive(true);
         }
 
-        // 지연 후 ScrollRect 초기화 (PlayerSkillSetUi와 동일한 코루틴 사용)
         StartCoroutine(InitializeScrollRect());
     }
 

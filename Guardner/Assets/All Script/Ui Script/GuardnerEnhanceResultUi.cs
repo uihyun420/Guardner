@@ -12,7 +12,7 @@ public class GuardnerEnhanceResultUi : GenericWindow
     [SerializeField] private TextMeshProUGUI attackText;
     [SerializeField] private Button exitButton;
     [SerializeField] private Image guardnerImage; // Inspector에서 연결
-
+    [SerializeField] private TextMeshProUGUI enhancePriceText;
     [SerializeField] private MainMenuUi mainMenuUi; // Inspector에서 연결
 
     private int currentGuardnerId;
@@ -76,6 +76,10 @@ public class GuardnerEnhanceResultUi : GenericWindow
         sb.Clear();
         sb.Append("현재 능력치\n").Append("Lv : ").Append(currentData.Level).Append("\n").Append("공격속도 : ").Append(currentData.APS).Append("\n").Append("DPS : ").Append(currentData.DPS);
         currentStatus.text = sb.ToString();
+
+        sb.Clear();
+        sb.Append("강화 비용 : ").Append(nextData.NeedGold);
+        enhancePriceText.text = sb.ToString();
 
         if (nextData != null)
         {
