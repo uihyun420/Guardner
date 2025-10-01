@@ -21,6 +21,28 @@ public class GuardnerSpawnUi : GenericWindow
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
 
+
+    private void Update()
+    {
+        foreach (Transform child in contentParent)
+        {
+            var itemUi = child.GetComponent<GuardnerItemUi>();
+            if (itemUi != null && itemUi.Data != null) // Data 프로퍼티가 있다고 가정
+            {
+                if (battleUi.gold < itemUi.Data.SummonGold)
+                {
+                    itemUi.SetTextColor(Color.red);
+                    itemUi.SetNameTextColor(Color.red);
+                }
+                else
+                {
+                    itemUi.SetTextColor(Color.white);
+                    itemUi.SetNameTextColor(Color.white);
+                }
+            }
+        }
+    }
+
     private void Awake()
     {
         isOverlayWindow = true;

@@ -18,18 +18,21 @@ public class GuardnerItemUi : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dictionaryName;
     [SerializeField] private TextMeshProUGUI dictionaryDiscription;
 
+    public GuardnerData Data { get; private set; }
 
     private int guardnerId;
 
     public void SetNameTextColor(Color color)
     {
         nameText.color = color;
+        nameText.ForceMeshUpdate();
     }
+
 
     public void SetData(GuardnerData data, System.Action<int> onSelect)
     {
         guardnerId = data.Id;
-
+        Data = data;
         // 1. 이름 표시
         if (nameText != null)
             nameText.text = data.Name;
@@ -88,6 +91,8 @@ public class GuardnerItemUi : MonoBehaviour
         if(infoText != null)
         {
             infoText.color = color;
+            infoText.ForceMeshUpdate();
+
         }
     }
 
