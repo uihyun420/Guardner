@@ -16,6 +16,7 @@ public class GuardnerSpawnUi : GenericWindow
     [SerializeField] private Button ExitButton;
     [SerializeField] private ScreenTouch screenTouch; // ScreenTouch 참조 추가
     [SerializeField] private ReCellUi reCellUi;
+    
 
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
