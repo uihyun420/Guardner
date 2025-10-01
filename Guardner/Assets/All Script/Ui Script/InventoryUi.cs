@@ -35,7 +35,7 @@ public class InventoryUi : GenericWindow
 
 
     // 저장된 인벤토리 데이터 로드
-    private void LoadInventoryData()
+    public void LoadInventoryData()
     {
         itemCounts.Clear();
 

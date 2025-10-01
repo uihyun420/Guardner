@@ -19,8 +19,7 @@ public class MainMenuUi : GenericWindow
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private Button settingButton;
     [SerializeField] private SettingUi settingUi;
-    [SerializeField] private StageChoiceUi stageChoiceUi;    
-
+    [SerializeField] private StageChoiceUi stageChoiceUi;
     [SerializeField] private GameObject tilemap;
     [SerializeField] private GameObject spawnRect;
     [SerializeField] private Button dailyGiftButton;
@@ -54,6 +53,17 @@ public class MainMenuUi : GenericWindow
         tilemap.SetActive(false);
         spawnRect.SetActive(false);
         SetMainUiGoldText();
+
+        //if (inventoryUi != null)
+        //{
+        //    inventoryUi.gameObject.SetActive(true);
+        //    inventoryUi.LoadInventoryData(); 
+        //    inventoryUi.gameObject.SetActive(false);
+        //}
+        if (inventoryUi != null)
+        {
+            inventoryUi.LoadInventoryData();
+        }
     }
 
     public override void Close()
@@ -100,6 +110,7 @@ public class MainMenuUi : GenericWindow
     public void OnClickEnhanceButton()
     {
         guardnerEnhanceUi.Open();
+
     }
 
     public void OnClickInventoryButton()
