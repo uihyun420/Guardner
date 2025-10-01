@@ -118,8 +118,8 @@ public class DictionaryUi : GenericWindow
             // 클릭 시 dictionaryInfoUi를 열도록 이벤트 연결
             itemUi.DictionarySetData(data, (id) =>
             {
+                dictionaryInfoUi.SetGuardnerInfo(data);
                 dictionaryInfoUi.Open();
-                // 필요하다면 선택된 가드너 정보 전달 코드 추가
             });
         }
     }
