@@ -102,8 +102,6 @@ public class BattleUi : GenericWindow
             SoundManager.soundManager.PlaySFX("UiClickSfx");
             settingUi.Open();
         });
-
-        StartCoroutine(CoSetReadyTimeUi());
     }
 
     // 스킬 슬롯 버튼 클릭 시 호출
@@ -298,6 +296,7 @@ public class BattleUi : GenericWindow
     }
     public override void Open()
     {
+        StartCoroutine(CoSetReadyTimeUi());
         readyTextButton.gameObject.SetActive(true);
         base.Open();
 

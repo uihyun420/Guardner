@@ -27,7 +27,8 @@ public class DictionaryUi : GenericWindow
     [SerializeField] private Button dictionaryInfoUiButton;
     [SerializeField] private WindowManager windowManager;
 
-
+    [SerializeField] private Button setButton;
+    [SerializeField] private DictionarySetUi dictionarySetUi;
     private void Update()
     {
         SetGoldText();
@@ -37,6 +38,7 @@ public class DictionaryUi : GenericWindow
     private void Start()
     {
         closeButton.onClick.AddListener(OnClickCloseButton);
+        setButton.onClick.AddListener(OnClickSetButton);
     }
 
     public override void Open()
@@ -62,6 +64,16 @@ public class DictionaryUi : GenericWindow
         sb.Clear();
         sb.Append("Á¤¿ø»ç ").Append("(").Append(guardnerSpawner.ownedGuardnerIds.Count).Append(" / ").Append(maxGuardnerCount).Append(")");
         guardnerCountText.text = sb.ToString();
+    }
+
+    private void OnClickSetButton()
+    {
+        if(windowManager != null)
+        {
+            windowManager.Open(WindowType.DictionarySetUi);
+        }
+        dictionarySetUi.Open();
+        SoundManager.soundManager.PlaySfxButton1();
     }
 
     private void InitializeOwnedGuardenr()

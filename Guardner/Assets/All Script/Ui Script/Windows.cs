@@ -9,4 +9,5 @@ public enum WindowType
     DictionaryUi,
     Setting,   
     DictionaryInfoUi,
+    DictionarySetUi,
 }
