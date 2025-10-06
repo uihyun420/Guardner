@@ -152,11 +152,11 @@ public class SoundManager : MonoBehaviour
 
     public void PlayMainBGM(string clipName)
     {
-        Debug.Log($"PlayMainBGM 호출됨: {clipName}, 호출 위치: {System.Environment.StackTrace}");
-
+        // 이미 같은 메인 BGM이 재생 중이면 건너뛰기
         if (mainBGM != null && mainBGM.clip != null && mainBGM.clip.name == clipName && mainBGM.isPlaying)
             return;
 
+        // 배틀 BGM만 정지 (메인 BGM 지속)
         if (battleBGM != null && battleBGM.isPlaying)
             battleBGM.Stop();
 
@@ -166,13 +166,13 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBattleBGM(string clipName)
     {
-        Debug.Log($"PlayBattleBGM 호출됨: {clipName}, 호출 위치: {System.Environment.StackTrace}");
-
+        // 이미 같은 배틀 BGM이 재생 중이면 건너뛰기
         if (battleBGM != null && battleBGM.clip != null && battleBGM.clip.name == clipName && battleBGM.isPlaying)
             return;
 
+        // 메인 BGM은 일시정지 (완전 정지하지 않음)
         if (mainBGM != null && mainBGM.isPlaying)
-            mainBGM.Stop();
+            mainBGM.Pause();
 
         currentBGMSource = battleBGM;
         PlayBGM(clipName, battleBGM);
@@ -193,19 +193,22 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // 배틀 BGM이 끝나면 메인 BGM 재개하는 메서드 추가
+    public void ResumeToPreviousBGM()
+    {
+        if (battleBGM != null && battleBGM.isPlaying)
+            battleBGM.Stop();
+
+        if (mainBGM != null && !mainBGM.isPlaying)
+        {
+            mainBGM.UnPause();
+            currentBGMSource = mainBGM;
+        }
+    }
+
     public void StopBGM()
     {
         if (mainBGM != null) mainBGM.Stop();
-        if (battleBGM != null) battleBGM.Stop();
-    }
-
-    public void StopMainBGM()
-    {
-        if (mainBGM != null) mainBGM.Stop();
-    }
-
-    public void StopBattleBGM()
-    {
         if (battleBGM != null) battleBGM.Stop();
     }
 
@@ -236,12 +239,12 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(AudioClip clip)
-    {
-        if (isMuted || isSfxMuted || clip == null || sfxSource == null) return;
+    //public void PlaySFX(AudioClip clip)
+    //{
+    //    if (isMuted || isSfxMuted || clip == null || sfxSource == null) return;
 
-        sfxSource.PlayOneShot(clip);
-    }
+    //    sfxSource.PlayOneShot(clip);
+    //}
 
     public void SetMasterVolume(float volume)
     {

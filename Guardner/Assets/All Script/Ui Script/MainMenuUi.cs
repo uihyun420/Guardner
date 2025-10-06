@@ -54,8 +54,6 @@ public class MainMenuUi : GenericWindow
         }); 
         SetMainUiGoldText();
         battleUi.gameObject.SetActive(false);
-
-        SoundManager.soundManager.PlayMainBGM("GameStartBGM");
     }
     private void Update()
     {
@@ -65,8 +63,11 @@ public class MainMenuUi : GenericWindow
     public override void Open()
     {
         base.Open();
-        SoundManager.soundManager.StopBGM();
-        SoundManager.soundManager.PlayMainBGM("GameStartBGM");
+        // BGM이 이미 재생 중이 아닐 때만 시작
+        if (SoundManager.soundManager != null && !SoundManager.soundManager.IsPlayingBGM())
+        {
+            SoundManager.soundManager.PlayMainBGM("GameStartBGM");
+        }
 
         tilemap.SetActive(false);
         spawnRect.SetActive(false);
@@ -83,6 +84,7 @@ public class MainMenuUi : GenericWindow
         base.Close();
         tilemap.SetActive(true);
         spawnRect.SetActive(true);
+        //SoundManager.soundManager.StopMainBGM();
         battleUi.gameObject.SetActive(true);
     }
 

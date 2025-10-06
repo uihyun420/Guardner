@@ -68,11 +68,12 @@ public class DictionaryUi : GenericWindow
 
     private void OnClickSetButton()
     {
-        if(windowManager != null)
+        // 직접 열기 방식으로 되돌리기
+        if (dictionarySetUi != null)
         {
-            windowManager.Open(WindowType.DictionarySetUi);
+            dictionarySetUi.Open();
         }
-        dictionarySetUi.Open();
+
         SoundManager.soundManager.PlaySfxButton1();
     }
 

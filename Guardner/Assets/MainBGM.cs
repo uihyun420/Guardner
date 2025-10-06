@@ -6,5 +6,4 @@ public class MainBGM : MonoBehaviour
     {
         SoundManager.soundManager.PlayMainBGM("GameStartBGM");
     }
-
 }

@@ -60,7 +60,7 @@ public class StageClearUi : GenericWindow
         }
         SetGameClearStageText();
         SoundManager.soundManager.PlaySFX("GameWinSfx");
-        SoundManager.soundManager.StopBattleBGM();
+        //SoundManager.soundManager.StopBattleBGM();
         Time.timeScale = 0;
     }
     public override void Close()

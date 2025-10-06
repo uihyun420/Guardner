@@ -322,11 +322,15 @@ public class BattleUi : GenericWindow
         }
         playerSkillManager.SetBattleState(false);
         playerSkillSetUi.IsBattleState(false);
-        StartCoroutine(CoSetReadyTimeUi());
     }
     public override void Close()
     {
         base.Close();
+        // 배틀 종료 시 이전 BGM으로 돌아가기
+        if (SoundManager.soundManager != null)
+        {
+            SoundManager.soundManager.ResumeToPreviousBGM();
+        }
     }
     public void TimeSetZero() // 테스트용
     {
@@ -427,7 +431,6 @@ public class BattleUi : GenericWindow
         readyTimeObject.gameObject.SetActive(true);
         if (SoundManager.soundManager != null)
         {
-            SoundManager.soundManager.StopBGM();
             SoundManager.soundManager.PlayBattleBGM("BattleBGM");
         }
         yield return new WaitForSeconds(1.5f);
