@@ -72,6 +72,7 @@ public class SettingUi : GenericWindow
 
     private void OnClickExitButton()
     {
+        SoundManager.soundManager.PlaySfxButton1();
         Close();
     }
 
@@ -104,7 +105,7 @@ public class SettingUi : GenericWindow
         {
             mainMenuUi.Open();
         }
-
+        SoundManager.soundManager.PlaySfxButton1();
         Close();
     }
 

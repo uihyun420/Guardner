@@ -377,4 +377,13 @@ public class SoundManager : MonoBehaviour
     public bool IsSFXMuted() => isSfxMuted;
     public bool IsPlayingBGM() => (mainBGM != null && mainBGM.isPlaying) || (battleBGM != null && battleBGM.isPlaying);
 
+
+    public void PlaySfxButton1()
+    {
+        PlaySFX("UiClickSfx");
+    }
+    public void PlaySfxButton2()
+    {
+        PlaySFX("UiClick2Sfx");
+    }
 }

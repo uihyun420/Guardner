@@ -12408,6 +12408,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2358717269806002368, guid: 15a69d82f1a814ac2bacb34960adbc52, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2358717269881219990, guid: 15a69d82f1a814ac2bacb34960adbc52, type: 3}
       propertyPath: m_Value
       value: 1
@@ -12643,6 +12647,10 @@ PrefabInstance:
     - target: {fileID: 5473111036241314693, guid: 15a69d82f1a814ac2bacb34960adbc52, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473111036246924396, guid: 15a69d82f1a814ac2bacb34960adbc52, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5473111036284462055, guid: 15a69d82f1a814ac2bacb34960adbc52, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'

@@ -18,9 +18,6 @@ public class WindowManager : MonoBehaviour
             window.gameObject.SetActive(false);
         }
 
-        //CurrentWindow = defaultWindow;
-        //windows[(int)CurrentWindow].Open();
-
         // GameOverUi에서 지정한 창을 사용
         CurrentWindow = GameOverUi.NextWindowAfterLoad;
         // 기본값으로 재설정 (다음 씬 로드를 위해)
