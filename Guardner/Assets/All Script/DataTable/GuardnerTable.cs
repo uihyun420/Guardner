@@ -77,6 +77,11 @@ public class GuardnerTable : DataTable
         return table[id];
     }
 
+    public IEnumerable<GuardnerData> GetAll()
+    {
+        return table.Values;
+    }
+
     public GuardnerData GetRandom()
     {
         var guardnerList = table.Values.ToList();

@@ -41,6 +41,9 @@ public class DataTableManager
         guardnerEnhanceTable.Load(DataTableIds.GuardnerEnhance);
         tables.Add(DataTableIds.GuardnerEnhance, guardnerEnhanceTable);
 
+        var dictionarySetTable = new DictionarySetTable();
+        dictionarySetTable.Load(DataTableIds.DictionarySet);
+        tables.Add(DataTableIds.DictionarySet, dictionarySetTable);
     }
     public static GuardnerEnhanceTable GuardnerEnhanceTable
     {
@@ -95,7 +98,14 @@ public class DataTableManager
         }
     }
 
-    
+    public static DictionarySetTable DictionarySetTable
+    {
+        get
+        {
+            return Get<DictionarySetTable>(DataTableIds.DictionarySet);
+        }
+    }
+
 
     public static T Get<T>(string id) where T : DataTable
     {
