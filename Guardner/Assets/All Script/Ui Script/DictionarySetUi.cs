@@ -48,29 +48,7 @@ public class DictionarySetUi : GenericWindow
 
     private void CreateGuardnerSlots()
     {
-        Debug.Log("[DictionarySetUi] CreateGuardnerSlots 시작");
         ClearSlots();
-
-        // null 체크들
-        if (contentParent == null)
-        {
-            return;
-        }
-
-        if (guardnerItemPrefab == null)
-        {
-            return;
-        }
-
-        if (notFoundPrefab == null)
-        {
-            return;
-        }
-
-        if (guardnerSpawner == null)
-        {
-            return;
-        }
 
         // 모든 가드너 ID 가져오기 (1~12번까지)
         var allGuardnerIds = GetAllGuardnerIds();
@@ -141,7 +119,6 @@ public class DictionarySetUi : GenericWindow
         itemUi.DictionarySetData(guardnerData, (id) =>
         {
             SoundManager.soundManager.PlaySFX("UiClick2Sfx");
-            // 필요하다면 여기서 해당 가드너의 세트를 하이라이트할 수 있습니다
         });
 
 
@@ -166,11 +143,10 @@ public class DictionarySetUi : GenericWindow
 
     private void SetupScrollRect()
     {
-        if (scrollRect != null)
-        {
-            var contentHeight = scrollRect.content.rect.height;
-            var viewportHeight = scrollRect.viewport.rect.height;
-            scrollRect.vertical = contentHeight > viewportHeight;
-        }
+        var contentHeight = scrollRect.content.rect.height;
+        var viewportHeight = scrollRect.viewport.rect.height;
+
+        scrollRect.vertical = true;
+        scrollRect.horizontal = false;
     }
 }

@@ -739,7 +739,7 @@ MonoBehaviour:
   selectButton: {fileID: 0}
   guardnerSpwawnDiscriptText: {fileID: 0}
   nameText: {fileID: 6474284324031469312}
-  dictionaryName: {fileID: 0}
+  dictionaryName: {fileID: 6474284324031469312}
   dictionaryDiscription: {fileID: 0}
 --- !u!1001 &934485484290179635
 PrefabInstance:

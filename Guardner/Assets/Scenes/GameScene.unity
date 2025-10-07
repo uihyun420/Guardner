@@ -11697,7 +11697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1942256323765017024, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
       propertyPath: m_Spacing
-      value: 2000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1942256323765017030, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
       propertyPath: m_SizeDelta.x
@@ -11794,6 +11794,26 @@ PrefabInstance:
     - target: {fileID: 1942256323867417370, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942256324828839017, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -62.700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942256324861373791, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942256324953952024, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+      propertyPath: m_Content
+      value: 
+      objectReference: {fileID: 978303716}
+    - target: {fileID: 1942256324953952031, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -409.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942256324953952031, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -23.422
       objectReference: {fileID: 0}
     - target: {fileID: 1942256325187414666, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -11930,6 +11950,10 @@ PrefabInstance:
     - target: {fileID: 3089485032580248343, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
       propertyPath: m_Spacing.y
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3089485032580248343, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+      propertyPath: m_CellSize.x
+      value: 280
       objectReference: {fileID: 0}
     - target: {fileID: 3089485032580248343, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
       propertyPath: m_Padding.m_Bottom
@@ -12279,6 +12303,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7925827069562033357, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 553.0001
+      objectReference: {fileID: 0}
     - target: {fileID: 8195991598081823270, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -12368,6 +12396,8 @@ PrefabInstance:
     - {fileID: 4885443904570788651, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
     - {fileID: 2768037671810531081, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
     - {fileID: 883833748999092322, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+    - {fileID: 1942256325867415188, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
+    - {fileID: 2333615778928342628, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1942256323867417369, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
