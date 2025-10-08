@@ -35,10 +35,6 @@ public class GuardnerData
     public int SkillID { get;  set; }
     public string Reference { get;  set; } // 설명
     public int GuardenerDrawId { get; set; } // 뽑기 아이디
-    public override string ToString()
-    {
-        return $"이름: {Name}\n 도감 설명: {Reference}";
-    }
 }
 
 public class GuardnerTable : DataTable
@@ -57,12 +53,7 @@ public class GuardnerTable : DataTable
         {
             if (!table.ContainsKey(guardner.Id))
             {
-                //Debug.Log($"로드된 가드너: {guardner.Id}, {guardner.Name}");
                 table.Add(guardner.Id, guardner);
-            }
-            else
-            {
-                Debug.Log("아이디 중복오류");
             }
         }
     }
@@ -80,12 +71,6 @@ public class GuardnerTable : DataTable
     public IEnumerable<GuardnerData> GetAll()
     {
         return table.Values;
-    }
-
-    public GuardnerData GetRandom()
-    {
-        var guardnerList = table.Values.ToList();
-        return guardnerList[Random.Range(0, guardnerList.Count)];
     }
 }
 

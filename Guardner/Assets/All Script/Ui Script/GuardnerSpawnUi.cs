@@ -16,7 +16,6 @@ public class GuardnerSpawnUi : GenericWindow
     [SerializeField] private Button ExitButton;
     [SerializeField] private ScreenTouch screenTouch; // ScreenTouch 참조 추가
     [SerializeField] private ReCellUi reCellUi;
-    
 
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
@@ -51,12 +50,10 @@ public class GuardnerSpawnUi : GenericWindow
 
     public override void Open()
     {
-        if (reCellUi != null)
-        {
-            reCellUi.Close(); // Close() 메서드 호출로 완전히 닫기
-            reCellUi.gameObject.SetActive(false);
-            reCellUi.enabled = false;
-        }
+
+        reCellUi.Close(); // Close() 메서드 호출로 완전히 닫기
+        reCellUi.gameObject.SetActive(false);
+        reCellUi.enabled = false;
 
         selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
         if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
@@ -64,68 +61,26 @@ public class GuardnerSpawnUi : GenericWindow
             Vector2 expectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
             if (guardnerSpawner.IsGuardnerAtPosition(expectedSpawnPos))
             {
-                Debug.Log("이미 가드너가 소환된 위치입니다.");
                 return;
             }
         }
 
         base.Open();
 
-        if (screenTouch != null)
-        {
-            screenTouch.enabled = false; 
-        }
+        screenTouch.enabled = false;
 
         DisplayAvailableGuardner();
 
-        if (scrollRect != null)
-        {
-            scrollRect.horizontal = false;
-            scrollRect.vertical = true;
-            scrollRect.enabled = true;
-            scrollRect.gameObject.SetActive(true);
-        }
-
-        StartCoroutine(InitializeScrollRect());
-    }
-
-
-    private IEnumerator InitializeScrollRect()
-    {
-        // 2프레임 대기 (UI가 완전히 생성될 때까지)
-        yield return null;
-        yield return null;
-
-        if (scrollRect != null)
-        {
-            // Canvas 강제 업데이트
-            Canvas.ForceUpdateCanvases();
-
-            // ScrollRect 재설정
-            scrollRect.enabled = false;
-            yield return null;
-            scrollRect.enabled = true;
-
-            // 스크롤 위치를 맨 위로 초기화
-            scrollRect.verticalNormalizedPosition = 1f;
-
-            // EventSystem 클리어 후 다시 설정
-            EventSystem.current.SetSelectedGameObject(null);
-            yield return null;
-            EventSystem.current.SetSelectedGameObject(scrollRect.gameObject);
-        }
+        scrollRect.horizontal = false;
+        scrollRect.vertical = true;
+        scrollRect.enabled = true;
+        scrollRect.gameObject.SetActive(true);
     }
 
     public override void Close()
     {
-        // ScreenTouch 다시 활성화
-        if (screenTouch != null)
-        {
-            screenTouch.enabled = true;
-        }
-
+        screenTouch.enabled = true;
         base.Close();
-
     }
 
     private void DisplayAvailableGuardner()
@@ -135,26 +90,19 @@ public class GuardnerSpawnUi : GenericWindow
             Destroy(child.gameObject);
         }
 
-        // 보유한 가드너만 표시하도록 변경
-        if (guardnerSpawner != null)
+        // 보유한 가드너만 표시
+        foreach (var guardnerId in guardnerSpawner.ownedGuardnerIds)
         {
-            foreach (var guardnerId in guardnerSpawner.ownedGuardnerIds)
+            var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
+            if (guardnerData != null)
             {
-                var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
-                if (guardnerData != null)
-                {
-                    CreateGuardnerItem(guardnerData, guardnerId);
-                }
+                CreateGuardnerItem(guardnerData, guardnerId);
             }
         }
 
-        // 콘텐츠 크기와 뷰포트 크기 비교해서 스크롤 활성/비활성
-        if (scrollRect != null)
-        {
-            var contentHeight = scrollRect.content.rect.height;
-            var viewportHeight = scrollRect.viewport.rect.height;
-            scrollRect.vertical = contentHeight > viewportHeight;
-        }
+        var contentHeight = scrollRect.content.rect.height;
+        var viewportHeight = scrollRect.viewport.rect.height;
+        scrollRect.vertical = contentHeight > viewportHeight;
     }
 
     private void CreateGuardnerItem(GuardnerData data, int guardnerId)
@@ -189,10 +137,9 @@ public class GuardnerSpawnUi : GenericWindow
 
             if (guardnerSpawner.IsGuardnerAtPosition(selectedSpawnPos))
             {
-                Debug.Log("가드너가 이미 존재합니다.");
                 return;
             }
-           if(guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos))
+            if (guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos))
             {
                 battleUi.UpdateGuardnerCount();
             }

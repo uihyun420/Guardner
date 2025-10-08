@@ -15,51 +15,41 @@ public class PlayerSkillItemUi : MonoBehaviour
     public void SetData(PlayerSkillData skillData, System.Action<int> onSelect, bool isAlreadyAssigned)
     {
         skillId = skillData.Id;
-        
 
-        if (skillNameText != null)
+        sb.Clear();
+        sb.Append(skillData.Name).Append("\n").Append(skillData.SkillDescription).Append("\n")
+            .Append("쿨타임 : ").Append(skillData.CoolTime).Append("초");
+
+        skillNameText.text = sb.ToString();
+
+        // 디버그: 로드 시도하는 경로 확인
+        string imagePath = $"SkillIcons/skill_{skillData.Id}";
+
+        var sprite = Resources.Load<Sprite>(imagePath);
+
+        if (sprite != null)
         {
-            sb.Clear();
-            sb.Append(skillData.Name).Append("\n").Append(skillData.SkillDescription).Append("\n")
-                .Append("쿨타임 : ").Append(skillData.CoolTime).Append("초");
-            
-            skillNameText.text = sb.ToString();
+            skillIcon.sprite = sprite;
+            skillIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            skillIcon.gameObject.SetActive(false);
         }
 
-        if (skillIcon != null)
+        selectButton.onClick.RemoveAllListeners();
+
+        // 이미 할당된 스킬이면 버튼 비활성화
+        if (isAlreadyAssigned)
         {
-            // 디버그: 로드 시도하는 경로 확인
-            string imagePath = $"SkillIcons/skill_{skillData.Id}";
-
-            var sprite = Resources.Load<Sprite>(imagePath);
-
-            if (sprite != null)
-            {
-                skillIcon.sprite = sprite;
-                skillIcon.gameObject.SetActive(true);
-            }
-            else
-            {
-                skillIcon.gameObject.SetActive(false);
-            }
+            selectButton.interactable = false;
+            selectButton.GetComponent<Image>().color = Color.gray;
+        }
+        else
+        {
+            selectButton.interactable = true;
+            selectButton.onClick.AddListener(() => onSelect(skillId));
         }
 
-
-        if (selectButton != null)
-        {
-            selectButton.onClick.RemoveAllListeners();
-
-            // 이미 할당된 스킬이면 버튼 비활성화
-            if (isAlreadyAssigned)
-            {
-                selectButton.interactable = false;
-                selectButton.GetComponent<Image>().color = Color.gray;
-            }
-            else
-            {
-                selectButton.interactable = true;
-                selectButton.onClick.AddListener(() => onSelect(skillId));
-            }
-        }
     }
 }

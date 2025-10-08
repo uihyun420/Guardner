@@ -60,10 +60,4 @@ public class MonsterTable : DataTable
         }
         return table[id];
     }
-
-    public MonsterData GetRandom()
-    {
-        var monsterList = table.Values.ToList();
-        return monsterList[Random.Range(0, monsterList.Count)];
-    }
 }

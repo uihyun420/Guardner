@@ -32,10 +32,6 @@ public class StageChoiceUi : GenericWindow
         int maxClearedStage = SaveLoadManager.GetMaxStage();
         int currentStageIndex = maxClearedStage + 1;
 
-        // 스테이지 진행도 디버깅
-        Debug.Log($"현재 스테이지 진행도: {maxClearedStage}, 다음 스테이지: {currentStageIndex}");
-
-
         if (maxClearedStage >= totalStages)
         {
             currentStageIndex = totalStages;
@@ -43,20 +39,15 @@ public class StageChoiceUi : GenericWindow
 
         CreateStageSlots(totalStages, maxClearedStage, currentStageIndex);
 
-        if (mainMenuUi != null)
-        {
-            mainMenuUi.gameObject.SetActive(false);
-        }
-
+        mainMenuUi.gameObject.SetActive(false);
     }
 
     public override void Close()
     {
         base.Close();
-        if (mainMenuUi != null)
-        {
+
             mainMenuUi.Open();
-        }
+        
     }
 
     private void OnClickExitButton()
@@ -98,15 +89,9 @@ public class StageChoiceUi : GenericWindow
     {
         int stageId = GetStageId(stageNumber);
 
-        if(stageId <= 0)
-        {
-            Debug.Log($"스테이지 {stageNumber}에 해당하는 ID를 찾을 수 없습니다.");
-        }
-
         Close();
 
         stageManager.LoadStage(stageId);
-        //stageManager.StartStage(); // 스테이지 시작 추가
 
         if (windowManager != null)
         {
@@ -115,10 +100,6 @@ public class StageChoiceUi : GenericWindow
         else if(battleUi != null)
         {
             battleUi.Open();
-        }
-        else
-        {
-            Debug.LogError("WindowManager와 BattleUi 모두 null입니다!");
         }
     }
 

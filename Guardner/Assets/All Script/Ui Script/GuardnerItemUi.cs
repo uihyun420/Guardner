@@ -80,7 +80,6 @@ public class GuardnerItemUi : MonoBehaviour
         {
             infoText.color = color;
             infoText.ForceMeshUpdate();
-
         }
     }
 

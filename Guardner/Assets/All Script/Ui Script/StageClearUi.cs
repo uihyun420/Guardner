@@ -43,7 +43,7 @@ public class StageClearUi : GenericWindow
         base.Open();
 
         spawnRect.SetActive(false);
-        // UI가 열릴 때 참조 가져오기
+
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>();
 
@@ -60,52 +60,33 @@ public class StageClearUi : GenericWindow
         }
         SetGameClearStageText();
         SoundManager.soundManager.PlaySFX("GameWinSfx");
-        //SoundManager.soundManager.StopBattleBGM();
         Time.timeScale = 0;
     }
     public override void Close()
     {
         base.Close();
         spawnRect.SetActive(true);
-
     }
 
     public void OnNextStageButton()
     {
-        if (stageManager == null || stageManager.stageData == null)
-        {
-            return;
-        }
-
-        // 스테이지 정보 가져오기
         int currentStage = stageManager.stageData.Stage;
         int nextStage = currentStage + 1;
         int nextStageId = FindNextStageId(nextStage);
 
-        Debug.Log($"현재 스테이지: {currentStage}, 다음 스테이지: {nextStage}, 다음 스테이지 ID: {nextStageId}");
-
         if (nextStageId <= 0)
         {
-            if (gameManager != null)
-                gameManager.GameExit();
+            gameManager.GameExit();
             return;
         }
         rewardGiven = false;
-
         Time.timeScale = 1;
-
         battleUi.ResetBattleTimer();
-
         Close();
-
         stageManager.LoadStage(nextStageId);
         monsterSpawner.ClearMonster();
         guardnerSpawner.ClearGuardner();
-
-        if (manager != null)
-        {
-            manager.Open(WindowType.Battle);
-        }
+        manager.Open(WindowType.Battle);
     }
 
 
@@ -117,23 +98,12 @@ public class StageClearUi : GenericWindow
         monsterSpawner.ClearMonster();
         guardnerSpawner.ClearGuardner();
 
-        // BattleUI 초기화 (필요한 경우)
-        if (battleUi != null)
-        {
-            battleUi.ResetBattleTimer();
-            battleUi.gameObject.SetActive(false);  // BattleUI 비활성화
-
-            // BattleUI 자식 오브젝트들 비활성화 (필요한 경우)
-            if (battleUi.battleUi != null)
-                battleUi.battleUi.SetActive(false);
-        }
+        battleUi.ResetBattleTimer();
+        battleUi.gameObject.SetActive(false);
+        battleUi.battleUi.SetActive(false);
 
         Close();
-
-        if (manager != null)
-        {
-            manager.Open(WindowType.MainMenuUi);
-        }
+        manager.Open(WindowType.MainMenuUi);
     }
 
 
@@ -169,7 +139,6 @@ public class StageClearUi : GenericWindow
 
         if (rewardData == null)
         {
-            Debug.Log($"스테이지 {currentStage}에 대한 보상 데이터가 없습니다.");
             return;
         }
 
@@ -228,9 +197,7 @@ public class StageClearUi : GenericWindow
         // 골드 지급
         if (mainMenuUi != null && totalReward > 0)
         {
-            // mainMenuUi.AddMainUiGold(totalReward + bonusReward);
             SaveLoadManager.AddGold(totalReward + bonusReward);
-            Debug.Log($"스테이지 {currentStage} 클리어 보상: {totalReward} 골드 지급");
         }
 
 
@@ -298,9 +265,6 @@ public class StageClearUi : GenericWindow
         SaveLoadManager.Data.CurrentStage = clearStage;
         SaveLoadManager.Data.IsStageCleared = true;
         SaveLoadManager.UpdateStageProgress(clearStage);
-        Debug.Log($"스테이지 {clearStage} 완료 정보가 저장되었습니다. 다음 스테이지 {clearStage}이 언락되었습니다.");
     }
-
-
 }
 

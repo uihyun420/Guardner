@@ -34,69 +34,30 @@ public class PlayerSkillSetUi : GenericWindow
     {
         base.Open();
 
-        // ScreenTouch를 완전히 비활성화
-        if (screenTouch != null)
-        {
-            screenTouch.enabled = false; // SetUiBlocking 대신 컴포넌트 자체를 비활성화
-        }
+        screenTouch.enabled = false; // SetUiBlocking 대신 컴포넌트 자체를 비활성화        
 
         DisplayAvailableSkills();
 
-        // ScrollRect 설정을 DisplayAvailableSkills 후에 실행
-        if (scrollRect != null)
-        {
-            scrollRect.horizontal = false;
-            scrollRect.vertical = true;
-            scrollRect.enabled = true;
-            scrollRect.gameObject.SetActive(true);
-        }
-        battleUi.blockTouchScreenPanel.SetActive(true);
+        scrollRect.horizontal = false;
+        scrollRect.vertical = true;
+        scrollRect.enabled = true;
+        scrollRect.gameObject.SetActive(true);
 
-        // 지연 후 ScrollRect 초기화
-        StartCoroutine(InitializeScrollRect());
+        battleUi.blockTouchScreenPanel.SetActive(true);
     }
 
     public override void Close()
     {
-        // ScreenTouch 다시 활성화
-        if (screenTouch != null)
-        {
-            screenTouch.enabled = true;
-        }
+        screenTouch.enabled = true;
+
         base.Close();
         battleUi.blockTouchScreenPanel.SetActive(false);
-    }
-
-    private IEnumerator InitializeScrollRect()
-    {
-        // 2프레임 대기 (UI가 완전히 생성될 때까지)
-        yield return null;
-        yield return null;
-
-        if (scrollRect != null)
-        {
-            // Canvas 강제 업데이트
-            Canvas.ForceUpdateCanvases();
-
-            // ScrollRect 재설정
-            scrollRect.enabled = false;
-            yield return null;
-            scrollRect.enabled = true;
-
-            // 스크롤 위치를 맨 위로 초기화
-            scrollRect.verticalNormalizedPosition = 1f;
-
-            // EventSystem 클리어 후 다시 설정
-            EventSystem.current.SetSelectedGameObject(null);
-            yield return null;
-            EventSystem.current.SetSelectedGameObject(scrollRect.gameObject);
-        }
     }
 
     // BattleUi에서 호출될 메서드 - 스킬 슬롯 설정
     public void OpenForSkillSlot(int skillSlot)
     {
-        if(isStartedBattle)
+        if (isStartedBattle)
         {
             return;
         }
@@ -137,12 +98,11 @@ public class PlayerSkillSetUi : GenericWindow
         var item = Instantiate(playerSkillItemPrefab, contentParent);
         var itemUi = item.GetComponent<PlayerSkillItemUi>();
 
-        if (itemUi != null)
-        {
-            // 이미 할당된 스킬인지 체크
-            bool isAlreadyAssigned = battleUi.IsSkillAlreadyAssigned(skillData.Id);
-            itemUi.SetData(skillData, OnSelectSkill, isAlreadyAssigned);
-        }
+
+        // 이미 할당된 스킬인지 체크
+        bool isAlreadyAssigned = battleUi.IsSkillAlreadyAssigned(skillData.Id);
+        itemUi.SetData(skillData, OnSelectSkill, isAlreadyAssigned);
+
     }
 
     private void OnSelectSkill(int skillId)

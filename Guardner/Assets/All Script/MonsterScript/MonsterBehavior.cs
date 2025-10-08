@@ -48,7 +48,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
     {
         monsterData = data;
         hp = monsterData.HP;
-        // moveSpeed = monsterData.BaseMoveSpeed;
         moveSpeed = monsterData.BaseMoveSpeed <= 0 ? 1.0f : monsterData.BaseMoveSpeed; // 테스트
         attackPower = monsterData.BaseAttackPower;
         monsterName = monsterData.Name;
@@ -59,7 +58,6 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
         hpBar.SetMaxHealth(hp);
 
-        //Debug.Log($"몬스터 생성: {monsterName}, HP: {hp}, Speed: {moveSpeed}, Attack: {attackPower}");
     }
     private void Awake()
     {
@@ -101,10 +99,10 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         }
         else
         {
-           animator.SetBool(attack, false);
+            animator.SetBool(attack, false);
         }
 
-        if(isStunned)
+        if (isStunned)
         {
             stunTimer -= Time.deltaTime;
             if (stunTimer < 0f)
@@ -137,13 +135,12 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         animator.SetTrigger(isDead);
         StageManager stageManager = FindObjectOfType<StageManager>();
         MonsterSpawner monsterSpawner = FindObjectOfType<MonsterSpawner>();
-        if (stageManager != null)
-        {
-            stageManager.enemiesRemaining--;
-            stageManager.monsterKillCount++;
-        }
 
-        if(monsterSpawner != null)
+        stageManager.enemiesRemaining--;
+        stageManager.monsterKillCount++;
+
+
+        if (monsterSpawner != null)
         {
             monsterSpawner.RemoveMonster(this);
         }
@@ -157,12 +154,12 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
         StartCoroutine(CoHitEffect());
         hpBar.SetHealth(hp);
 
-        if(skillManager != null)
+        if (skillManager != null)
         {
             skillManager.PlayDamageEffect(transform.position);
         }
 
-        if(hp <= 0)
+        if (hp <= 0)
         {
             hp = 0;
             Die();
@@ -194,7 +191,7 @@ public class MonsterBehavior : MonoBehaviour, IDamageable
 
     public void SetSortingOrder(int order)
     {
-        if(spriteRenderer != null)
+        if (spriteRenderer != null)
         {
             spriteRenderer.sortingOrder = order;
         }

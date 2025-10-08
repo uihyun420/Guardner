@@ -52,7 +52,6 @@ public class SkillManager : MonoBehaviour
             {
                 SelectSkill(skillData.SkillID);
                 UseSkill();
-                Debug.Log($"가드너 {guardner.name}가 스킬 {skillData.Name} 사용");
             }
         }
     }
@@ -88,20 +87,6 @@ public class SkillManager : MonoBehaviour
         lastUsedTime[selectSkill.SkillID] = Time.time;
     }
 
-    // 몬스터 대상 스킬 적용
-    //protected virtual void ApplySkillToMonsters()
-    //{
-    //    if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
-    //        return;
-
-    //    foreach (var monster in monsterSpawner.spawnedMonsters)
-    //    {
-    //        if (monster != null && !monster.IsDead)
-    //        {
-    //            ApplyMonsterSkills(monster);
-    //        }
-    //    }
-    //}
 
     protected virtual void ApplySkillToMonsters()
     {
@@ -199,7 +184,6 @@ public class SkillManager : MonoBehaviour
         {
             targetMonster.Stun(selectSkill.Stun);
             PlaySkillEffect(targetMonster.transform.position, SkillEffectType.Stun);
-            Debug.Log($"Stun 적용: {selectSkill.Stun}초 (SkillID: {selectSkill.SkillID})");
         }
 
         // GateDamageReflection
@@ -208,7 +192,6 @@ public class SkillManager : MonoBehaviour
             float reflectedDamage = targetMonster.attackPower * selectSkill.GateDamageReflection;
             targetMonster.ReflectDamage(reflectedDamage);
             PlaySkillEffect(targetMonster.transform.position, SkillEffectType.Damage);
-            Debug.Log($"GateDamageReflection 적용: {reflectedDamage} (SkillID: {selectSkill.SkillID})");
         }
     }
 
@@ -234,7 +217,6 @@ public class SkillManager : MonoBehaviour
             float duration = selectSkill.Duration;
             guardner.AttackSpeedBoost(attackSpeedBoost, duration);
             PlaySkillEffect(guardner.transform.position, SkillEffectType.Buff);
-            Debug.Log($"AttackSpeedBoost 적용: {attackSpeedBoost} ({duration}초, SkillID: {selectSkill.SkillID})");
         }
     }
 
@@ -271,7 +253,6 @@ public class SkillManager : MonoBehaviour
             }
             else
             {
-                // 파티클이 없다면 2초 후 삭제
                 Destroy(effect, 0.5f);
             }
         }

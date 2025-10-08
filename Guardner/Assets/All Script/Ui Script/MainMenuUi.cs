@@ -30,7 +30,7 @@ public class MainMenuUi : GenericWindow
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private GameObject tilemap;
     [SerializeField] private GameObject spawnRect;
- 
+
 
     public int mainUiGold
     {
@@ -47,11 +47,11 @@ public class MainMenuUi : GenericWindow
         EnhanceButton.onClick.AddListener(OnClickEnhanceButton);
         inventoryButton.onClick.AddListener(OnClickInventoryButton);
         settingButton.onClick.AddListener(OnClickSettingButton);
-        dailyGiftButton.onClick.AddListener(() => 
+        dailyGiftButton.onClick.AddListener(() =>
         {
             SoundManager.soundManager.PlaySFX("UiClickSfx");
             dailyGiftUi.Open();
-        }); 
+        });
         SetMainUiGoldText();
         battleUi.gameObject.SetActive(false);
     }
@@ -72,11 +72,8 @@ public class MainMenuUi : GenericWindow
         tilemap.SetActive(false);
         spawnRect.SetActive(false);
         SetMainUiGoldText();
+        inventoryUi.LoadInventoryData();
 
-        if (inventoryUi != null)
-        {
-            inventoryUi.LoadInventoryData();
-        }
     }
 
     public override void Close()
@@ -84,7 +81,6 @@ public class MainMenuUi : GenericWindow
         base.Close();
         tilemap.SetActive(true);
         spawnRect.SetActive(true);
-        //SoundManager.soundManager.StopMainBGM();
         battleUi.gameObject.SetActive(true);
     }
 
@@ -96,10 +92,6 @@ public class MainMenuUi : GenericWindow
 
     private void OnClickSettingButton()
     {
-        if(windowManager != null)
-        {
-            windowManager.Open(WindowType.Setting);
-        }
         SoundManager.soundManager.PlaySFX("UiClickSfx");
         settingUi.Open();
     }
@@ -136,6 +128,4 @@ public class MainMenuUi : GenericWindow
         SoundManager.soundManager.PlaySFX("UiClickSfx");
         inventoryUi.Open();
     }
-
-    
 }

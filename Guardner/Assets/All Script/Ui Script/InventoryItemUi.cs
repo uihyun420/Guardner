@@ -11,19 +11,12 @@ public class InventoryItemUi : MonoBehaviour
         countText.text = count.ToString();
         if (count <= 0)
         {
-            // 1. 슬롯 전체 비활성화
-            //gameObject.SetActive(false);
-
-
             countText.color = Color.gray;
             if (iconImage != null)
                 iconImage.color = Color.gray;
         }
         else
         {
-            // 1. 슬롯 활성화
-            //gameObject.SetActive(true);
-
             //2.원래 색상 복원
             countText.color = Color.white;
             if (iconImage != null)

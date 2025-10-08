@@ -52,6 +52,7 @@ public class WindowManager : MonoBehaviour
     {
         windows[(int)CurrentWindow].Close();
         CurrentWindow = id;
+        windows[(int)CurrentWindow].gameObject.SetActive(true);
         windows[(int)CurrentWindow].Open();
     }
 
