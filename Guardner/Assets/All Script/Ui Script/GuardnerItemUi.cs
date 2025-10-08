@@ -34,65 +34,52 @@ public class GuardnerItemUi : MonoBehaviour
         guardnerId = data.Id;
         Data = data;
 
-        if (nameText != null)
-            nameText.text = data.Name;
+        nameText.text = data.Name;
 
         var enhancedData = SaveLoadManager.GetGuardnerStats(data.Id.ToString());
         int attackPower = enhancedData?.AttackPower ?? data.AttackPower;
 
-        if (guardnerSpwawnDiscriptText != null)
-        {
-            guardnerSpwawnDiscriptText.text =
-                $"공격력: {attackPower}\n" +
-                $"공격속도: {data.APS}\n" +
-                $"소환 골드: {data.SummonGold}";
-        }
 
-        if (infoText != null)
-        {
-            if (enhancedData != null)
-                infoText.text = $"{data.Name} Lv.{enhancedData.Level}\n공격력: {attackPower} (+{attackPower - data.AttackPower})\n골드: {data.SummonGold}";
-            else
-                infoText.text = $"{data.Name}\n공격력: {data.AttackPower}\n골드: {data.SummonGold}";
-        }
+        guardnerSpwawnDiscriptText.text =
+            $"공격력: {attackPower}\n" +
+            $"공격속도: {data.APS}\n" +
+            $"소환 골드: {data.SummonGold}";
+
+
+        if (enhancedData != null)
+            infoText.text = $"{data.Name} Lv.{enhancedData.Level}\n공격력: {attackPower} (+{attackPower - data.AttackPower})\n골드: {data.SummonGold}";
+        else
+            infoText.text = $"{data.Name}\n공격력: {data.AttackPower}\n골드: {data.SummonGold}";
+
 
         // 6. 이미지
-        if (guardnerImage != null)
-        {
-            string imagePath = $"GuardnerIcons/guardner_{data.GuardenerDrawId}";
-            var sprite = Resources.Load<Sprite>(imagePath);
-            guardnerImage.sprite = sprite;
-            guardnerImage.gameObject.SetActive(sprite != null);
-        }
+        string imagePath = $"GuardnerIcons/guardner_{data.GuardenerDrawId}";
+        var sprite = Resources.Load<Sprite>(imagePath);
+        guardnerImage.sprite = sprite;
+        guardnerImage.gameObject.SetActive(sprite != null);
+
 
         // 7. 버튼
-        if (selectButton != null)
-        {
-            selectButton.onClick.RemoveAllListeners();
-            selectButton.onClick.AddListener(() => onSelect(data.Id));
-        }
+        selectButton.onClick.RemoveAllListeners();
+        selectButton.onClick.AddListener(() => onSelect(data.Id));
     }
 
 
     public void SetTextColor(Color color)
     {
-        if(infoText != null)
-        {
-            infoText.color = color;
-            infoText.ForceMeshUpdate();
-        }
+        infoText.color = color;
+        infoText.ForceMeshUpdate();
     }
 
     public void DictionarySetData(GuardnerData data, System.Action<int> onSelect)
     {
         guardnerId = data.Id;
 
-        if (dictionaryName != null)
-        {
-            var nameBuilder = new StringBuilder();
-            nameBuilder.Append(data.Name);
-            dictionaryName.text = nameBuilder.ToString();
-        }
+
+        var nameBuilder = new StringBuilder();
+        nameBuilder.Append(data.Name);
+        dictionaryName.text = nameBuilder.ToString();
+
 
         if (dictionaryDiscription != null)
         {

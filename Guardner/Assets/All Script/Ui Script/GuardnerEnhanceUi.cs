@@ -78,7 +78,6 @@ public class GuardnerEnhanceUi : GenericWindow
 
     private int GetCurrentLevel(int guardnerId)
     {
-        // 실제로는 플레이어 데이터에서 현재 강화 레벨을 가져와야 함
         if (guardnerLevelDict.TryGetValue(guardnerId, out int level))
             return level;
         return 1; // 기본 1레벨
@@ -91,7 +90,6 @@ public class GuardnerEnhanceUi : GenericWindow
         if (itemUi != null)
         {
             var sprite = GetGuardnerSprite(guardnerId);
-            // ← 한 번만 호출하고, 실제 guardnerId 전달
             itemUi.SetData(data, sprite, () => OnEnhanceButton(guardnerId));
         }
 
@@ -99,14 +97,12 @@ public class GuardnerEnhanceUi : GenericWindow
     private Sprite GetGuardnerSprite(int guardnerId)
     {
         var sprite = Resources.Load<Sprite>($"GuardnerIcons/{guardnerId}");
-
         return sprite;
     }
 
     private void OnEnhanceButton(int guardnerId)
     {
         int level = GetCurrentLevel(guardnerId);
-
         guardnerEnhanceResultUi.SetEnhanceData(guardnerId, level);
         guardnerEnhanceResultUi.Open();
     }
@@ -118,8 +114,6 @@ public class GuardnerEnhanceUi : GenericWindow
 
     private void OnClickGuardnerGatchButton()
     {
-        Debug.Log("[Gatcha] UseItem 호출 전 LotteryTicket 개수: " + inventoryUi.GetItemCount("LotteryTicket"));
-
         if (inventoryUi != null && inventoryUi.UseItem("LotteryTicket", 1))
         {
             var allIds = new List<int>(GetAllGuardnerIdsAll());
@@ -143,11 +137,6 @@ public class GuardnerEnhanceUi : GenericWindow
             ResetList();
             SoundManager.soundManager.PlaySFX("GachaResultSfx");
         }
-        else
-        {
-            Debug.Log("뽑기권이 부족합니다.");
-        }
-
     }
 
     // 전체 가드너 ID 반환 (뽑기 전용)
