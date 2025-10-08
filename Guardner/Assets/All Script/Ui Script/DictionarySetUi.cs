@@ -38,6 +38,7 @@ public class DictionarySetUi : GenericWindow
     {
         base.Open();
         CreateGuardnerSlots();
+       // dictionarySetDiscriptUi.DisplayAllSets();
     }
 
     public override void Close()

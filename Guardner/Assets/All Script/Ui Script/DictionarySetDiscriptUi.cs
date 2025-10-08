@@ -18,11 +18,10 @@ public class DictionarySetDiscriptUi : MonoBehaviour
 
     private void Start()
     {
-        // 시작할 때 모든 세트 정보 표시
         DisplayAllSets();
     }
 
-    private void DisplayAllSets()
+    public void DisplayAllSets()
     {
         var allSets = DataTableManager.DictionarySetTable.GetAll();
         var setArray = new DictionarySetData[3];

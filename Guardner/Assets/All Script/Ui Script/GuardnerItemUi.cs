@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GuardnerItemUi : MonoBehaviour
 {
     public TextMeshProUGUI infoText;
-    public Image guardnerImage; // 스킬 아이콘 이미지
+    public Image guardnerImage;
     public Button selectButton;
 
 
