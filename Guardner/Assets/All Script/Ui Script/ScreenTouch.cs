@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ScreenTouch : MonoBehaviour
 {
     [SerializeField] private ReCellUi reCellUi;
     [SerializeField] private GuardnerSpawnUi guardnerSpawnUi;
     public BoxCollider2D[] touchAreas;
-    private int selectedAreaIndex = -1; // 선택된 영역의 인덱스
+    private int selectedAreaIndex = -1;
 
     public Camera mainCamera;
     public WindowManager windowManager;
@@ -20,79 +19,98 @@ public class ScreenTouch : MonoBehaviour
             return;
 
 #if UNITY_EDITOR
-        // 에디터에서는 마우스만 처리
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 mousePosition = Input.mousePosition;
-            HandleTouch(mousePosition);
+            HandleTouch(Input.mousePosition);
         }
 #else
-    // 디바이스에서는 터치만 처리
-    if (Input.touchCount == 1)
-    {
-        Touch touch = Input.GetTouch(0);
-        if (touch.phase == TouchPhase.Began)
+        if (Input.touchCount == 1)
         {
-            Vector2 touchPosition = touch.position;
-            HandleTouch(touchPosition);
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                HandleTouch(touch.position);
+            }
         }
-    }
 #endif
     }
 
     public void HandleTouch(Vector2 screenPosition)
     {
-        Vector2 worldPosition = Vector2.zero; // 선언 위치를 함수 맨 위로 이동
-        if (mainCamera != null)
-        {
-             worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);
-            selectedAreaIndex = -1;
+        if (mainCamera == null) return;
 
-            for(int i =0;  i < touchAreas.Length; i++)
+        Vector3 worldPos3D = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.nearClipPlane));
+        Vector2 worldPosition = new Vector2(worldPos3D.x, worldPos3D.y);
+
+        selectedAreaIndex = -1;
+
+        // 스폰 영역 터치 체크
+        CheckSpawnAreaTouch(worldPosition);
+
+        // 가드너 터치 체크
+        CheckGuardnerTouch(worldPosition);
+    }
+
+    private void CheckSpawnAreaTouch(Vector2 worldPosition)
+    {
+        for (int i = 0; i < touchAreas.Length; i++)
+        {
+            if (touchAreas[i] == null) continue;
+
+            var bounds = touchAreas[i].bounds;
+            bool isInBounds = worldPosition.x >= bounds.min.x && worldPosition.x <= bounds.max.x &&
+                              worldPosition.y >= bounds.min.y && worldPosition.y <= bounds.max.y;
+
+            if (isInBounds)
             {
-                if (touchAreas[i] != null && touchAreas[i].bounds.Contains(worldPosition))
-                {
-                    selectedAreaIndex = i;
-                    if(windowManager != null)
-                    {
-                        windowManager.OpenOverlay(WindowType.GuardnerSpawnUi);
-                    }
-                    else
-                    {
-                        guardnerSpawnUi.Open();
-                    }
-                    break;
-                }
+                selectedAreaIndex = i;
+                OpenGuardnerSpawnUi();
+                break;
             }
         }
+    }
 
+    private void CheckGuardnerTouch(Vector2 worldPosition)
+    {
         Collider2D[] hits = Physics2D.OverlapPointAll(worldPosition);
-
         foreach (var hit in hits)
         {
             GuardnerBehavior guardner = hit.GetComponent<GuardnerBehavior>();
             if (guardner != null)
             {
                 guardner.ToggleRangeDisplay();
-
-                if (reCellUi != null)
-                {
-                    if (lastOpenedGuardner == guardner)
-                    {
-                        reCellUi.Close();
-                        lastOpenedGuardner = null;
-                    }
-                    else
-                    {
-                        reCellUi.Open(guardner);
-                        lastOpenedGuardner = guardner;
-                    } 
-                }
-
-                break; 
+                HandleGuardnerUI(guardner);
+                break;
             }
         }
+    }
 
+    private void OpenGuardnerSpawnUi()
+    {
+        if (windowManager != null)
+        {
+            windowManager.OpenOverlay(WindowType.GuardnerSpawnUi);
+        }
+        else if (guardnerSpawnUi != null)
+        {
+            guardnerSpawnUi.Open();
+        }
+    }
+
+    private void HandleGuardnerUI(GuardnerBehavior guardner)
+    {
+        if (reCellUi == null) return;
+
+        if (lastOpenedGuardner == guardner)
+        {
+            reCellUi.Close();
+            lastOpenedGuardner = null;
+        }
+        else
+        {
+            reCellUi.Open(guardner);
+            lastOpenedGuardner = guardner;
+        }
     }
 
     public int GetSelectedAreaIndex()

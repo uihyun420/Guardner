@@ -71,8 +71,6 @@ public class GuardnerSpawner : MonoBehaviour
         }
     }
 
-
-
     public bool SpawnGuardner(int guardnerId, Vector2 spawnPos)
     {
         var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
@@ -114,7 +112,6 @@ public class GuardnerSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"아이디 {guardnerId}에 해당하는 프리팹이 없습니다.");
             return false;
         }
     }

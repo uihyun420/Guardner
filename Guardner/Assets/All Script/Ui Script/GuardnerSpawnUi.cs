@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GuardnerSpawnUi : GenericWindow
 {
@@ -16,6 +17,7 @@ public class GuardnerSpawnUi : GenericWindow
     [SerializeField] private Button ExitButton;
     [SerializeField] private ScreenTouch screenTouch; // ScreenTouch 참조 추가
     [SerializeField] private ReCellUi reCellUi;
+
 
     private int selectedGuardnerId; // 선택된 가드너 ID 저장
     private int selectedAreaIndex;
@@ -52,23 +54,13 @@ public class GuardnerSpawnUi : GenericWindow
 
     public override void Open()
     {
-
-        reCellUi.Close(); // Close() 메서드 호출로 완전히 닫기
-        reCellUi.gameObject.SetActive(false);
-        reCellUi.enabled = false;
-
-        selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
-        if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
+        if (reCellUi != null)
         {
-            Vector2 expectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
-            if (guardnerSpawner.IsGuardnerAtPosition(expectedSpawnPos))
-            {
-                return;
-            }
+            reCellUi.Close(); 
+            reCellUi.gameObject.SetActive(false);
+            reCellUi.enabled = false;
         }
 
-
-        // guardnerSpawner가 null인 경우 (튜토리얼 모드) 처리
         if (guardnerSpawner != null && guardnerSpawner.screenTouch != null)
         {
             selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
@@ -83,20 +75,25 @@ public class GuardnerSpawnUi : GenericWindow
         }
         else
         {
-            // 튜토리얼 모드: 기본값 설정
             selectedAreaIndex = 0;
         }
 
         base.Open();
 
-        screenTouch.enabled = false;
+        if (screenTouch != null)
+        {
+            screenTouch.enabled = false;
+        }
 
         DisplayAvailableGuardner();
 
-        scrollRect.horizontal = false;
-        scrollRect.vertical = true;
-        scrollRect.enabled = true;
-        scrollRect.gameObject.SetActive(true);
+        if (scrollRect != null)
+        {
+            scrollRect.horizontal = false;
+            scrollRect.vertical = true;
+            scrollRect.enabled = true;
+            scrollRect.gameObject.SetActive(true);
+        }
     }
 
     public override void Close()
@@ -169,28 +166,78 @@ public class GuardnerSpawnUi : GenericWindow
         }
     }
 
+    //private void OnSelectGuardner(int guardnerId)
+    //{
+    //    selectedGuardnerId = guardnerId;
+
+    //    if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
+    //    {
+    //        Vector2 selectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
+
+    //        if (guardnerSpawner.IsGuardnerAtPosition(selectedSpawnPos))
+    //        {
+    //            return;
+    //        }
+    //        if (guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos))
+    //        {
+    //            battleUi.UpdateGuardnerCount();
+    //        }
+    //    }
+    //    Close();
+    //}
+
+    private void OnClickExitButton()
+    {
+        Close();
+    }
     private void OnSelectGuardner(int guardnerId)
     {
         selectedGuardnerId = guardnerId;
 
-        if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
+        if (guardnerSpawner != null)
         {
-            Vector2 selectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
+            // 일반 모드
+            if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
+            {
+                Vector2 selectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
 
-            if (guardnerSpawner.IsGuardnerAtPosition(selectedSpawnPos))
-            {
-                return;
-            }
-            if (guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos))
-            {
-                battleUi.UpdateGuardnerCount();
+                if (guardnerSpawner.IsGuardnerAtPosition(selectedSpawnPos))
+                {
+                    return;
+                }
+
+                // 튜토리얼 모드인지 확인
+                var tutorialSpawner = guardnerSpawner as TutorialGuardnerSpawner;
+                if (tutorialSpawner != null)
+                {
+                    // 튜토리얼 모드: 골드 체크 없이 스폰
+                    if (tutorialSpawner.SpawnGuardnerForTutorial(guardnerId, selectedSpawnPos))
+                    {
+                        Debug.Log("튜토리얼에서 가드너 스폰 성공");
+                        if (battleUi != null)
+                        {
+                            battleUi.UpdateGuardnerCount();
+                        }
+                    }
+                }
+                else
+                {
+                    // 일반 모드: 골드 체크 후 스폰
+                    if (guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos))
+                    {
+                        if (battleUi != null)
+                        {
+                            battleUi.UpdateGuardnerCount();
+                        }
+                    }
+                }
             }
         }
-        Close();
-    }
+        else
+        {
+            Debug.LogError("guardnerSpawner가 null입니다!");
+        }
 
-    private void OnClickExitButton()
-    {
         Close();
     }
 }
