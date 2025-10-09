@@ -9,13 +9,13 @@ public class GuardnerSpawnUi : GenericWindow
     public ScrollRect scrollRect;
 
     public GameObject guardnerItemPrefab; // 가드너 아이템 ui 프리팹 
-    public Transform contentParent; // 스크롤랙트의 content
+    public Transform contentParent; // 스크롤랙트 content
 
     [SerializeField] private GameObject blockScreenPanel;
-    [SerializeField] private GuardnerSpawner guardnerSpawner; // inspector에서 연결
+    [SerializeField] private GuardnerSpawner guardnerSpawner; 
     [SerializeField] private BattleUi battleUi;
     [SerializeField] private Button ExitButton;
-    [SerializeField] private ScreenTouch screenTouch; // ScreenTouch 참조 추가
+    [SerializeField] private ScreenTouch screenTouch; 
     [SerializeField] private ReCellUi reCellUi;
 
 
@@ -210,10 +210,8 @@ public class GuardnerSpawnUi : GenericWindow
                 var tutorialSpawner = guardnerSpawner as TutorialGuardnerSpawner;
                 if (tutorialSpawner != null)
                 {
-                    // 튜토리얼 모드: 골드 체크 없이 스폰
                     if (tutorialSpawner.SpawnGuardnerForTutorial(guardnerId, selectedSpawnPos))
                     {
-                        Debug.Log("튜토리얼에서 가드너 스폰 성공");
                         if (battleUi != null)
                         {
                             battleUi.UpdateGuardnerCount();
@@ -222,7 +220,7 @@ public class GuardnerSpawnUi : GenericWindow
                 }
                 else
                 {
-                    // 일반 모드: 골드 체크 후 스폰
+                    // 일반 모드
                     if (guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos))
                     {
                         if (battleUi != null)
@@ -233,11 +231,6 @@ public class GuardnerSpawnUi : GenericWindow
                 }
             }
         }
-        else
-        {
-            Debug.LogError("guardnerSpawner가 null입니다!");
-        }
-
         Close();
     }
 }

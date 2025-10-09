@@ -243,7 +243,6 @@ public class PlayerSkillManager : SkillManager
         {
             GameObject effect = Instantiate(effectPrefab, position, Quaternion.identity);
 
-            // 파티클 시스템이 있다면 자동으로 삭제되도록 설정
             ParticleSystem particles = effect.GetComponent<ParticleSystem>();
             if (particles != null)
             {
@@ -252,7 +251,6 @@ public class PlayerSkillManager : SkillManager
             }
             else
             {
-                //파티클이 없다면 삭제
                 Destroy(effect, 0.5f);
             }
         }
@@ -263,15 +261,9 @@ public class PlayerSkillManager : SkillManager
     {
         if (monsterSpawner == null || monsterSpawner.spawnedMonsters == null || monsterSpawner.spawnedMonsters.Count == 0)
         {
-            Debug.Log("적용할 몬스터가 없습니다.");
             return new List<MonsterBehavior>();
         }
-
         var aliveMonsters = monsterSpawner.spawnedMonsters.Where(m => m != null && !m.IsDead).ToList();
-        if (aliveMonsters.Count == 0)
-        {
-            Debug.Log("살아있는 몬스터가 없습니다.");
-        }
         return aliveMonsters;
     }
 
@@ -279,14 +271,9 @@ public class PlayerSkillManager : SkillManager
     {
         if (guardnerSpawner == null || guardnerSpawner.spawnedGuardners == null || guardnerSpawner.spawnedGuardners.Count == 0)
         {
-            Debug.Log("적용할 정원사가 없습니다.");
             return new List<GuardnerBehavior>();
         }
         var aliveGuardner = guardnerSpawner.spawnedGuardners.Where(g => g != null).ToList();
-        if(aliveGuardner.Count == 0)
-        {
-            Debug.Log("소환된 정원사가 없습니다.");
-        }
         return aliveGuardner;
     }
 
@@ -315,7 +302,6 @@ public class PlayerSkillManager : SkillManager
 
                 monster.Ondamage(damage);
                 PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.PullingWeeds);
-                Debug.Log($"잡초 뽑기: {monster.monsterData.Name}에게 {damage} 데미지 (HP {reductionPercent * 100}% 감소)");
             }
         }
     }
@@ -335,7 +321,6 @@ public class PlayerSkillManager : SkillManager
             {
                 float boostAmount = guardner.aps * boostPercent;
                 guardner.AttackSpeedBoost(boostAmount, duration);
-                Debug.Log($"아군 가드너 {guardner.name} 공격속도 {boostPercent * 100}% 증가 ({duration}초)");
                 PlayPlayerSkillEffect(guardner.transform.position, PlayerSkillEffectType.MorningWatering);
 
             }
@@ -452,10 +437,7 @@ public class PlayerSkillManager : SkillManager
 
                 guardnerSkillData.CoolTime = reducedCoolTime;
 
-
                 float coolTimeDiff = originalCoolTime - reducedCoolTime; // 디버그 테스트용
-                Debug.Log($"가드너 {guardner.name}의 스킬 쿨타임 {originalCoolTime:F2}초 → {reducedCoolTime:F2}초 ({coolTimeDiff:F2}초 감소)");
-
 
                 // 일정 시간 후 원래 쿨타임으로 복구
                 StartCoroutine(RestoreGuardnerSkillCoolTime(guardnerSkillData, originalCoolTime, duration));
@@ -497,20 +479,16 @@ public class PlayerSkillManager : SkillManager
         {
             if (monster != null && !monster.IsDead)
             {
-                // 몬스터의 현재 HP를 모두 깎음 (즉시 처치)
                 int currentHp = monster.monsterData.HP; // 몬스터의 최대 HP
                 monster.Ondamage(currentHp);
                 PlayPlayerSkillEffect(monster.transform.position, PlayerSkillEffectType.SolarFocus);
-
             }
         }
-        // 효과 텍스트(디버프) 표시
         AddSkillEffect(skillData.SkillDescription, 0.5f, false);
     }
 
     private void GardenFestival(PlayerSkillData skillData)
     {
-        // 1. 모든 몬스터 HP 80% 피해
         var aliveMonsters = GetAliveMonsters();
         if (aliveMonsters.Count > 0)
         {
@@ -527,10 +505,9 @@ public class PlayerSkillManager : SkillManager
             AddSkillEffect("몬스터 HP -80%", 0.5f, false); // 디버프 효과 텍스트
         }
 
-        // 2. 정원사 전체 공격력 +30%
         var aliveGuardners = GetAliveGuardner();
         float duration = skillData.Duration;
-        float attackPowerPercent = 0.3f; // 30%
+        float attackPowerPercent = 0.3f; 
         if (aliveGuardners.Count > 0)
         {
             foreach (var guardner in aliveGuardners)
@@ -540,7 +517,7 @@ public class PlayerSkillManager : SkillManager
                 PlayPlayerSkillEffect(guardner.transform.position, PlayerSkillEffectType.GardenFestival);
 
             }
-            AddSkillEffect("정원사 전체 공격력 +30%", duration, true); // 버프 효과 텍스트
+            AddSkillEffect("정원사 전체 공격력 +30%", duration, true); 
         }
     }
 

@@ -9,21 +9,19 @@ public class TutorialScene : MonoBehaviour
     [SerializeField] private Image[] images;
     [SerializeField] private float time = 1f;
     [SerializeField] private float fadeDuration = 0.5f;
-    [SerializeField] private Button button;
 
     [SerializeField] private BattleUi battleUi;
     [SerializeField] private GameObject map;    
 
     private void Start()
     {
-        //battleUi.gameObject.SetActive(false);
-        //map.SetActive(false);
-        //StartCoroutine(ShowImages());
+        battleUi.gameObject.SetActive(false);
+        map.SetActive(false);
+        StartCoroutine(ShowImages());
     }
 
     private void Awake()
     {
-        button.onClick.AddListener(OnClickGameStartButton);
     }
 
     private IEnumerator ShowImages()
@@ -44,11 +42,8 @@ public class TutorialScene : MonoBehaviour
 
             yield return new WaitForSeconds(time);
 
-            if (i < images.Length - 1)
-            {
-                yield return StartCoroutine(Fade(canvasGroup, 1f, 0f, fadeDuration)); // ÆäÀÌµå ¾Æ¿ô
-                images[i].gameObject.SetActive(false);
-            }
+            yield return StartCoroutine(Fade(canvasGroup, 1f, 0f, fadeDuration)); // ÆäÀÌµå ¾Æ¿ô
+            images[i].gameObject.SetActive(false);
         }
 
         battleUi.gameObject.SetActive(true);
@@ -71,6 +66,11 @@ public class TutorialScene : MonoBehaviour
     private void OnClickGameStartButton()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    private IEnumerator TutorialProgress()
+    {
+        yield return null;
     }
 }
 
