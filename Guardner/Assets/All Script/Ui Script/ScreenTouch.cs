@@ -3,6 +3,7 @@ using UnityEngine;
 public class ScreenTouch : MonoBehaviour
 {
     [SerializeField] private ReCellUi reCellUi;
+    [SerializeField] private GuardnerSpawnUi guardnerSpawnUi;
     public BoxCollider2D[] touchAreas;
     private int selectedAreaIndex = -1; // 선택된 영역의 인덱스
 
@@ -56,6 +57,10 @@ public class ScreenTouch : MonoBehaviour
                     if(windowManager != null)
                     {
                         windowManager.OpenOverlay(WindowType.GuardnerSpawnUi);
+                    }
+                    else
+                    {
+                        guardnerSpawnUi.Open();
                     }
                     break;
                 }

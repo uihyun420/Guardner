@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8103123549286507836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9056508656021867477}
+  - component: {fileID: 8346471093709651647}
+  m_Layer: 0
+  m_Name: GuardnerSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9056508656021867477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8103123549286507836}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8346471093709651647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8103123549286507836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966ead756d3c77d4b9d989238c3a4ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guardnerPrefabs:
+  - guardnerId: 11255
+    prefab: {fileID: 5145476537578873741, guid: 214830a3d5180b143b2abc86caf3962a, type: 3}
+  - guardnerId: 11245
+    prefab: {fileID: 4204627278967031321, guid: 4df5966a2b46c4a4392c1814f55043c5, type: 3}
+  - guardnerId: 11135
+    prefab: {fileID: 829225696231526450, guid: 9b7998ef4d960f143981bebfe71f578d, type: 3}
+  - guardnerId: 11120
+    prefab: {fileID: 8616823271620557351, guid: fa3069480700c3e4682e78b7525793c7, type: 3}
+  - guardnerId: 11125
+    prefab: {fileID: 3141656821139911677, guid: fb912fc50f42b4f48bcc2e8ee8bc169e, type: 3}
+  - guardnerId: 11235
+    prefab: {fileID: 642227571115821349, guid: 65932e942e61e684bafe31de4cfcc5fc, type: 3}
+  - guardnerId: 11250
+    prefab: {fileID: 8397444121506317559, guid: 51ce4d1eae2566448983a946daa0cfc9, type: 3}
+  - guardnerId: 11310
+    prefab: {fileID: 9023479103262044033, guid: 0c52e55466dbb3744b20fd9d5b033c3b, type: 3}
+  - guardnerId: 11260
+    prefab: {fileID: 4696447781663140227, guid: d6d0d6badb88a0f43944598e5c943a5f, type: 3}
+  - guardnerId: 11270
+    prefab: {fileID: 7898903888608801064, guid: 665bce5b0593b2f42afcaaea9e2abb37, type: 3}
+  - guardnerId: 11315
+    prefab: {fileID: 474307786480568128, guid: 37a4af256f401ad4093eb36aed092e99, type: 3}
+  - guardnerId: 11320
+    prefab: {fileID: 6711067257167622804, guid: d4a59ba1f8510844d9359e2078245b27, type: 3}
+  spawnedGuardners: []
+  guardnerSpawnUi: {fileID: 0}
+  screenTouch: {fileID: 0}
+  spawnPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  battleUi: {fileID: 0}

@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &975090216067680964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1580690373537297281}
+  - component: {fileID: 6516397593912045301}
+  m_Layer: 0
+  m_Name: PlayerSkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1580690373537297281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975090216067680964}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 716.89307, y: 1371.4796, z: -5.337346}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6516397593912045301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975090216067680964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15ce8c156e094f8f0e8d691c2e9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guardnerSpawner: {fileID: 0}
+  monsterSpawner: {fileID: 0}
+  guardnerStunEffectPrefab: {fileID: 0}
+  guardnerBuffEffectPrefab: {fileID: 0}
+  guardnerDeBuffEffectPrefab: {fileID: 0}
+  guardnerDamageEffectPrefab: {fileID: 0}
+  buffText: {fileID: 0}
+  deBuffText: {fileID: 0}
+  pullingWeedsEffectPrefab: {fileID: 2325481569229151742, guid: a6ce10d4e5e04404db5147e520895aec, type: 3}
+  morningWateringEffectPrefab: {fileID: 4436220594023338641, guid: 1faa45203103dbf478cf9a83af6a3eba, type: 3}
+  pestRepellentEffectPrefab: {fileID: 4436220594023338641, guid: 1faa45203103dbf478cf9a83af6a3eba, type: 3}
+  pruningEffectPrefab: {fileID: 5663818590087976858, guid: 04cffb8fdcffe3e4d9ec8465fac62636, type: 3}
+  sunlightControlEffectPrefab: {fileID: 4584132065741636156, guid: 5ea4d25120c34fc4181f64a696f2f0a6, type: 3}
+  soilLevelingEffectPrefab: {fileID: 5663818590087976858, guid: 04cffb8fdcffe3e4d9ec8465fac62636, type: 3}
+  fragranceBloomEffectPrefab: {fileID: 8631341552309315076, guid: 9ec9920b5fc7b91489c3e592fb204cf2, type: 3}
+  pestExterminationEffectPrefab: {fileID: 4122757149669930, guid: 81ec20ee8db4daf439d4da37821af62b, type: 3}
+  solarFocusEffectPrefab: {fileID: 2619973573001623042, guid: 6c229071a4ebb3645b5c71f177625819, type: 3}
+  gardenFestivalEffectPrefab: {fileID: 8631341552309315076, guid: 9ec9920b5fc7b91489c3e592fb204cf2, type: 3}
