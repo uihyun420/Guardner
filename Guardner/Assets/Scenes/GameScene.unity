@@ -19161,6 +19161,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 983533562}
     - target: {fileID: 1170472068124035508, guid: 97fe9c6d263c0874a9cce6648674c83b, type: 3}
+      propertyPath: guardnerSpawnUi
+      value: 
+      objectReference: {fileID: 579048190}
+    - target: {fileID: 1170472068124035508, guid: 97fe9c6d263c0874a9cce6648674c83b, type: 3}
       propertyPath: 'touchAreas.Array.data[0]'
       value: 
       objectReference: {fileID: 936163424}

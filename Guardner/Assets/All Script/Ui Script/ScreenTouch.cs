@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScreenTouch : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class ScreenTouch : MonoBehaviour
     public WindowManager windowManager;
 
     private bool isUiBlocking = false;
-    private GuardnerBehavior lastOpenedGuardner = null; 
-
+    private GuardnerBehavior lastOpenedGuardner = null;
 
     private void Update()
     {
@@ -43,7 +43,6 @@ public class ScreenTouch : MonoBehaviour
     public void HandleTouch(Vector2 screenPosition)
     {
         Vector2 worldPosition = Vector2.zero; // 선언 위치를 함수 맨 위로 이동
-
         if (mainCamera != null)
         {
              worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);

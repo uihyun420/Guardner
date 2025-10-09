@@ -49,12 +49,9 @@ public class GuardnerSpawner : MonoBehaviour
         if (ownedGuardnerIds.Add(guardnerId))
         {
             SaveLoadManager.SaveOwnedGuardners(ownedGuardnerIds);
-
-            Debug.Log($"[GuardnerSpawner] 가드너 {guardnerId} 획득!");
             UpdateAllUIs(guardnerId);
             return true;
         }
-        Debug.Log($"[GuardnerSpawner] 이미 보유한 가드너: {guardnerId}");
         return false;
     }
 

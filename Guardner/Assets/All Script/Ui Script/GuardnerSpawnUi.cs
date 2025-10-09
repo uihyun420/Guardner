@@ -23,10 +23,12 @@ public class GuardnerSpawnUi : GenericWindow
 
     private void Update()
     {
+        if (contentParent == null || battleUi == null) return;
+
         foreach (Transform child in contentParent)
         {
             var itemUi = child.GetComponent<GuardnerItemUi>();
-            if (itemUi != null && itemUi.Data != null) // Data 프로퍼티가 있다고 가정
+            if (itemUi != null && itemUi.Data != null) 
             {
                 if (battleUi.gold < itemUi.Data.SummonGold)
                 {
@@ -65,6 +67,26 @@ public class GuardnerSpawnUi : GenericWindow
             }
         }
 
+
+        // guardnerSpawner가 null인 경우 (튜토리얼 모드) 처리
+        if (guardnerSpawner != null && guardnerSpawner.screenTouch != null)
+        {
+            selectedAreaIndex = guardnerSpawner.screenTouch.GetSelectedAreaIndex();
+            if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
+            {
+                Vector2 expectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
+                if (guardnerSpawner.IsGuardnerAtPosition(expectedSpawnPos))
+                {
+                    return;
+                }
+            }
+        }
+        else
+        {
+            // 튜토리얼 모드: 기본값 설정
+            selectedAreaIndex = 0;
+        }
+
         base.Open();
 
         screenTouch.enabled = false;
@@ -91,18 +113,38 @@ public class GuardnerSpawnUi : GenericWindow
         }
 
         // 보유한 가드너만 표시
-        foreach (var guardnerId in guardnerSpawner.ownedGuardnerIds)
+        if (guardnerSpawner != null)
         {
-            var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
-            if (guardnerData != null)
+            // 일반 모드
+            foreach (var guardnerId in guardnerSpawner.ownedGuardnerIds)
             {
-                CreateGuardnerItem(guardnerData, guardnerId);
+                var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
+                if (guardnerData != null)
+                {
+                    CreateGuardnerItem(guardnerData, guardnerId);
+                }
+            }
+        }
+        else
+        {
+            // 튜토리얼 모드: 기본 가드너들 표시
+            var tutorialGuardnerIds = new int[] { 11120, 11235 }; // 원하는 가드너 ID로 변경
+            foreach (var guardnerId in tutorialGuardnerIds)
+            {
+                var guardnerData = DataTableManager.GuardnerTable.Get(guardnerId);
+                if (guardnerData != null)
+                {
+                    CreateGuardnerItem(guardnerData, guardnerId);
+                }
             }
         }
 
-        var contentHeight = scrollRect.content.rect.height;
-        var viewportHeight = scrollRect.viewport.rect.height;
-        scrollRect.vertical = contentHeight > viewportHeight;
+        if (scrollRect != null && scrollRect.content != null && scrollRect.viewport != null)
+        {
+            var contentHeight = scrollRect.content.rect.height;
+            var viewportHeight = scrollRect.viewport.rect.height;
+            scrollRect.vertical = contentHeight > viewportHeight;
+        }
     }
 
     private void CreateGuardnerItem(GuardnerData data, int guardnerId)
