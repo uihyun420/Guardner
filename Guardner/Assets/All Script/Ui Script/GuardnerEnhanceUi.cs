@@ -75,7 +75,6 @@ public class GuardnerEnhanceUi : GenericWindow
         }
     }
 
-
     private int GetCurrentLevel(int guardnerId)
     {
         if (guardnerLevelDict.TryGetValue(guardnerId, out int level))
@@ -92,7 +91,6 @@ public class GuardnerEnhanceUi : GenericWindow
             var sprite = GetGuardnerSprite(guardnerId);
             itemUi.SetData(data, sprite, () => OnEnhanceButton(guardnerId));
         }
-
     }
     private Sprite GetGuardnerSprite(int guardnerId)
     {

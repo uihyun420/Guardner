@@ -108,31 +108,19 @@ public class GuardnerEnhanceResultUi : GenericWindow
     {
         var nextData = DataTableManager.GuardnerEnhanceTable.Get(currentGuardnerId, currentLevel + 1);
 
-        // 1. 최대 레벨 체크
         if (nextData == null)
         {
-            Debug.Log("최대 레벨입니다.");
             enhanceButton.interactable = false;
             return;
         }
 
-        // 2. 골드 확인
         if (SaveLoadManager.Data.Gold < nextData.NeedGold)
         {
-            Debug.Log($"골드 부족! 필요: {nextData.NeedGold}, 보유: {SaveLoadManager.Data.Gold}");
             return;
         }
 
-        // 3. 아이템 확인 (현재는 아이템 시스템이 없으므로 생략)
-        // if (!HasItem(nextData.NeedItemId, nextData.NeedItemQty))
-        // {
-        //     Debug.Log($"아이템 부족! ID: {nextData.NeedItemId}, 필요 수량: {nextData.NeedItemQty}");
-        //     return;
-        // }
-
         // 4. 재화 차감
         SaveLoadManager.Data.Gold -= nextData.NeedGold;
-        // UseItem(nextData.NeedItemId, nextData.NeedItemQty); // 아이템 시스템 구현 시 사용
 
         // 5. 강화된 가드너 데이터 생성 및 저장
         var enhancedGuardner = new GuardnerSaveData
@@ -144,13 +132,10 @@ public class GuardnerEnhanceResultUi : GenericWindow
             MovementSpeed = 1.0f, // 기본값 (테이블에 MovementSpeed가 없다면)
         };
 
-        // 가드너 강화 정보 저장
         SaveLoadManager.SaveGuardnerEnhance(currentGuardnerId.ToString(), enhancedGuardner);
 
-        // 가드너 언락 (처음 강화시)
         SaveLoadManager.UnlockGuardner(currentGuardnerId.ToString());
 
-        // 6. UI 갱신
         currentLevel = nextData.Level;
         SetEnhanceData(currentGuardnerId, currentLevel);
 
@@ -159,12 +144,8 @@ public class GuardnerEnhanceResultUi : GenericWindow
         {
             mainMenuUi.mainUiGold = SaveLoadManager.Data.Gold;
         }
-
-        Debug.Log($"{nextData.Name} 강화 성공! Lv.{currentLevel - 1} → Lv.{currentLevel}");
         SoundManager.soundManager.PlaySFX("LevelUpSfx");
-
-
-    }
+    }    
 
     private void OnClickExitButton()
     {

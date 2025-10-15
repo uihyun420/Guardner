@@ -79,7 +79,6 @@ public class GuardnerBehavior : MonoBehaviour
         {
             mainCamera = FindObjectOfType<Camera>();
         }
-
         SetupLinRenderer();
     }
     private void SetupLinRenderer()
@@ -138,8 +137,6 @@ public class GuardnerBehavior : MonoBehaviour
             animator.SetBool(attack, false);
         }
 
-       // HandleTouchInput();
-
         if(isRangeVisible)
         {
             DrawAttackRange();
@@ -151,7 +148,6 @@ public class GuardnerBehavior : MonoBehaviour
         Debug.Log($"범위 토글: {isRangeVisible}, attackRange: {attackRange}");
         ShowAttackRange(isRangeVisible);
     }
-
     public void ShowAttackRange(bool show)
     {
         isRangeVisible = show;
@@ -163,16 +159,12 @@ public class GuardnerBehavior : MonoBehaviour
             StartCoroutine(DisableLineRenderer(0.2f));
         }
     }
-
-
     private IEnumerator DisableLineRenderer(float delay)
     {
         yield return new WaitForSeconds(delay);
         isRangeVisible = false;
         lineRenderer.enabled = false;
     }
-
-
     private void DrawAttackRange()
     {
         int segments = 64;
@@ -190,7 +182,6 @@ public class GuardnerBehavior : MonoBehaviour
             lineRenderer.SetPosition(i, new Vector3(x, y, 0f));
         }
     }
-
     private void Attack()
     {
         animator.SetBool(attack, true);

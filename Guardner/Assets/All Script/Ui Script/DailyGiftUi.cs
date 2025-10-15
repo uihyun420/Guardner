@@ -107,16 +107,9 @@ public class DailyGiftUi : GenericWindow
             ResetStreak();
         }
 
-        // 보상 지급
         GiveReward(day);
-
-        // 출석 기록 업데이트
         UpdateAttendanceRecord();
-
-        // UI 업데이트
         UpdateDailyGiftUI();
-
-        Debug.Log($"{day}일차 출석체크 완료!");
     }
 
     private void GiveReward(int day)
@@ -130,7 +123,6 @@ public class DailyGiftUi : GenericWindow
             case 3:
                 // 골드 1000 고정 지급
                 AddGoldToSave(goldAmount);
-                Debug.Log($"{goldAmount} 골드를 받았습니다!");
                 break;
 
             case 4:
@@ -140,7 +132,6 @@ public class DailyGiftUi : GenericWindow
                 if (inventoryUi != null)
                 {
                     inventoryUi.AddItem("LotteryTicket", lotteryTickets);
-                    Debug.Log($"가드너 뽑기권 {lotteryTickets}장을 받았습니다! (사이클 {cycle})");
                 }
                 break;
 
@@ -170,7 +161,6 @@ public class DailyGiftUi : GenericWindow
     {
         string lastClaimDate = PlayerPrefs.GetString(lastDateKey, "");
         string today = DateTime.Now.ToString("yyyy-MM-dd");
-
         return lastClaimDate != today;
     }
 

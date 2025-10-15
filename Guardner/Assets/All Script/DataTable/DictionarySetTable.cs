@@ -42,7 +42,6 @@ public class DictionarySetTable : DataTable
     {
         if (!table.ContainsKey(id))
         {
-            Debug.LogError($"SkillTable에 skillId {id}가 없습니다.");
             return null;
         }
         return table[id];

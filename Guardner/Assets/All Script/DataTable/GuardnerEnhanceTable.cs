@@ -38,10 +38,6 @@ public class GuardnerEnhanceTable : DataTable
             {
                 table.Add(key, guardner);
             }
-            else
-            {
-                Debug.Log("아이디+레벨 중복오류");
-            }
         }
     }
 
@@ -50,7 +46,6 @@ public class GuardnerEnhanceTable : DataTable
         var key = (id, level);
         if (!table.ContainsKey(key))
         {
-            Debug.LogError($"강화테이블에 id {id}, level {level}이 없습니다.");
             return null;
         }
         return table[key];

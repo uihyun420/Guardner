@@ -22,11 +22,9 @@ public class DictionaryUi : GenericWindow
 
     private HashSet<int> ownedGuardnerIds = new HashSet<int>(); // 가지고있는 가드너 목록
 
-
     [SerializeField] private DictionaryInfoUi dictionaryInfoUi;
     [SerializeField] private Button dictionaryInfoUiButton;
     [SerializeField] private WindowManager windowManager;
-
     [SerializeField] private Button setButton;
     [SerializeField] private DictionarySetUi dictionarySetUi;
     private void Update()

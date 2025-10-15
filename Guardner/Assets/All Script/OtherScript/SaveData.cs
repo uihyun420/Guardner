@@ -37,7 +37,7 @@ public class SaveDataV1 : SaveData
         GuardnerEnhances[guardnerId] = enhanceData;
     }
 
-    // 가드너 강화 정보 조회 메서드
+    // 가드너 강화 정보 조회 
     public GuardnerSaveData GetGuardnerEnhance(string guardnerId)
     {
         if (GuardnerEnhances.ContainsKey(guardnerId))
@@ -47,7 +47,7 @@ public class SaveDataV1 : SaveData
         return null;
     }
 
-    // 가드너 언락 메서드
+    // 가드너 언락 
     public void UnlockGuardner(string guardnerId)
     {
         if (!UnlockedGuardners.Contains(guardnerId))
@@ -56,7 +56,7 @@ public class SaveDataV1 : SaveData
         }
     }
 
-    // 가드너 언락 여부 확인 메서드
+    // 가드너 언락 여부 확인 
     public bool IsGuardnerUnlocked(string guardnerId)
     {
         return UnlockedGuardners.Contains(guardnerId);
