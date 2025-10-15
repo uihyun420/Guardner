@@ -6,22 +6,52 @@ using UnityEngine.UI;
 
 public class BattleUi : GenericWindow
 {
-    public GameObject battleUi;
-
+    [Header("Button")]
     public Button skill1;
     public Button skill2;
     public Button skill3;
-
-    public GameObject blockTouchScreenPanel;
-    public SkillManager skillManager;
-    public TextMeshProUGUI battleTimeText;
-    public TextMeshProUGUI goldText;
-
     [SerializeField] private Button readyTextButton;
     [SerializeField] private Button BattleTimerButton;
-    [SerializeField] private GameObject door;
-    [SerializeField] private SettingUi settingUi;
     [SerializeField] private Button settingUiButton;
+
+    [Header("GameObject")]
+    public GameObject battleUi;
+    public GameObject blockTouchScreenPanel;
+    [SerializeField] private GameObject readyTimeObject;
+    [SerializeField] private GameObject battleStartObject;
+    [SerializeField] private GameObject door;
+
+    [Header("Reference")]
+    public SkillManager skillManager;
+    public MonsterSpawner monsterSpawner;
+    public GuardnerSpawner guardnerSpawner;
+    [SerializeField] private SettingUi settingUi;
+    [SerializeField] private StageManager stageManager;
+    [SerializeField] private PlayerSkillManager playerSkillManager;
+    [SerializeField] private PlayerSkillSetUi playerSkillSetUi;
+
+    [Header("Text")]
+    public TextMeshProUGUI battleTimeText;
+    public TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI coolTimeText1;
+    [SerializeField] private TextMeshProUGUI coolTimeText2;
+    [SerializeField] private TextMeshProUGUI coolTimeText3;
+    [SerializeField] private TextMeshProUGUI text1;
+    [SerializeField] private TextMeshProUGUI text2;
+    [SerializeField] private TextMeshProUGUI text3;
+    [SerializeField] private TextMeshProUGUI guardnerSpawnCount;
+
+
+    private int maxGuardnerCount = 16;
+    public int canSpawnGuardnerCount = 0;
+    public float battleTimer;
+    private float readyTimer = 30f;
+    private bool isReadyTime = true;
+    public int gold;
+    StringBuilder sb = new StringBuilder();
+    private int assignedSkill1 = -1;
+    private int assignedSkill2 = -1;
+    private int assignedSkill3 = -1;
 
     public void ReadyTimeSetZero()
     {
@@ -40,36 +70,7 @@ public class BattleUi : GenericWindow
         isReadyTime = true;
     }
 
-    [SerializeField] private TextMeshProUGUI coolTimeText1;
-    [SerializeField] private TextMeshProUGUI coolTimeText2;
-    [SerializeField] private TextMeshProUGUI coolTimeText3;
 
-    [SerializeField] private TextMeshProUGUI text1;
-    [SerializeField] private TextMeshProUGUI text2;
-    [SerializeField] private TextMeshProUGUI text3;
-
-    [SerializeField] private TextMeshProUGUI guardnerSpawnCount;
-
-    private int maxGuardnerCount = 16;
-    public int canSpawnGuardnerCount = 0;
-    public float battleTimer;
-    private float readyTimer = 30f;
-    private bool isReadyTime = true;
-
-    public int gold;
-    public MonsterSpawner monsterSpawner;
-    public GuardnerSpawner guardnerSpawner;
-    StringBuilder sb = new StringBuilder();
-
-    [SerializeField] private GameObject readyTimeObject;
-    [SerializeField] private GameObject battleStartObject;
-    [SerializeField] private StageManager stageManager;
-    [SerializeField] private PlayerSkillManager playerSkillManager;
-    [SerializeField] private PlayerSkillSetUi playerSkillSetUi;
-
-    private int assignedSkill1 = -1;
-    private int assignedSkill2 = -1;
-    private int assignedSkill3 = -1;
 
     private void Start()
     {

@@ -17,7 +17,7 @@ public class InventoryItemUi : MonoBehaviour
         }
         else
         {
-            //2.원래 색상 복원
+            //원래 색상 복원
             countText.color = Color.white;
             if (iconImage != null)
                 iconImage.color = Color.white;

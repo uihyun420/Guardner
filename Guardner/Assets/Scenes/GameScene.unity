@@ -5787,17 +5787,17 @@ MonoBehaviour:
   isOverlayWindow: 0
   dateText: {fileID: 0}
   timeText: {fileID: 142521840}
+  inventoryUi: {fileID: 1964932189}
+  exitButton: {fileID: 1828997018}
+  checkMarkGoldPrefab: {fileID: 487097976823904720, guid: 33437bb728474d64d880dfb1e315f9f1, type: 3}
+  checkMarkLotteryPrefab: {fileID: 3846474855741089267, guid: b7b1437bc76ad7b499ee839eea5c0d03, type: 3}
+  checkMarkSkillPrefab: {fileID: 6487173606592376528, guid: e71002b2b756b8b46a636118e09ae732, type: 3}
   dailyGiftButtons:
   - {fileID: 3640963929562870168}
   - {fileID: 1006123511}
   - {fileID: 1618113057}
   - {fileID: 903591598901852836}
   - {fileID: 8368497085746694007}
-  checkMarkGoldPrefab: {fileID: 487097976823904720, guid: 33437bb728474d64d880dfb1e315f9f1, type: 3}
-  checkMarkLotteryPrefab: {fileID: 3846474855741089267, guid: b7b1437bc76ad7b499ee839eea5c0d03, type: 3}
-  checkMarkSkillPrefab: {fileID: 6487173606592376528, guid: e71002b2b756b8b46a636118e09ae732, type: 3}
-  inventoryUi: {fileID: 1964932189}
-  exitButton: {fileID: 1828997018}
 --- !u!1 &574920371 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3173628997110681389, guid: a0817ea52fa5c40ec81fb0fc4399761f, type: 3}
@@ -19297,6 +19297,10 @@ PrefabInstance:
       propertyPath: screenTouch
       value: 
       objectReference: {fileID: 585887588}
+    - target: {fileID: 8346471093709651647, guid: a7010ab7c718a994fa643cfed372a3fa, type: 3}
+      propertyPath: dictionaryUi
+      value: 
+      objectReference: {fileID: 6156404}
     - target: {fileID: 8346471093709651647, guid: a7010ab7c718a994fa643cfed372a3fa, type: 3}
       propertyPath: guardnerSpawnUi
       value: 

@@ -12,7 +12,6 @@ public class StageChoiceUi : GenericWindow
     [SerializeField] private BattleUi battleUi;
     [SerializeField] private MainMenuUi mainMenuUi;
     [SerializeField] private WindowManager windowManager;
-
     [SerializeField] private Button exitButton;
 
     private void Awake()

@@ -7,22 +7,18 @@ using UnityEngine.UI;
 public class DailyGiftUi : GenericWindow
 {
     [SerializeField] private TextMeshProUGUI dateText;
-    [SerializeField] private TextMeshProUGUI timeText; 
-    private TimeSpan remainTime;
-    private bool isTimerActive = false;
-
-    [SerializeField] private Button[] dailyGiftButtons = new Button[20]; 
-
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private InventoryUi inventoryUi;
+    [SerializeField] private Button exitButton;
     [SerializeField] private GameObject checkMarkGoldPrefab;
     [SerializeField] private GameObject checkMarkLotteryPrefab;
     [SerializeField] private GameObject checkMarkSkillPrefab;
+    [SerializeField] private Button[] dailyGiftButtons = new Button[20];
+
+    private TimeSpan remainTime;
+    private bool isTimerActive = false;
     private GameObject[] checkMarkInstances = new GameObject[20];
-
     private int goldAmount = 1000; // 1~3일 골드 수량
-
-    [SerializeField] private InventoryUi inventoryUi;
-    [SerializeField] private Button exitButton;
-
     private const string lastDateKey = "LastClaimDate";
     private const string currentStreakKey = "CurrentStreak";
 
@@ -89,13 +85,10 @@ public class DailyGiftUi : GenericWindow
 
     private void OnDailyGiftButtonClicked(int day)
     {
-        Debug.Log("버튼 클릭됨, SFX 재생 시도");
-
         SoundManager.soundManager.PlaySFX("UiClickSfx");
 
         if (!CanClaimToday())
         {
-            Debug.Log("오늘은 이미 보상을 받았습니다.");
             return;
         }
 
@@ -104,7 +97,6 @@ public class DailyGiftUi : GenericWindow
 
         if (day != expectedDay)
         {
-            Debug.Log($"순서대로 받아야 합니다. 현재 받을 수 있는 날: {expectedDay}일");
             return;
         }
 

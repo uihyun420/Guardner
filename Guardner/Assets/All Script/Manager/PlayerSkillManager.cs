@@ -322,7 +322,6 @@ public class PlayerSkillManager : SkillManager
                 float boostAmount = guardner.aps * boostPercent;
                 guardner.AttackSpeedBoost(boostAmount, duration);
                 PlayPlayerSkillEffect(guardner.transform.position, PlayerSkillEffectType.MorningWatering);
-
             }
         }
 

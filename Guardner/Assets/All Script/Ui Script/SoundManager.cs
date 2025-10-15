@@ -25,12 +25,12 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private bool isBgmMuted = false;
     [SerializeField] private bool isSfxMuted = false;
 
-    [Header("UI Sliders (Optional)")]
+    [Header("UI Sliders")]
     [SerializeField] private Slider masterVolumeSlider;
     [SerializeField] private Slider bgmVolumeSlider;
     [SerializeField] private Slider sfxVolumeSlider;
 
-    [Header("UI Toggle Buttons (Optional)")]
+    [Header("UI Toggle Buttons")]
     [SerializeField] private Button masterMuteButton;
     [SerializeField] private Button bgmMuteButton;
     [SerializeField] private Button sfxMuteButton;
@@ -39,6 +39,13 @@ public class SoundManager : MonoBehaviour
     private Dictionary<string, AudioClip> sfxDictionary = new Dictionary<string, AudioClip>();
 
     private AudioSource currentBGMSource;
+    public float GetMasterVolume() => masterVolume;
+    public float GetBGMVolume() => bgmVolume;
+    public float GetSFXVolume() => sfxVolume;
+    public bool IsMuted() => isMuted;
+    public bool IsBGMMuted() => isBgmMuted;
+    public bool IsSFXMuted() => isSfxMuted;
+    public bool IsPlayingBGM() => (mainBGM != null && mainBGM.isPlaying) || (battleBGM != null && battleBGM.isPlaying);
 
     private void Awake()
     {
@@ -187,13 +194,8 @@ public class SoundManager : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
         }
-        else
-        {
-            Debug.LogWarning($"BGM 클립을 찾을 수 없습니다: {clipName}");
-        }
     }
 
-    // 배틀 BGM이 끝나면 메인 BGM 재개하는 메서드 추가
     public void ResumeToPreviousBGM()
     {
         if (battleBGM != null && battleBGM.isPlaying)
@@ -233,18 +235,7 @@ public class SoundManager : MonoBehaviour
         {
             sfxSource.PlayOneShot(clip);
         }
-        else
-        {
-            Debug.LogWarning($"SFX 클립을 찾을 수 없습니다: {clipName}");
-        }
     }
-
-    //public void PlaySFX(AudioClip clip)
-    //{
-    //    if (isMuted || isSfxMuted || clip == null || sfxSource == null) return;
-
-    //    sfxSource.PlayOneShot(clip);
-    //}
 
     public void SetMasterVolume(float volume)
     {
@@ -371,15 +362,6 @@ public class SoundManager : MonoBehaviour
         isBgmMuted = PlayerPrefs.GetInt("IsBGMMuted", 0) == 1;
         isSfxMuted = PlayerPrefs.GetInt("IsSFXMuted", 0) == 1;
     }
-
-    public float GetMasterVolume() => masterVolume;
-    public float GetBGMVolume() => bgmVolume;
-    public float GetSFXVolume() => sfxVolume;
-    public bool IsMuted() => isMuted;
-    public bool IsBGMMuted() => isBgmMuted;
-    public bool IsSFXMuted() => isSfxMuted;
-    public bool IsPlayingBGM() => (mainBGM != null && mainBGM.isPlaying) || (battleBGM != null && battleBGM.isPlaying);
-
 
     public void PlaySfxButton1()
     {

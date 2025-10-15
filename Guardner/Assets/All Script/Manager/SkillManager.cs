@@ -21,7 +21,6 @@ public class SkillManager : MonoBehaviour
     [SerializeField] protected GuardnerSpawner guardnerSpawner;
     [SerializeField] protected MonsterSpawner monsterSpawner;
 
-
     [SerializeField] private GameObject guardnerStunEffectPrefab;
     [SerializeField] private GameObject guardnerBuffEffectPrefab;
     [SerializeField] private GameObject guardnerDeBuffEffectPrefab;
@@ -143,11 +142,9 @@ public class SkillManager : MonoBehaviour
 
     protected virtual MonsterBehavior FindTargetMonster(GuardnerBehavior guardner)
     {
-        // 스포너의 spawnedMonsters 리스트 직접 사용
         if (monsterSpawner == null || monsterSpawner.spawnedMonsters.Count == 0)
             return null;
 
-        // 현재 가디언이 타겟팅하고 있는 몬스터 우선 확인
         if (guardner != null && guardner.Monster != null && !guardner.Monster.IsDead)
         {
             return guardner.Monster;
@@ -157,7 +154,7 @@ public class SkillManager : MonoBehaviour
         MonsterBehavior nearestMonster = null;
         float nearestDistance = float.MaxValue;
 
-        // spawnedMonsters 리스트 직접 순회 - 성능 최적화
+        // spawnedMonsters 리스트 직접 순회 
         foreach (var monster in monsterSpawner.spawnedMonsters)
         {
             if (monster != null && !monster.IsDead)

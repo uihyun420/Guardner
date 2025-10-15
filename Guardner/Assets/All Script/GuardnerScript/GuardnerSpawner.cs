@@ -16,12 +16,12 @@ public class GuardnerSpawner : MonoBehaviour
 
     public GuardnerPrefabInfo[] guardnerPrefabs;
     public List<GuardnerBehavior> spawnedGuardners = new List<GuardnerBehavior>();
-
     public GuardnerSpawnUi guardnerSpawnUi;
     public ScreenTouch screenTouch;
     public GameObject[] spawnPos;
 
     [SerializeField] private BattleUi battleUi;
+    [SerializeField] private DictionaryUi dictionaryUi;
 
     private void Start()
     {
@@ -37,8 +37,7 @@ public class GuardnerSpawner : MonoBehaviour
         else
         {
             ownedGuardnerIds.Add(11120);
-            ownedGuardnerIds.Add(11235);
-            // 헬퍼 메서드로 저장
+            ownedGuardnerIds.Add(11235);            
             SaveLoadManager.SaveOwnedGuardners(ownedGuardnerIds);
         }
     }
@@ -64,7 +63,6 @@ public class GuardnerSpawner : MonoBehaviour
     private void UpdateAllUIs(int newGuardnerId)
     {
         // DictionaryUi 업데이트
-        var dictionaryUi = FindObjectOfType<DictionaryUi>();
         if (dictionaryUi != null)
         {
             dictionaryUi.AddGuardnerToCollection(newGuardnerId);

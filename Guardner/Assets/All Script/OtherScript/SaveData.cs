@@ -28,7 +28,6 @@ public class SaveDataV1 : SaveData
 
     public override SaveData VersionUp()
     {
-        // 현재 최신 버전이므로 자기 자신 반환
         return this;
     }
 
