@@ -4,12 +4,13 @@ using UnityEngine.UI;
 
 public class GenericWindow : MonoBehaviour
 {
-    public GameObject firstSelected;
-    protected WindowManager manager;
-
-    [SerializeField] protected bool isOverlayWindow = false; // 오버레이 창인지 구분  
+    [Header("Reference")]
     [SerializeField] protected ScreenTouch screenTouch;
     [SerializeField] protected BattleUi battleUi;
+    [SerializeField] private GameObject firstSelected;
+
+    protected WindowManager manager;
+    protected bool isOverlayWindow = false; // 오버레이 창인지 구분  
 
     public void Init(WindowManager mgr)
     {
@@ -31,7 +32,7 @@ public class GenericWindow : MonoBehaviour
             {
                 screenTouch.SetUiBlocking(true);
             }
-            BlockBattleUI(true); // 오버레이 창이 열릴 때 스킬 버튼 차단
+            BlockBattleUI(true);
         }        
     }
     public virtual void Close()
@@ -46,7 +47,6 @@ public class GenericWindow : MonoBehaviour
             BlockBattleUI(false);
         }        
     }
-
     public void BlockBattleUI(bool block)
     {
         if(battleUi != null)

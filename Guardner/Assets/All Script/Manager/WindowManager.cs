@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 public class WindowManager : MonoBehaviour
 {
-    public WindowType defaultWindow;
+    [Header("Reference")]
+    [SerializeField] private List<GenericWindow> windows;
+    [SerializeField] private StageManager stageManager;
+
+    private WindowType defaultWindow;
     public WindowType CurrentWindow { get; private set; }
 
-    public List<GenericWindow> windows;
-
-    [SerializeField] private StageManager stageManager;
     private void Start()
     {
         foreach (var window in windows)

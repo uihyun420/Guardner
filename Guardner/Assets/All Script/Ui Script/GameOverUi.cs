@@ -50,9 +50,8 @@ public class GameOverUi : GenericWindow
     public void OnClickRetryButton()
     {
         SoundManager.soundManager.PlaySFX("UiClick2Sfx");
-        // 재시작 시 현재 스테이지 ID를 정적 변수에 저장
+
         RetryStageId = StageManager.stageData.ID;
-        // 씬 로드 후 Battle UI를 열도록 설정
         NextWindowAfterLoad = WindowType.Battle;
 
         Time.timeScale = 1;
