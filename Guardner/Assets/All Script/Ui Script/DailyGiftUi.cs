@@ -6,14 +6,22 @@ using UnityEngine.UI;
 
 public class DailyGiftUi : GenericWindow
 {
+    [Header("Reference")]
+    [SerializeField] private InventoryUi inventoryUi;
+
+    [Header("Text")]
     [SerializeField] private TextMeshProUGUI dateText;
     [SerializeField] private TextMeshProUGUI timeText;
-    [SerializeField] private InventoryUi inventoryUi;
-    [SerializeField] private Button exitButton;
+
+    [Header("GameObject")]
     [SerializeField] private GameObject checkMarkGoldPrefab;
     [SerializeField] private GameObject checkMarkLotteryPrefab;
     [SerializeField] private GameObject checkMarkSkillPrefab;
+
+    [Header("Button")]
+    [SerializeField] private Button exitButton;
     [SerializeField] private Button[] dailyGiftButtons = new Button[20];
+
 
     private TimeSpan remainTime;
     private bool isTimerActive = false;
@@ -75,7 +83,7 @@ public class DailyGiftUi : GenericWindow
     {
         for (int i = 0; i < dailyGiftButtons.Length; i++)
         {
-            int dayIndex = i; // 클로저를 위한 로컬 변수
+            int dayIndex = i; 
             if (dailyGiftButtons[i] != null)
             {
                 dailyGiftButtons[i].onClick.AddListener(() => OnDailyGiftButtonClicked(dayIndex + 1));
@@ -121,12 +129,10 @@ public class DailyGiftUi : GenericWindow
             case 1:
             case 2:
             case 3:
-                // 골드 1000 고정 지급
                 AddGoldToSave(goldAmount);
                 break;
 
             case 4:
-                // 가드너 뽑기권 (사이클에 따라 개수 증가)
                 int cycle = ((day - 1) / 5) + 1;
                 int lotteryTickets = cycle;
                 if (inventoryUi != null)

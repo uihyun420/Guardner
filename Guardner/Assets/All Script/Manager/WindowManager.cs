@@ -8,7 +8,7 @@ public class WindowManager : MonoBehaviour
     [SerializeField] private StageManager stageManager;
 
     private WindowType defaultWindow;
-    public WindowType CurrentWindow { get; private set; }
+    public WindowType currentWindow { get; private set; }
 
     private void Start()
     {
@@ -19,13 +19,13 @@ public class WindowManager : MonoBehaviour
         }
 
         // GameOverUi에서 지정한 창을 사용
-        CurrentWindow = GameOverUi.NextWindowAfterLoad;
+        currentWindow = GameOverUi.NextWindowAfterLoad;
         // 기본값으로 재설정 (다음 씬 로드를 위해)
         GameOverUi.NextWindowAfterLoad = defaultWindow;
 
-        windows[(int)CurrentWindow].Open();
+        windows[(int)currentWindow].Open();
 
-        if(CurrentWindow == WindowType.Battle && GameOverUi.RetryStageId > 0)
+        if(currentWindow == WindowType.Battle && GameOverUi.RetryStageId > 0)
         {
             if(stageManager != null)
             {
@@ -49,10 +49,10 @@ public class WindowManager : MonoBehaviour
     }
     public void Open(WindowType id)
     {
-        windows[(int)CurrentWindow].Close();
-        CurrentWindow = id;
-        windows[(int)CurrentWindow].gameObject.SetActive(true);
-        windows[(int)CurrentWindow].Open();
+        windows[(int)currentWindow].Close();
+        currentWindow = id;
+        windows[(int)currentWindow].gameObject.SetActive(true);
+        windows[(int)currentWindow].Open();
     }
 
     private void OnDestroy()

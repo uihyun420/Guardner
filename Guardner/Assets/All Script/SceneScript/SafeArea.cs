@@ -1,11 +1,8 @@
-//#define DEBUG
-
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
 public class SafeArea : MonoBehaviour
 {
-
     private RectTransform safeAreaRect;
     private Canvas canvas;
     private Rect lastSafeArea;
@@ -17,20 +14,8 @@ public class SafeArea : MonoBehaviour
         OnRectTransformDimensionsChange();
     }
 
-    //void Update()
-    //{
-    //    // 런타임에서 SafeArea 변경사항 감지 (디바이스 회전 등)
-    //    if (GetSafeArea() != lastSafeArea)
-    //    {
-    //        ApplySafeArea();
-    //    }
-    //}
-
-
-
     private void OnRectTransformDimensionsChange()
     {
-
         if (GetSafeArea() != lastSafeArea && canvas != null)
         {
             lastSafeArea = GetSafeArea();
@@ -40,7 +25,6 @@ public class SafeArea : MonoBehaviour
 
     private void UpdateSizeToSafeArea()
     {
-
         var safeArea = GetSafeArea();
         var inverseSize = new Vector2(1f, 1f) / canvas.pixelRect.size;
         var newAnchorMin = Vector2.Scale(safeArea.position, inverseSize);
@@ -52,7 +36,6 @@ public class SafeArea : MonoBehaviour
         safeAreaRect.offsetMin = Vector2.zero;
         safeAreaRect.offsetMax = Vector2.zero;
     }
-
     private Rect GetSafeArea()
     {
         return Screen.safeArea;
