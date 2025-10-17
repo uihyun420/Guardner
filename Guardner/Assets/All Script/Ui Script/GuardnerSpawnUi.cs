@@ -13,9 +13,8 @@ public class GuardnerSpawnUi : GenericWindow
 
     [SerializeField] private GameObject blockScreenPanel;
     [SerializeField] private GuardnerSpawner guardnerSpawner; 
-    [SerializeField] private BattleUi battleUi;
+    //[SerializeField] private BattleUi battleUi;
     [SerializeField] private Button ExitButton;
-    [SerializeField] private ScreenTouch screenTouch; 
     [SerializeField] private ReCellUi reCellUi;
 
 
@@ -165,26 +164,6 @@ public class GuardnerSpawnUi : GenericWindow
             }
         }
     }
-
-    //private void OnSelectGuardner(int guardnerId)
-    //{
-    //    selectedGuardnerId = guardnerId;
-
-    //    if (selectedAreaIndex >= 0 && selectedAreaIndex < guardnerSpawner.spawnPos.Length)
-    //    {
-    //        Vector2 selectedSpawnPos = guardnerSpawner.spawnPos[selectedAreaIndex].transform.position;
-
-    //        if (guardnerSpawner.IsGuardnerAtPosition(selectedSpawnPos))
-    //        {
-    //            return;
-    //        }
-    //        if (guardnerSpawner.SpawnGuardner(guardnerId, selectedSpawnPos))
-    //        {
-    //            battleUi.UpdateGuardnerCount();
-    //        }
-    //    }
-    //    Close();
-    //}
 
     private void OnClickExitButton()
     {

@@ -7,8 +7,9 @@ public class GenericWindow : MonoBehaviour
     public GameObject firstSelected;
     protected WindowManager manager;
 
-    [SerializeField] protected bool isOverlayWindow = false; // 오버레이 창인지 구분
-
+    [SerializeField] protected bool isOverlayWindow = false; // 오버레이 창인지 구분  
+    [SerializeField] protected ScreenTouch screenTouch;
+    [SerializeField] protected BattleUi battleUi;
 
     public void Init(WindowManager mgr)
     {
@@ -26,7 +27,6 @@ public class GenericWindow : MonoBehaviour
         
         if(isOverlayWindow)
         {
-            var screenTouch = FindObjectOfType<ScreenTouch>();
             if(screenTouch != null)
             {
                 screenTouch.SetUiBlocking(true);
@@ -40,7 +40,6 @@ public class GenericWindow : MonoBehaviour
 
         if (isOverlayWindow)
         {
-            var screenTouch = FindObjectOfType<ScreenTouch>();
             if (screenTouch != null)
                 screenTouch.SetUiBlocking(false);
 
@@ -48,10 +47,8 @@ public class GenericWindow : MonoBehaviour
         }        
     }
 
-
     public void BlockBattleUI(bool block)
     {
-        BattleUi battleUi = FindObjectOfType<BattleUi>();
         if(battleUi != null)
         {
             if (battleUi.skill1 != null) battleUi.skill1.interactable = !block;

@@ -15,7 +15,7 @@ public class BattleUi : GenericWindow
     [SerializeField] private Button settingUiButton;
 
     [Header("GameObject")]
-    public GameObject battleUi;
+    //public GameObject battleUi;
     public GameObject blockTouchScreenPanel;
     [SerializeField] private GameObject readyTimeObject;
     [SerializeField] private GameObject battleStartObject;

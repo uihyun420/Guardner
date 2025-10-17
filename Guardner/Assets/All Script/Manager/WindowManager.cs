@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 public class WindowManager : MonoBehaviour
 {
-    public List<GenericWindow> windows;
-
     public WindowType defaultWindow;
     public WindowType CurrentWindow { get; private set; }
 
-    private GenericWindow currentWindow;
+    public List<GenericWindow> windows;
 
+    [SerializeField] private StageManager stageManager;
     private void Start()
     {
         foreach (var window in windows)
@@ -27,7 +26,6 @@ public class WindowManager : MonoBehaviour
 
         if(CurrentWindow == WindowType.Battle && GameOverUi.RetryStageId > 0)
         {
-            StageManager stageManager = FindObjectOfType<StageManager>();
             if(stageManager != null)
             {
                 stageManager.LoadStage(GameOverUi.RetryStageId);
@@ -55,7 +53,6 @@ public class WindowManager : MonoBehaviour
         windows[(int)CurrentWindow].gameObject.SetActive(true);
         windows[(int)CurrentWindow].Open();
     }
-
 
     private void OnDestroy()
     {

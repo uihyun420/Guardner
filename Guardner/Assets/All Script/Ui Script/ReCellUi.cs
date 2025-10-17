@@ -10,10 +10,8 @@ public class ReCellUi : GenericWindow
 
     [SerializeField] private Button reCellButton;
     [SerializeField] private GuardnerSpawner guardnerSpawner;
-    [SerializeField] private BattleUi battleUi;
     [SerializeField] private GameObject spawnRect;
     [SerializeField] private GuardnerSpawnUi guardnerSpawnUi;
-    [SerializeField] private ScreenTouch screenTouch;
     [SerializeField] private Button closeButton;
     
 

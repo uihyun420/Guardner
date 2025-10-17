@@ -17,7 +17,6 @@ public class MainMenuUi : GenericWindow
     [Header("UI")]
     [SerializeField] private DictionaryUi dictionaryUi;
     [SerializeField] private InventoryUi inventoryUi;
-    [SerializeField] private BattleUi battleUi;
     [SerializeField] private DailyGiftUi dailyGiftUi;
     [SerializeField] private StageChoiceUi stageChoiceUi;
     [SerializeField] private GuardnerEnhanceUi guardnerEnhanceUi;

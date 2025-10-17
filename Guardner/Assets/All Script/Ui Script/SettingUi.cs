@@ -7,8 +7,7 @@ public class SettingUi : GenericWindow
     [SerializeField] private Button MainMenuButton;
     [SerializeField] private Button GameExitButton;
     [SerializeField] private MainMenuUi mainMenuUi;
-    [SerializeField] private WindowManager windowManager;
-    [SerializeField] private BattleUi battleUi;
+    [SerializeField] private WindowManager windowManager;    
     [SerializeField] private MonsterSpawner monsterSpawner;
     [SerializeField] private GuardnerSpawner guardnerSpawner;
     [SerializeField] private StageManager stageManager;
@@ -161,7 +160,6 @@ public class SettingUi : GenericWindow
     {
         if (SoundManager.soundManager != null)
         {
-            // 현재 상태를 반전시켜서 적용
             bool isMuted = SoundManager.soundManager.IsBGMMuted();
             SoundManager.soundManager.SetBGMMute(!isMuted);
         }
@@ -171,7 +169,6 @@ public class SettingUi : GenericWindow
     {
         if (SoundManager.soundManager != null)
         {
-            // 현재 상태를 반전시켜서 적용
             bool isMuted = SoundManager.soundManager.IsSFXMuted();
             SoundManager.soundManager.IsSFXMuted();
         }

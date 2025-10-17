@@ -9,10 +9,8 @@ public class PlayerSkillSetUi : GenericWindow
     public GameObject playerSkillItemPrefab; // 플레이어 스킬 아이템 UI 프리팹
     public Transform contentParent; // 스크롤렉트의 content
 
-    [SerializeField] private BattleUi battleUi;
+    //[SerializeField] private BattleUi battleUi;
     [SerializeField] private PlayerSkillManager playerSkillManager;
-    [SerializeField] private ScreenTouch screenTouch; // ScreenTouch 참조 추가
-
 
     private int selectedSkillSlot; // 현재 선택된 스킬 슬롯 (1, 2, 3)
     private int selectedSkillId; // 선택된 스킬 ID

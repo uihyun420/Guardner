@@ -17,7 +17,6 @@ public class GameOverUi : GenericWindow
     
     [SerializeField] private StageManager StageManager;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private BattleUi battleUi;
     [SerializeField] private MainMenuUi mainMenuUi;
     [SerializeField] private MonsterSpawner monsterSpawner;
     [SerializeField] private GuardnerSpawner guardnerSpawner;

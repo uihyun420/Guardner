@@ -11,7 +11,6 @@ public class StageClearUi : GenericWindow
     [SerializeField] private Button nextStage;
     [SerializeField] private StageManager stageManager;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private BattleUi battleUi;
     [SerializeField] private GuardnerSpawner guardnerSpawner;
     [SerializeField] private MonsterSpawner monsterSpawner;
     [SerializeField] private MainMenuUi mainMenuUi;
@@ -100,7 +99,6 @@ public class StageClearUi : GenericWindow
 
         battleUi.ResetBattleTimer();
         battleUi.gameObject.SetActive(false);
-        battleUi.battleUi.SetActive(false);
 
         Close();
         manager.Open(WindowType.MainMenuUi);
