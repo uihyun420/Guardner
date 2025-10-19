@@ -10,8 +10,9 @@ public class TutorialScene : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f;
 
     [SerializeField] private BattleUi battleUi;
-    [SerializeField] private GameObject map;    
+    [SerializeField] private GameObject map;
 
+    [SerializeField] private Button tutorialSkipButton;
     private void Start()
     {
         battleUi.gameObject.SetActive(false);
@@ -21,6 +22,7 @@ public class TutorialScene : MonoBehaviour
 
     private void Awake()
     {
+        tutorialSkipButton.onClick.AddListener(onClickTutorialSkipButton);
     }
 
     private IEnumerator ShowImages()
@@ -47,8 +49,11 @@ public class TutorialScene : MonoBehaviour
 
         battleUi.gameObject.SetActive(true);
         map.SetActive(true);
-    }  
-
+    }
+    private void onClickTutorialSkipButton()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
     private IEnumerator Fade(CanvasGroup canvasGroup, float alpha, float to, float duration)
     {
         float elapsed = 0f;
