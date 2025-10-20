@@ -847,10 +847,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76846f58d81a484a884780096af7155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 6156402}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 0}
+  firstSelected: {fileID: 6156402}
   scrollRect: {fileID: 764665777}
   dictionarySlot: {fileID: 5984533528720131421, guid: a1acff833aed4bd4bb4f39f096a9dfcd, type: 3}
   contentParent: {fileID: 357203513}
@@ -1725,10 +1724,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe155cdd4d63dde40b81bfc88622b73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 199810802}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 1466228247}
+  firstSelected: {fileID: 199810802}
   battleStartButton: {fileID: 245699497}
   DictionaryButton: {fileID: 1029421995}
   inventoryButton: {fileID: 1809461534}
@@ -1737,7 +1735,6 @@ MonoBehaviour:
   settingButton: {fileID: 1825120584}
   dictionaryUi: {fileID: 6156404}
   inventoryUi: {fileID: 1964932189}
-  battleUi: {fileID: 1466228247}
   dailyGiftUi: {fileID: 567256488}
   stageChoiceUi: {fileID: 1597684921}
   guardnerEnhanceUi: {fileID: 551174785}
@@ -4288,10 +4285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1844065df18ce429a91faba01c9093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 551174784}
-  isOverlayWindow: 1
   screenTouch: {fileID: 0}
   battleUi: {fileID: 0}
+  firstSelected: {fileID: 551174784}
   scrollRect: {fileID: 635539198}
   contentParent: {fileID: 543994374}
   guardnerEnhanceItemPrefab: {fileID: 9039943896394392953, guid: 3bfecee205517d342b21913b33c1aff6, type: 3}
@@ -5789,17 +5785,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f789b0060c0bd944987fd944be8f383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 567256486}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 0}
+  firstSelected: {fileID: 567256486}
+  inventoryUi: {fileID: 1964932189}
   dateText: {fileID: 0}
   timeText: {fileID: 142521840}
-  inventoryUi: {fileID: 1964932189}
-  exitButton: {fileID: 1828997018}
   checkMarkGoldPrefab: {fileID: 487097976823904720, guid: 33437bb728474d64d880dfb1e315f9f1, type: 3}
   checkMarkLotteryPrefab: {fileID: 3846474855741089267, guid: b7b1437bc76ad7b499ee839eea5c0d03, type: 3}
   checkMarkSkillPrefab: {fileID: 6487173606592376528, guid: e71002b2b756b8b46a636118e09ae732, type: 3}
+  exitButton: {fileID: 1828997018}
   dailyGiftButtons:
   - {fileID: 3640963929562870168}
   - {fileID: 1006123511}
@@ -6554,10 +6549,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7636a7331c3775b4bb8ad82f020723e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 744801861}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 0}
+  firstSelected: {fileID: 744801861}
   nameText: {fileID: 1873131536}
   attackPowerText: {fileID: 63048541}
   referenceText: {fileID: 494151214}
@@ -7618,10 +7612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0859cd63aaf0a4c40a8982d3d80e6db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 940489154}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 0}
+  firstSelected: {fileID: 940489154}
   nameText: {fileID: 1132038182}
   guardnerDicriptText: {fileID: 89579835}
   attackText: {fileID: 1056111396}
@@ -8606,10 +8599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714252a261ca1a54fa37b2489cb78d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 0}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 0}
+  firstSelected: {fileID: 0}
   exitButton: {fileID: 1892736184}
   guardnerItemPrefab: {fileID: 8118109347976239666, guid: e54d1baeaa9e0b74f82272c1890e2207, type: 3}
   notFoundPrefab: {fileID: 3548268970042107971, guid: 6f1141d3b2014cf4ba69df9fc1457a47, type: 3}
@@ -8748,7 +8740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39cf00e3710e77445a732799dfba3ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWindow: 5
   windows:
   - {fileID: 1466228247}
   - {fileID: 1772806980}
@@ -11874,10 +11865,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4a583e6c4eac944a7e5e9da987638d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 1061125435}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 0}
+  firstSelected: {fileID: 1061125435}
   enhanceButton: {fileID: 857789847}
   nameText: {fileID: 1234024180}
   currentStatus: {fileID: 317797239}
@@ -13583,17 +13573,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1354ecf42322e744b9d1c26458d8560d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 1597684919}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 1466228247}
+  firstSelected: {fileID: 1597684919}
   clearedStagePrefab: {fileID: 3421256918415073394, guid: 3173de0a2c0b8894f90763af71065f72, type: 3}
   currentStagePrefab: {fileID: 6767729158785409124, guid: a1948bd6d58e8c14aae855c0acabc17b, type: 3}
   lockedStagePrefab: {fileID: 3639745463135172096, guid: f4dab92c9b43ee540ba975a9d4b53018, type: 3}
   contentParent: {fileID: 1637725911}
   stageManager: {fileID: 941582427}
   gameManager: {fileID: 1614417559}
-  battleUi: {fileID: 1466228247}
   mainMenuUi: {fileID: 199810806}
   windowManager: {fileID: 983533562}
   exitButton: {fileID: 1970417857}
@@ -14837,17 +14825,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f90fa03b34759d469d64c614dab910b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 1772806978}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 1466228247}
+  firstSelected: {fileID: 1772806978}
   retryButton: {fileID: 292260650}
   mainMenuButton: {fileID: 1685996366}
   stageText: {fileID: 1786787053}
   spawnRect: {fileID: 99098600}
   StageManager: {fileID: 941582427}
   gameManager: {fileID: 1614417559}
-  battleUi: {fileID: 1466228247}
   mainMenuUi: {fileID: 199810806}
   monsterSpawner: {fileID: 125721413}
   guardnerSpawner: {fileID: 1794989048}
@@ -15415,15 +15401,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e5dad9f36ad5b41af1db1705c54b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 1799934330}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 1466228247}
+  firstSelected: {fileID: 1799934330}
   mainMenu: {fileID: 567239750}
   nextStage: {fileID: 1353595216}
   stageManager: {fileID: 941582427}
   gameManager: {fileID: 1614417559}
-  battleUi: {fileID: 1466228247}
   guardnerSpawner: {fileID: 1794989048}
   monsterSpawner: {fileID: 125721413}
   mainMenuUi: {fileID: 199810806}
@@ -16295,10 +16279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd07987cdd69c94ca2d6953addb9300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 0}
-  isOverlayWindow: 0
   screenTouch: {fileID: 585887588}
   battleUi: {fileID: 1466228247}
+  firstSelected: {fileID: 0}
 --- !u!1 &1892736180 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1942256324828839016, guid: 615edd9d34db24bf091095fa6a935c39, type: 3}
@@ -16478,16 +16461,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db20c5201c4ce8545944f203ce70fb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 1925533441}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 1466228247}
+  firstSelected: {fileID: 1925533441}
   ExitButton: {fileID: 788209091}
   MainMenuButton: {fileID: 1104858264}
   GameExitButton: {fileID: 321125455}
   mainMenuUi: {fileID: 199810806}
   windowManager: {fileID: 983533562}
-  battleUi: {fileID: 1466228247}
   monsterSpawner: {fileID: 125721413}
   guardnerSpawner: {fileID: 1794989048}
   stageManager: {fileID: 941582427}
@@ -17409,10 +17390,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b3f8a5b53c7d54881585a151c4646f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 574920371}
-  isOverlayWindow: 0
   screenTouch: {fileID: 0}
   battleUi: {fileID: 0}
+  firstSelected: {fileID: 574920371}
   enhanceTicketUi: {fileID: 5102627099976176519}
   lotteryTicketUi: {fileID: 1988004687831607827}
   exitButton: {fileID: 489615742}
@@ -17757,15 +17737,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82cdfbf2bb69784a8deb5b9fb4ec2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 2134871457}
-  isOverlayWindow: 0
   screenTouch: {fileID: 585887588}
   battleUi: {fileID: 1466228247}
+  firstSelected: {fileID: 2134871457}
   guardnerInfoText: {fileID: 194198034}
   reCellText: {fileID: 1422195783}
   reCellButton: {fileID: 1422195782}
   guardnerSpawner: {fileID: 1794989048}
-  battleUi: {fileID: 1466228247}
   spawnRect: {fileID: 99098600}
   guardnerSpawnUi: {fileID: 579048190}
   closeButton: {fileID: 991655753}
