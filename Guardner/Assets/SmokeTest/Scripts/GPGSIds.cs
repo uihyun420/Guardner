@@ -31,16 +31,16 @@ namespace SmokeTest
          * using the resource data from the Play Console.
          */
         public const string
-            achievement_achievementtoincrement = "PLACEHOLDER - This file will be generated."; // <GPGSID>
+            achievement_achievementtoincrement = "CgkIw5vx7ccZEAIQAg"; // <GPGSID>
 
         public const string achievement_achievementtounlock = "PLACEHOLDER - This file will be generated."; // <GPGSID>
-        public const string achievement_achievementtoreveal = "PLACEHOLDER - This file will be generated."; // <GPGSID>
+        public const string achievement_achievementtoreveal = "CgkIw5vx7ccZEAIQAQ"; // <GPGSID>
         public const string event_smokingevent = "PLACEHOLDER - This file will be generated."; // <GPGSID>
 
         public const string achievement_achievement_hidden_incremental =
-            "PLACEHOLDER - This file will be generated."; // <GPGSID>
+            "CgkIw5vx7ccZEAIQAQ"; // <GPGSID>
 
         public const string
-            leaderboard_leaders_in_smoketesting = "PLACEHOLDER - This file will be generated."; // <GPGSID>
+            leaderboard_leaders_in_smoketesting = "CgkIw5vx7ccZEAIQAw"; // <GPGSID>
     }
 }
